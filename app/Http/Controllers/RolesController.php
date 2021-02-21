@@ -22,6 +22,20 @@ class RolesController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Roles $roles)
+    {
+        return view('modals/partials/_delete', [
+            'id'        => $roles->id,
+            'routeName' => route('roles.destroy', $roles->id),
+            'itemName'  => $roles->name,
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -108,6 +122,13 @@ class RolesController extends Controller
      */
     public function destroy(Roles $roles)
     {
-        //
+        if($roles->delete())
+            return response()->json([
+                'Deleted'
+            ], 200);
+
+        return response()->json([
+            'Something went wrong!'
+        ], 500);
     }
 }
