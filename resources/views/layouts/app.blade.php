@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     <div id="app">
@@ -34,9 +35,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a href="#">Roles</a></li>
-                        <li><a href="#">Users</a></li>
-                        <li><a href="#">Clinics</a></li>
+
+                        @if (auth()->user())
+                             <li><a href="{{ route('roles.index') }}">Roles</a></li>
+                            <li><a href="{{ route('users.index') }}">Users</a></li>
+                            <li><a href="#">Clinics</a></li>
+                        @endif
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

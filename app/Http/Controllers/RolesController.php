@@ -44,6 +44,8 @@ class RolesController extends Controller
     {
         return view('roles/create', [
                 'levels' => Roles::$levels,
+                'task'   => 'create',
+                'view'  => 'roles',
             ]
         );
     }
@@ -62,7 +64,12 @@ class RolesController extends Controller
 
         Roles::create($data);
 
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.index')->with([
+            'status' => [
+                'message' => 'Role Created',
+                'type'    => 'success',
+            ]
+        ]);
     }
 
     /**
@@ -86,7 +93,9 @@ class RolesController extends Controller
     {
         return view('roles/edit', [
             'role'   => $roles,
+            'view'  => 'roles',
             'levels' => Roles::$levels,
+            'task'   => 'edit',
         ]);
     }
 

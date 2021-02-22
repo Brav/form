@@ -1,0 +1,115 @@
+<form action="{{ route('clinics.update', $clinic->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="form-group">
+        <label for="name">Clinic Name</label>
+        <input type="text" class="form-control" name=name id="name" value="{{ old('name', $clinic->name) }}">
+
+        @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="form-row align-items-center">
+
+        <div class="col">
+             <div class="form-group">
+                <label for="lead_vet">Lead Vet</label>
+                <select class="form-control select2"
+                    name=lead_vet
+                    id="lead_vet">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old("lead_vet", $clinic->lead_vet) == $user->id)
+                                selected
+                            @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col">
+             <div class="form-group">
+                <label for="practise_manager">Practise Manager</label>
+                <select class="form-control select2" name=practise_manager id="practise_manager">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old("practise_manager", $clinic->practise_manager) == $user->id)
+                                selected
+                            @endif
+                            >{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col">
+             <div class="form-group">
+                <label for="vet_manager">Vet Manager</label>
+                <select class="form-control select2" name=vet_manager id="vet_manager">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old("vet_manager", $clinic->vet_manager) == $user->id)
+                                selected
+                            @endif
+                            >{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+
+     <div class="form-row align-items-center">
+
+        <div class="col">
+             <div class="form-group">
+                <label for="gm_veterinary_option">GM Veterinary Option</label>
+                <select class="form-control select2" name=gm_veterinary_option id="gm_veterinary_option">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old("gm_veterinary_option", $clinic->gm_veterinary_option) == $user->id)
+                                selected
+                            @endif
+                            >{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col">
+             <div class="form-group">
+                <label for="gm_region">GM Region</label>
+                <select class="form-control select2"
+                    name=gm_region
+                    id="gm_region">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old("gm_region", $clinic->gm_region) == $user->id)
+                                selected
+                            @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col">
+             <div class="form-group">
+                <label for="regional_manager">Regional Manager</label>
+                <select class="form-control select2" name=regional_manager id="regional_manager">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old("regional_manager", $clinic->regional_manager) == $user->id)
+                                selected
+                            @endif
+                            >{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

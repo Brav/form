@@ -1,4 +1,6 @@
 require('./bootstrap');
+require('select2')
+require('./clinic');
 
 $.ajaxSetup({
     headers: {
@@ -52,8 +54,28 @@ $(document).on("submit", "#delete-form", function (event) {
         },
         error: function (jqXHR, testStatus, error) {
             alert("Page " + href + " cannot open. Error:" + error);
-            $("#loader").hide();
+        $("#loader").hide();
         },
         timeout: 8000,
     });
 });
+
+$(document).on('click', "#generate-password", function () {
+
+    let randomString = Math.random().toString(36).substr(2, 18);
+
+    $('#password').val(randomString)
+});
+
+$(document).on("change", "#admin", function () {
+    if($(this).is(':checked')){
+       $('#can_login').attr('checked', true);
+    }
+});
+
+$(document).on("click", "#can_login", function (e) {
+    if ($('#admin').is(":checked")) {
+         e.preventDefault();
+    }
+});
+

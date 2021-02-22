@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Requests;
+
+use App\Models\Roles;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class UserCreateRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name'       =>['required', 'string', 'min:2'],
+            'email'      =>['required', 'email', 'unique:App\Models\User,email'],
+            'password'   =>['required_if:can_login,1', 'min:10', 'string'],
+            'role_id'    =>['exclude_if:admin,1', Rule::in(
+                    Roles::all()->pluck('id')->toArray()
+                )],
+            'can_loging' =>['nullable', Rule::in([1])],
+            'admin'      =>['nullable', Rule::in([1])],
+        ];
+    }
+}
