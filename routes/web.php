@@ -2,9 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ComplaintCategoryController;
+use App\Http\Controllers\ComplaintChannelController;
+use App\Http\Controllers\ComplaintTypeController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 require __DIR__.'/auth.php';
 
@@ -14,11 +18,6 @@ Route::get('', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])
 ->middleware(['auth'])->name('home');
-
-// Route::middleware(['auth'])
-//     ->group(['prefix' => 'roles'], functuion(){
-//         Route::get('create', [Roles::class, 'create'])->name('routes.create');
-//     });
 
 Route::prefix('user')->middleware(['auth', 'admin'])->group(function () {
 
@@ -52,5 +51,38 @@ Route::prefix('clinic')->middleware(['auth', 'admin'])->group(function () {
     Route::post('store', [ClinicController::class, 'store'])->name('clinics.store');
     Route::put('update/{clinic}', [ClinicController::class, 'update'])->name('clinics.update');
     Route::delete('destroy/{clinic}', [ClinicController::class, 'destroy'])->name('clinics.destroy');
+});
+
+Route::prefix('complaint-category')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [ComplaintCategoryController::class, 'index'])->name('complaint-category.index');
+    Route::get('create', [ComplaintCategoryController::class, 'create'])->name('complaint-category.create');
+    Route::get('delete/{complaint}', [ComplaintCategoryController::class, 'delete'])->name('complaint-category.delete');
+    Route::get('edit/{complaint}', [ComplaintCategoryController::class, 'edit'])->name('complaint-category.edit');
+    Route::post('store', [ComplaintCategoryController::class, 'store'])->name('complaint-category.store');
+    Route::put('update/{complaint}', [ComplaintCategoryController::class, 'update'])->name('complaint-category.update');
+    Route::delete('destroy/{complaint}', [ComplaintCategoryController::class, 'destroy'])->name('complaint-category.destroy');
+});
+
+Route::prefix('complaint-type')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [ComplaintTypeController::class, 'index'])->name('complaint-type.index');
+    Route::get('create', [ComplaintTypeController::class, 'create'])->name('complaint-type.create');
+    Route::get('delete/{type}', [ComplaintTypeController::class, 'delete'])->name('complaint-type.delete');
+    Route::get('edit/{type}', [ComplaintTypeController::class, 'edit'])->name('complaint-type.edit');
+    Route::post('store', [ComplaintTypeController::class, 'store'])->name('complaint-type.store');
+    Route::put('update/{type}', [ComplaintTypeController::class, 'update'])->name('complaint-type.update');
+    Route::delete('destroy/{type}', [ComplaintTypeController::class, 'destroy'])->name('complaint-type.destroy');
+});
+
+Route::prefix('complaint-channel')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [ComplaintChannelController::class, 'index'])->name('complaint-channel.index');
+    Route::get('create', [ComplaintChannelController::class, 'create'])->name('complaint-channel.create');
+    Route::get('delete/{channel}', [ComplaintChannelController::class, 'delete'])->name('complaint-channel.delete');
+    Route::get('edit/{channel}', [ComplaintChannelController::class, 'edit'])->name('complaint-channel.edit');
+    Route::post('store', [ComplaintChannelController::class, 'store'])->name('complaint-channel.store');
+    Route::put('update/{channel}', [ComplaintChannelController::class, 'update'])->name('complaint-channel.update');
+    Route::delete('destroy/{channel}', [ComplaintChannelController::class, 'destroy'])->name('complaint-channel.destroy');
 });
 

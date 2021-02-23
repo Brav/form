@@ -37,9 +37,10 @@
                     <ul class="navbar-nav mr-auto">
 
                         @if (auth()->user())
-                             <li><a href="{{ route('roles.index') }}">Roles</a></li>
                             <li><a href="{{ route('users.index') }}">Users</a></li>
-                            <li><a href="#">Clinics</a></li>
+                            <li><a href="{{ route('clinics.index') }}">Clinics</a></li>
+                            <li><a href="{{ route('roles.index') }}">Roles</a></li>
+                            <li><a href="{{ route('complaint-category.index') }}">Complaint Categories</a></li>
                         @endif
 
                     </ul>
@@ -78,6 +79,7 @@
         </main>
 
         @include('modals/small')
+        @include('modals/big')
     </div>
 </body>
 </html>

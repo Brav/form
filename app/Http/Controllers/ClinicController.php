@@ -128,7 +128,13 @@ class ClinicController extends Controller
      */
     public function destroy(Clinic $clinic)
     {
+        if($clinic->delete())
+            return response()->json([
+                'Deleted'
+            ], 200);
 
-
+        return response()->json([
+            'Something went wrong!'
+        ], 500);
     }
 }

@@ -42,7 +42,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('roles/create', [
+        return view('form', [
                 'levels' => Roles::$levels,
                 'task'   => 'create',
                 'view'  => 'roles',
@@ -91,7 +91,7 @@ class RolesController extends Controller
      */
     public function edit(Roles $roles)
     {
-        return view('roles/edit', [
+        return view('form', [
             'role'   => $roles,
             'view'  => 'roles',
             'levels' => Roles::$levels,
