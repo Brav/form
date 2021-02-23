@@ -17,6 +17,15 @@ class Roles extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'level' => 'array',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -30,7 +39,7 @@ class Roles extends Model
     */
     public function permissions() :string
     {
-        $permission = [];
+        $permissions = [];
 
         if( \is_integer(\strpos($this->permissions, 'r')) )
         {
@@ -49,7 +58,7 @@ class Roles extends Model
 
         $permissions = \implode(', ', $permissions);
 
-        return empty($permissions) ? 'N' : \ucwords($permissions);
+        return empty($permissions) ? 'None' : \ucwords($permissions);
     }
 
     /**

@@ -22,7 +22,7 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Level</th>
+                            <th scope="col">Level for notifications</th>
                             <th scope="col">Permissions</th>
                             <th scope="col">Actions</th>
                         </tr>

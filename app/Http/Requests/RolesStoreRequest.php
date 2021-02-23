@@ -27,12 +27,24 @@ class RolesStoreRequest extends FormRequest
     {
         return [
             'name'  =>['required'],
-            'level' =>['required',
-                Rule::in(Roles::$levels),
+            'level' =>['required', 'array',
+                // Rule::in(Roles::$levels),
             ],
             'read'  =>['nullable', Rule::in('r')],
             'write' =>['nullable', Rule::in('w')],
             'delete'=>['nullable', Rule::in('d')],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'level.required' => 'Select at least one level for notifications',
         ];
     }
 }

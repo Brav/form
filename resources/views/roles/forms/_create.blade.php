@@ -12,12 +12,12 @@
     <div class="form-row align-items-center">
         <div class="col">
              <div class="form-group">
-                <label for="level">Role Level</label>
-                <select class="form-control" name=level id="level">
+                <label for="level">Role Level (will receive notifications from this levels)</label>
+                <select class="form-control" name=level[] id="level" multiple>
                     @foreach ($levels as $level)
                         <option value="{{ $level }}"
-                            @if (old('level') === $level)
-                                checked
+                            @if (in_array($level, old('level', [])))
+                                selected
                             @endif
                         >{{ $level }}</option>
                     @endforeach
