@@ -9,10 +9,17 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($types as $type)
-                @include('complaint-types/partials/_type')
-            @endforeach
+        <tbody id=complaint-type-container>
+            @include('complaint-types/partials/_container')
         </tbody>
     </table>
+
+    <div id="pagination-type">
+        @include('pagination', [
+            'paginator' => $types,
+            'layout'    => 'vendor.pagination.bootstrap-4',
+            'role'      => 'complaint-type',
+            'container' => 'complaint-type-container',
+        ])
+    </div>
 </div>

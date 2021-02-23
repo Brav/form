@@ -16,7 +16,20 @@ class ComplaintChannelController extends Controller
      */
     public function index()
     {
-        //
+        $channels = ComplaintChannel::with(['type'])->paginate(20);
+
+        return [
+            'html' => view('complaint-channel/partials/_container', [
+                'channels' => $channels,
+            ])->render(),
+            'pagination' => view('pagination', [
+                'paginator' => $channels,
+                'layout'    => 'vendor.pagination.bootstrap-4',
+                'role'      => 'complaint-channel',
+                'container' => 'complaint-channel-container',
+            ])->render(),
+            'id' => 'channel'
+        ];
     }
 
     /**

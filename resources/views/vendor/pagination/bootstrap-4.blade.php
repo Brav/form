@@ -1,6 +1,11 @@
 @if ($paginator->hasPages())
     <nav>
-        <ul class="pagination">
+        <ul class="pagination justify-content-center push"
+            role="{{ $role }}"
+            data-container="{{ $container ?? ''}}"
+            data-total="{{ $paginator->total()}}"
+            data-lastpage={{$paginator->lastPage()}}
+        >
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">

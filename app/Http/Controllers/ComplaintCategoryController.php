@@ -18,11 +18,30 @@ class ComplaintCategoryController extends Controller
      */
     public function index()
     {
-        return view('complaint-category/index', [
-            'categories' => ComplaintCategory::all(),
-            'types'      => ComplaintType::with(['category'])->get(),
-            'channels'   => ComplaintChannel::with(['type'])->get(),
-        ]);
+
+        $categories = ComplaintCategory::paginate(20);
+
+        if(!request()->ajax())
+            return view('complaint-category/index', [
+                'categories' => $categories,
+                'types'      => ComplaintType::with(['category'])->paginate(20)
+                    ->withPath(route('complaint-type.index')),
+                'channels'   => ComplaintChannel::with(['type'])->paginate(20)
+                    ->withPath(route('complaint-channel.index')),
+            ]);
+
+        return [
+                'html' => view('complaint-category/partials/_container', [
+                    'categories' => $categories,
+                ])->render(),
+                'pagination' => view('pagination', [
+                    'paginator' => $categories,
+                    'layout'    => 'vendor.pagination.bootstrap-4',
+                    'role'      => 'complaint-category',
+                    'container' => 'complaint-category-container',
+                ])->render(),
+                'id' => 'categories'
+            ];
     }
 
     /**

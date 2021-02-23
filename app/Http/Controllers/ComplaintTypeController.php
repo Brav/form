@@ -17,7 +17,20 @@ class ComplaintTypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = ComplaintType::with(['category'])->paginate(20);
+
+        return [
+            'html' => view('complaint-types/partials/_container', [
+                'types' => $types,
+            ])->render(),
+            'pagination' => view('pagination', [
+                'paginator' => $types,
+                'layout'    => 'vendor.pagination.bootstrap-4',
+                'role'      => 'complaint-type',
+                'container' => 'complaint-type-container',
+            ])->render(),
+            'id' => 'type'
+        ];
     }
 
     /**

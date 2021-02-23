@@ -9,10 +9,17 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($channels as $channel)
-                @include('complaint-channel/partials/_channel')
-            @endforeach
+        <tbody id=complaint-channel-container>
+            @include('complaint-channel/partials/_container')
         </tbody>
     </table>
+
+    <div id="pagination-channel">
+        @include('pagination', [
+            'paginator' => $channels,
+            'layout'    => 'vendor.pagination.bootstrap-4',
+            'role'      => 'complaint-channel',
+            'container' => 'complaint-channel-container',
+        ])
+    </div>
 </div>
