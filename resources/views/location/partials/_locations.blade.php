@@ -7,8 +7,8 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody id=complaint-type-container>
-            @include('locationcs/partials/_container')
+        <tbody id=location-container>
+            @include('location/partials/_container')
         </tbody>
     </table>
 
@@ -16,8 +16,8 @@
         @include('pagination', [
             'paginator' => $locations,
             'layout'    => 'vendor.pagination.bootstrap-4',
-            'role'      => 'complaint-type',
-            'container' => 'complaint-type-container',
+            'role'      => 'location',
+            'container' => 'location-container',
         ])
     </div>
 </div>

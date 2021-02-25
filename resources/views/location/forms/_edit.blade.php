@@ -7,6 +7,7 @@
     @method('PUT')
     <input type="hidden" name="table" id=table value="location">
     <input type="hidden" name="action" id=action value="edit">
+    <input type="hidden" name="_id" id=_id value="{{ $location->id }}">
 
     <div class="form-row align-items-center">
 

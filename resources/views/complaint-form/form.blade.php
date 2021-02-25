@@ -44,6 +44,8 @@
                             </div>
                         </div>
 
+                        <div class="col"></div>
+
                     </div>
 
                     <div class="form-row align-items-center">
@@ -74,6 +76,8 @@
                             </div>
 
                         </div>
+
+                        <div class="col"></div>
 
                     </div>
 
@@ -159,6 +163,8 @@
                             </div>
                         </div>
 
+                        <div class="col"></div>
+
                     </div>
 
                      <div class="form-row">
@@ -168,6 +174,21 @@
                                <textarea class="form-control" name="description" id="description" rows="4"></textarea>
                              </div>
                          </div>
+                     </div>
+
+                     <div class="form-row">
+                         <div class="col">
+                             <div class="form-group">
+                               <label for="location_id">Location</label>
+                               <select class="form-control" name="location_id" id="location_id">
+                                    @foreach ($locations as $location)
+                                        <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                    @endforeach
+                               </select>
+                             </div>
+                         </div>
+                         <div class="col"></div>
+                         <div class="col"></div>
                      </div>
 
                      <div class="form-row align-items-center">

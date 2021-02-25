@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LocationCreateRequest;
+use App\Http\Requests\LocationUpdateRequest;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
@@ -29,6 +31,10 @@ class LocationController extends Controller
                 ])->render(),
                 'id' => 'type'
             ];
+
+        return view('location/index', [
+            'locations' => $locations,
+        ]);
     }
 
     /**
@@ -36,12 +42,12 @@ class LocationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function delete(Location $model)
+    public function delete(Location $location)
     {
         return view('modals/partials/_delete', [
-            'id'        => $model->id,
-            'routeName' => route('location.destroy', $model->id),
-            'itemName'  => $model->name,
+            'id'        => $location->id,
+            'routeName' => route('location.destroy', $location->id),
+            'itemName'  => $location->name,
             'table'     => 'location',
         ]);
     }
@@ -53,18 +59,29 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+        return response()->json(
+            view('form-ajax', [
+                'task'       => 'create',
+                'view'       => 'location',
+            ])->render()
+        , 200);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\LocationCreateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LocationCreateRequest $request)
     {
-        //
+        $location = Location::create($request->all());
+
+        return response()->json(
+            view('location/partials/_location', [
+                'location' => $location,
+            ])->render()
+            , 200);
     }
 
     /**
@@ -86,7 +103,13 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
-        //
+        return response()->json(
+            view('form-ajax', [
+                'location' => $location,
+                'task'     => 'edit',
+                'view'     => 'location',
+            ])->render()
+        , 200);
     }
 
     /**
@@ -96,9 +119,15 @@ class LocationController extends Controller
      * @param  \App\Models\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Location $location)
+    public function update(LocationUpdateRequest $request, Location $location)
     {
-        //
+        $location->update($request->all());
+
+        return response()->json(
+            view('location/partials/_location', [
+                'location' => $location,
+            ])->render()
+            , 200);
     }
 
     /**
@@ -109,6 +138,13 @@ class LocationController extends Controller
      */
     public function destroy(Location $location)
     {
-        //
+        if($location->delete())
+            return response()->json([
+                'Deleted'
+            ], 200);
+
+        return response()->json([
+            'Something went wrong!'
+        ], 500);
     }
 }

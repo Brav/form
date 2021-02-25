@@ -7,6 +7,7 @@ use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,7 @@ class ComplaintFormController extends Controller
             'categories' => ComplaintCategory::get(),
             'types'      => ComplaintType::get(),
             'channels'   => ComplaintChannel::get(),
+            'locations'  => Location::get(),
         ]);
     }
 

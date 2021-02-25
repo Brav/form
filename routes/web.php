@@ -90,11 +90,11 @@ Route::prefix('location')->middleware(['auth', 'admin'])->group(function () {
 
     Route::get('', [LocationController::class, 'index'])->name('location.index');
     Route::get('create', [LocationController::class, 'create'])->name('location.create');
-    Route::get('delete/{model}', [LocationController::class, 'delete'])->name('location.delete');
-    Route::get('edit/{model}', [LocationController::class, 'edit'])->name('location.edit');
+    Route::get('delete/{location}', [LocationController::class, 'delete'])->name('location.delete');
+    Route::get('edit/{location}', [LocationController::class, 'edit'])->name('location.edit');
     Route::post('store', [LocationController::class, 'store'])->name('location.store');
-    Route::put('update/{model}', [LocationController::class, 'update'])->name('location.update');
-    Route::delete('destroy/{model}', [LocationController::class, 'destroy'])->name('location.destroy');
+    Route::put('update/{location}', [LocationController::class, 'update'])->name('location.update');
+    Route::delete('destroy/{location}', [LocationController::class, 'destroy'])->name('location.destroy');
 });
 
 Route::get('', [ComplaintFormController::class, 'index'])->name('complaint-form.index');
