@@ -3,7 +3,7 @@
         <th>{{ $user->id }}</th>
         <th>{{ $user->name }}</th>
         <th>{{ $user->email }}</th>
-        <th>{{ $user->role->name }}</th>
+        <th>{{ optional($user->role)->name }}</th>
         <th>
             <a href="{{ route('users.edit', $user->id) }}"
                 class="btn btn-primary btn-sm active"

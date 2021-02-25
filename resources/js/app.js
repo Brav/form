@@ -1,12 +1,18 @@
 require('./bootstrap');
-require('select2')
+require('tempusdominus-bootstrap-4');
+require("select2");
 require('./clinic');
-require('./paginate');
+require('./complaint-form');
+// require('./paginate');
 
 $.ajaxSetup({
     headers: {
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
     },
+});
+
+$(".select2").select2({
+    placeholder: "Select an option",
 });
 
 $(document).on("click", "a[role=smallModal]", function (event) {
@@ -168,4 +174,19 @@ function showValidationErrors(errors)
         `).insertAfter($(`#${error}`));
     }
 }
+
+$(function () {
+    $(".datetimepicker-datetime").datetimepicker({
+        local: "AU",
+    });
+
+    $(".datetimepicker-date").datetimepicker({
+        format: "L",
+        format: "AU",
+    });
+
+    $(".timepicker1").datetimepicker({
+        format: "LT",
+    });
+});
 

@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ComplaintCategoryController;
 use App\Http\Controllers\ComplaintChannelController;
+use App\Http\Controllers\ComplaintFormController;
 use App\Http\Controllers\ComplaintTypeController;
 use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +15,6 @@ use Illuminate\Support\Facades\Auth;
 require __DIR__.'/auth.php';
 
 Auth::routes();
-
-Route::get('', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])
 ->middleware(['auth'])->name('home');
@@ -84,5 +84,28 @@ Route::prefix('complaint-channel')->middleware(['auth', 'admin'])->group(functio
     Route::post('store', [ComplaintChannelController::class, 'store'])->name('complaint-channel.store');
     Route::put('update/{channel}', [ComplaintChannelController::class, 'update'])->name('complaint-channel.update');
     Route::delete('destroy/{channel}', [ComplaintChannelController::class, 'destroy'])->name('complaint-channel.destroy');
+});
+
+Route::prefix('location')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [LocationController::class, 'index'])->name('location.index');
+    Route::get('create', [LocationController::class, 'create'])->name('location.create');
+    Route::get('delete/{model}', [LocationController::class, 'delete'])->name('location.delete');
+    Route::get('edit/{model}', [LocationController::class, 'edit'])->name('location.edit');
+    Route::post('store', [LocationController::class, 'store'])->name('location.store');
+    Route::put('update/{model}', [LocationController::class, 'update'])->name('location.update');
+    Route::delete('destroy/{model}', [LocationController::class, 'destroy'])->name('location.destroy');
+});
+
+Route::get('', [ComplaintFormController::class, 'index'])->name('complaint-form.index');
+
+Route::prefix('complaint-form')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('create', [ComplaintFormController::class, 'create'])->name('complaint-form.create');
+    Route::get('delete/{channel}', [ComplaintFormController::class, 'delete'])->name('complaint-form.delete');
+    Route::get('edit/{channel}', [ComplaintFormController::class, 'edit'])->name('complaint-form.edit');
+    Route::post('store', [ComplaintFormController::class, 'store'])->name('complaint-form.store');
+    Route::put('update/{channel}', [ComplaintFormController::class, 'update'])->name('complaint-form.update');
+    Route::delete('destroy/{channel}', [ComplaintFormController::class, 'destroy'])->name('complaint-form.destroy');
 });
 
