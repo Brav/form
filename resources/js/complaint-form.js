@@ -1,4 +1,3 @@
-
 const categoryID = $("#complaint_category_id").val();
 
 $("#complaint_type_id").children().not(`[data-category=${categoryID}]`).hide();
@@ -51,3 +50,17 @@ $("body").on("change", "#complaint_type_id", function (e) {
         channel.attr("disabled", true);
     }
 });
+
+$(document).ready(function () {
+    setManager()
+});
+
+$('body').on('change', '#clinic_id', function () {
+    setManager()
+});
+
+function setManager()
+{
+    let manager = $("#clinic_id").find("option:selected").data("manager")
+    $("#regional_manager").val(manager);
+}

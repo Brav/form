@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ComplaintFormCreateRequest;
+use App\Http\Requests\ComplaintFormUpdateRequest;
 use App\Models\Clinic;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
@@ -90,7 +91,7 @@ class ComplaintFormController extends Controller
         return view('form', [
             'task'       => 'create',
             'view'       => 'complaint-form',
-            'clinics'    => DB::table('clinics')->select('id', 'name')->get(),
+            'clinics'    => Clinic::with(['regionalManager'])->get(),
             'categories' => ComplaintCategory::get(),
             'types'      => ComplaintType::get(),
             'channels'   => ComplaintChannel::get(),
@@ -132,24 +133,53 @@ class ComplaintFormController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ComplaintForm  $complaintForm
+     * @param  \App\Models\ComplaintForm  $form
      * @return \Illuminate\Http\Response
      */
-    public function edit(ComplaintForm $complaintForm)
+    public function edit(ComplaintForm $form)
     {
-        //
+        if(!auth()->user()->admin ||
+            !auth()->user()->role->hasPermission('w'))
+        {
+            return redirect()->route('complaint-form.create');
+        }
+
+        return view('form', [
+            'task'       => 'edit',
+            'view'       => 'complaint-form',
+            'clinics'    => Clinic::with(['regionalManager'])->get(),
+            'categories' => ComplaintCategory::get(),
+            'types'      => ComplaintType::get(),
+            'channels'   => ComplaintChannel::get(),
+            'locations'  => Location::get(),
+            'form'       => $form->load(['clinic', 'location', 'category', 'type', 'channel']),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ComplaintFormUpdateRequest  $request
      * @param  \App\Models\ComplaintForm  $complaintForm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ComplaintForm $complaintForm)
+    public function update(ComplaintFormUpdateRequest $request, ComplaintForm $form)
     {
-        //
+        if(!auth()->user()->admin ||
+            !auth()->user()->role->hasPermission('w'))
+        {
+            return redirect()->route('complaint-form.create');
+        }
+
+        $data = $form->format($request->all(), true);
+        $form->save($data);
+
+        return redirect()->route('complaint-form.manage')
+            ->with([
+                'status' => [
+                    'message' => "Form Updated"
+                ]
+            ]);
     }
 
     /**

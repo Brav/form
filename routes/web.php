@@ -100,15 +100,16 @@ Route::prefix('location')->middleware(['auth', 'admin'])->group(function () {
 Route::get('', [ComplaintFormController::class, 'create'])->name('complaint-form.create');
 Route::get('form-sent', [ComplaintFormController::class, 'sent'])->name('complaint-form.sent');
 
-Route::get('complaint-form/manage', [ComplaintFormController::class, 'index'])->middleware(['auth']);
+Route::get('complaint-form/manage', [ComplaintFormController::class, 'index'])
+    ->middleware(['auth'])->name('complaint-form.manage');
 
 Route::prefix('complaint-form')->middleware(['auth', 'admin'])->group(function () {
 
     Route::get('create', [ComplaintFormController::class, 'create'])->name('complaint-form.create');
-    Route::get('delete/{channel}', [ComplaintFormController::class, 'delete'])->name('complaint-form.delete');
-    Route::get('edit/{channel}', [ComplaintFormController::class, 'edit'])->name('complaint-form.edit');
+    Route::get('delete/{form}', [ComplaintFormController::class, 'delete'])->name('complaint-form.delete');
+    Route::get('edit/{form}', [ComplaintFormController::class, 'edit'])->name('complaint-form.edit');
     Route::post('store', [ComplaintFormController::class, 'store'])->name('complaint-form.store');
-    Route::put('update/{channel}', [ComplaintFormController::class, 'update'])->name('complaint-form.update');
-    Route::delete('destroy/{channel}', [ComplaintFormController::class, 'destroy'])->name('complaint-form.destroy');
+    Route::put('update/{form}', [ComplaintFormController::class, 'update'])->name('complaint-form.update');
+    Route::delete('destroy/{form}', [ComplaintFormController::class, 'destroy'])->name('complaint-form.destroy');
 });
 

@@ -12,6 +12,7 @@
                     <select class="form-control select2" name="clinic_id" id="clinic_id">
                     @foreach ($clinics as $clinic)
                         <option value="{{ $clinic->id }}"
+                            data-manager="{{ $clinic->regionalManager->name }}"
                             @if (old('clinic_id') == $clinic->id)
                                 selected
                             @endif
@@ -146,16 +147,16 @@
         <div class="col">
             <div class="form-group">
                 <label for="date_of_incident">Date of the incident</label>
-                <div class="input-group date datetimepicker-datetime" data-target-input="nearest">
+                <div class="input-group date date_of_incident" data-target-input="nearest">
 
                     <input type="text"
                         class="form-control datetimepicker-input"
-                        data-target=".datetimepicker-datetime"
+                        data-target=".date_of_incident"
                         name="date_of_incident"
                         id="date_of_incident"
                         value="{{ old('date_of_incident') }}"/>
                     <div class="input-group-append"
-                        data-target=".datetimepicker-datetime"
+                        data-target=".date_of_incident"
                         data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -169,7 +170,7 @@
         <div class="col">
             <div class="form-group">
                 <label for="date_of_client_complaint">Date if client complaint: (if applicable)</label>
-                <div class="input-group date timepicker1" id="start_dt_2" data-target-input="nearest" >
+                <div class="input-group date date_of_client_complaint" id="start_dt_2" data-target-input="nearest" >
                     <input type="text"
                         class="form-control datetimepicker-input datetimepicker"
                         data-target="#start_dt_2"

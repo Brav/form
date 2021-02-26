@@ -175,15 +175,64 @@ function showValidationErrors(errors)
     }
 }
 
-$(function () {
-    $(".datetimepicker-datetime").datetimepicker();
+$(document).ready(function () {
 
-    $(".datetimepicker-date").datetimepicker({
-        format: "L",
-    });
+    let dateOfIncident        = $("#date_of_incident").val();
+    let dateOfClientComplaint = $("#date_of_client_complaint").val();
+    let dateCompleted         = $("#date_completed").val();
 
-    $(".timepicker1").datetimepicker({
-        format: "L",
+    $(function () {
+
+        if (dateOfIncident !== undefined && moment(dateOfIncident).isValid()) {
+            dateOfIncident = {
+                defaultDate: moment(dateOfIncident),
+                date: moment(),
+            };
+        }
+        else
+        {
+            dateOfIncident = {}
+        }
+
+        $(".date_of_incident").datetimepicker();
+
+        if(moment(dateOfClientComplaint).isValid())
+        {
+            dateOfClientComplaint = {
+                format: "L",
+                defaultDate: moment(dateOfClientComplaint),
+                date: moment(),
+            };
+        }
+        else
+        {
+            dateOfClientComplaint = {
+                format: "L",
+            };
+        }
+
+        $(".date_of_client_complaint").datetimepicker(dateOfClientComplaint);
+
+        if($('#date_completed').length){
+            if (
+                dateCompleted !== undefined &&
+                moment(dateCompleted).isValid()
+            ) {
+                dateCompleted = {
+                    format: "L",
+                    defaultDate: moment(dateCompleted),
+                    date: moment(),
+                };
+            } else {
+                dateCompleted = {
+                    format: "L",
+                };
+            }
+
+            $(".date_completed").datetimepicker(dateCompleted);
+        }
+
     });
 });
+
 

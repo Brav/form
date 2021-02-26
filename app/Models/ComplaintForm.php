@@ -46,10 +46,11 @@ class ComplaintForm extends Model
      * Formats data for save
      *
      * @param array $data
+     * @param boolean $update
      *
      * @return array
      */
-    public function format(array $data) :array
+    public function format(array $data, bool $update = false) :array
     {
         $date = DateTime::createFromFormat('d/m/Y g:i A', $data['date_of_incident']);
 
@@ -57,8 +58,17 @@ class ComplaintForm extends Model
 
         if($data['date_of_client_complaint'] !== null)
         {
-            $dateOfClientComplaint = DateTime::createFromFormat('d/m/Y', $data['date_of_incident']);
-            $data['date_of_client_complaint'] = $date->format('Y-m-d');
+            $dateOfClientComplaint            = DateTime::createFromFormat('d/m/Y', $data['date_of_client_complaint']);
+            $data['date_of_client_complaint'] = $dateOfClientComplaint->format('Y-m-d');
+        }
+
+        if($update === true)
+        {
+            if($data['date_completed'] !== null)
+            {
+                $dateCompleted          = DateTime::createFromFormat('d/m/Y', $data['date_completed']);
+                $data['date_completed'] = $dateCompleted->format('Y-m-d');
+            }
         }
 
         return $data;
