@@ -19,7 +19,7 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])
 ->middleware(['auth'])->name('home');
 
-Route::prefix('user')->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('user')->middleware(['auth'])->group(function () {
 
     Route::get('', [UserController::class, 'index'])->name('users.index');
     Route::get('create', [UserController::class, 'create'])->name('users.create');
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'roles', 'middleware' => ['auth', 'admin']], function 
 
 });
 
-Route::prefix('clinic')->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('clinic')->middleware(['auth'])->group(function () {
 
     Route::get('', [ClinicController::class, 'index'])->name('clinics.index');
     Route::get('create', [ClinicController::class, 'create'])->name('clinics.create');

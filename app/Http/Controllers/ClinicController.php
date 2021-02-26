@@ -16,16 +16,31 @@ class ClinicController extends Controller
      */
     public function index()
     {
-        return view('clinics/index', [
-            'clinics' => Clinic::with([
-                'leadVet',
-                'practiseManager',
-                'vetManager',
-                'gmVeterinaryOptions',
-                'gmRegion',
-                'regionalManager',
-            ])->get(),
-        ]);
+        $clinics = Clinic::with([
+                        'leadVet',
+                        'practiseManager',
+                        'vetManager',
+                        'gmVeterinaryOptions',
+                        'gmRegion',
+                        'regionalManager',
+                    ])->paginate(20);
+
+        if(!request()->ajax())
+            return view('clinics/index', [
+                'clinics' => $clinics,
+            ]);
+
+        return [
+            'html' => view('clinics/partials/_clinics', [
+                'clinics' => $clinics,
+            ])->render(),
+            'pagination' => view('pagination', [
+                'paginator' => $clinics,
+                'layout'    => 'vendor.pagination.bootstrap-4',
+                'role'      => 'clinics',
+                'container' => 'clinics-container',
+            ])->render()
+        ];
     }
 
     /**
@@ -110,7 +125,7 @@ class ClinicController extends Controller
      */
     public function update(Request $request, Clinic $clinic)
     {
-        $clinic-save($request->all());
+        $clinic->update($request->all());
 
         return redirect()->route('clinics.index')->with([
             'status' => [

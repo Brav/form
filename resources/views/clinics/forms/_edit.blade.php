@@ -65,11 +65,11 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="gm_veterinary_option">GM Veterinary Option</label>
-                <select class="form-control select2" name=gm_veterinary_option id="gm_veterinary_option">
+                <label for="gm_veterinary_options">GM Veterinary Option</label>
+                <select class="form-control select2" name=gm_veterinary_options id="gm_veterinary_options">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("gm_veterinary_option", $clinic->gm_veterinary_option) == $user->id)
+                            @if (old("gm_veterinary_options", $clinic->gm_veterinary_options) == $user->id)
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -106,6 +106,9 @@
                             >{{ $user->name }}</option>
                     @endforeach
                 </select>
+                @error('regional_manager')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 

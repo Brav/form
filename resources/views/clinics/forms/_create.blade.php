@@ -64,11 +64,11 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="gm_veterinary_option">GM Veterinary Option</label>
-                <select class="form-control select2" name=gm_veterinary_option id="gm_veterinary_option">
+                <label for="gm_veterinary_options">GM Veterinary Option</label>
+                <select class="form-control select2" name=gm_veterinary_options id="gm_veterinary_options">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("gm_veterinary_option") == $user->id)
+                            @if (old("gm_veterinary_options") == $user->id)
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -96,15 +96,20 @@
         <div class="col">
              <div class="form-group">
                 <label for="regional_manager">Regional Manager</label>
-                <select class="form-control select2" name=regional_manager id="regional_manager">
+                <select class="form-control select2"
+                    name=regional_manager
+                    id="regional_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (old("regional_manager") == $user->id)
                                 selected
-                            @endif
-                            >{{ $user->name }}</option>
+                            @endif>{{ $user->name }}</option>
                     @endforeach
                 </select>
+
+                @error('regional_manager')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 

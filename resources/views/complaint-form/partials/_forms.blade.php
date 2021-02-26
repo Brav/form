@@ -1,29 +1,29 @@
 @foreach ($forms as $form)
     <tr id="item-{{ $form->id }}">
-        <th>{{ date('d/m/Y g:i A', strtotime($form->created_at)) }}</th>
-        <th>{{ $form->clinic->name }}</th>
-        <th>{{ $form->clinic->regionalManager->name }}</th>
-        <th>{{ $form->team_member }}</th>
-        <th>{{ $form->team_member_position }}</th>
-        <th>{{ $form->client_name }}</th>
-        <th>{{ $form->patient_name }}</th>
-        <th>{{ $form->pms_code }}</th>
-        <th>{{ $form->date_of_incident->format('d/m/Y g:i A') }}</th>
-        <th>{{ $form->date_of_client_complaint !== null ?
+        <th scope="col">{{ date('d/m/Y g:i A', strtotime($form->created_at)) }}</th>
+        <th scope="col">{{ $form->clinic->name }}</th>
+        <th scope="col">{{ $form->clinic->regionalManager->name }}</th>
+        <th scope="col">{{ $form->team_member }}</th>
+        <th scope="col">{{ $form->team_member_position }}</th>
+        <th scope="col">{{ $form->client_name }}</th>
+        <th scope="col">{{ $form->patient_name }}</th>
+        <th scope="col">{{ $form->pms_code }}</th>
+        <th scope="col">{{ $form->date_of_incident->format('d/m/Y g:i A') }}</th>
+        <th scope="col">{{ $form->date_of_client_complaint !== null ?
             date('d/m/Y', \strtotime($form->date_of_client_complaint)) : '/'}}</th>
-        <th class="text-break">{{ $form->description }}</th>
-        <th>{{ $form->location->name }}</th>
-        <th>{{ $form->category->name }}</th>
-        <th>{{ $form->type->name ?? '/' }}</th>
-        <th>{{ $form->channel->name ?? '/' }}</th>
-        <th>{{ $form->complaintLevel() ?? '/' }}</th>
+        <th scope="col" class="text-break">{{ $form->description }}</th>
+        <th scope="col">{{ $form->location->name }}</th>
+        <th scope="col">{{ $form->category->name }}</th>
+        <th scope="col">{{ $form->type->name ?? '/' }}</th>
+        <th scope="col">{{ $form->channel->name ?? '/' }}</th>
+        <th scope="col">{{ $form->complaintLevel() ?? '/' }}</th>
         @if ($canEdit)
-            <th scope="col">{{ $form->outcome }}</th>
+            <th scope="col" class="text-break">{{ $form->outcome }}</th>
             <th scope="col">{{ $form->completed_by }}</th>
             <th scope="col">{{ $form->date_completed !== null ?
                 date('d/m/Y', \strtotime($form->date_completed)) : '/'}}</th>
         @endif
-        <th>
+        <th scope="col">
 
             @if ($canEdit)
                 <a href="{{ route('complaint-form.edit', $form->id) }}"
