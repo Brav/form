@@ -10,6 +10,7 @@ use App\Models\ComplaintChannel;
 use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
 use App\Models\Location;
+use App\Providers\ComplaintFilled;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -111,6 +112,8 @@ class ComplaintFormController extends Controller
         $data  = $model->format($request->all());
         $model->create($data);
 
+        ComplaintFilled::dispatch($model);
+
         return redirect()->route('complaint-form.sent')
             ->with([
                 'status' => [
@@ -172,12 +175,14 @@ class ComplaintFormController extends Controller
         }
 
         $data = $form->format($request->all(), true);
-        $form->save($data);
+
+        $form->update($data);
 
         return redirect()->route('complaint-form.manage')
             ->with([
                 'status' => [
-                    'message' => "Form Updated"
+                    'message' => "Form Updated",
+                    'type'    => 'success',
                 ]
             ]);
     }

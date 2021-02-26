@@ -18,9 +18,10 @@
         <th>{{ $form->channel->name ?? '/' }}</th>
         <th>{{ $form->complaintLevel() ?? '/' }}</th>
         @if ($canEdit)
-            <th scope="col">Outcome of the incident and/or complaint</th>
-            <th scope="col">Completed by</th>
-            <th scope="col">Date completed</th>
+            <th scope="col">{{ $form->outcome }}</th>
+            <th scope="col">{{ $form->completed_by }}</th>
+            <th scope="col">{{ $form->date_completed !== null ?
+                date('d/m/Y', \strtotime($form->date_completed)) : '/'}}</th>
         @endif
         <th>
 

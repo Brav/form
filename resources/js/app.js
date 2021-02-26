@@ -194,7 +194,7 @@ $(document).ready(function () {
             dateOfIncident = {}
         }
 
-        $(".date_of_incident").datetimepicker();
+        $(".date_of_incident").datetimepicker(dateOfIncident);
 
         if(moment(dateOfClientComplaint).isValid())
         {
