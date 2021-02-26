@@ -17,7 +17,7 @@
                     <a href="{{ route('users.create') }}" class="btn btn-primary my-2">Create</a>
                 </div>
 
-                <table class="table table-hover">
+                <table class="table table-hover" id=users>
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">ID</th>
@@ -27,10 +27,19 @@
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id=users-container>
                         @include('users/partials/_users')
                     </tbody>
                 </table>
+
+                <div id="pagination">
+                    @include('pagination', [
+                        'paginator' => $users,
+                        'layout'    => 'vendor.pagination.bootstrap-4',
+                        'role'      => 'users',
+                        'container' => 'users-container',
+                    ])
+                </div>
             </div>
         </div>
     </div>

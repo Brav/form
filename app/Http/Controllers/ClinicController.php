@@ -23,7 +23,16 @@ class ClinicController extends Controller
                         'gmVeterinaryOptions',
                         'gmRegion',
                         'regionalManager',
-                    ])->paginate(20);
+                    ])
+                    ->when(!auth()->user()->admin, function($query){
+
+                        $userID = auth()->id();
+
+                        return $query->where('owner_id', '=', $userID)
+                            ->orWhere('lead_vet', '=', $userID)
+                            ->orWhere('regional_manager', '=', $userID);
+                    })
+                    ->paginate(20);
 
         if(!request()->ajax())
             return view('clinics/index', [
@@ -64,10 +73,14 @@ class ClinicController extends Controller
      */
     public function create()
     {
+        $users = User::when(!auth()->user()->admin, function($query){
+            return $query->where('created_by', '=', auth()->id());
+        })->get();
+
         return view('form', [
             'task'  => 'create',
             'view'  => 'clinics',
-            'users' => User::all(),
+            'users' => $users,
         ]);
     }
 
@@ -79,7 +92,9 @@ class ClinicController extends Controller
      */
     public function store(ClinicCreateRequest $request)
     {
-        Clinic::create($request->all());
+        $data = $request->all();
+        $data['owner_id'] = auth()->id();
+        Clinic::create($data);
 
         return redirect()->route('clinics.index')->with([
             'status' => [
@@ -108,10 +123,24 @@ class ClinicController extends Controller
      */
     public function edit(Clinic $clinic)
     {
+
+        $userID = auth()->id();
+
+        if (!auth()->user()->admin ||
+            $clinic->lead_vet != $userID ||
+            $clinic->practise_manager != $userID
+        ) {
+            return redirect()->route('clinics.index');
+        }
+
+        $users = User::when(!auth()->user()->admin, function($query){
+            return $query->where('created_by', '=', auth()->id());
+        })->get();
+
         return view('form', [
             'task'   => 'edit',
             'view'   => 'clinics',
-            'users'  => User::all(),
+            'users'  => $users,
             'clinic' => $clinic,
         ]);
     }
@@ -143,6 +172,15 @@ class ClinicController extends Controller
      */
     public function destroy(Clinic $clinic)
     {
+        $userID = auth()->id();
+
+        if (!auth()->user()->admin ||
+            $clinic->lead_vet != $userID ||
+            $clinic->practise_manager != $userID
+        ) {
+            die;
+        }
+
         if($clinic->delete())
             return response()->json([
                 'Deleted'

@@ -25,6 +25,9 @@ class UserCreateRequest extends FormRequest
      */
     public function rules()
     {
+
+        $createdBy = auth()->user()->admin ? 'requered' : 'nullable';
+
         return [
             'name'       =>['required', 'string', 'min:2'],
             'email'      =>['required', 'email', 'unique:App\Models\User,email'],
@@ -32,8 +35,9 @@ class UserCreateRequest extends FormRequest
             'role_id'    =>['exclude_if:admin,1', Rule::in(
                     Roles::all()->pluck('id')->toArray()
                 )],
-            'can_loging' =>['nullable', Rule::in([1])],
-            'admin'      =>['nullable', Rule::in([1])],
+            'can_loging' => ['nullable', Rule::in([1])],
+            'admin'      => ['nullable', Rule::in([1])],
+            'created_by' => [$createdBy, 'integer'],
         ];
     }
 }

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'can_login',
         'admin',
         'role_id',
+        'created_by',
     ];
 
     /**
@@ -52,5 +53,15 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Roles::class);
+    }
+
+    /**
+     * Get the owner associated with the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 }

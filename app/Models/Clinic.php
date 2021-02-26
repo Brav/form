@@ -23,6 +23,7 @@ class Clinic extends Model
         'gm_veterinary_options',
         'gm_region',
         'regional_manager',
+        'owner_id'
     ];
 
     /**
@@ -118,5 +119,15 @@ class Clinic extends Model
     public function regionalManager(): BelongsTo
     {
         return $this->belongsTo(User::class, 'regional_manager', 'id');
+    }
+
+    /**
+     * Get the owner associated with the Clinic
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'owner_id', 'id');
     }
 }

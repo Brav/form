@@ -20,11 +20,31 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::with(['role'])->paginate(20);
+        $users = User::query();
 
-        return view('users/index', [
-            'users' => $users,
-        ]);
+        $users->when(!auth()->user()->admin, function($query){
+            return $query->where('created_by', '=', auth()->id());
+        });
+
+        $users = $users->with(['role'])->paginate(20);
+
+        if(!request()->ajax())
+            return view('users/index', [
+                'users' => $users,
+            ]);
+
+        return [
+            'html' => view('users/partials/_users', [
+                'users' => $users,
+            ])->render(),
+            'pagination' => view('pagination', [
+                'paginator' => $users,
+                'layout'    => 'vendor.pagination.bootstrap-4',
+                'role'      => 'users',
+                'container' => 'users-container',
+            ])->render()
+        ];
+
     }
 
     /**
@@ -48,10 +68,19 @@ class UserController extends Controller
      */
     public function create()
     {
+
+        $users = null;
+
+        if(auth()->user()->admin)
+        {
+            $users = User::where('id', '!=', auth()->id())->get();
+        }
+
         return view('form', [
             'task'  => 'create',
             'view'  => 'users',
             'roles' => Roles::all(),
+            'users' => $users,
         ]);
     }
 
@@ -73,6 +102,13 @@ class UserController extends Controller
         if($request->password)
         {
             $data['password'] = Hash::make($request->password);
+        }
+
+        $data['created_by'] = auth()->id();
+
+        if(auth()->user()->admin)
+        {
+            $data['created_by'] = (int) $request->post('created_by');
         }
 
         User::create($data);
@@ -104,11 +140,27 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $userID = auth()->id();
+
+        if (!auth()->user()->admin ||
+            $user->created_by != $userID
+        ) {
+            return redirect()->route('users.index');
+        }
+
+        $users = null;
+
+        if(auth()->user()->admin)
+        {
+            $users = User::where('id', '!=', auth()->id())->get();
+        }
+
         return view('users/form', [
             'task'  => 'edit',
             'view'  => 'users',
             'roles' => Roles::all(),
             'user'  => $user,
+            'users' => $users,
         ]);
     }
 
@@ -153,6 +205,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $userID = auth()->id();
+
+        if (!auth()->user()->admin ||
+            $user->created_by != $userID
+        ) {
+            die();
+        }
+
         if($user->id === auth()->id())
         {
             return response()->json([
