@@ -65,8 +65,27 @@
                         >{{ $role->name }}</option>
                   @endforeach
               </select>
+              <small id="ownerHelp" class="form-text text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, nulla corporis?</small>
             </div>
         </div>
+
+        @if ($users !== null)
+            <div class="col align-middle">
+                <div class="form-group">
+                  <label for="created_by">Owner of the user</label>
+                  <select class="form-control select2" name="created_by" id="created_by" aria-describedby="ownerHelp">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old('created_by', $user->created_by))
+                                selected
+                            @endif
+                            >{{ $user->name }}</option>
+                    @endforeach
+                  </select>
+                  <small id="ownerHelp" class="form-text text-muted">This user will be able to edit user and assign him to the clinics</small>
+                </div>
+            </div>
+        @endif
 
         <div class="col mx-4 align-middle">
             <div class="form-check">

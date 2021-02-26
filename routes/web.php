@@ -16,8 +16,7 @@ require __DIR__.'/auth.php';
 
 Auth::routes();
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])
-->middleware(['auth'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('user')->middleware(['auth'])->group(function () {
 
@@ -97,7 +96,7 @@ Route::prefix('location')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('destroy/{location}', [LocationController::class, 'destroy'])->name('location.destroy');
 });
 
-Route::get('', [ComplaintFormController::class, 'create'])->name('complaint-form.create');
+
 Route::get('form-sent', [ComplaintFormController::class, 'sent'])->name('complaint-form.sent');
 
 Route::get('complaint-form/manage', [ComplaintFormController::class, 'index'])

@@ -143,7 +143,8 @@ class UserController extends Controller
         $userID = auth()->id();
 
         if (!auth()->user()->admin ||
-            $user->created_by != $userID
+            $user->created_by != $userID ||
+            $user->id != $userID
         ) {
             return redirect()->route('users.index');
         }

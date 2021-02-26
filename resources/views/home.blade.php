@@ -1,18 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
+<div class="container justify-content-center">
+    <div class="row align-self-center">
+        <div class="col-md-12 ">
+            <div class="card vh-100 d-flex align-self-center">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                </div>
+                <a name="fill-a-complain"
+                    id="fill-a-complain"
+                    class="btn btn-primary" href="{{ route('complaint-form.create') }}"
+                    role="button">Fill a complaint</a>
+
+                @if (!Auth::check())
+                    <a name="login"
+                        id="login"
+                        class="btn btn-primary" href="{{ route('login') }}"
+                        role="button">Login</a>
+                @endif
+
             </div>
         </div>
     </div>

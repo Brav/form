@@ -8,7 +8,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="w-100">
+    <div class="container-fluid">
         <div class="row justify-content-center">
 
                 <div class="card-body">
