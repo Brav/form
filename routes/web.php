@@ -97,7 +97,10 @@ Route::prefix('location')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('destroy/{location}', [LocationController::class, 'destroy'])->name('location.destroy');
 });
 
-Route::get('', [ComplaintFormController::class, 'index'])->name('complaint-form.index');
+Route::get('', [ComplaintFormController::class, 'create'])->name('complaint-form.create');
+Route::get('form-sent', [ComplaintFormController::class, 'sent'])->name('complaint-form.sent');
+
+Route::get('complaint-form/manage', [ComplaintFormController::class, 'index'])->middleware(['auth']);
 
 Route::prefix('complaint-form')->middleware(['auth', 'admin'])->group(function () {
 

@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ComplaintFormCreateRequest;
 use App\Models\Clinic;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
 use App\Models\Location;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class ComplaintFormController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -20,13 +24,60 @@ class ComplaintFormController extends Controller
      */
     public function index()
     {
-        return view('complaint-form/form', [
-            'clinics'    => DB::table('clinics')->select('id', 'name')->get(),
-            'categories' => ComplaintCategory::get(),
-            'types'      => ComplaintType::get(),
-            'channels'   => ComplaintChannel::get(),
-            'locations'  => Location::get(),
-        ]);
+        $clinics     = Clinic::$userFields;
+        $userClinics = null;
+
+        if(auth()->user()->admin !== 1)
+        {
+            $userID  = auth()->id();
+            $clinics = Clinic::query();
+
+            foreach ($clinics as $field )
+            {
+                $clinics->orWhere($field, '=', $userID);
+            }
+
+            $userClinics = $clinics->get();
+        }
+
+        $forms = ComplaintForm::when(auth()->user()->admin !== 1, function($query) use($userClinics){
+            return $query->whereIn('clinic_id', $userClinics->pluck('id')->toArray());
+        })
+        ->with(['clinic', 'location', 'category', 'type', 'channel'])
+        ->paginate(20);
+
+        if(!request()->ajax())
+            return view('complaint-form/index', [
+                'forms' => $forms,
+            ]);
+
+        return [
+            'html' => view('complaint-form/partials/_forms', [
+                'forms' => $forms,
+            ])->render(),
+            'pagination' => view('pagination', [
+                'paginator' => $forms,
+                'layout'    => 'vendor.pagination.bootstrap-4',
+                'role'      => 'forms',
+                'container' => 'forms-container',
+            ])->render()
+        ];
+    }
+
+    /**
+     * Show the message after the form is sent.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sent()
+    {
+
+        if(rtrim(request()->server('HTTP_REFERER'), "/") != route('complaint-form.index'))
+        {
+            return redirect()->route('complaint-form.index');
+        }
+
+        return view('complaint-form/form-sent');
     }
 
     /**
@@ -36,18 +87,35 @@ class ComplaintFormController extends Controller
      */
     public function create()
     {
-        //
+        return view('form', [
+            'task'       => 'create',
+            'view'       => 'complaint-form',
+            'clinics'    => DB::table('clinics')->select('id', 'name')->get(),
+            'categories' => ComplaintCategory::get(),
+            'types'      => ComplaintType::get(),
+            'channels'   => ComplaintChannel::get(),
+            'locations'  => Location::get(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ComplaintFormCreateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ComplaintFormCreateRequest $request)
     {
-        //
+        $model = new ComplaintForm();
+        $data  = $model->format($request->all());
+        $model->create($data);
+
+        return redirect()->route('complaint-form.sent')
+            ->with([
+                'status' => [
+                    'message' => "You have file the complaint successfully"
+                ]
+            ]);
     }
 
     /**

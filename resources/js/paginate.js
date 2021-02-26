@@ -13,8 +13,12 @@ $('body').on('click', '.page-link', function (e) {
         data,
         function (data, textStatus, jqXHR) {
 
+            let paginationID = data.id
+                ? `#pagination-${data.id}`
+                : "#pagination";
+
             $("#" + pagination.data("container")).html(data.html);
-            $(`#pagination-${data.id}`).html(data.pagination);
+            $(paginationID).html(data.pagination);
 
         },
         "json"

@@ -15,7 +15,7 @@
                     role="smallModal"
                     data-target="#smallModal"
                     data-attr="{{ route('users.delete', $user->id) }}" title="Delete User">
-                        <i class="fas fa-trash text-danger  fa-lg"></i> Delete
+                        <i class="fa fa-trash-o  fa-lg"></i> Delete
                 </a>
             @endif
 

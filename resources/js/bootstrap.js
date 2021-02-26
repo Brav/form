@@ -1,5 +1,7 @@
 global.moment = require("moment");
 
+moment.locale('en-au');
+
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');

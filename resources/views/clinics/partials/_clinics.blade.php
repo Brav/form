@@ -18,7 +18,7 @@
                 role="smallModal"
                 data-target="#smallModal"
                 data-attr="{{ route('clinics.delete', $clinic->id) }}" title="Delete Clinic">
-                    <i class="fas fa-trash text-danger  fa-lg"></i> Delete
+                    <i class="fa fa-trash-o fa-lg"></i> Delete
                 </a>
         </th>
     </tr>

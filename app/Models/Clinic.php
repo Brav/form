@@ -26,6 +26,20 @@ class Clinic extends Model
     ];
 
     /**
+     * The users associated with the clinic.
+     *
+     * @var array
+     */
+    public static $userFields = [
+        'lead_vet',
+        'practise_manager',
+        'vet_manager',
+        'gm_veterinary_options',
+        'gm_region',
+        'regional_manager',
+    ];
+
+    /**
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value

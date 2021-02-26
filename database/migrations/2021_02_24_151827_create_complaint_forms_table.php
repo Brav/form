@@ -22,12 +22,12 @@ class CreateComplaintFormsTable extends Migration
             $table->string('patient_name');
             $table->string('pms_code');
             $table->dateTime('date_of_incident');
-            $table->dateTime('date_of_client_complaint');
+            $table->date('date_of_client_complaint')->nullable()->default(null);
             $table->text('description');
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('complaint_category_id');
-            $table->unsignedBigInteger('complaint_type_id');
-            $table->unsignedBigInteger('complaint_channel_id');
+            $table->unsignedBigInteger('complaint_type_id')->nullable()->default(null);
+            $table->unsignedBigInteger('complaint_channel_id')->nullable()->default(null);
             $table->timestamps();
         });
     }

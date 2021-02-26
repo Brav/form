@@ -19,7 +19,7 @@
                 data-target="#smallModal"
                 data-attr="{{ route('complaint-type.delete', $type->id) }}"
                 title="Delete Category">
-                    <i class="fas fa-trash text-danger  fa-lg"></i> Delete
+                    <i class="fa fa-trash-o  fa-lg"></i> Delete
                 </a>
         </th>
     </tr>

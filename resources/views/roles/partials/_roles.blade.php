@@ -14,7 +14,7 @@
                 role="smallModal"
                 data-target="#smallModal"
                 data-attr="{{ route('roles.delete', $role->id) }}" title="Delete Role">
-                    <i class="fas fa-trash text-danger  fa-lg"></i> Delete
+                    <i class="fa fa-trash-o  fa-lg"></i> Delete
                 </a>
         </th>
     </tr>

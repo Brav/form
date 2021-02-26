@@ -3,7 +3,7 @@ require('tempusdominus-bootstrap-4');
 require("select2");
 require('./clinic');
 require('./complaint-form');
-// require('./paginate');
+require('./paginate');
 
 $.ajaxSetup({
     headers: {
@@ -32,7 +32,7 @@ $(document).on("click", "a[role=smallModal]", function (event) {
             $("#loader").hide();
         },
         error: function (jqXHR, testStatus, error) {
-            alert("Page " + href + " cannot open. Error:" + error);
+        alert("Page " + href + " cannot open. Error:" + error);
             $("#loader").hide();
         },
         timeout: 8000,
@@ -176,17 +176,14 @@ function showValidationErrors(errors)
 }
 
 $(function () {
-    $(".datetimepicker-datetime").datetimepicker({
-        local: "AU",
-    });
+    $(".datetimepicker-datetime").datetimepicker();
 
     $(".datetimepicker-date").datetimepicker({
         format: "L",
-        format: "AU",
     });
 
     $(".timepicker1").datetimepicker({
-        format: "LT",
+        format: "L",
     });
 });
 
