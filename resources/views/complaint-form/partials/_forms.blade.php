@@ -1,10 +1,3 @@
-@php
-    $canEdit = auth()->user()->admin == 1 ||
-                auth()->user()->role->hasPermission('w') ? true : false;
-
-    $canDelete = auth()->user()->admin == 1 ||
-                auth()->user()->role->hasPermission('d') ? true : false;
- @endphp
 @foreach ($forms as $form)
     <tr id="item-{{ $form->id }}">
         <th>{{ date('d/m/Y g:i A', strtotime($form->created_at)) }}</th>
@@ -24,6 +17,11 @@
         <th>{{ $form->type->name ?? '/' }}</th>
         <th>{{ $form->channel->name ?? '/' }}</th>
         <th>{{ $form->complaintLevel() ?? '/' }}</th>
+        @if ($canEdit)
+            <th scope="col">Outcome of the incident and/or complaint</th>
+            <th scope="col">Completed by</th>
+            <th scope="col">Date completed</th>
+        @endif
         <th>
 
             @if ($canEdit)

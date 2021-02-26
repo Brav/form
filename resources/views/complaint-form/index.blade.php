@@ -1,3 +1,10 @@
+@php
+    $canEdit = auth()->user()->admin == 1 ||
+                auth()->user()->role->hasPermission('w') ? true : false;
+
+    $canDelete = auth()->user()->admin == 1 ||
+                auth()->user()->role->hasPermission('d') ? true : false;
+@endphp
 @extends('layouts.app')
 
 @section('content')
@@ -35,6 +42,11 @@
                             <th scope="col">Type of complaint</th>
                             <th scope="col">Channel</th>
                             <th scope="col">Complaint Level</th>
+                            @if ($canEdit)
+                                <th scope="col">Outcome of the incident and/or complaint</th>
+                                <th scope="col">Completed by</th>
+                                <th scope="col">Date completed</th>
+                            @endif
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
