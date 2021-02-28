@@ -38,7 +38,13 @@ class UserUpdateRequest extends FormRequest
                 )],
             'can_loging' => ['nullable', Rule::in([1])],
             'admin'      => ['nullable', Rule::in([1])],
-            'created_by' => [$createdBy, 'integer'],
+            'created_by' => [$createdBy, function ($attribute, $value, $fail) {
+                                if( is_numeric( $value ) || 'none' === $value ) {
+                                    return true;
+                                } else {
+                                    $fail($attribute.' is invalid.');
+                                }
+                            }],
         ];
     }
 }

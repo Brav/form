@@ -26,7 +26,7 @@ class UserCreateRequest extends FormRequest
     public function rules()
     {
 
-        $createdBy = auth()->user()->admin ? 'requered' : 'nullable';
+        $createdBy = auth()->user()->admin ? 'required' : 'nullable';
 
         return [
             'name'       =>['required', 'string', 'min:2'],
@@ -37,7 +37,13 @@ class UserCreateRequest extends FormRequest
                 )],
             'can_loging' => ['nullable', Rule::in([1])],
             'admin'      => ['nullable', Rule::in([1])],
-            'created_by' => [$createdBy, 'integer'],
+            'created_by' => [$createdBy, function ($attribute, $value, $fail) {
+                                if( is_numeric( $value ) || 'none' === $value ) {
+                                    return true;
+                                } else {
+                                    $fail($attribute.' is invalid.');
+                                }
+                            }],
         ];
     }
 }

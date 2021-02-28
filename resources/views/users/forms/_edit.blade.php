@@ -75,6 +75,7 @@
                   <label for="created_by">Owner of the user</label>
                   <select class="form-control select2" name="created_by" id="created_by" aria-describedby="ownerHelp">
                     @foreach ($users as $user)
+                        <option value=none>None</option>
                         <option value="{{ $user->id }}"
                             @if (old('created_by', $user->created_by))
                                 selected

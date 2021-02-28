@@ -108,7 +108,8 @@ class UserController extends Controller
 
         if(auth()->user()->admin)
         {
-            $data['created_by'] = (int) $request->post('created_by');
+            $data['created_by'] = is_numeric($request->post('created_by')) ?
+                (int) $request->post('created_by') : null;
         }
 
         User::create($data);
@@ -187,6 +188,13 @@ class UserController extends Controller
         {
             $data['password'] = Hash::make($request->password);
         }
+
+        if(auth()->user()->admin)
+        {
+            $data['created_by'] = is_numeric($request->post('created_by')) ?
+                (int) $request->post('created_by') : null;
+        }
+
 
         $user->save($data);
 
