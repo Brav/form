@@ -28,6 +28,7 @@ class SendEmailToManagers
      */
     public function handle(ComplaintFilled $event)
     {
+
         $form           = $event->form;
 
         $complaintLevel = $form->complaintLevel();

@@ -74,9 +74,9 @@ class ComplaintFormController extends Controller
     public function sent()
     {
 
-        if(rtrim(request()->server('HTTP_REFERER'), "/") != route('complaint-form.index'))
+        if(rtrim(request()->server('HTTP_REFERER'), "/") != route('complaint-form.create'))
         {
-            return redirect()->route('complaint-form.index');
+            return redirect()->route('complaint-form.create');
         }
 
         return view('complaint-form/form-sent');
@@ -110,7 +110,7 @@ class ComplaintFormController extends Controller
     {
         $model = new ComplaintForm();
         $data  = $model->format($request->all());
-        $model->create($data);
+        $model = $model->create($data);
 
         ComplaintFilled::dispatch($model);
 

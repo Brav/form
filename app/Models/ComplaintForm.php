@@ -74,6 +74,11 @@ class ComplaintForm extends Model
             }
         }
 
+        if(!isset($data['outcome']))
+        {
+            $data['outcome'] = '';
+        }
+
         return $data;
     }
 

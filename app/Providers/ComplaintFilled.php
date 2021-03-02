@@ -24,7 +24,7 @@ class ComplaintFilled
      */
     public function __construct(ComplaintForm $form)
     {
-        $this->$form = $form;
+        $this->form = $form;
     }
 
     /**
