@@ -1,94 +1,71 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex" />
+<html lang="{{ config('app.locale') }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Vet Partners') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+        <meta name="description" content="RMA&reg; - The Art of Executive Search &amp; Executive Recrutment">
+        <meta name="author" content="dushan887mob3">
+        <meta name="robots" content="noindex, nofollow">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <!-- Icons -->
+        <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.png') }}">
+        <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
 
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <!-- Fonts and Styles -->
+        @yield('css_before')
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+        <link rel="stylesheet" id="css-main" href="{{ asset('css/dashmix.css') }}">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+        <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
+        <link rel="stylesheet" id="css-theme" href="{{ asset('css/themes/rma.css') }}">
+        @yield('css_after')
 
-                        @auth
-                            <li><a href="{{ route('complaint-form.manage') }}">Complaint Forms</a></li>
-                            <li><a href="{{ route('users.index') }}">Users</a></li>
-                            <li><a href="{{ route('clinics.index') }}">Clinics</a></li>
+        <!-- Scripts -->
+        <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
+    </head>
+    <body>
+        <!-- Page Container -->
+        <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled page-header-dark">
+         
 
-                            @if (auth()->user()->admin)
-                                <li><a href="{{ route('roles.index') }}">Roles</a></li>
-                                <li><a href="{{ route('complaint-category.index') }}">Complaint Categories</a></li>
-                                <li><a href="{{ route('location.index') }}">Locations</a></li>
-                            @endif
+            <!-- Sidebar -->
+            @include('layouts.partials.sidebar')            
+            <!-- END Sidebar -->
 
-                        @endauth
+            <!-- Header -->
+            @include('layouts.partials.header')
+            <!-- END Header -->            
 
-                    </ul>
+            <!-- Main Container -->
+            <main id="main-container">
+                @yield('content')
+            </main>
+            <!-- END Main Container -->
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+            <!-- Footer -->
+            @include('layouts.partials.footer')
+            <!-- END Footer -->
 
-                        @if(Auth::user())
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endif
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        </div>
+        <!-- END Page Container -->
 
         @include('modals/small')
         @include('modals/big')
-    </div>
-</body>
+
+        <!-- Dashmix Core JS -->
+        <script src="{{ asset('js/dashmix.app.js') }}"></script>
+        <script src="{{ asset('js/dashapp.js') }}"></script>
+
+        <!-- Laravel Scaffolding JS -->
+
+        @yield('js_after')
+    </body>
 </html>
