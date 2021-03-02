@@ -126,8 +126,8 @@ class ClinicController extends Controller
 
         $userID = auth()->id();
 
-        if (!auth()->user()->admin ||
-            $clinic->lead_vet != $userID ||
+        if (!auth()->user()->admin &&
+            $clinic->lead_vet != $userID &&
             $clinic->practise_manager != $userID
         ) {
             return redirect()->route('clinics.index');
@@ -174,8 +174,8 @@ class ClinicController extends Controller
     {
         $userID = auth()->id();
 
-        if (!auth()->user()->admin ||
-            $clinic->lead_vet != $userID ||
+        if (!auth()->user()->admin &&
+            $clinic->lead_vet != $userID &&
             $clinic->practise_manager != $userID
         ) {
             die;

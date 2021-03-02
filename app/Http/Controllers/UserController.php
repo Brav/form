@@ -143,8 +143,8 @@ class UserController extends Controller
     {
         $userID = auth()->id();
 
-        if (!auth()->user()->admin ||
-            $user->created_by != $userID ||
+        if (!auth()->user()->admin &&
+            $user->created_by != $userID &&
             $user->id != $userID
         ) {
             return redirect()->route('users.index');
@@ -157,7 +157,7 @@ class UserController extends Controller
             $users = User::where('id', '!=', auth()->id())->get();
         }
 
-        return view('users/form', [
+        return view('form', [
             'task'  => 'edit',
             'view'  => 'users',
             'roles' => Roles::all(),
@@ -216,7 +216,7 @@ class UserController extends Controller
     {
         $userID = auth()->id();
 
-        if (!auth()->user()->admin ||
+        if (!auth()->user()->admin &&
             $user->created_by != $userID
         ) {
             die();

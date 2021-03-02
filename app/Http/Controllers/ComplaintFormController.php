@@ -141,7 +141,7 @@ class ComplaintFormController extends Controller
      */
     public function edit(ComplaintForm $form)
     {
-        if(!auth()->user()->admin ||
+        if(!auth()->user()->admin &&
             !auth()->user()->role->hasPermission('w'))
         {
             return redirect()->route('complaint-form.create');
@@ -168,7 +168,7 @@ class ComplaintFormController extends Controller
      */
     public function update(ComplaintFormUpdateRequest $request, ComplaintForm $form)
     {
-        if(!auth()->user()->admin ||
+        if(!auth()->user()->admin &&
             !auth()->user()->role->hasPermission('w'))
         {
             return redirect()->route('complaint-form.create');
