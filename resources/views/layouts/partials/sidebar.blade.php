@@ -40,7 +40,7 @@ Sidebar -->
                     </a>
                 </li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link" href="#">
+                    <a class="nav-main-link" href="{{ route('complaint-form.create') }}">
                         <i class="nav-main-link-icon fa fa-folder-open"></i>
                         <span class="nav-main-link-name">Add New</span>
                     </a>
@@ -53,7 +53,7 @@ Sidebar -->
                     </a>
                 </li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link" href="#">
+                    <a class="nav-main-link" href="{{ route('users.create') }}">
                         <i class="nav-main-link-icon fa fa-folder-open"></i>
                         <span class="nav-main-link-name">Add New</span>
                     </a>

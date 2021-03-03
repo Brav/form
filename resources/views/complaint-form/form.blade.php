@@ -2,9 +2,8 @@
 
 @section('content')
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
+    <div class="content">
+        <div class="block-content">
 
                 <form
                     action="{{ route('complaint-form.store') }}"
@@ -308,7 +307,6 @@
                     <button type="submit" class="btn btn-primary">Submit a complaint</button>
                 </form>
 
-            </div>
         </div>
     </div>
 

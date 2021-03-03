@@ -8,8 +8,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row justify-content-center">
+    <div class="content">
+        <div class="block-content">
 
                 <div class="card-body">
                     @if (session('status'))
@@ -19,41 +19,39 @@
                     @endif
                 </div>
 
-                <div class="float-right">
-                    <a href="{{ route('complaint-form.create') }}" class="btn btn-primary my-2">Create</a>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-vcenter" id="forms">
+                        <thead>
+                            <tr>
+                                <th class="small">Date/Time Submitet</th>
+                                <th class="small">Clinic Name</th>
+                                <th class="small">Regional Manager</th>
+                                <th class="small">Team member logging the complaint</th>
+                                <th class="small">Position of the team member</th>
+                                <th class="small">Client/Owner name</th>
+                                <th class="small">Patient name</th>
+                                <th class="small">PMS code</th>
+                                <th class="small">Date of the incident</th>
+                                <th class="small">Date of client complaint (if applicable)</th>
+                                <th class="small">Description of the incident and/or complaint</th>
+                                <th class="small">Location of the incident</th>
+                                <th class="small">Category</th>
+                                <th class="small">Type of complaint</th>
+                                <th class="small">Channel</th>
+                                <th class="small">Complaint Level</th>
+                                @if ($canEdit)
+                                    <th class="small">Outcome of the incident and/or complaint</th>
+                                    <th class="small">Completed by</th>
+                                    <th class="small">Date completed</th>
+                                @endif
+                                <th class="small">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id=forms-container>
+                            @include('complaint-form/partials/_forms')
+                        </tbody>
+                    </table>
                 </div>
-
-                <table class="table table-hover w-100" id="forms">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Date/Time Submitet</th>
-                            <th scope="col">Clinic Name</th>
-                            <th scope="col">Regional Manager</th>
-                            <th scope="col">Team member logging the complaint</th>
-                            <th scope="col">Position of the team member</th>
-                            <th scope="col">Client/Owner name</th>
-                            <th scope="col">Patient name</th>
-                            <th scope="col">PMS code</th>
-                            <th scope="col">Date of the incident</th>
-                            <th scope="col">Date of client complaint (if applicable)</th>
-                            <th scope="col">Description of the incident and/or complaint</th>
-                            <th scope="col">Location of the incident</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Type of complaint</th>
-                            <th scope="col">Channel</th>
-                            <th scope="col">Complaint Level</th>
-                            @if ($canEdit)
-                                <th scope="col">Outcome of the incident and/or complaint</th>
-                                <th scope="col">Completed by</th>
-                                <th scope="col">Date completed</th>
-                            @endif
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id=forms-container>
-                        @include('complaint-form/partials/_forms')
-                    </tbody>
-                </table>
 
                 <div id="pagination">
                     @include('pagination', [

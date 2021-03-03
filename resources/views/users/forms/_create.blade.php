@@ -1,4 +1,3 @@
-@dump($errors)
 <form action="{{ route('users.store') }}" method="POST">
     @csrf
 

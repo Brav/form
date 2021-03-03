@@ -1,19 +1,20 @@
-@extends('layouts.app')
+@php 
+    $layout = auth()->user() ? 'layouts.app' : 'layouts.public';
+@endphp
+@extends($layout)
 
 @section('content')
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                @if ($task === 'create')
-                    @include($view . '/forms/_create')
-                @endif
+    <div class="content">
+        <div class="block-content">
+            @if ($task === 'create')
+                @include($view . '/forms/_create')
+            @endif
 
-                @if ($task === 'edit')
-                    @include($view . '/forms/_edit')
-                @endif
+            @if ($task === 'edit')
+                @include($view . '/forms/_edit')
+            @endif
 
-            </div>
         </div>
     </div>
 

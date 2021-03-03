@@ -41,15 +41,10 @@
     </head>
     <body>
         <!-- Page Container -->
-        <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled page-header-dark">
-         
-
-            <!-- Sidebar -->
-            @include('layouts.partials.sidebar')            
-            <!-- END Sidebar -->
-
+        <div id="page-container">
+                   
             <!-- Header -->
-            @include('layouts.partials.header')
+            @include('layouts.partials.public_header')
             <!-- END Header -->            
 
             <!-- Main Container -->

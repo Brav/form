@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
+    <div class="content">
+        <div class="block-content">
 
                 <div class="card-body">
                     @if (session('status'))
@@ -24,7 +23,6 @@
                 </div>
 
                 @include('location/partials/_locations')
-            </div>
         </div>
     </div>
 @endsection
