@@ -70,7 +70,7 @@
 
         <!-- Dashmix Core JS -->
         <script src="{{ asset('js/dashmix.app.js') }}"></script>
-        <script src="{{ asset('js/app.js') }}"></script>
+        <!-- <script src="{{ asset('js/app.js') }}"></script> -->
 
         <!-- Laravel Scaffolding JS -->
 

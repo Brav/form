@@ -12,20 +12,22 @@
                     @endif
                 </div>
                 
-                <table class="table table-hover" id=users>
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id=users-container>
-                        @include('users/partials/_users')
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-vcenter" id=users>
+                        <thead>
+                            <tr>
+                                <th class="small">ID</th>
+                                <th class="small">Name</th>
+                                <th class="small">Email</th>
+                                <th class="small">Role</th>
+                                <th class="small">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id=users-container>
+                            @include('users/partials/_users')
+                        </tbody>
+                    </table>
+                </div>
 
                 <div id="pagination">
                     @include('pagination', [

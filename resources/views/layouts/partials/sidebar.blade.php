@@ -24,7 +24,7 @@ Sidebar -->
         <div class="content-side content-side-full">
             <ul class="nav-main">
                 <li class="nav-main-item">
-                    <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="/dashboard">
+                    <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="{{ route('complaint-form.manage') }}">
                         <i class="nav-main-link-icon fa fa-location-arrow"></i>
                         <span class="nav-main-link-name">Dashboard</span>
                     </a>
@@ -66,7 +66,7 @@ Sidebar -->
                     </a>
                 </li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link" href="#">
+                    <a class="nav-main-link" href="{{ route('clinics.create') }}">
                         <i class="nav-main-link-icon fa fa-folder-open"></i>
                         <span class="nav-main-link-name">Add New</span>
                     </a>

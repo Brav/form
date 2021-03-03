@@ -1,18 +1,20 @@
 <div class="tab-pane fade show" id="types" role="tabpanel" aria-labelledby="types">
-    <table class="table table-hover" id="complaint-types">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Complaint Category</th>
-                <th scope="col">Level</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody id=complaint-type-container>
-            @include('complaint-types/partials/_container')
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-vcenter" id="complaint-types">
+            <thead>
+                <tr>
+                    <th class="small">ID</th>
+                    <th class="small">Name</th>
+                    <th class="small">Complaint Category</th>
+                    <th class="small">Level</th>
+                    <th class="small">Actions</th>
+                </tr>
+            </thead>
+            <tbody id=complaint-type-container>
+                @include('complaint-types/partials/_container')
+            </tbody>
+        </table>
+    </div>
 
     <div id="pagination-type">
         @include('pagination', [

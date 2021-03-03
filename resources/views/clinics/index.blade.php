@@ -12,29 +12,27 @@
                         </div>
                     @endif
                 </div>
-
-                <div class="float-right">
-                    <a href="{{ route('clinics.create') }}" class="btn btn-primary my-2">Create</a>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-vcenter" id=clinics>
+                        <thead>
+                            <tr>
+                                <th class="small">ID</th>
+                                <th class="small">Name</th>
+                                <th class="small">Lead Vet</th>
+                                <th class="small">Practise Manager</th>
+                                <th class="small">Vet Manager</th>
+                                <th class="small">GM Veterinary Options</th>
+                                <th class="small">GM Region</th>
+                                <th class="small">Regional Manager</th>
+                                <th class="small">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id=clinics-container>
+                            @include('clinics/partials/_clinics')
+                        </tbody>
+                    </table>
                 </div>
-
-                <table class="table table-hover" id=clinics>
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Lead Vet</th>
-                            <th scope="col">Practise Manager</th>
-                            <th scope="col">Vet Manager</th>
-                            <th scope="col">GM Veterinary Options</th>
-                            <th scope="col">GM Region</th>
-                            <th scope="col">Regional Manager</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id=clinics-container>
-                        @include('clinics/partials/_clinics')
-                    </tbody>
-                </table>
 
                 <div id="pagination">
                     @include('pagination', [
