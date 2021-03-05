@@ -102,7 +102,7 @@ Route::get('form-sent', [ComplaintFormController::class, 'sent'])->name('complai
 Route::get('complaint-form/manage', [ComplaintFormController::class, 'index'])
     ->middleware(['auth'])->name('complaint-form.manage');
 
-Route::get('create', [ComplaintFormController::class, 'create'])->name('complaint-form.create');
+Route::get('complaint-form/create', [ComplaintFormController::class, 'create'])->name('complaint-form.create');
 
 Route::prefix('complaint-form')->middleware(['auth', 'admin'])->group(function () {
 
