@@ -82,7 +82,6 @@ $(document).on("submit", "#formAjax", function (event) {
         success: function (result) {
 
             if (action === 'create') {
-                console.log($(`#${table}`));
                 $(`#${table}`).find("tbody").append(result);
             }
 
@@ -91,7 +90,6 @@ $(document).on("submit", "#formAjax", function (event) {
 
                 $(`#${table}`).find(`#item-${id}`).replaceWith(result);
             }
-
 
             $("#bigModal").modal("hide");
         },
