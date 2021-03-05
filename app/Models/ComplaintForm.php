@@ -42,7 +42,9 @@ class ComplaintForm extends Model
      * @var array
      */
     protected $casts = [
-        'date_of_incident' => 'datetime',
+        'date_of_incident'         => 'datetime',
+        'date_of_client_complaint' => 'datetime',
+        'date_completed'           => 'datetime',
     ];
 
     /**

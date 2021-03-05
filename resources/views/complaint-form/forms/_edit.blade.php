@@ -61,7 +61,7 @@
                         data-target="#date-completed"
                         name="date_completed"
                         id="date_completed"
-                        value="{{ old('date_completed', $form->date_completed) }}"/>
+                        value="{{ old('date_completed', optional($form->date_completed)->format('d/m/Y')) }}"/>
                     <div class="input-group-append"
                         data-target="#date-completed"
                         data-toggle="datetimepicker">
@@ -227,7 +227,7 @@
                         data-target=".datetimepicker-datetime"
                         name="date_of_incident"
                         id="date_of_incident"
-                        value="{{ old('date_of_incident', $form->date_of_incident) }}"/>
+                        value="{{ old('date_of_incident', $form->date_of_incident->format('d/m/Y g:i A')) }}"/>
                     <div class="input-group-append"
                         data-target=".datetimepicker-datetime"
                         data-toggle="datetimepicker">
@@ -251,7 +251,7 @@
                         data-target="#start_dt_2"
                         name="date_of_client_complaint"
                         id="date_of_client_complaint"
-                        value="{{ old('date_of_client_complaint', $form->date_of_client_complaint) }}"/>
+                        value="{{ old('date_of_client_complaint', optional($form->date_of_client_complaint)->format('d/m/Y')) }}"/>
                     <div class="input-group-append"
                         data-target="#start_dt_2"
                         data-toggle="datetimepicker">

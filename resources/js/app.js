@@ -1,5 +1,4 @@
 require('./bootstrap');
-require('tempusdominus-bootstrap-4');
 require("select2");
 require('./clinic');
 require('./complaint-form');
@@ -174,65 +173,3 @@ function showValidationErrors(errors)
         `).insertAfter($(`#${error}`));
     }
 }
-
-$(document).ready(function () {
-
-    let dateOfIncident        = $("#date_of_incident").val();
-    let dateOfClientComplaint = $("#date_of_client_complaint").val();
-    let dateCompleted         = $("#date_completed").val();
-
-    $(function () {
-
-        if (dateOfIncident !== undefined && moment(dateOfIncident).isValid()) {
-            dateOfIncident = {
-                defaultDate: moment(dateOfIncident),
-                date: moment(),
-            };
-        }
-        else
-        {
-            dateOfIncident = {}
-        }
-
-        $(".date_of_incident").datetimepicker(dateOfIncident);
-
-        if(moment(dateOfClientComplaint).isValid())
-        {
-            dateOfClientComplaint = {
-                format: "L",
-                defaultDate: moment(dateOfClientComplaint),
-                date: moment(),
-            };
-        }
-        else
-        {
-            dateOfClientComplaint = {
-                format: "L",
-            };
-        }
-
-        $(".date_of_client_complaint").datetimepicker(dateOfClientComplaint);
-
-        if($('#date_completed').length){
-            if (
-                dateCompleted !== undefined &&
-                moment(dateCompleted).isValid()
-            ) {
-                dateCompleted = {
-                    format: "L",
-                    defaultDate: moment(dateCompleted),
-                    date: moment(),
-                };
-            } else {
-                dateCompleted = {
-                    format: "L",
-                };
-            }
-
-            $(".date_completed").datetimepicker(dateCompleted);
-        }
-
-    });
-});
-
-
