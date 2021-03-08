@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FormsExport;
 use App\Http\Requests\ComplaintFormCreateRequest;
 use App\Http\Requests\ComplaintFormUpdateRequest;
 use App\Models\Clinic;
@@ -15,6 +16,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ComplaintFormController extends Controller
 {
@@ -196,5 +198,10 @@ class ComplaintFormController extends Controller
     public function destroy(ComplaintForm $complaintForm)
     {
         //
+    }
+
+    public function export()
+    {
+        return Excel::download(new FormsExport, 'forms.xlsx');
     }
 }

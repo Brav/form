@@ -20,6 +20,11 @@
                 </div>
 
                 <div class="table-responsive">
+                    <a name="exportToExcel" id="exportToExcel" class="btn btn-primary"
+                        href="{{ route('complaint-form.export') }}"
+                        role="button"
+                    <i class="fa fa-table" aria-hidden="true"></i>
+                    Export</a>
                     <table class="table table-bordered table-striped table-vcenter" id="forms">
                         <thead>
                             <tr>
@@ -61,6 +66,12 @@
                         'container' => 'forms-container',
                     ])
                 </div>
+
+                <a name="exportToExcel" id="exportToExcel" class="btn btn-primary"
+                        href="{{ route('complaint-form.export') }}"
+                        role="button"
+                    <i class="fa fa-table" aria-hidden="true"></i>
+                    Export</a>
 
         </div>
     </div>
