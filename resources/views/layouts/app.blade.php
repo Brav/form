@@ -49,9 +49,7 @@
         </script>
 
         {!! htmlScriptTagJsApi([
-            'action' => 'homepage',
-            'callback_then' => 'callbackThen',
-            'callback_catch' => 'callbackCatch'
+            'action' => 'submit',
         ]) !!}
     </head>
     <body>
