@@ -6,7 +6,7 @@
 			    Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="javascriot.void()" target="_blank">yayclicks</a>
 			</div>
 			<div class="col-sm-6 order-sm-1 text-center text-sm-left">
-			    &copy; <a class="font-w600" href="javascriot.void()" target="_blank">Vet Partenrs</a> <span data-toggle="year-copy"></span>. All Rights Reserved.
+			    &copy; <a class="font-w600" href="javascriot.void()" target="_blank">Vet Partners</a> <span data-toggle="year-copy"></span>. All Rights Reserved.
 			</div>
         </div>
     </div>
