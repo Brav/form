@@ -103,12 +103,13 @@ Route::get('complaint-form/manage', [ComplaintFormController::class, 'index'])
     ->middleware(['auth'])->name('complaint-form.manage');
 
 Route::get('complaint-form/create', [ComplaintFormController::class, 'create'])->name('complaint-form.create');
+Route::post('complaint-form/store', [ComplaintFormController::class, 'store'])->name('complaint-form.store');
 
 Route::prefix('complaint-form')->middleware(['auth', 'admin'])->group(function () {
 
     Route::get('delete/{form}', [ComplaintFormController::class, 'delete'])->name('complaint-form.delete');
     Route::get('edit/{form}', [ComplaintFormController::class, 'edit'])->name('complaint-form.edit');
-    Route::post('store', [ComplaintFormController::class, 'store'])->name('complaint-form.store');
+
     Route::put('update/{form}', [ComplaintFormController::class, 'update'])->name('complaint-form.update');
     Route::delete('destroy/{form}', [ComplaintFormController::class, 'destroy'])->name('complaint-form.destroy');
 });
