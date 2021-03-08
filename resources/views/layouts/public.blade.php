@@ -47,12 +47,6 @@
 
             gtag('config', 'G-G98990XJNN');
         </script>
-
-        {!! htmlScriptTagJsApi([
-            'action' => 'homepage',
-            'callback_then' => 'callbackThen',
-            'callback_catch' => 'callbackCatch'
-        ]) !!}
     </head>
     <body>
         <!-- Page Container -->
