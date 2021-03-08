@@ -47,8 +47,9 @@
 
             gtag('config', 'G-G98990XJNN');
         </script>
-
-        {!! htmlScriptTagJsApi() !!}
+        <script>
+            var csrfToken = document.head.querySelector('meta[name="csrf-token"]');
+        </script>
     </head>
     <body>
         <!-- Page Container -->
@@ -129,5 +130,6 @@
         <!-- Laravel Scaffolding JS -->
 
         @yield('js_after')
+        {!! htmlScriptTagJsApi() !!}
     </body>
 </html>

@@ -47,8 +47,6 @@
 
             gtag('config', 'G-G98990XJNN');
         </script>
-
-        {!! htmlScriptTagJsApi() !!}
     </head>
     <body>
         <!-- Page Container -->
@@ -125,4 +123,5 @@
 
         @yield('js_after')
     </body>
+    {!! htmlScriptTagJsApi() !!}
 </html>
