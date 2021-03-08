@@ -31,7 +31,7 @@ Sidebar -->
                 </li>
 
                 @auth
-               
+
                 <li class="nav-main-heading">Complaint Forms</li>
                 <li class="nav-main-item">
                     <a class="nav-main-link" href="{{ route('complaint-form.manage') }}">
@@ -73,29 +73,29 @@ Sidebar -->
                 </li>
 
                     @if (auth()->user()->admin)
-                    <li class="nav-main-heading">Admin Options</li>
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('roles.index') }}">
-                            <i class="nav-main-link-icon fa fa-folder-open"></i>
-                            <span class="nav-main-link-name">Manage Roles</span>
-                        </a>
-                    </li>
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('complaint-category.index') }}">
-                            <i class="nav-main-link-icon fa fa-folder-open"></i>
-                            <span class="nav-main-link-name">Complaint Categories</span>
-                        </a>
-                    </li>
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('location.index') }}">
-                            <i class="nav-main-link-icon fa fa-folder-open"></i>
-                            <span class="nav-main-link-name">Locations</span>
-                        </a>
-                    </li>
+                        <li class="nav-main-heading">Admin Options</li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('roles.index') }}">
+                                <i class="nav-main-link-icon fa fa-folder-open"></i>
+                                <span class="nav-main-link-name">Manage Roles</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('complaint-category.index') }}">
+                                <i class="nav-main-link-icon fa fa-folder-open"></i>
+                                <span class="nav-main-link-name">Complaint Categories</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('location.index') }}">
+                                <i class="nav-main-link-icon fa fa-folder-open"></i>
+                                <span class="nav-main-link-name">Locations</span>
+                            </a>
+                        </li>
                     @endif
 
                 @endauth
-               
+
             </ul>
         </div>
         <!-- END Side Navigation -->

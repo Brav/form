@@ -29,7 +29,7 @@ Route::prefix('user')->middleware(['auth'])->group(function () {
     Route::delete('destroy/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
-Route::group(['prefix' => 'roles', 'middleware' => ['auth', 'admin']], function () {
+Route::group(['prefix' => 'roles', 'middleware' => []], function () {
 
     Route::get('', [RolesController::class, 'index'])->name('roles.index');
     Route::get('create', [RolesController::class, 'create'])->name('roles.create');
