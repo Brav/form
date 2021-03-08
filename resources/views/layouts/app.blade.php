@@ -48,9 +48,7 @@
             gtag('config', 'G-G98990XJNN');
         </script>
 
-        {!! htmlScriptTagJsApi([
-            'action' => 'submit',
-        ]) !!}
+        {!! htmlScriptTagJsApi() !!}
     </head>
     <body>
         <!-- Page Container -->
