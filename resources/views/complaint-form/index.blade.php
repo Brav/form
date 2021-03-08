@@ -23,7 +23,7 @@
                     <table class="table table-bordered table-striped table-vcenter" id="forms">
                         <thead>
                             <tr>
-                                <th class="small">Date/Time Submitet</th>
+                                <th class="small">Date/Time Submitted</th>
                                 <th class="small">Clinic Name</th>
                                 <th class="small">Regional Manager</th>
                                 <th class="small">Team member logging the complaint</th>
