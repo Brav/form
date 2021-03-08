@@ -24,11 +24,11 @@
             {{ __('Confirm Password') }}
         </button>
 
-        @if (Route::has('password.request'))
+        {{-- @if (Route::has('password.request'))
             <a class="" href="{{ route('password.request') }}">
                 {{ __('Forgot Your Password?') }}
             </a>
-        @endif
+        @endif --}}
     </div>
 </form>
 @endsection

@@ -3,7 +3,7 @@
 @section('content')
 
 <p class="text-uppercase text-center font-w700 font-size-sm text-muted">{{ __('Login') }}</p>
-   
+
 <form method="POST" action="{{ route('login') }}">
     @csrf
 
@@ -42,11 +42,11 @@
 
         </div>
         <div class="col text-right">
-            @if (Route::has('password.request'))
+            {{-- @if (Route::has('password.request'))
                 <a class="" href="{{ route('password.request') }}">
                     <small>{{ __('Forgot Your Password?') }}</small>
                 </a>
-            @endif
+            @endif --}}
         </div>
     </div>
 
