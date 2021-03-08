@@ -66,6 +66,49 @@
         <!-- Dashmix Core JS -->
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/dashmix.app.js') }}"></script>
+        <script src="{{ asset('js/flatpickr.min.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+
+                let dateOfIncidentDate        = $("#date_of_incident").val();
+                let dateOfClientComplaintDate = $("#date_of_client_complaint").val();
+                let dateCompletedDate         = $("#date_completed").val();
+
+                $(function () {
+
+                    dateOfIncident = {
+                        dateFormat: "d/m/Y h:i K",
+                        enableTime: true,
+                    };
+
+                    if (dateOfIncidentDate !== '') {
+                        dateOfIncident.defaultDate = dateOfIncidentDate;
+                    }
+
+                    $("#date_of_incident").flatpickr(dateOfIncident);
+
+                    dateConfiguration = {
+                        dateFormat: "d/m/Y",
+                    };
+
+                    if (dateOfClientComplaintDate !== '') {
+                        dateConfiguration.defaultDate = dateOfClientComplaintDate;
+                    }
+
+                    $("#date_of_client_complaint").flatpickr(dateConfiguration);
+
+                    if($('#date_completed').length){
+
+                        if (dateCompletedDate !== '') {
+                            dateConfiguration.defaultDate = dateCompletedDate;
+                        }
+
+                        $("#date_completed").flatpickr(dateConfiguration);
+                    }
+
+                });
+            });
+        </script>
 
         <!-- Laravel Scaffolding JS -->
 
