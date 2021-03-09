@@ -29,10 +29,7 @@
                        User Options
                     </div>
                     <div class="p-2">
-                        <a class="dropdown-item" href="javascript:void(0)">
-                            <i class="far fa-fw fa-user mr-1"></i> Profile
-                        </a>
-                        <a class="dropdown-item" href="javascript:void(0)">
+                        <a class="dropdown-item" href="{{ route('users.edit', auth()->id() ) }}">
                             <i class="fa fa-fw fa-cog mr-1"></i> Settings
                         </a>
 

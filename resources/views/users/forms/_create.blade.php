@@ -1,8 +1,8 @@
 <form action="{{ route('users.store') }}" method="POST">
     @csrf
 
-    <div class="form-row align-items-center">
-        <div class="col">
+    <div class="form-row align-items-center mb-3" style="max-width: 600px">
+        <div class="col-12">
 
             <div class="form-group">
                 <label for="name">User Name</label>
@@ -15,7 +15,7 @@
 
         </div>
 
-        <div class="col">
+        <div class="col-12">
 
             <div class="form-group">
                 <label for="email">Email</label>
@@ -28,7 +28,7 @@
 
         </div>
 
-        <div class="col">
+        <div class="col-12">
 
             <div class="form-group">
                 <label for="password">Password</label>
@@ -41,17 +41,14 @@
 
         </div>
 
-        <div class="col">
+        <div class="col-12 mb-3">
             <button type="button"
-                class="btn btn-primary btn-sm"
+                class="btn btn-primary btn-sm mt-2"
                 id="generate-password">Generate Password</button>
         </div>
 
-    </div>
 
-    <div class="form-row align-items-center">
-
-        <div class="col">
+        <div class="col-12">
             <div class="form-group align-middle">
               <label for="role_id">Role</label>
               <select class="form-control" name="role_id" id="role_id">
@@ -63,7 +60,7 @@
                         >{{ $role->name }}</option>
                   @endforeach
               </select>
-              <small id="ownerHelp" class="form-text text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, nulla corporis?</small>
+              <!-- <small id="ownerHelp" class="form-text text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, nulla corporis?</small> -->
             </div>
         </div>
 
@@ -81,7 +78,7 @@
                             >{{ $user->name }}</option>
                     @endforeach
                   </select>
-                  <small id="ownerHelp" class="form-text text-muted">This user will be able to edit user and assign him to the clinics</small>
+                  <!-- <small id="ownerHelp" class="form-text text-muted">This user will be able to edit user and assign him to the clinics</small> -->
                 </div>
             </div>
         @endif
@@ -119,5 +116,5 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary mb-3">Create</button>
 </form>

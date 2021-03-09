@@ -33,7 +33,7 @@
 
 
         <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
-        <link rel="stylesheet" id="css-theme" href="{{ asset('css/themes/rma.css') }}">
+        <link rel="stylesheet" id="css-theme" href="{{ asset('css/themes/xinspire.css') }}">
         @yield('css_after')
 
         <!-- Scripts -->

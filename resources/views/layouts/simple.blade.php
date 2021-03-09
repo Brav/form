@@ -25,7 +25,7 @@
         <link rel="stylesheet" id="css-main" href="{{ asset('css/dashmix.css') }}">
 
         <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
-        <link rel="stylesheet" id="css-theme" href="{{ asset('css/themes/rma.css') }}">
+        <link rel="stylesheet" id="css-theme" href="{{ asset('css/themes/xinspire.css') }}">
         @yield('css_after')
 
         <!-- Scripts -->
@@ -50,7 +50,7 @@
                 <div class="row no-gutters justify-content-center bg-body-dark">
                     <div class="hero-static col-sm-12 col-md-10 col-xl-8 d-flex align-items-center p-2 px-sm-0">
                         <!-- Sign In Block -->
-                        <div class="block block-rounded block-transparent block-fx-pop w-100 mb-0 overflow-hidden bg-image" style="background-image: url({{ asset('media/photos/photo20@2x.jpg') }});">
+                        <div class="block block-rounded block-transparent block-fx-pop w-100 mb-0 overflow-hidden bg-image" style="background-image: url({{ asset('media/images/main-cover.jpg') }});">
                             <div class="row no-gutters">
                                 <div class="col-md-6 order-md-1 bg-white">
                                     <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6">
@@ -67,14 +67,13 @@
                                 <div class="col-md-6 order-md-0 bg-primary-dark-op d-flex align-items-center">
                                     <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6">
                                         <div class="media">
-                                            <a class="img-link mr-3" href="javascript:void(0)">
+                                           <!--  <a class="img-link mr-3" href="javascript:void(0)">
                                                 <img class="img-avatar img-avatar-thumb" src="{{ asset('media/avatars/avatar16.jpg') }}" alt="">
-                                            </a>
+                                            </a> -->
                                             <div class="media-body">
                                                 <p class="text-white font-w600 mb-1">
-                                                    Amazing framework with tons of options! It helped us build our project!
+                                                    Please use the form to lodge any formal complaints. If the complaint is of an urgent nature please flag you have submitted this to your regional manager
                                                 </p>
-                                                <a class="text-white-75 font-w600" href="javascript:void(0)">Scott Young, Web Developer</a>
                                             </div>
                                         </div>
                                     </div>
