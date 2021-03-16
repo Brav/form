@@ -1,7 +1,6 @@
 {{-- !-- Delete Warning Modal -->  --}}
 <form action="{{ $routeName }}" method="post" id=delete-form>
     <div class="modal-body">
-        @csrf
         @method('DELETE')
         <input type="hidden" name="id" value="{{ $id }}">
 

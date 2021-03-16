@@ -195,8 +195,7 @@ class UserController extends Controller
                 (int) $request->post('created_by') : null;
         }
 
-
-        $user->save($data);
+        $user->update($data);
 
         return redirect()->route('users.index')->with([
             'status' => [

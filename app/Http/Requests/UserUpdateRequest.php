@@ -25,7 +25,7 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $createdBy = auth()->user()->admin ? 'requered' : 'nullable';
+        $createdBy = auth()->user()->admin ? 'required' : 'nullable';
 
         return [
             'name'       =>['required', 'string', 'min:2'],

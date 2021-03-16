@@ -111,8 +111,9 @@ $(document).on("submit", "#delete-form", function (event) {
     let table = $this.find('#table')
 
     $.ajax({
-        url: $this.attr('action'),
+        url: $this.attr("action"),
         type: "DELETE",
+        data: { _token: $('meta[name="csrf-token"]').attr("content") },
         beforeSend: function () {
             $("#loader").show();
         },
@@ -120,21 +121,18 @@ $(document).on("submit", "#delete-form", function (event) {
         success: function (result) {
             $("#smallModal").modal("hide");
 
-            if(table.length === 0)
-            {
+            if (table.length === 0) {
                 $(`#item-${id}`).remove();
             } else {
                 $(`#${table.val()}`).find(`#item-${id}`).remove();
             }
-
-
         },
         complete: function () {
             $("#loader").hide();
         },
         error: function (jqXHR, testStatus, error) {
-            alert("Page " + href + " cannot open. Error:" + error);
-        $("#loader").hide();
+            alert("Page " + error + " cannot open. Error:" + error);
+            $("#loader").hide();
         },
         timeout: 8000,
     });

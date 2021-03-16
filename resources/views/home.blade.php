@@ -1,11 +1,11 @@
 @extends('layouts.simple')
 
 @section('content')
-    
+
     <a name="fill-a-complain"
         id="fill-a-complain"
         class="btn btn-hero-primary btn-block" href="{{ route('complaint-form.create') }}"
-        role="button">Fill a complaint</a>
+        role="button">File a complaint</a>
 
     @if (!Auth::check())
         <a name="login"
