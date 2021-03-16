@@ -123,5 +123,4 @@
 
         @yield('js_after')
     </body>
-    {!! htmlScriptTagJsApi() !!}
 </html>

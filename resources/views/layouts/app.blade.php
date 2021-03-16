@@ -130,6 +130,5 @@
         <!-- Laravel Scaffolding JS -->
 
         @yield('js_after')
-        {!! htmlScriptTagJsApi() !!}
     </body>
 </html>

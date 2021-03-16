@@ -2,7 +2,7 @@
     action="{{ route('complaint-form.store') }}"
     method="POST">
     @csrf
-
+    <input type=hidden name=recaptcha_token id=recaptcha_token>
     <div class="form-row align-items-center">
 
         <div class="col">
@@ -297,6 +297,21 @@
         </div>
 
         </div>
-
+    @if($errors->has('recaptcha_token'))
+        {{$errors->first('recaptcha_token')}}
+    @endif
     <button type="submit" class="btn btn-primary">Submit a complaint</button>
 </form>
+
+@section('js_after')
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.api_site_key') }}"></script>
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('{{ config('recaptcha.api_site_key') }}')
+                .then(function(token) {
+                    console.log(token);
+                    document.getElementById("recaptcha_token").value = token;
+                });
+        });
+    </script>
+@endsection
