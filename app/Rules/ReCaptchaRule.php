@@ -43,6 +43,7 @@ class ReCaptchaRule implements Rule
         $recaptcha = new ReCaptcha(env('GOOGLE_CAPTCHA_PRIVATE_KEY'));
 
         $response = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
+            ->setExpectedAction('complaint_form')
             ->setScoreThreshold(0.5)
             ->verify($value, $_SERVER['REMOTE_ADDR']);
 

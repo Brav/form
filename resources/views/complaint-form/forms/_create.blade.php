@@ -1,4 +1,5 @@
 <form
+    id=complaint_form
     action="{{ route('complaint-form.store') }}"
     method="POST">
     @csrf
@@ -307,7 +308,7 @@
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.api_site_key') }}"></script>
     <script>
         grecaptcha.ready(function() {
-            grecaptcha.execute('{{ config('recaptcha.api_site_key') }}', {action: "submit"})
+            grecaptcha.execute('{{ config('recaptcha.api_site_key') }}', {action: "complaint_form"})
                 .then(function(token) {
                     document.getElementById("recaptcha_token").value = token;
                 });
