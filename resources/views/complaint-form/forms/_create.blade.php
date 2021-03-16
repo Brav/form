@@ -307,9 +307,8 @@
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.api_site_key') }}"></script>
     <script>
         grecaptcha.ready(function() {
-            grecaptcha.execute('{{ config('recaptcha.api_site_key') }}')
+            grecaptcha.execute('{{ config('recaptcha.api_site_key') }}', {action: "submit"})
                 .then(function(token) {
-                    console.log(token);
                     document.getElementById("recaptcha_token").value = token;
                 });
         });

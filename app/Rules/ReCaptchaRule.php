@@ -35,7 +35,7 @@ class ReCaptchaRule implements Rule
     public function passes($attribute, $value)
     {
         if (empty($value)) {
-            $this->error_msg = ':attribute field is required.';
+            $this->error_msg = ':attribute is required.';
 
             return false;
          }
@@ -47,15 +47,15 @@ class ReCaptchaRule implements Rule
             ->verify($value, $_SERVER['REMOTE_ADDR']);
 
         if (!$response->isSuccess()) {
-        $this->error_msg = 'ReCaptcha field is required.';
+            $this->error_msg = 'ReCaptcha field is required.';
 
-        return false;
+            return false;
         }
 
         if ($response->getScore() < 0.5) {
-        $this->error_msg = 'Failed to validate captcha.';
+            $this->error_msg = 'Failed to validate captcha.';
 
-        return false;
+            return false;
         }
 
 
