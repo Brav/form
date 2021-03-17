@@ -35,7 +35,7 @@ class UserCreateRequest extends FormRequest
             'role_id'    =>['exclude_if:admin,1', Rule::in(
                     Roles::all()->pluck('id')->toArray()
                 )],
-            'can_loging' => ['nullable', Rule::in([1])],
+            'can_login' => ['nullable', Rule::in([1])],
             'admin'      => ['nullable', Rule::in([1])],
             'created_by' => [$createdBy, function ($attribute, $value, $fail) {
                                 if( is_numeric( $value ) || 'none' === $value ) {

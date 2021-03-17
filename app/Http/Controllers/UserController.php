@@ -183,6 +183,10 @@ class UserController extends Controller
         {
             $data['can_login'] = true;
         }
+        else
+        {
+            $data['admin'] = false;
+        }
 
         if($request->password)
         {
@@ -193,6 +197,11 @@ class UserController extends Controller
         {
             $data['created_by'] = is_numeric($request->post('created_by')) ?
                 (int) $request->post('created_by') : null;
+        }
+
+        if(!$request->can_login)
+        {
+            $data['can_login'] = false;
         }
 
         $user->update($data);

@@ -71,13 +71,13 @@
                 <div class="form-group">
                   <label for="created_by">Owner of the user</label>
                   <select class="form-control select2" name="created_by" id="created_by" aria-describedby="ownerHelp">
-                    @foreach ($users as $user)
-                        <option value=none>None</option>
-                        <option value="{{ $user->id }}"
-                            @if (old('created_by', $user->created_by))
+                    <option value=none>None</option>
+                    @foreach ($users as $userList)
+                        <option value="{{ $userList->id }}"
+                            @if ($user->created_by == old('created_by', $userList->id))
                                 selected
                             @endif
-                            >{{ $user->name }}</option>
+                            >{{ $userList->name }}</option>
                     @endforeach
                   </select>
                   <!-- <small id="ownerHelp" class="form-text text-muted">This user will be able to edit user and assign him to the clinics</small> -->
