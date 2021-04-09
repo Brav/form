@@ -29,7 +29,7 @@
                             data-target="#bigModal"
                             data-table="complaint-types"
                             data-attr="{{ route('complaint-type.create') }}"
-                            class="btn btn-primary my-2">Create Category Type</a>
+                            class="btn btn-primary my-2">Create Complaint Type</a>
 
                             <a href="{{ route('complaint-channel.create') }}"
                                 role="bigModal"
@@ -37,7 +37,7 @@
                                 data-target="#bigModal"
                                 data-table="complaint-channel"
                                 data-attr="{{ route('complaint-channel.create') }}"
-                                class="btn btn-primary my-2">Create Category Channel</a>
+                                class="btn btn-primary my-2">Create Complaint Channel</a>
                     </div>
                 </div>
 
@@ -56,6 +56,10 @@
                         <a class="nav-link" id="channel-tab" data-toggle="tab" href="#channel" role="tab" aria-controls="channel" aria-selected="false">Complaint Channel</a>
                     </li>
 
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="severity-tab" data-toggle="tab" href="#severity" role="tab" aria-controls="channel" aria-selected="false">Severity</a>
+                    </li>
+
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
@@ -65,6 +69,8 @@
                     @include('complaint-types/partials/_types')
 
                     @include('complaint-channel/partials/_channels')
+
+                    @include('severity/partials/_severities')
                 </div>
 
 

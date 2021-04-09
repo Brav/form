@@ -6,6 +6,7 @@ use App\Http\Requests\ComplaintTypeCreateRequest;
 use App\Http\Requests\ComplaintTypeUpdateRequest;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintType;
+use App\Models\Severity;
 use Illuminate\Http\Request;
 
 class ComplaintTypeController extends Controller
@@ -59,6 +60,7 @@ class ComplaintTypeController extends Controller
             view('form-ajax', [
                 'task'       => 'create',
                 'view'       => 'complaint-types',
+                'severities' => Severity::SEVERITIES,
                 'categories' => ComplaintCategory::all(),
             ])->render()
         , 200);
@@ -74,16 +76,14 @@ class ComplaintTypeController extends Controller
     {
         $data = $request->all();
 
-        if($data['level'] === 'None')
-        {
-            $data['level'] = null;
-        }
+        $data['level'] = null;
 
         $type = ComplaintType::create($data);
 
         return response()->json(
             view('complaint-types/partials/_type', [
-                'type' => $type,
+                'type'       => $type,
+                'severities' => Severity::SEVERITIES,
             ])->render()
             , 200);
     }
@@ -112,6 +112,7 @@ class ComplaintTypeController extends Controller
                 'type'       => $type,
                 'task'       => 'edit',
                 'view'       => 'complaint-types',
+                'severities' => Severity::SEVERITIES,
                 'categories' => ComplaintCategory::all(),
             ])->render()
         , 200);
@@ -137,7 +138,8 @@ class ComplaintTypeController extends Controller
 
         return response()->json(
             view('complaint-types/partials/_type', [
-                'type' => $type,
+                'type'       => $type,
+                'severities' => Severity::SEVERITIES,
             ])->render()
             , 200);
     }

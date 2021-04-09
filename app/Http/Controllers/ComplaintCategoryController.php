@@ -7,6 +7,7 @@ use App\Http\Requests\ComplaintCategoryUpdateRequest;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintType;
+use App\Models\Severity;
 use Illuminate\Http\Request;
 
 class ComplaintCategoryController extends Controller
@@ -19,15 +20,16 @@ class ComplaintCategoryController extends Controller
     public function index()
     {
 
-        $categories = ComplaintCategory::paginate(20);
+        $categories = ComplaintCategory::orderBy('name', "ASC")->paginate(20);
 
         if(!request()->ajax())
             return view('complaint-category/index', [
                 'categories' => $categories,
-                'types'      => ComplaintType::with(['category'])->paginate(20)
+                'types'      => ComplaintType::orderBy('name', "ASC")->with(['category'])->paginate(20)
                     ->withPath(route('complaint-type.index')),
-                'channels'   => ComplaintChannel::with(['type'])->paginate(20)
+                'channels'   => ComplaintChannel::orderBy('name', "ASC")->with(['type'])->paginate(20)
                     ->withPath(route('complaint-channel.index')),
+                'severities' => Severity::SEVERITIES,
             ]);
 
         return [

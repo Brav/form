@@ -20,6 +20,7 @@ class ComplaintType extends Model
         'name',
         'complaint_category_id',
         'level',
+        'severity',
     ];
 
     /**

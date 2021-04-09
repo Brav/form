@@ -22,10 +22,15 @@
 
         <div class="col">
             <div class="form-group">
-              <label for="complaint_category_id">Complaint Category</label>
-              <select class="form-control" name="complaint_category_id" id="complaint_category_id">
-                  @foreach ($categories as $category)
-                      <option value="{{ $category->id }}">{{ $category->name }}</option>
+              <label for="severity">Severity</label>
+              <select class="form-control" name="severity" id="severity">
+                  @foreach ($severities as $key => $value)
+                    <option
+                        @if (old('severity') == $key)
+                            selected
+                        @endif
+                        value="{{ $key }}">{{ \ucwords($value) }}
+                    </option>
                   @endforeach
               </select>
             </div>
@@ -33,24 +38,11 @@
 
         <div class="col">
             <div class="form-group">
-              <label for="level">Complaint Level</label>
-              <select class="form-control" name="level" id="level">
-                  <option>None</option>
-                  << value=1
-                    @if (old('level') === 1)
-                        selected
-                    @endif
-                  >1</>
-                  <option value=2
-                    @if (old('level') === 2)
-                        selected
-                    @endif
-                  >2</option>
-                  <option value=3
-                    @if (old('level') === 3)
-                        selected
-                    @endif
-                  >3</option>
+              <label for="complaint_category_id">Complaint Category</label>
+              <select class="form-control" name="complaint_category_id" id="complaint_category_id">
+                  @foreach ($categories as $category)
+                      <option value="{{ $category->id }}">{{ $category->name }}</option>
+                  @endforeach
               </select>
             </div>
         </div>

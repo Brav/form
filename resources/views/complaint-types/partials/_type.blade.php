@@ -1,8 +1,8 @@
 <tr id="item-{{ $type->id }}">
         <th>{{ $type->id }}</th>
         <th>{{ $type->name }}</th>
-        <th>{{ $type->category->name }}</th>
-        <th>{{ $type->level ?? '/' }}</th>
+        <th class="complaint-type-category-{{ $type->category->id }}">{{ $type->category->name }}</th>
+        <th>{{ ucwords($severities[$type->severity]) ?? '/' }}</th>
         <th>
             <a href="{{ route('complaint-type.edit', $type->id) }}"
                 class="btn btn-primary btn-sm active"

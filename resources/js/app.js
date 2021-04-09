@@ -86,9 +86,17 @@ $(document).on("submit", "#formAjax", function (event) {
             }
 
             if (action === 'edit') {
+
                 let id = $this.find('#_id').val()
 
                 $(`#${table}`).find(`#item-${id}`).replaceWith(result);
+
+                if(table === 'complaint-category')
+                {
+                    $(`.complaint-type-category-${id}`).text(
+                        $(`#${table}`).find(`#item-${id}`).find(".title").text()
+                    );
+                }
             }
 
             $("#bigModal").modal("hide");

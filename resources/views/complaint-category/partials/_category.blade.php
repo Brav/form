@@ -1,6 +1,6 @@
 <tr id="item-{{ $category->id }}">
         <th>{{ $category->id }}</th>
-        <th>{{ $category->name }}</th>
+        <th class="title">{{ $category->name }}</th>
         <th>
             <a href="{{ route('complaint-category.edit', $category->id) }}"
                 class="btn btn-primary btn-sm active"
