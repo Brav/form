@@ -44,6 +44,7 @@
                                 <th class="small">Type of complaint</th>
                                 <th class="small">Channel</th>
                                 <th class="small">Complaint Level</th>
+                                <th class="small">Severity</th>
                                 @if ($canEdit)
                                     <th class="small">Outcome of the incident and/or complaint</th>
                                     <th class="small">Completed by</th>

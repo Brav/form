@@ -7,6 +7,7 @@ use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintType;
 use App\Models\Location;
+use App\Models\Severity;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -53,7 +54,8 @@ class ComplaintFormCreateRequest extends FormRequest
             'complaint_channel_id' => ['nullable',
                 Rule::in(ComplaintChannel::all()->pluck('id')->toArray()),
             ],
-            'recaptcha_token' => ['required', new   \App\Rules\ReCaptchaRule($this->recaptcha_token)]
+            'recaptcha_token' => ['required', new   \App\Rules\ReCaptchaRule($this->recaptcha_token)],
+            'severity' => ['required', Rule::in(\array_keys(Severity::SEVERITIES))],
 
         ];
     }

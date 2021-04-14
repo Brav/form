@@ -1,6 +1,7 @@
 <form
     action="{{ route('complaint-form.update', $form->id) }}"
-    method="POST">
+    method="POST"
+    enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -273,7 +274,7 @@
         <div class="form-row">
             <div class="col">
                 <div class="form-group">
-                <label for="description">Decription of incident and/or complaint</label>
+                <label for="description">Description of incident and/or complaint</label>
                 <textarea class="form-control" name="description" id="description" rows="4">{{
                 old('description', $form->description) }}</textarea>
                 @error('description')
@@ -365,6 +366,27 @@
                     @endforeach
                 </select>
                 @error('complaint_channel_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+        </div>
+
+        <div class="col">
+
+            <div class="form-group">
+                <label for="severity">Severity</label>
+                <select class="form-control" name="severity" id="severity">
+                    @foreach ($severities as $key => $value)
+                        <option
+                            value="{{ $key }}"
+                            @if (old('severity', $form->severity) == $key)
+                                selected
+                            @endif
+                            >{{ \ucwords($value) }}</option>
+                    @endforeach
+                </select>
+                @error('severity')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

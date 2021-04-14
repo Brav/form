@@ -7,6 +7,7 @@ use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintType;
 use App\Models\Location;
+use App\Models\Severity;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -53,6 +54,7 @@ class ComplaintFormUpdateRequest extends FormRequest
             'complaint_channel_id' => ['nullable',
                 Rule::in(ComplaintChannel::all()->pluck('id')->toArray()),
             ],
+            'severity'       => ['required', Rule::in(\array_keys(Severity::SEVERITIES))],
             'outcome'        => ['nullable', 'string', 'min:2'],
             'completed_by'   => ['nullable', 'string', 'min:2'],
             'date_completed' => ['nullable', 'date_format:d/m/Y'],

@@ -17,6 +17,7 @@
         <th>{{ $form->type->name ?? '/' }}</th>
         <th>{{ $form->channel->name ?? '/' }}</th>
         <th>{{ $form->complaintLevel() ?? '/' }}</th>
+        <th class="text-capitalize">{{ $severities[$form->severity] ?? '' }}</th>
         @if ($canEdit)
             <th class="text-break">{{ $form->outcome }}</th>
             <th>{{ $form->completed_by }}</th>

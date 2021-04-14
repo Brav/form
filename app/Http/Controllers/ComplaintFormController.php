@@ -11,6 +11,7 @@ use App\Models\ComplaintChannel;
 use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
 use App\Models\Location;
+use App\Models\Severity;
 use App\Providers\ComplaintFilled;
 use DateTime;
 use Illuminate\Http\Request;
@@ -52,12 +53,14 @@ class ComplaintFormController extends Controller
 
         if(!request()->ajax())
             return view('complaint-form/index', [
-                'forms' => $forms,
+                'forms'      => $forms,
+                'severities' => Severity::SEVERITIES,
             ]);
 
         return [
             'html' => view('complaint-form/partials/_forms', [
-                'forms' => $forms,
+                'forms'      => $forms,
+                'severities' => Severity::SEVERITIES,
             ])->render(),
             'pagination' => view('pagination', [
                 'paginator' => $forms,
@@ -99,6 +102,7 @@ class ComplaintFormController extends Controller
             'types'      => ComplaintType::get(),
             'channels'   => ComplaintChannel::get(),
             'locations'  => Location::get(),
+            'severities' => Severity::SEVERITIES,
         ]);
     }
 
@@ -158,6 +162,7 @@ class ComplaintFormController extends Controller
             'channels'   => ComplaintChannel::get(),
             'locations'  => Location::get(),
             'form'       => $form->load(['clinic', 'location', 'category', 'type', 'channel']),
+            'severities' => Severity::SEVERITIES,
         ]);
     }
 
