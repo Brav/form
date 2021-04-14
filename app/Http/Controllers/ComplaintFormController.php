@@ -13,10 +13,7 @@ use App\Models\ComplaintType;
 use App\Models\Location;
 use App\Models\Severity;
 use App\Providers\ComplaintFilled;
-use DateTime;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ComplaintFormController extends Controller
@@ -51,15 +48,25 @@ class ComplaintFormController extends Controller
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
         ->paginate(20);
 
+        $canEdit = auth()->user()->admin == 1 ||
+                auth()->user()->role->hasPermission('w') ? true : false;
+
+        $canDelete = auth()->user()->admin == 1 ||
+                auth()->user()->role->hasPermission('d') ? true : false;
+
         if(!request()->ajax())
             return view('complaint-form/index', [
                 'forms'      => $forms,
+                'canEdit'    => $canEdit,
+                'canDelete'  => $canDelete,
                 'severities' => Severity::SEVERITIES,
             ]);
 
         return [
             'html' => view('complaint-form/partials/_forms', [
                 'forms'      => $forms,
+                'canEdit'    => $canEdit,
+                'canDelete'  => $canDelete,
                 'severities' => Severity::SEVERITIES,
             ])->render(),
             'pagination' => view('pagination', [
@@ -119,6 +126,20 @@ class ComplaintFormController extends Controller
         $model = $model->create($data);
 
         ComplaintFilled::dispatch($model);
+
+        $directory = 'documents/complaint_form_' . $model->id;
+
+        if(request()->hasFile('documents'))
+        {
+            foreach(request()->file('documents') as $file)
+            {
+                Storage::putFileAs($directory,
+                    $file,
+                    $file->getClientOriginalName());
+
+                Storage::setVisibility($directory . '/' . $file->getClientOriginalName(), 'public');
+            }
+        }
 
         return redirect()->route('complaint-form.sent')
             ->with([
@@ -195,18 +216,58 @@ class ComplaintFormController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display a listing of the resource.
      *
-     * @param  \App\Models\ComplaintForm  $complaintForm
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ComplaintForm $complaintForm)
+    public function delete(ComplaintForm $form)
     {
-        //
+        return view('modals/partials/_delete', [
+            'id'        => $form->id,
+            'routeName' => route('complaint-form.destroy', $form->id),
+            'itemName'  => "Complaint Form",
+            'table'     => 'forms',
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\ComplaintForm  $form
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ComplaintForm $form)
+    {
+        if(!auth()->user()->admin &&
+            !auth()->user()->role->hasPermission('d'))
+        {
+            die;
+        }
+
+        if($form->delete())
+            return response()->json([
+                'Deleted'
+            ], 200);
+
+        return response()->json([
+            'Something went wrong!'
+        ], 500);
     }
 
     public function export()
     {
         return Excel::download(new FormsExport, 'forms.xlsx');
+    }
+
+    /**
+     * Downloads the selected file
+     *
+     * @param ComplaintForm $form
+     * @param string $file
+     * @return mixed
+     */
+    public function download(ComplaintForm $form, string $file, string $extension)
+    {
+        return Storage::download('documents/complaint_form_' . $form->id . '/' . $file . '.' . $extension);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 
 class ComplaintForm extends Model
 {
@@ -147,7 +148,26 @@ class ComplaintForm extends Model
             return $this->channel->level;
         }
 
-        return $this->type->level;
+        return $this->type->level ?? '/';
+    }
+
+    /**
+     * Get all files for the complaint form
+     *
+     * @return string
+     */
+    public function getFilesAttribute()
+    {
+        $files     = [];
+        $formFiles =  Storage::files('documents/complaint_form_' . $this->id);
+
+        foreach($formFiles as $file)
+        {
+            $path    = \explode('/', $file);
+            $files[] = end($path);
+        }
+
+        return $files;
     }
 
 

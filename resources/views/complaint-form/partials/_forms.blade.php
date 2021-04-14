@@ -1,4 +1,5 @@
 @foreach ($forms as $form)
+
     <tr id="item-{{ $form->id }}">
         <th>{{ date('d/m/Y g:i A', strtotime($form->created_at)) }}</th>
         <th>{{ $form->clinic->name }}</th>
@@ -18,6 +19,21 @@
         <th>{{ $form->channel->name ?? '/' }}</th>
         <th>{{ $form->complaintLevel() ?? '/' }}</th>
         <th class="text-capitalize">{{ $severities[$form->severity] ?? '' }}</th>
+        <th>
+            @if ($form->files)
+                @foreach ($form->files as $file)
+                    @php
+                        $fileInfo = explode('.', $file)
+                    @endphp
+                    <a  class="d-block mb-1"
+                        href="{{ route('complaint-form.download', [
+                        'form'      => $form->id,
+                        'file'      => $fileInfo[0],
+                        'extension' => $fileInfo[1],
+                    ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
+                @endforeach
+            @endif
+        </th>
         @if ($canEdit)
             <th class="text-break">{{ $form->outcome }}</th>
             <th>{{ $form->completed_by }}</th>

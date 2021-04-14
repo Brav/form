@@ -197,43 +197,43 @@
 
     </div>
 
-        <div class="form-row">
-            <div class="col">
-                <div class="form-group">
-                <label for="description">Description of incident and/or complaint</label>
-                <textarea class="form-control" name="description" id="description" rows="4">{{
-                old('description') }}</textarea>
-                @error('description')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                </div>
+    <div class="form-row">
+        <div class="col">
+            <div class="form-group">
+            <label for="description">Description of incident and/or complaint</label>
+            <textarea class="form-control" name="description" id="description" rows="4">{{
+            old('description') }}</textarea>
+            @error('description')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             </div>
         </div>
+    </div>
 
-        <div class="form-row">
-            <div class="col">
-                <div class="form-group">
-                <label for="location_id">Location</label>
-                <select class="form-control" name="location_id" id="location_id">
-                    @foreach ($locations as $location)
-                        <option value="{{ $location->id }}"
-                            @if (old('location_id') == $location->id)
-                                selected
-                            @endif
-                            >{{ $location->name }}</option>
-                    @endforeach
-                </select>
+    <div class="form-row">
+        <div class="col">
+            <div class="form-group">
+            <label for="location_id">Location</label>
+            <select class="form-control" name="location_id" id="location_id">
+                @foreach ($locations as $location)
+                    <option value="{{ $location->id }}"
+                        @if (old('location_id') == $location->id)
+                            selected
+                        @endif
+                        >{{ $location->name }}</option>
+                @endforeach
+            </select>
 
-                @error('location_id')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                </div>
+            @error('location_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             </div>
-            <div class="col"></div>
-            <div class="col"></div>
         </div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
 
-        <div class="form-row align-items-center">
+    <div class="form-row align-items-center">
 
         <div class="col">
 
@@ -319,7 +319,23 @@
 
         </div>
 
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+            <div class="custom-file">
+                <label for="documents" class="custom-file-label">Files/Documents</label>
+                <input type="file"
+                name="documents[]"
+                id="documents" multiple
+                class="custom-file-input">
+                @error('documents')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
+    </div>
+
     @if($errors->has('recaptcha_token'))
         {{$errors->first('recaptcha_token')}}
     @endif
