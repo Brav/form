@@ -1,3 +1,7 @@
+<span class="smini-hidden">
+    <img src="{{ asset('media/logos/logo-1x.png')}}" alt="VetsDirect" class="img-fluid">
+</span>
+<h1>Complaint Form Update</h1>
 <form
     action="{{ route('complaint-form.update', $form->id) }}"
     method="POST"

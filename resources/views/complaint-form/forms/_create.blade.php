@@ -1,3 +1,7 @@
+<span class="smini-hidden">
+    <img src="{{ asset('media/logos/logo-1x.png')}}" alt="VetsDirect" class="img-fluid">
+</span>
+<h1>Complaint Form</h1>
 <form
     id=complaint_form
     action="{{ route('complaint-form.store') }}"

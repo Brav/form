@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\FormsExport;
 use App\Http\Requests\ComplaintFormCreateRequest;
 use App\Http\Requests\ComplaintFormUpdateRequest;
+use App\Models\AutomatedResponse;
 use App\Models\Clinic;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
@@ -150,10 +151,16 @@ class ComplaintFormController extends Controller
             }
         }
 
+        $response = AutomatedResponse::whereJsonContains('scenario->categories', $model->complaint_category_id)
+            ->whereJsonContains('scenario->types', $model->complaint_type_id)
+            ->whereJsonContains('scenario->channels', $model->complaint_channel_id)
+            ->first();
+
         return redirect()->route('complaint-form.sent')
             ->with([
                 'status' => [
-                    'message' => "You have file the complaint successfully"
+                    'message'  => "You have file the complaint successfully",
+                    'response' => $response,
                 ]
             ]);
     }
