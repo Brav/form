@@ -28,7 +28,8 @@ class ClinicUpdateRequest extends FormRequest
             'name'                 => ['required', 'min:3', 'string',
                 Rule::unique('clinics')->ignore($this->clinic->id)
             ],
-            'lead_vet'              => ['required', 'numeric'],
+            'lead_vet'              => ['required'],
+            'lead_vet.*'            => ['numeric'],
             'practise_manager'      => ['required', 'numeric'],
             'vet_manager'           => ['required', 'numeric'],
             'gm_veterinary_options' => ['required', 'numeric'],

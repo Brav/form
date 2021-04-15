@@ -24,13 +24,14 @@ class ClinicCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                  => ['required', 'min:3', 'string', 'unique:App\Models\Clinic,name'],
-            'lead_vet'              => ['required', 'numeric'],
-            'practise_manager'      => ['required', 'numeric'],
-            'vet_manager'           => ['required', 'numeric'],
-            'gm_veterinary_options' => ['required', 'numeric'],
-            'gm_region'             => ['required', 'numeric'],
-            'regional_manager'      => ['required', 'numeric'],
+            'name'                     => ['required', 'min:3', 'string', 'unique:App\Models\Clinic,name'],
+            'lead_vet'                 => ['required'],
+            'lead_vet.*'               => ['numeric'],
+            'practise_manager'         => ['required', 'numeric'],
+            'vet_manager'              => ['required', 'numeric'],
+            'gm_veterinary_operations' => ['required', 'numeric'],
+            'general_manager'          => ['required', 'numeric'],
+            'regional_manager'         => ['required', 'numeric'],
         ];
     }
 }

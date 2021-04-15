@@ -1,3 +1,4 @@
+@dump($errors)
 <form action="{{ route('clinics.store') }}" method="POST">
     @csrf
     <div class="form-group">
@@ -15,11 +16,12 @@
              <div class="form-group">
                 <label for="lead_vet">Lead Vet</label>
                 <select class="form-control select2"
-                    name=lead_vet
+                    multiple
+                    name="lead_vet[]"
                     id="lead_vet">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("lead_vet") == $user->id)
+                            @if (in_array($user->id, old("lead_vet") ?? []))
                                 selected
                             @endif>{{ $user->name }}</option>
                     @endforeach
@@ -64,11 +66,11 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="gm_veterinary_options">GM Veterinary Option</label>
-                <select class="form-control select2" name=gm_veterinary_options id="gm_veterinary_options">
+                <label for="gm_veterinary_operations">GM Veterinary Operations</label>
+                <select class="form-control select2" name=gm_veterinary_operations id="gm_veterinary_operations">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("gm_veterinary_options") == $user->id)
+                            @if (old("gm_veterinary_operations") == $user->id)
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -79,13 +81,13 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="gm_region">GM Region</label>
+                <label for="general_manager">General Manager</label>
                 <select class="form-control select2"
-                    name=gm_region
-                    id="gm_region">
+                    name=general_manager
+                    id="general_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("gm_region") == $user->id)
+                            @if (old("general_manager") == $user->id)
                                 selected
                             @endif>{{ $user->name }}</option>
                     @endforeach

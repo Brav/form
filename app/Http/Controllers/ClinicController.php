@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClinicCreateRequest;
 use App\Models\Clinic;
+use App\Models\ClinicManagers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,23 +17,24 @@ class ClinicController extends Controller
      */
     public function index()
     {
-        $clinics = Clinic::with([
-                        'leadVet',
-                        'practiseManager',
-                        'vetManager',
-                        'gmVeterinaryOptions',
-                        'gmRegion',
-                        'regionalManager',
-                    ])
-                    ->when(!auth()->user()->admin, function($query){
+        $clinics = Clinic::with(['managers'])
+            ->when(!auth()->user()->admin, function($query){
+            $userID = auth()->id();
 
-                        $userID = auth()->id();
+            return $query->where('owner_id', '=', $userID)
+                ->whereIn('id', function($query) use ($userID)
+                {
+                    return $query->select('clinic_id')
+                        ->from('clinic_managers')
+                        ->where('user_id', '=', $userID)
+                        ->whereIn('manager_type_id', [
+                            \array_search('lead_vet', ClinicManagers::$managerTypes),
+                            \array_search('regional_manager', ClinicManagers::$managerTypes),
+                        ]);
 
-                        return $query->where('owner_id', '=', $userID)
-                            ->orWhere('lead_vet', '=', $userID)
-                            ->orWhere('regional_manager', '=', $userID);
-                    })
-                    ->paginate(20);
+                });
+        })
+        ->paginate(20);
 
         if(!request()->ajax())
             return view('clinics/index', [
@@ -94,7 +96,10 @@ class ClinicController extends Controller
     {
         $data = $request->all();
         $data['owner_id'] = auth()->id();
-        Clinic::create($data);
+
+        $clinic = Clinic::create($data);
+
+        ClinicManagers::saveManagers($clinic, $request);
 
         return redirect()->route('clinics.index')->with([
             'status' => [
@@ -123,8 +128,9 @@ class ClinicController extends Controller
      */
     public function edit(Clinic $clinic)
     {
-
         $userID = auth()->id();
+
+
 
         if (!auth()->user()->admin &&
             $clinic->lead_vet != $userID &&

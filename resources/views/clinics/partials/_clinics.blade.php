@@ -2,12 +2,36 @@
     <tr id="item-{{ $clinic->id }}">
         <th>{{ $clinic->id }}</th>
         <th>{{ $clinic->name }}</th>
-        <th>{{ $clinic->leadVet->name }}</th>
-        <th>{{ $clinic->practiseManager->name }}</th>
-        <th>{{ $clinic->vetManager->name }}</th>
-        <th>{{ $clinic->gmVeterinaryOptions->name }}</th>
-        <th>{{ $clinic->gmRegion->name }}</th>
-        <th>{{ $clinic->regionalManager->name }}</th>
+        <th>
+            @foreach ($clinic->leadVet as $user)
+                {{ $user->user->name }} <br>
+            @endforeach
+        </th>
+        <th>
+            @foreach ($clinic->practiseManager as $user)
+                {{ $user->user->name }} <br>
+            @endforeach
+        </th>
+        <th>
+            @foreach ($clinic->vetManager as $user)
+                {{ $user->user->name }} <br>
+            @endforeach
+        </th>
+        <th>
+            @foreach ($clinic->gmVeterinaryOperation as $user)
+                {{ $user->user->name }} <br>
+            @endforeach
+        </th>
+        <th>
+            @foreach ($clinic->generalManager as $user)
+                {{ $user->user->name }} <br>
+            @endforeach
+        </th>
+        <th>
+            @foreach ($clinic->regionalManager as $user)
+                {{ $user->user->name }} <br>
+            @endforeach
+        </th>
         <th>
             <a href="{{ route('clinics.edit', $clinic->id) }}"
                 class="btn btn-primary btn-sm active"

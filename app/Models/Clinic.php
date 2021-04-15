@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\ClinicManagers;
 
 class Clinic extends Model
 {
@@ -17,13 +20,6 @@ class Clinic extends Model
      */
     protected $fillable = [
         'name',
-        'lead_vet',
-        'practise_manager',
-        'vet_manager',
-        'gm_veterinary_options',
-        'gm_region',
-        'regional_manager',
-        'owner_id'
     ];
 
     /**
@@ -35,90 +31,19 @@ class Clinic extends Model
         'lead_vet',
         'practise_manager',
         'vet_manager',
-        'gm_veterinary_options',
-        'gm_region',
+        'gm_veterinary_operations',
+        'general_manager',
         'regional_manager',
     ];
 
     /**
-     * Retrieve the model for a bound value.
+     * Get all of the managers for the Clinic
      *
-     * @param  mixed  $value
-     * @param  string|null  $field
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function resolveRouteBinding($value, $field = null)
+    public function managers(): HasMany
     {
-        return $this->when(request()->route()->getName() === 'clinics.index', function($query){
-            return $query->with([
-                'leadVet',
-                'practiseManager',
-                'vetManager',
-                'gmVeterinaryOptions',
-                'gmRegion',
-                'regionalManager',
-            ]);
-        })->firstOrFail();
-    }
-
-    /**
-     * Get the leadVet associated with the Clinic
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function leadVet(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'lead_vet', 'id');
-    }
-
-    /**
-     * Get the leadVet associated with the Clinic
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function practiseManager(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'practise_manager', 'id');
-    }
-
-    /**
-     * Get the leadVet associated with the Clinic
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function vetManager(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'vet_manager', 'id');
-    }
-
-    /**
-     * Get the leadVet associated with the Clinic
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function gmVeterinaryOptions(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'gm_veterinary_options', 'id');
-    }
-
-    /**
-     * Get the leadVet associated with the Clinic
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function gmRegion(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'gm_region', 'id');
-    }
-
-    /**
-     * Get the leadVet associated with the Clinic
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function regionalManager(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'regional_manager', 'id');
+        return $this->hasMany(ClinicManagers::class);
     }
 
     /**
@@ -129,5 +54,95 @@ class Clinic extends Model
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id', 'id');
+    }
+
+    /**
+     * Get the let vet(s)
+     *
+     * @return Illuminate\Database\Eloquent\Collection[]
+     */
+    public function getLeadVetAttribute()
+    {
+        if($this->managers->count() === 0)
+            return [];
+
+        return $this->managers->filter(function($item){
+            return $item->manager_type_id == ClinicManagers::managerID('lead_vet');
+        });
+    }
+
+    /**
+     * Get the Practise Manager(s)
+     *
+     * @return Illuminate\Database\Eloquent\Collection[]
+     */
+    public function getPractiseManagerAttribute()
+    {
+        if($this->managers->count() === 0)
+            return [];
+
+        return $this->managers->filter(function($item){
+            return $item->manager_type_id == ClinicManagers::managerID('practise_manager');
+        });
+    }
+
+    /**
+     * Get the Vet Manager(s)
+     *
+     * @return Illuminate\Database\Eloquent\Collection[]
+     */
+    public function getVetManagerAttribute()
+    {
+        if($this->managers->count() === 0)
+            return [];
+
+        return $this->managers->filter(function($item){
+            return $item->manager_type_id == ClinicManagers::managerID('vet_manager');
+        });
+    }
+
+    /**
+     * Get the GM Veterinary Operation(s)
+     *
+     * @return Illuminate\Database\Eloquent\Collection[]
+     */
+    public function getGmVeterinaryOperationAttribute()
+    {
+        if($this->managers->count() === 0)
+            return [];
+
+        return $this->managers->filter(function($item){
+            return $item->manager_type_id == ClinicManagers::managerID('gm_veterinary_operations');
+        });
+    }
+
+    /**
+     * Get the General Manager(s)
+     *
+     * @return Illuminate\Database\Eloquent\Collection[]
+     */
+    public function getGeneralManagerAttribute()
+    {
+        if($this->managers->count() === 0)
+            return [];
+
+        return $this->managers->filter(function($item){
+            return $item->manager_type_id == ClinicManagers::managerID('general_manager');
+        });
+    }
+
+    /**
+     * Get the Regional Manager(s)
+     *
+     * @return Illuminate\Database\Eloquent\Collection[]
+     */
+    public function getRegionalManagerAttribute()
+    {
+        if($this->managers->count() === 0)
+            return [];
+
+        return $this->managers->filter(function($item){
+            return $item->manager_type_id == ClinicManagers::managerID('regional_manager');
+        });
     }
 }

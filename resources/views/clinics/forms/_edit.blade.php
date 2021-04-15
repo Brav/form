@@ -16,11 +16,12 @@
              <div class="form-group">
                 <label for="lead_vet">Lead Vet</label>
                 <select class="form-control select2"
-                    name=lead_vet
+                    name=lead_vet[]
+                    multiple
                     id="lead_vet">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("lead_vet", $clinic->lead_vet) == $user->id)
+                            @if (in_array($user->id, old("lead_vet", $clinic->leadVet->pluck('user_id')->toArray())))
                                 selected
                             @endif>{{ $user->name }}</option>
                     @endforeach
@@ -34,7 +35,8 @@
                 <select class="form-control select2" name=practise_manager id="practise_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("practise_manager", $clinic->practise_manager) == $user->id)
+                            @if (in_array($user->id,
+                                old("practise_manager", $clinic->practiseManager->pluck('user_id')->toArray())))
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -49,7 +51,8 @@
                 <select class="form-control select2" name=vet_manager id="vet_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("vet_manager", $clinic->vet_manager) == $user->id)
+                            @if (in_array($user->id,
+                                old("vet_manager", $clinic->vetManager->pluck('user_id')->toArray())))
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -65,11 +68,12 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="gm_veterinary_options">GM Veterinary Option</label>
-                <select class="form-control select2" name=gm_veterinary_options id="gm_veterinary_options">
+                <label for="gm_veterinary_operations">GM Veterinary Operations</label>
+                <select class="form-control select2" name=gm_veterinary_operations id="gm_veterinary_operations">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("gm_veterinary_options", $clinic->gm_veterinary_options) == $user->id)
+                            @if (in_array($user->id,
+                                old("gm_veterinary_operations", $clinic->gmVeterinaryOperation->pluck('user_id')->toArray())))
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -80,13 +84,14 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="gm_region">GM Region</label>
+                <label for="general_manager">General Manager</label>
                 <select class="form-control select2"
-                    name=gm_region
-                    id="gm_region">
+                    name=general_manager
+                    id="general_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("gm_region", $clinic->gm_region) == $user->id)
+                            @if (in_array($user->id,
+                                old("general_manager", $clinic->generalManager->pluck('user_id')->toArray())))
                                 selected
                             @endif>{{ $user->name }}</option>
                     @endforeach
@@ -100,7 +105,8 @@
                 <select class="form-control select2" name=regional_manager id="regional_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("regional_manager", $clinic->regional_manager) == $user->id)
+                            @if (in_array($user->id,
+                                old("regional_manager", $clinic->regionalManager->pluck('user_id')->toArray())))
                                 selected
                             @endif
                             >{{ $user->name }}</option>
