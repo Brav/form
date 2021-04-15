@@ -108,7 +108,7 @@ Route::post('complaint-form/store', [ComplaintFormController::class, 'store'])->
 Route::prefix('complaint-form')->middleware(['auth', 'admin'])->group(function () {
 
     Route::get('export/',  [ComplaintFormController::class, 'export'])->name('complaint-form.export');
-    Route::get('download/{form}/{file}/{extension}',  [ComplaintFormController::class, 'download'])->name('complaint-form.download');
+    Route::post('download/{form}',  [ComplaintFormController::class, 'download'])->name('complaint-form.download');
     Route::get('delete/{form}', [ComplaintFormController::class, 'delete'])->name('complaint-form.delete');
     Route::get('edit/{form}', [ComplaintFormController::class, 'edit'])->name('complaint-form.edit');
 

@@ -1,7 +1,6 @@
 <tr id="item-{{ $channel->id }}">
         <th>{{ $channel->id }}</th>
         <th>{{ $channel->name }}</th>
-        <th>{{ $channel->type->name }}</th>
         <th>{{ $channel->level ?? '/' }}</th>
         <th>
             <a href="{{ route('complaint-channel.edit', $channel->id) }}"

@@ -280,10 +280,9 @@
 
             <div class="form-group">
                 <label for="complaint_channel_id">Channel</label>
-                <select class="form-control" readonly disabled name="complaint_channel_id" id="complaint_channel_id">
-                    <option></option>
+                <select class="form-control" name="complaint_channel_id" id="complaint_channel_id">
                     @foreach ($channels as $channel)
-                        <option data-type="{{ $channel->complaint_type_id }}"
+                        <option
                             value="{{ $channel->id }}"
                             @if (old('complaint_channel_id') == $channel->id)
                                 selected
@@ -303,6 +302,7 @@
             <div class="form-group">
                 <label for="severity">Severity</label>
                 <select class="form-control" name="severity" id="severity">
+                    <option value="none">None</option>
                     @foreach ($severities as $key => $value)
                         <option
                             value="{{ $key }}"

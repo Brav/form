@@ -21,8 +21,12 @@ class ComplaintType extends Model
         'complaint_category_id',
         'level',
         'severity',
+        'complaint_channels_affected',
     ];
 
+    protected $casts = [
+        'complaint_channels_affected' => 'array',
+    ];
     /**
      * Get all of the channels for the ComplaintType
      *

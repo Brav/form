@@ -24,6 +24,7 @@
             <div class="form-group">
               <label for="severity">Severity</label>
               <select class="form-control" name="severity" id="severity">
+                  <option value="none">None</option>
                   @foreach ($severities as $key => $value)
                     <option
                         @if (old('severity') == $key)
@@ -47,6 +48,26 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="form-row align-items-center">
+        <div class="col">
+            <div class="form-group">
+              <label for="complaint_channels_affected">Channels Affected by Severity</label>
+              <select class="form-control"
+                name="complaint_channels_affected[]"
+                id="complaint_channels_affected"
+                multiple>
+                  @foreach ($channels as $channel)
+                      <option
+                      @if (in_array($channel->id, old('complaint_channels_affected') ?? []))
+                        selected
+                      @endif
+                      value="{{ $channel->id }}">{{ $channel->name }}</option>
+                  @endforeach
+              </select>
+            </div>
+        </div>
     </div>
 
     <button type="submit" class="btn btn-primary">Create</button>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ComplaintTypeCreateRequest;
 use App\Http\Requests\ComplaintTypeUpdateRequest;
 use App\Models\ComplaintCategory;
+use App\Models\ComplaintChannel;
 use App\Models\ComplaintType;
 use App\Models\Severity;
 use Illuminate\Http\Request;
@@ -62,6 +63,7 @@ class ComplaintTypeController extends Controller
                 'view'       => 'complaint-types',
                 'severities' => Severity::SEVERITIES,
                 'categories' => ComplaintCategory::all(),
+                'channels'   => ComplaintChannel::all(),
             ])->render()
         , 200);
     }
@@ -114,6 +116,7 @@ class ComplaintTypeController extends Controller
                 'view'       => 'complaint-types',
                 'severities' => Severity::SEVERITIES,
                 'categories' => ComplaintCategory::all(),
+                'channels'   => ComplaintChannel::all(),
             ])->render()
         , 200);
     }

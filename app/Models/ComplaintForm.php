@@ -145,7 +145,22 @@ class ComplaintForm extends Model
     {
         if($this->channel !== null)
         {
-            return $this->channel->level;
+            $level = $this->channel->level;
+
+            if($level == 3)
+            {
+                return $level;
+            }
+
+            if($this->type->complaint_channels_affected)
+            {
+                if (\in_array($this->channel->id, $this->type->complaint_channels_affected))
+                {
+                    return $level + 1;
+                }
+            }
+
+            return $level;
         }
 
         return $this->type->level ?? '/';

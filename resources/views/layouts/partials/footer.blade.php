@@ -6,7 +6,7 @@
 			    Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://www.yayclicks.com/" target="_blank">yayclicks</a>
 			</div>
 			<div class="col-sm-6 order-sm-1 text-center text-sm-left">
-			    &copy; <a class="font-w600" href="https://vet.partners/" target="_blank">Vet Partners</a> <span data-toggle="year-copy"></span>. All Rights Reserved.
+			    &copy; <a class="font-w600" href="https://vet.partners/" target="_blank">VetPartners</a> <span data-toggle="year-copy"></span>. All Rights Reserved.
 			</div>
         </div>
     </div>

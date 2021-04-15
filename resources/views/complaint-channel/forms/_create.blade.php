@@ -22,17 +22,6 @@
 
         <div class="col">
             <div class="form-group">
-              <label for="complaint_type_id">Complaint Type</label>
-              <select class="form-control" name="complaint_type_id" id="complaint_type_id">
-                  @foreach ($types as $type)
-                      <option value="{{ $type->id }}">{{ $type->name }}</option>
-                  @endforeach
-              </select>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="form-group">
               <label for="level">Complaint Level</label>
               <select class="form-control" name="level" id="level">
                   <option>None</option>

@@ -5,13 +5,13 @@
     <a name="fill-a-complain"
         id="fill-a-complain"
         class="btn btn-hero-primary btn-block" href="{{ route('complaint-form.create') }}"
-        role="button">File a complaint</a>
+        role="button">Submit a complaint</a>
 
     @if (!Auth::check())
         <a name="login"
             id="login"
             class="btn btn-hero-secondary btn-block" href="{{ route('login') }}"
-            role="button">Login</a>
+            role="button">View Submitted Complaints</a>
     @endif
 
 @endsection

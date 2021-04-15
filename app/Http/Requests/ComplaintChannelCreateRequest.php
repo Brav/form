@@ -27,9 +27,6 @@ class ComplaintChannelCreateRequest extends FormRequest
     {
         return [
             'name'              => ['required', 'min:3', 'unique:App\Models\ComplaintChannel,name'],
-            'complaint_type_id' => ['required',
-                Rule::in(ComplaintType::all()->pluck('id')->toArray()),
-            ],
             'level' => ['nullable',
                 Rule::in([1, 2, 3, "None"]),
             ],

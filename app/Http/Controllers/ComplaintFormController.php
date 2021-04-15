@@ -133,11 +133,20 @@ class ComplaintFormController extends Controller
         {
             foreach(request()->file('documents') as $file)
             {
+                $fileName =
+                \strtolower(
+                    \str_replace(' ', '',
+                        \filter_var($file->getClientOriginalName(),
+                        FILTER_SANITIZE_STRING,
+                        FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+                        )
+                    )
+                );
+
                 Storage::putFileAs($directory,
                     $file,
-                    $file->getClientOriginalName());
+                    $fileName);
 
-                Storage::setVisibility($directory . '/' . $file->getClientOriginalName(), 'public');
             }
         }
 
@@ -264,6 +273,7 @@ class ComplaintFormController extends Controller
      *
      * @param ComplaintForm $form
      * @param string $file
+     * @param extension $file
      * @return mixed
      */
     public function download(ComplaintForm $form, string $file, string $extension)

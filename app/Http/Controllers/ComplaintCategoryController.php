@@ -27,7 +27,7 @@ class ComplaintCategoryController extends Controller
                 'categories' => $categories,
                 'types'      => ComplaintType::orderBy('name', "ASC")->with(['category'])->paginate(20)
                     ->withPath(route('complaint-type.index')),
-                'channels'   => ComplaintChannel::orderBy('name', "ASC")->with(['type'])->paginate(20)
+                'channels'   => ComplaintChannel::orderBy('name', "ASC")->paginate(20)
                     ->withPath(route('complaint-channel.index')),
                 'severities' => Severity::SEVERITIES,
             ]);

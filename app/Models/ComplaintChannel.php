@@ -17,17 +17,7 @@ class ComplaintChannel extends Model
      */
     protected $fillable = [
         'name',
-        'complaint_type_id',
         'level',
     ];
 
-    /**
-     * Get the category that owns the ComplaintType
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(ComplaintType::class, 'complaint_type_id');
-    }
 }

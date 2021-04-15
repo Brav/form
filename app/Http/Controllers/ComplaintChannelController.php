@@ -58,7 +58,6 @@ class ComplaintChannelController extends Controller
             view('form-ajax', [
                 'task'  => 'create',
                 'view'  => 'complaint-channel',
-                'types' => ComplaintType::all(),
             ])->render()
         , 200);
     }
@@ -111,7 +110,6 @@ class ComplaintChannelController extends Controller
                 'channel' => $channel,
                 'task'    => 'edit',
                 'view'    => 'complaint-channel',
-                'types'   => ComplaintType::all(),
             ])->render()
         , 200);
     }

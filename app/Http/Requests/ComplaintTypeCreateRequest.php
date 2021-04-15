@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\ComplaintCategory;
+use App\Models\ComplaintChannel;
 use App\Models\Severity;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -35,6 +36,10 @@ class ComplaintTypeCreateRequest extends FormRequest
             'severity' => ['required',
                 Rule::in(\array_keys(Severity::SEVERITIES)),
             ],
+            'complaint_channels_affected'   => ['nullable'],
+            'complaint_channels_affected.*' => [
+                Rule::in(ComplaintChannel::all()->pluck('id')->toArray()),
+            ]
         ];
     }
 }
