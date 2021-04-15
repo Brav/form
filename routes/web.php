@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutomatedResponseController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ComplaintCategoryController;
@@ -116,3 +117,13 @@ Route::prefix('complaint-form')->middleware(['auth', 'admin'])->group(function (
     Route::delete('destroy/{form}', [ComplaintFormController::class, 'destroy'])->name('complaint-form.destroy');
 });
 
+Route::prefix('automated-response')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [AutomatedResponseController::class, 'index'])->name('automated-response.index');
+    Route::get('create', [AutomatedResponseController::class, 'create'])->name('automated-response.create');
+    Route::get('delete/{response}', [AutomatedResponseController::class, 'delete'])->name('automated-response.delete');
+    Route::get('edit/{response}', [AutomatedResponseController::class, 'edit'])->name('automated-response.edit');
+    Route::post('store', [AutomatedResponseController::class, 'store'])->name('automated-response.store');
+    Route::put('update/{response}', [AutomatedResponseController::class, 'update'])->name('automated-response.update');
+    Route::delete('destroy/{response}', [AutomatedResponseController::class, 'destroy'])->name('automated-response.destroy');
+});

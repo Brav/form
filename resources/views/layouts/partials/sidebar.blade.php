@@ -92,6 +92,12 @@ Sidebar -->
                                 <span class="nav-main-link-name">Locations</span>
                             </a>
                         </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('automated-response.index') }}">
+                                <i class="nav-main-link-icon fa fa-folder-open"></i>
+                                <span class="nav-main-link-name">Automated Response</span>
+                            </a>
+                        </li>
                     @endif
 
                 @endauth

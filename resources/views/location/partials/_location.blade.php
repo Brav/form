@@ -17,7 +17,6 @@
             data-target="#smallModal"
             data-attr="{{ route('location.delete', $location->id) }}"
             title="Delete Category">
-                <i class="fa fa-trash-o  fa-lg"></i> Delete
-            </a>
+                <i class="fa fa-trash-o  fa-lg"></i> Delete</a>
     </th>
 </tr>

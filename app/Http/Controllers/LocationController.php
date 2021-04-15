@@ -61,8 +61,8 @@ class LocationController extends Controller
     {
         return response()->json(
             view('form-ajax', [
-                'task'       => 'create',
-                'view'       => 'location',
+                'task' => 'create',
+                'view' => 'location',
             ])->render()
         , 200);
     }
