@@ -54,7 +54,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'complaint_channel_id' => ['required',
                 Rule::in(ComplaintChannel::all()->pluck('id')->toArray()),
             ],
-            'recaptcha_token' => ['required', new   \App\Rules\ReCaptchaRule($this->recaptcha_token)],
+            // 'recaptcha_token' => ['required', new   \App\Rules\ReCaptchaRule($this->recaptcha_token)],
             'severity'    => ['required', Rule::in(\array_keys(Severity::SEVERITIES))],
             'documents'   => 'nullable',
             'documents.*' => 'max:10000',

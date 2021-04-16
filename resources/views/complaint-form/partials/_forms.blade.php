@@ -3,7 +3,7 @@
     <tr id="item-{{ $form->id }}">
         <th>{{ date('d/m/Y g:i A', strtotime($form->created_at)) }}</th>
         <th>{{ $form->clinic->name }}</th>
-        <th>{{ $form->clinic->regionalManager->name }}</th>
+        <th>{{ $form->clinic->regionalManager->first->name }}</th>
         <th>{{ $form->team_member }}</th>
         <th>{{ $form->team_member_position }}</th>
         <th>{{ $form->client_name }}</th>

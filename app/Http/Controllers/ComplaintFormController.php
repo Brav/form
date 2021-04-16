@@ -33,19 +33,14 @@ class ComplaintFormController extends Controller
 
         if(auth()->user()->admin !== 1)
         {
-            $userID  = auth()->id();
-            $clinics = Clinic::query();
-
-            foreach ($clinics as $field )
-            {
-                $clinics->orWhere($field, '=', $userID);
-            }
-
-            $userClinics = $clinics->get();
+            $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
+                ->get()
+                ->pluck('clinic_id')
+                ->toArray();
         }
 
         $forms = ComplaintForm::when(auth()->user()->admin !== 1, function($query) use($userClinics){
-            return $query->whereIn('clinic_id', $userClinics->pluck('id')->toArray());
+            return $query->whereIn('clinic_id', $userClinics);
         })
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
         ->paginate(20);
@@ -159,14 +154,15 @@ class ComplaintFormController extends Controller
         $response = AutomatedResponse::whereJsonContains('scenario->categories', $model->complaint_category_id)
             ->whereJsonContains('scenario->types', $model->complaint_type_id)
             ->whereJsonContains('scenario->channels', $model->complaint_channel_id)
-            ->first();
+            ->first()
+            ->response;
 
         return redirect()->route('complaint-form.sent')
             ->with([
                 'status' => [
                     'message'  => "You have file the complaint successfully",
-                    'response' => $response,
-                ]
+                ],
+                'response' => $response,
             ]);
     }
 
