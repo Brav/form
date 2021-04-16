@@ -145,4 +145,34 @@ class Clinic extends Model
             return $item->manager_type_id == ClinicManagers::managerID('regional_manager');
         });
     }
+
+    /**
+     * Get the GM Vet Services
+     *
+     * @return Illuminate\Database\Eloquent\Collection[]
+     */
+    public function getGmVetsServicesAttribute()
+    {
+        if($this->managers->count() === 0)
+            return [];
+
+        return $this->managers->filter(function($item){
+            return $item->manager_type_id == ClinicManagers::managerID('gm_vet_services');
+        });
+    }
+
+    /**
+     * Get the Other users
+     *
+     * @return Illuminate\Database\Eloquent\Collection[]
+     */
+    public function getOtherAttribute()
+    {
+        if($this->managers->count() === 0)
+            return [];
+
+        return $this->managers->filter(function($item){
+            return $item->manager_type_id == ClinicManagers::managerID('other');
+        });
+    }
 }

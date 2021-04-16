@@ -34,6 +34,8 @@ class ClinicManagers extends Model
         4 => 'gm_veterinary_operations',
         5 => 'general_manager',
         6 => 'regional_manager',
+        7 => 'gm_vet_services',
+        8 => 'other',
     ];
 
     /**

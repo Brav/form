@@ -61,7 +61,6 @@
             </div>
         </div>
 
-
     </div>
 
      <div class="form-row align-items-center">
@@ -117,6 +116,45 @@
                 @enderror
             </div>
         </div>
+
+    </div>
+
+    <div class="form-row align-items-center">
+
+        <div class="col">
+             <div class="form-group">
+                <label for="gm_vet_services">GM Vet Services</label>
+                <select class="form-control select2"
+                    name=gm_vet_services
+                    id="gm_vet_services">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (in_array($user->id,
+                                old("gm_vet_services", $clinic->gmVetServicesManager->pluck('user_id')->toArray())))
+                                selected
+                            @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col">
+             <div class="form-group">
+                <label for="other">GM Vet Services</label>
+                <select class="form-control select2"
+                    name=other
+                    id="other">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old("other", $clinic) == $user->id)
+                                selected
+                            @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col"></div>
 
     </div>
 

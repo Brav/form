@@ -1,4 +1,3 @@
-@dump($errors)
 <form action="{{ route('clinics.store') }}" method="POST">
     @csrf
     <div class="form-group">
@@ -62,7 +61,7 @@
 
     </div>
 
-     <div class="form-row align-items-center">
+    <div class="form-row align-items-center">
 
         <div class="col">
              <div class="form-group">
@@ -114,6 +113,44 @@
                 @enderror
             </div>
         </div>
+
+    </div>
+
+    <div class="form-row align-items-center">
+
+        <div class="col">
+             <div class="form-group">
+                <label for="gm_vet_services">GM Vet Services</label>
+                <select class="form-control select2"
+                    name=gm_vet_services
+                    id="gm_vet_services">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old("gm_vet_services") == $user->id)
+                                selected
+                            @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col">
+             <div class="form-group">
+                <label for="other">GM Vet Services</label>
+                <select class="form-control select2"
+                    name=other
+                    id="other">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}"
+                            @if (old("other") == $user->id)
+                                selected
+                            @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col"></div>
 
     </div>
 
