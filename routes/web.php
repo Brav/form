@@ -9,6 +9,8 @@ use App\Http\Controllers\ComplaintFormController;
 use App\Http\Controllers\ComplaintTypeController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\OutcomeOptionsController;
+use App\Http\Controllers\OutcomeOptionsCategoriesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -126,4 +128,26 @@ Route::prefix('automated-response')->middleware(['auth', 'admin'])->group(functi
     Route::post('store', [AutomatedResponseController::class, 'store'])->name('automated-response.store');
     Route::put('update/{response}', [AutomatedResponseController::class, 'update'])->name('automated-response.update');
     Route::delete('destroy/{response}', [AutomatedResponseController::class, 'destroy'])->name('automated-response.destroy');
+});
+
+Route::prefix('outcome-options')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [OutcomeOptionsController::class, 'index'])->name('outcome-options.index');
+    Route::get('create', [OutcomeOptionsController::class, 'create'])->name('outcome-options.create');
+    Route::get('delete/{option}', [OutcomeOptionsController::class, 'delete'])->name('outcome-options.delete');
+    Route::get('edit/{option}', [OutcomeOptionsController::class, 'edit'])->name('outcome-options.edit');
+    Route::post('store', [OutcomeOptionsController::class, 'store'])->name('outcome-options.store');
+    Route::put('update/{option}', [OutcomeOptionsController::class, 'update'])->name('outcome-options.update');
+    Route::delete('destroy/{option}', [OutcomeOptionsController::class, 'destroy'])->name('outcome-options.destroy');
+});
+
+Route::prefix('outcome-options-categories')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [OutcomeOptionsCategoriesController::class, 'index'])->name('outcome-options-categories.index');
+    Route::get('create', [OutcomeOptionsCategoriesController::class, 'create'])->name('outcome-options-categories.create');
+    Route::get('delete/{category}', [OutcomeOptionsCategoriesController::class, 'delete'])->name('outcome-options-categories.delete');
+    Route::get('edit/{category}', [OutcomeOptionsCategoriesController::class, 'edit'])->name('outcome-options-categories.edit');
+    Route::post('store', [OutcomeOptionsCategoriesController::class, 'store'])->name('outcome-options-categories.store');
+    Route::put('update/{category}', [OutcomeOptionsCategoriesController::class, 'update'])->name('outcome-options-categories.update');
+    Route::delete('destroy/{category}', [OutcomeOptionsCategoriesController::class, 'destroy'])->name('outcome-options-categories.destroy');
 });

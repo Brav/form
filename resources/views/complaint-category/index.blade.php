@@ -57,7 +57,7 @@
                     </li>
 
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="severity-tab" data-toggle="tab" href="#severity" role="tab" aria-controls="channel" aria-selected="false">Severity</a>
+                        <a class="nav-link" id="severity-tab" data-toggle="tab" href="#severity" role="tab" aria-controls="severity" aria-selected="false">Severity</a>
                     </li>
 
                 </ul>
