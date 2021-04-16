@@ -194,7 +194,7 @@ class ComplaintFormController extends Controller
         return view('form', [
             'task'       => 'edit',
             'view'       => 'complaint-form',
-            'clinics'    => Clinic::with(['regionalManager'])->get(),
+            'clinics'    => Clinic::with(['managers'])->get(),
             'categories' => ComplaintCategory::get(),
             'types'      => ComplaintType::get(),
             'channels'   => ComplaintChannel::get(),

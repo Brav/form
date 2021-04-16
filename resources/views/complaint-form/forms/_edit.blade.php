@@ -397,7 +397,24 @@
 
         </div>
 
+    </div>
+
+    @if ($form->files)
+        <div class=mb-2>
+            <h4>Files</h4>
+            @foreach ($form->files as $file)
+                @php
+                    $fileInfo = explode('.', $file)
+                @endphp
+                <a  class="d-block mb-1"
+                    href="{{ route('complaint-form.download', [
+                    'form'      => $form->id,
+                    'file'      => $fileInfo[0],
+                    'extension' => $fileInfo[1],
+                ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
+            @endforeach
         </div>
+    @endif
 
     <button type="submit" class="btn btn-primary">Update the complaint</button>
 </form>
