@@ -2,6 +2,7 @@
     <img src="{{ asset('media/logos/logo-1x.png')}}" alt="VetsDirect" class="img-fluid">
 </span>
 <h1>Complaint Form</h1>
+
 <form
     id=complaint_form
     action="{{ route('complaint-form.store') }}"
@@ -13,12 +14,11 @@
 
         <div class="col">
             <div class="form-group">
-
                     <label for="clinic_id">Clinic Name</label>
                     <select class="form-control select2" name="clinic_id" id="clinic_id">
                     @foreach ($clinics as $clinic)
                         <option value="{{ $clinic->id }}"
-                            data-manager="{{ $clinic->regionalManager->name }}"
+                            data-manager="{{ $clinic->regionalManager ? $clinic->regionalManager->first()->user->name : ''}}"
                             @if (old('clinic_id') == $clinic->id)
                                 selected
                             @endif

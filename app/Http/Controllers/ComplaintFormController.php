@@ -7,6 +7,7 @@ use App\Http\Requests\ComplaintFormCreateRequest;
 use App\Http\Requests\ComplaintFormUpdateRequest;
 use App\Models\AutomatedResponse;
 use App\Models\Clinic;
+use App\Models\ClinicManagers;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintForm;
@@ -105,7 +106,11 @@ class ComplaintFormController extends Controller
         return view('form', [
             'task'       => 'create',
             'view'       => 'complaint-form',
-            'clinics'    => Clinic::with(['regionalManager'])->get(),
+            'clinics'    => Clinic::with([
+                'managers' => function($query){
+                    return $query->where('manager_type_id', '=', ClinicManagers::managerID('regional_manager'));
+                },
+                'managers.user'])->get(),
             'categories' => ComplaintCategory::get(),
             'types'      => ComplaintType::get(),
             'channels'   => ComplaintChannel::get(),
