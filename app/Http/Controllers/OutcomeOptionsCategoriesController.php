@@ -15,7 +15,35 @@ class OutcomeOptionsCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = OutcomeOptionsCategories::paginate(20);
+
+        return [
+            'html' => view('outcome-options-categories/partials/_container', [
+                'categories' => $categories,
+            ])->render(),
+            'pagination' => view('pagination', [
+                'paginator' => $categories,
+                'layout'    => 'vendor.pagination.bootstrap-4',
+                'role'      => 'outcome-options-categories',
+                'container' => 'outcome-options-categories-container',
+            ])->render(),
+            'id' => 'type'
+        ];
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(OutcomeOptionsCategories $category)
+    {
+        return view('modals/partials/_delete', [
+            'id'        => $category->id,
+            'routeName' => route('outcome-options-categories.destroy', $category->id),
+            'itemName'  => $category->name,
+            'table'     => 'outcome-options-categories',
+        ]);
     }
 
     /**
