@@ -35,6 +35,11 @@
             @endif
         </th>
         @if ($canEdit)
+            @foreach ($form->outcome_options as $item)
+                <th>
+                    {{ $form->option($item) }}
+                </th>
+            @endforeach
             <th class="text-break">{{ $form->outcome }}</th>
             <th>{{ $form->completed_by }}</th>
             <th>{{ $form->date_completed !== null ?

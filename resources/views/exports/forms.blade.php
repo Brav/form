@@ -22,6 +22,9 @@
                 <th class="small">Channel</th>
                 <th class="small">Complaint Level</th>
                 @if ($canEdit)
+                    @foreach ($outcomeOptions as $option)
+                        <th>{{ $option->name }}</th>
+                    @endforeach
                     <th class="small">Outcome of the incident and/or complaint</th>
                     <th class="small">Completed by</th>
                     <th class="small">Date completed</th>
@@ -49,6 +52,11 @@
                 <th>{{ $form->channel->name ?? '/' }}</th>
                 <th>{{ $form->complaintLevel() ?? '/' }}</th>
                 @if ($canEdit)
+                    @foreach ($form->outcome_options as $item)
+                        <th>
+                            {{ $form->option($item) }}
+                        </th>
+                    @endforeach
                     <th class="text-break">{{ $form->outcome }}</th>
                     <th>{{ $form->completed_by }}</th>
                     <th>{{ $form->date_completed !== null ?

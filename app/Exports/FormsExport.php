@@ -3,7 +3,9 @@
 namespace App\Exports;
 
 use App\Models\Clinic;
+use App\Models\ClinicManagers;
 use App\Models\ComplaintForm;
+use App\Models\OutcomeOptionsCategories;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
@@ -41,29 +43,26 @@ class FormsExport implements FromView
     public function view(): View
     {
 
+        $clinics     = Clinic::$userFields;
         $userClinics = null;
 
         if(auth()->user()->admin !== 1)
         {
-            $userID  = auth()->id();
-            $clinics = Clinic::query();
-
-            foreach ($clinics as $field )
-            {
-                $clinics->orWhere($field, '=', $userID);
-            }
-
-            $userClinics = $clinics->get();
+            $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
+                ->get()
+                ->pluck('clinic_id')
+                ->toArray();
         }
 
         $forms = ComplaintForm::when(auth()->user()->admin !== 1, function($query) use($userClinics){
-            return $query->whereIn('clinic_id', $userClinics->pluck('id')->toArray());
+            return $query->whereIn('clinic_id', $userClinics);
         })
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
         ->get();
 
         return view('exports.forms', [
-            'forms' => $forms,
+            'forms'          => $forms,
+            'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
         ]);
     }
 }

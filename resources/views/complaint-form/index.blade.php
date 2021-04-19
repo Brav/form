@@ -40,6 +40,9 @@
                                 <th class="small">Severity</th>
                                 <th class="small">Files/Documets</th>
                                 @if ($canEdit)
+                                    @foreach ($outcomeOptions as $option)
+                                        <th>{{ $option->name }}</th>
+                                    @endforeach
                                     <th class="small">Outcome of the incident and/or complaint</th>
                                     <th class="small">Completed by</th>
                                     <th class="small">Date completed</th>

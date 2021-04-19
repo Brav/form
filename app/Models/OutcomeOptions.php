@@ -21,6 +21,16 @@ class OutcomeOptions extends Model
     ];
 
     /**
+     * Get the name formated for select
+     *
+     * @return string
+     */
+    public function getSelectNameAttribute() :string
+    {
+        return \str_replace(' ', '_', \strtolower($this->name));
+    }
+
+    /**
      * Get the category associated with the OutcomeOptions
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

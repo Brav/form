@@ -28,9 +28,41 @@
     </div>
 
     <div class="form-row align-items-center">
+
+        @foreach ($outcomeOptions as $option)
+
+            @php
+                $categoryKey = array_search($option->id, array_column($form->outcome_options, 'category_id'));
+            @endphp
+
+            <div class="col">
+                <div class="form-group">
+                  <label for="outcomeOptions-{{ $option->selectName }}">{{ $option->name }}</label>
+
+                  <select class="form-control"
+                    name="outcomeOptions[{{ $option->selectName }}]"
+                    id="outcomeOptions-{{ $option->selectName }}">
+                    @foreach ($option->options as $item)
+                        <option value="{{ $item->id }}"
+                            @if (old('outcomeOptions-' . $option->selectName, $item->id)
+                            == $form->outcome_options[$categoryKey]['option_id'])
+                                selected
+                            @endif
+                            >{{ $item->name }}</option>
+                    @endforeach
+                  </select>
+
+                </div>
+            </div>
+        @endforeach
+
+    </div>
+
+    <div class="form-row align-items-center">
+
         <div class="col">
             <div class="form-group">
-              <label for="outcome">Outcome of incident and/or complaont</label>
+              <label for="outcome">Outcome of incident and/or complaint</label>
               <textarea class="form-control"
                 name="outcome"
                 id="outcome"
@@ -42,6 +74,9 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="form-row alight-items-center">
         <div class="col">
             <div class="form-group">
               <label for="completed_by">Completed by</label>

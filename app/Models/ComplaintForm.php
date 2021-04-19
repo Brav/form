@@ -36,6 +36,7 @@ class ComplaintForm extends Model
         'complaint_channel_id',
         'severity',
         'outcome',
+        'outcome_options',
         'completed_by',
         'date_completed',
     ];
@@ -49,6 +50,7 @@ class ComplaintForm extends Model
         'date_of_incident'         => 'datetime',
         'date_of_client_complaint' => 'datetime',
         'date_completed'           => 'datetime',
+        'outcome_options'          => 'json',
     ];
 
     /**
@@ -187,5 +189,19 @@ class ComplaintForm extends Model
         return $files;
     }
 
+    /**
+     * Get option name for the category
+     *
+     * @param array $item
+     * @return string
+     */
+    public function option(array $item) :string
+    {
+        $option = OutcomeOptions::where('id', '=', $item['option_id'])
+            ->where('category_id', '=', $item['category_id'])
+            ->first();
+
+        return $option->name ?? '/';
+    }
 
 }

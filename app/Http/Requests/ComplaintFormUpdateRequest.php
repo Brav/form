@@ -54,12 +54,13 @@ class ComplaintFormUpdateRequest extends FormRequest
             'complaint_channel_id' => ['required',
                 Rule::in(ComplaintChannel::all()->pluck('id')->toArray()),
             ],
-            'severity'       => ['required', Rule::in(\array_keys(Severity::SEVERITIES))],
-            'documents'      => 'nullable',
-            'documents.*'    => 'max:10000',
-            'outcome'        => ['nullable', 'string', 'min:2'],
-            'completed_by'   => ['nullable', 'string', 'min:2'],
-            'date_completed' => ['nullable', 'date_format:d/m/Y'],
+            'severity'        => ['required', Rule::in(\array_keys(Severity::SEVERITIES))],
+            'documents'       => 'nullable',
+            'documents.*'     => 'max:10000',
+            'outcome'         => ['nullable', 'string', 'min:2'],
+            'completed_by'    => ['nullable', 'string', 'min:2'],
+            'date_completed'  => ['nullable', 'date_format:d/m/Y'],
+            'outcome_options' => ['nullable'],
 
         ];
     }

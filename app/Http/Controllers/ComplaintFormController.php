@@ -13,6 +13,7 @@ use App\Models\ComplaintChannel;
 use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
 use App\Models\Location;
+use App\Models\OutcomeOptionsCategories;
 use App\Models\Severity;
 use App\Providers\ComplaintFilled;
 use Illuminate\Support\Facades\Storage;
@@ -53,18 +54,20 @@ class ComplaintFormController extends Controller
 
         if(!request()->ajax())
             return view('complaint-form/index', [
-                'forms'      => $forms,
-                'canEdit'    => $canEdit,
-                'canDelete'  => $canDelete,
-                'severities' => Severity::SEVERITIES,
+                'forms'          => $forms,
+                'canEdit'        => $canEdit,
+                'canDelete'      => $canDelete,
+                'severities'     => Severity::SEVERITIES,
+                'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             ]);
 
         return [
             'html' => view('complaint-form/partials/_forms', [
-                'forms'      => $forms,
-                'canEdit'    => $canEdit,
-                'canDelete'  => $canDelete,
-                'severities' => Severity::SEVERITIES,
+                'forms'          => $forms,
+                'canEdit'        => $canEdit,
+                'canDelete'      => $canDelete,
+                'severities'     => Severity::SEVERITIES,
+                'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             ])->render(),
             'pagination' => view('pagination', [
                 'paginator' => $forms,
@@ -106,11 +109,11 @@ class ComplaintFormController extends Controller
                     return $query->where('manager_type_id', '=', ClinicManagers::managerID('regional_manager'));
                 },
                 'managers.user'])->get(),
-            'categories' => ComplaintCategory::get(),
-            'types'      => ComplaintType::get(),
-            'channels'   => ComplaintChannel::get(),
-            'locations'  => Location::get(),
-            'severities' => Severity::SEVERITIES,
+            'categories'     => ComplaintCategory::get(),
+            'types'          => ComplaintType::get(),
+            'channels'       => ComplaintChannel::get(),
+            'locations'      => Location::get(),
+            'severities'     => Severity::SEVERITIES,
         ]);
     }
 
@@ -192,15 +195,16 @@ class ComplaintFormController extends Controller
         }
 
         return view('form', [
-            'task'       => 'edit',
-            'view'       => 'complaint-form',
-            'clinics'    => Clinic::with(['managers'])->get(),
-            'categories' => ComplaintCategory::get(),
-            'types'      => ComplaintType::get(),
-            'channels'   => ComplaintChannel::get(),
-            'locations'  => Location::get(),
-            'form'       => $form->load(['clinic', 'location', 'category', 'type', 'channel']),
-            'severities' => Severity::SEVERITIES,
+            'task'           => 'edit',
+            'view'           => 'complaint-form',
+            'clinics'        => Clinic::with(['managers'])->get(),
+            'categories'     => ComplaintCategory::get(),
+            'types'          => ComplaintType::get(),
+            'channels'       => ComplaintChannel::get(),
+            'locations'      => Location::get(),
+            'form'           => $form->load(['clinic', 'location', 'category', 'type', 'channel']),
+            'severities'     => Severity::SEVERITIES,
+            'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
         ]);
     }
 
@@ -220,6 +224,22 @@ class ComplaintFormController extends Controller
         }
 
         $data = $form->format($request->all(), true);
+
+        $outcomeOptions = [];
+
+        foreach ($data['outcomeOption'] as $key => $value )
+        {
+            $name = \str_replace('_', ' ', $key);
+
+            $option = OutcomeOptionsCategories::where('name', '=', $name)->first();
+
+            $outcomeOptions[] = [
+                'category_id' => $option->id,
+                'option_id'   => (int) $value,
+            ];
+        }
+
+        $data['outcome_options'] = $outcomeOptions;
 
         $form->update($data);
 
