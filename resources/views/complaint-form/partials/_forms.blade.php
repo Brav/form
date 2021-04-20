@@ -45,7 +45,7 @@
             @else
                 @for ($i = 0; $i < $outcomeOptions->count(); $i++)
                     <th>/</th>
-                @endforfor
+                @endfor
             @endif
 
             <th class="text-break">{{ $form->outcome }}</th>
