@@ -228,7 +228,7 @@ class ComplaintFormController extends Controller
 
         $outcomeOptions = [];
 
-        foreach ($data['outcomeOption'] as $key => $value )
+        foreach ($data['outcomeOptions'] as $key => $value )
         {
             $name = \str_replace('_', ' ', $key);
 
