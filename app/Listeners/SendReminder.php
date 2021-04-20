@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Providers;
+namespace App\Listeners;
 
 use App\Models\ClinicManagers;
 use App\Models\Roles;
 use App\Models\User;
-use App\Providers\ComplaintFilled;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendEmailToManagers
+class SendReminder
 {
     /**
      * Create the event listener.
@@ -24,12 +23,11 @@ class SendEmailToManagers
     /**
      * Handle the event.
      *
-     * @param  ComplaintFilled  $event
+     * @param  object  $event
      * @return void
      */
-    public function handle(ComplaintFilled $event)
+    public function handle($event)
     {
-
         $form           = $event->form;
 
         $complaintLevel = $form->complaintLevel();
@@ -44,6 +42,13 @@ class SendEmailToManagers
                             })
                             ->get();
 
-        \Mail::to($users->pluck('email')->toArray())->send(new \App\Mail\SendEmailToManagers($form));
+        \Mail::to($users->pluck('email')->toArray())->send(new \App\Mail\SendReminder($form, $event->week));
+
+        $column = \str_replace(' ', '_', $event->week) . '_reminder';
+
+        \DB::table('complaint_forms_reminder_sent')->insert([
+            'complaint_form_id' => $form->id,
+            $column             => true,
+        ]);
     }
 }

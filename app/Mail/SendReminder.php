@@ -7,20 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendEmailToManagers extends Mailable
+class SendReminder extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $form;
+    private $form;
+    private $type;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($form)
+    public function __construct($form, $week)
     {
         $this->form = $form;
+        $this->week = $week;
     }
 
     /**
@@ -35,6 +37,7 @@ class SendEmailToManagers extends Mailable
             ->view('emails/complaint-form')
             ->with([
                 'form' => $this->form,
+                'week' => $this->week,
             ]);
     }
 }
