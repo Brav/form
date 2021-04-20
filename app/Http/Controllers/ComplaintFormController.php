@@ -29,12 +29,9 @@ class ComplaintFormController extends Controller
      */
     public function index()
     {
-        $clinics     = Clinic::$userFields;
-        $userClinics = null;
+        $userClinics = [];
 
-        dd(auth()->user());
-
-        if(auth()->user()->admin !== 1)
+        if(!auth()->user()->admin)
         {
             $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
@@ -42,7 +39,7 @@ class ComplaintFormController extends Controller
                 ->toArray();
         }
 
-        $forms = ComplaintForm::when(auth()->user()->admin !== 1, function($query) use($userClinics){
+        $forms = ComplaintForm::when(!auth()->user()->admin, function($query) use($userClinics){
             return $query->whereIn('clinic_id', $userClinics);
         })
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
