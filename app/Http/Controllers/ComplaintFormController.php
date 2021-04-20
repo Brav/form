@@ -29,10 +29,9 @@ class ComplaintFormController extends Controller
      */
     public function index()
     {
-        $clinics     = Clinic::$userFields;
         $userClinics = null;
 
-        if(auth()->user()->admin !== 1)
+        if(auth()->user()->admin != 1)
         {
             $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
