@@ -241,7 +241,14 @@ class ComplaintFormController extends Controller
 
         $data['outcome_options'] = $outcomeOptions;
 
-        $form->update($data);
+        $result = $form->update($data);
+
+        if($result)
+        {
+            \DB::table('complaint_forms_reminder_sent')
+                ->where('complaint_form_id', '=', $form->id)
+                ->delete();
+        }
 
         return redirect()->route('complaint-form.manage')
             ->with([
