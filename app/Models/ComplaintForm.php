@@ -65,9 +65,12 @@ class ComplaintForm extends Model
     {
         $date = DateTime::createFromFormat('d/m/Y g:i A', $data['date_of_incident']);
 
-        $data['date_of_incident'] = $date->format('Y-m-d H:i:s');
+        if(isset($data['date_of_incident']))
+        {
+            $data['date_of_incident'] = $date->format('Y-m-d H:i:s');
+        }
 
-        if($data['date_of_client_complaint'] !== null)
+        if(isset($data['date_of_client_complaint']) && $data['date_of_client_complaint'] !== null)
         {
             $dateOfClientComplaint            = DateTime::createFromFormat('d/m/Y', $data['date_of_client_complaint']);
             $data['date_of_client_complaint'] = $dateOfClientComplaint->format('Y-m-d');

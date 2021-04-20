@@ -197,6 +197,7 @@ class ComplaintFormController extends Controller
         return view('form', [
             'task'           => 'edit',
             'view'           => 'complaint-form',
+            'readonly'       => auth()->user()->admin ? '' : 'readonly',
             'clinics'        => Clinic::with(['managers'])->get(),
             'categories'     => ComplaintCategory::get(),
             'types'          => ComplaintType::get(),
@@ -223,7 +224,14 @@ class ComplaintFormController extends Controller
             return redirect()->route('complaint-form.create');
         }
 
+        if(!auth()->user()->admin)
+        {
+            $request->request->remove('date_of_incident');
+            $request->request->remove('date_of_client_complaint');
+        }
+
         $data = $form->format($request->all(), true);
+
 
         $outcomeOptions = [];
 

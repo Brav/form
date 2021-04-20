@@ -39,7 +39,7 @@ class ComplaintFormUpdateRequest extends FormRequest
             'client_name'              => ['required', 'string', 'min:2'],
             'patient_name'             => ['required', 'string', 'min:2'],
             'pms_code'                 => ['required', 'string', 'min:2'],
-            'date_of_incident'         => ['required', 'date_format:d/m/Y g:i A'],
+            'date_of_incident'         => ['nullable', 'date_format:d/m/Y g:i A'],
             'date_of_client_complaint' => ['nullable', 'date_format:d/m/Y'],
             'description'              => ['required', 'string', 'min:2'],
             'location_id'              => ['required',

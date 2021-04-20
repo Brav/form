@@ -123,7 +123,9 @@
             <div class="form-group">
 
                     <label for="clinic_id">Clinic Name</label>
-                    <select class="form-control select2" name="clinic_id" id="clinic_id">
+                    <select class="form-control select2" name="clinic_id"
+                        id="clinic_id"
+                        {{ $readonly }}>
                     @foreach ($clinics as $clinic)
                         <option value="{{ $clinic->id }}"
                             data-manager="{{ $clinic->regionalManager ? $clinic->regionalManager->first()->user->name : ''}}"
@@ -170,7 +172,8 @@
                 name="team_member"
                 id="team_member"
                 value="{{ old('team_member', $form->team_member) }}"
-                placeholder="Team Member logging the complaint">
+                placeholder="Team Member logging the complaint"
+                {{ $readonly }}>
 
                 @error('team_member')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -188,7 +191,8 @@
                     name="team_member_position"
                     id="team_member_position"
                     value="{{ old('team_member_position', $form->team_member_position) }}"
-                    placeholder="Position of the Member">
+                    placeholder="Position of the Member"
+                    {{ $readonly }}>
 
                     @error('team_member_position')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -212,7 +216,8 @@
                 name="client_name"
                 id="client_name"
                 value="{{ old('client_name', $form->client_name) }}"
-                placeholder="Client / Owner Name">
+                placeholder="Client / Owner Name"
+                {{ $readonly }}>
                 @error('client_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -229,7 +234,8 @@
                     name="patient_name"
                     id="patient_name"
                     value="{{ old('patient_name', $form->patient_name) }}"
-                    placeholder="Patient Name">
+                    placeholder="Patient Name"
+                    {{ $readonly }}>
                 @error('patient_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -246,7 +252,8 @@
                     name="pms_code"
                     id="pms_code"
                     value="{{ old('pms_code', $form->pms_code) }}"
-                    placeholder="PMS Code">
+                    placeholder="PMS Code"
+                    {{ $readonly }}>
                 @error('pms_code')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -268,7 +275,8 @@
                         data-target=".datetimepicker-datetime"
                         name="date_of_incident"
                         id="date_of_incident"
-                        value="{{ old('date_of_incident', $form->date_of_incident->format('d/m/Y g:i A')) }}"/>
+                        value="{{ old('date_of_incident', $form->date_of_incident->format('d/m/Y g:i A')) }}"
+                        {{ $readonly }}/>
                     <div class="input-group-append"
                         data-target=".datetimepicker-datetime"
                         data-toggle="datetimepicker">
@@ -292,10 +300,12 @@
                         data-target="#start_dt_2"
                         name="date_of_client_complaint"
                         id="date_of_client_complaint"
-                        value="{{ old('date_of_client_complaint', optional($form->date_of_client_complaint)->format('d/m/Y')) }}"/>
+                        value="{{ old('date_of_client_complaint', optional($form->date_of_client_complaint)->format('d/m/Y')) }}"
+                        {{ $readonly }}/>
                     <div class="input-group-append"
                         data-target="#start_dt_2"
-                        data-toggle="datetimepicker">
+                        data-toggle="datetimepicker"
+                        >
                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                 </div>
 
@@ -315,7 +325,11 @@
             <div class="col">
                 <div class="form-group">
                 <label for="description">Description of incident and/or complaint</label>
-                <textarea class="form-control" name="description" id="description" rows="4">{{
+                <textarea class="form-control"
+                    name="description"
+                    id="description"
+                    rows="4"
+                    {{ $readonly }}>{{
                 old('description', $form->description) }}</textarea>
                 @error('description')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -328,7 +342,7 @@
             <div class="col">
                 <div class="form-group">
                 <label for="location_id">Location</label>
-                <select class="form-control" name="location_id" id="location_id">
+                <select class="form-control" name="location_id" id="location_id" {{ $readonly }}>
                     @foreach ($locations as $location)
                         <option value="{{ $location->id }}"
                             @if (old('location_id', $form->location_id) == $location->id)
@@ -353,7 +367,11 @@
 
             <div class="form-group">
                 <label for="complaint_category_id">Category</label>
-                <select class="form-control" name="complaint_category_id" id="complaint_category_id">
+                <select
+                    class="form-control"
+                    name="complaint_category_id"
+                    id="complaint_category_id"
+                    {{ $readonly }}>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
                             @if (old('complaint_category_id', $form->complaint_category_id) == $category->id)
@@ -373,7 +391,10 @@
 
             <div class="form-group">
                 <label for="complaint_type_id">Type of complaint</label>
-                <select class="form-control" name="complaint_type_id" id="complaint_type_id">
+                <select class="form-control"
+                    name="complaint_type_id"
+                    id="complaint_type_id"
+                    {{ $readonly }}>
                     <option></option>
                     @foreach ($types as $type)
                         <option data-category="{{ $type->complaint_category_id }}"
@@ -394,7 +415,10 @@
 
             <div class="form-group">
                 <label for="complaint_channel_id">Channel</label>
-                <select class="form-control" name="complaint_channel_id" id="complaint_channel_id">
+                <select class="form-control"
+                    name="complaint_channel_id"
+                    id="complaint_channel_id"
+                    {{ $readonly }}>
                     <option></option>
                     @foreach ($channels as $channel)
                         <option
@@ -416,7 +440,10 @@
 
             <div class="form-group">
                 <label for="severity">Severity</label>
-                <select class="form-control" name="severity" id="severity">
+                <select class="form-control"
+                    name="severity"
+                    id="severity"
+                    {{ $readonly }}>
                     <option>None</option>
                     @foreach ($severities as $key => $value)
                         <option
