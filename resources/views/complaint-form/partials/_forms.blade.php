@@ -42,6 +42,10 @@
                         {{ $form->option($item) }}
                     </th>
                 @endforeach
+            @else
+                @for ($i = 0; $i < $outcomeOptions->count(); $i++)
+                    <th>/</th>
+                @endforfor
             @endif
 
             <th class="text-break">{{ $form->outcome }}</th>

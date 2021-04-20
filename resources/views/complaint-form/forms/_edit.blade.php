@@ -32,7 +32,7 @@
         @foreach ($outcomeOptions as $option)
 
             @php
-                $categoryKey = array_search($option->id, array_column($form->outcome_options, 'category_id'));
+                $categoryKey = array_search($option->id, array_column($form->outcome_options ?? [], 'category_id'));
             @endphp
 
             <div class="col">
@@ -44,8 +44,9 @@
                     id="outcomeOptions-{{ $option->selectName }}">
                     @foreach ($option->options as $item)
                         <option value="{{ $item->id }}"
-                            @if (old('outcomeOptions-' . $option->selectName, $item->id)
-                            == $form->outcome_options[$categoryKey]['option_id'])
+                            @if (old('outcomeOptions-' . $option->selectName,
+                                $form->outcome_options ? $form->outcome_options[$categoryKey]['option_id'] ?? null)
+                            == $item->id)
                                 selected
                             @endif
                             >{{ $item->name }}</option>
