@@ -444,7 +444,7 @@
                     name="severity"
                     id="severity"
                     {{ $readonly }}>
-                    <option>None</option>
+                    <option value=null>None</option>
                     @foreach ($severities as $key => $value)
                         <option
                             value="{{ $key }}"

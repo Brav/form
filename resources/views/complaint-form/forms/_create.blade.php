@@ -306,7 +306,7 @@
             <div class="form-group">
                 <label for="severity">Severity</label>
                 <select class="form-control" name="severity" id="severity">
-                    <option>None</option>
+                    <option value=null>None</option>
                     @foreach ($severities as $key => $value)
                         <option
                             value="{{ $key }}"

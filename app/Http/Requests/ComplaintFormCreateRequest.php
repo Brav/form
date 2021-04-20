@@ -56,7 +56,7 @@ class ComplaintFormCreateRequest extends FormRequest
             ],
             // 'recaptcha_token' => ['required', new   \App\Rules\ReCaptchaRule($this->recaptcha_token)],
             'severity'    => ['nullable',
-                Rule::in(\array_keys(Severity::SEVERITIES))],
+                Rule::in(\array_merge(\array_keys(Severity::SEVERITIES), ['null']))],
             'documents'   => 'nullable',
             'documents.*' => 'max:10000',
 

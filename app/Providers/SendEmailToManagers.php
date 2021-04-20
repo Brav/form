@@ -38,7 +38,7 @@ class SendEmailToManagers
 
         $users          = User::whereIn('role_id', $roles->pluck('id')->toArray())
                             ->whereIn('id', function($query) use ($form){
-                                return ClinicManagers::select('user_id')
+                                return $query->from('clinic_managers')->select('user_id')
                                     ->where('clinic_id', '=', $form->clinic_id)
                                     ->get();
                             })

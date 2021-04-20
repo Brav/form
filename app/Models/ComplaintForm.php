@@ -106,6 +106,11 @@ class ComplaintForm extends Model
             $data['outcome'] = '';
         }
 
+        if(!\is_numeric($data['severity']))
+        {
+            $data['severity'] = null;
+        }
+
         return $data;
     }
 

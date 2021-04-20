@@ -64,7 +64,7 @@ class Clinic extends Model
     public function getLeadVetAttribute()
     {
         if($this->managers->count() === 0)
-            return [];
+            return '/';
 
         return $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('lead_vet');
@@ -79,7 +79,7 @@ class Clinic extends Model
     public function getPractiseManagerAttribute()
     {
         if($this->managers->count() === 0)
-            return [];
+            return '/';
 
         return $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('practise_manager');
@@ -94,7 +94,7 @@ class Clinic extends Model
     public function getVetManagerAttribute()
     {
         if($this->managers->count() === 0)
-            return [];
+            return '/';
 
         return $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('vet_manager');
@@ -109,7 +109,7 @@ class Clinic extends Model
     public function getGmVeterinaryOperationAttribute()
     {
         if($this->managers->count() === 0)
-            return [];
+            return '/';
 
         return $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('gm_veterinary_operations');
@@ -124,7 +124,7 @@ class Clinic extends Model
     public function getGeneralManagerAttribute()
     {
         if($this->managers->count() === 0)
-            return [];
+            return '/';
 
         return $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('general_manager');
@@ -139,11 +139,13 @@ class Clinic extends Model
     public function getRegionalManagerAttribute()
     {
         if($this->managers->count() === 0)
-            return [];
+            return '/';
 
-        return $this->managers->filter(function($item){
+        $managers = $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('regional_manager');
         });
+
+        return $managers->first()->user->name;
     }
 
     /**
@@ -154,7 +156,7 @@ class Clinic extends Model
     public function getGmVetsServicesAttribute()
     {
         if($this->managers->count() === 0)
-            return [];
+            return '/';
 
         return $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('gm_vet_services');
@@ -169,7 +171,7 @@ class Clinic extends Model
     public function getOtherAttribute()
     {
         if($this->managers->count() === 0)
-            return [];
+            return '/';
 
         return $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('other');
