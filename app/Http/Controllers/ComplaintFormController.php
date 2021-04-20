@@ -289,9 +289,15 @@ class ComplaintFormController extends Controller
         }
 
         if($form->delete())
+        {
+            \DB::table('complaint_forms_reminder_sent')
+                ->where('complaint_form_id', '=', $form->id)
+                ->delete();
+
             return response()->json([
                 'Deleted'
             ], 200);
+        }
 
         return response()->json([
             'Something went wrong!'
