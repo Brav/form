@@ -154,11 +154,12 @@ class ComplaintFormController extends Controller
             }
         }
 
-        $response = AutomatedResponse::whereJsonContains('scenario->categories', $model->complaint_category_id)
+        $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories', $model->complaint_category_id)
             ->whereJsonContains('scenario->types', $model->complaint_type_id)
             ->whereJsonContains('scenario->channels', $model->complaint_channel_id)
-            ->first()
-            ->response;
+            ->first();
+
+        $response = $autoResponse->response ?? null;
 
         return redirect()->route('complaint-form.sent')
             ->with([
