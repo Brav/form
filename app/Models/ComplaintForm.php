@@ -83,6 +83,22 @@ class ComplaintForm extends Model
                 $dateCompleted          = DateTime::createFromFormat('d/m/Y', $data['date_completed']);
                 $data['date_completed'] = $dateCompleted->format('Y-m-d');
             }
+
+            $outcomeOptions = [];
+
+            foreach ($data['outcomeOptions'] as $key => $value )
+            {
+                $name = \str_replace('_', ' ', $key);
+
+                $option = OutcomeOptionsCategories::where('name', '=', $name)->first();
+
+                $outcomeOptions[] = [
+                    'category_id' => $option->id,
+                    'option_id'   => (int) $value,
+                ];
+            }
+
+            $data['outcome_options'] = $outcomeOptions;
         }
 
         if(!isset($data['outcome']))

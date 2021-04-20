@@ -232,23 +232,6 @@ class ComplaintFormController extends Controller
 
         $data = $form->format($request->all(), true);
 
-
-        $outcomeOptions = [];
-
-        foreach ($data['outcomeOptions'] as $key => $value )
-        {
-            $name = \str_replace('_', ' ', $key);
-
-            $option = OutcomeOptionsCategories::where('name', '=', $name)->first();
-
-            $outcomeOptions[] = [
-                'category_id' => $option->id,
-                'option_id'   => (int) $value,
-            ];
-        }
-
-        $data['outcome_options'] = $outcomeOptions;
-
         $result = $form->update($data);
 
         if($result)
