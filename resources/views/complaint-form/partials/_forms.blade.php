@@ -1,4 +1,3 @@
-[]
 @foreach ($forms as $form)
 
     <tr id="item-{{ $form->id }}">
