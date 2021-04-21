@@ -18,7 +18,7 @@
                     <select class="form-control select2" name="clinic_id" id="clinic_id">
                     @foreach ($clinics as $clinic)
                         <option value="{{ $clinic->id }}"
-                            data-manager="{{ $clinic->regionalManager ? $clinic->regionalManager->first()->user->name : ''}}"
+                            data-manager="{{ $clinic->regionalManager }}"
                             @if (old('clinic_id') == $clinic->id)
                                 selected
                             @endif
