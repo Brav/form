@@ -128,7 +128,8 @@
                         {{ $readonly }}>
                     @foreach ($clinics as $clinic)
                         <option value="{{ $clinic->id }}"
-                            data-manager="{{ $clinic->regionalManager }}"
+                            data-manager="{{
+                                $clinic->regionalManager ? $clinic->regionalManager->first()->user->name : '' }}"
                             @if (old('clinic_id', $form->clinic_id) == $clinic->id)
                                 selected
                             @endif
