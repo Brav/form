@@ -1,4 +1,6 @@
-<form action="{{ route('automated-response.store') }}" method="POST">
+<form action="{{ route('automated-response.store') }}" method="POST"
+    role="formAjax"
+    id=formAjax>
     @csrf
     <div class="form-group">
         <label for="name">Response Name</label>

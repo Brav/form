@@ -1,4 +1,7 @@
-<form action="{{ route('automated-response.update', $response->id) }}" method="POST">
+<form action="{{ route('automated-response.update', $response->id) }}"
+        method="POST"
+        role="formAjax"
+        id=formAjax>
     @csrf
     @method('PUT')
     <div class="form-group">
