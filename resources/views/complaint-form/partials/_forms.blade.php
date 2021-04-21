@@ -3,7 +3,7 @@
     <tr id="item-{{ $form->id }}">
         <th>{{ date('d/m/Y g:i A', strtotime($form->created_at)) }}</th>
         <th>{{ $form->clinic->name }}</th>
-        <th>{{ $form->clinic->regionalManager }}</th>
+        <th>{{ $form->clinic->regionalManager ? $form->clinic->regionalManager->first()->user->name : '/'}}</th>
         <th>{{ $form->team_member }}</th>
         <th>{{ $form->team_member_position }}</th>
         <th>{{ $form->client_name }}</th>
@@ -18,7 +18,7 @@
         <th>{{ $form->type->name ?? '/' }}</th>
         <th>{{ $form->channel->name ?? '/' }}</th>
         <th>{{ $form->complaintLevel() ?? '/' }}</th>
-        <th class="text-capitalize">{{ $severities[$form->severity] ?? '' }}</th>
+        <th class="text-capitalize">{{ $severities[$form->severity] ?? '/' }}</th>
         <th>
             @if ($form->files)
                 @foreach ($form->files as $file)

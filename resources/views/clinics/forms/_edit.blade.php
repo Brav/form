@@ -21,7 +21,8 @@
                     id="lead_vet">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (in_array($user->id, old("lead_vet", $clinic->leadVet->pluck('user_id')->toArray())))
+                            @if (in_array($user->id, old("lead_vet",
+                                 $clinic->leadVet ? $clinic->leadVet->pluck('user_id')->toArray() : [])))
                                 selected
                             @endif>{{ $user->name }}</option>
                     @endforeach
@@ -36,7 +37,9 @@
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
-                                old("practise_manager", $clinic->practiseManager->pluck('user_id')->toArray())))
+                                old("practise_manager",
+                                    $clinic->practiseManager ? $clinic->practiseManager->pluck('user_id')->toArray()
+                                    : [])))
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -52,7 +55,8 @@
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
-                                old("vet_manager", $clinic->vetManager->pluck('user_id')->toArray())))
+                                old("vet_manager",
+                                $clinic->vetManager ? $clinic->vetManager->pluck('user_id')->toArray() : [])))
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -72,7 +76,9 @@
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
-                                old("gm_veterinary_operations", $clinic->gmVeterinaryOperation->pluck('user_id')->toArray())))
+                                old("gm_veterinary_operations",
+                                    $clinic->gmVeterinaryOperation ?
+                                        $clinic->gmVeterinaryOperation->pluck('user_id')->toArray() : [])))
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -90,7 +96,9 @@
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
-                                old("general_manager", $clinic->generalManager->pluck('user_id')->toArray())))
+                                old("general_manager",
+                                    $clinic->generalManager ?
+                                        $clinic->generalManager->pluck('user_id')->toArray() : [])))
                                 selected
                             @endif>{{ $user->name }}</option>
                     @endforeach
@@ -105,7 +113,9 @@
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
-                                old("regional_manager", $clinic->regionalManager->pluck('user_id')->toArray())))
+                                old("regional_manager",
+                                    $clinic->regionalManager ?
+                                        $clinic->regionalManager->pluck('user_id')->toArray() : [] )))
                                 selected
                             @endif
                             >{{ $user->name }}</option>
@@ -130,7 +140,9 @@
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
-                                old("gm_vet_services", $clinic->gmVetServicesManager->pluck('user_id')->toArray())))
+                                old("gm_vet_services",
+                                    $clinic->gmVetServicesManager ?
+                                        $clinic->gmVetServicesManager->pluck('user_id')->toArray() : [])))
                                 selected
                             @endif>{{ $user->name }}</option>
                     @endforeach
@@ -146,7 +158,10 @@
                     id="other">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("other", $clinic) == $user->id)
+                            @if (in_array($user->id,
+                                old("other",
+                                    $clinic->other ?
+                                        $clinic->other->pluck('user_id')->toArray() : [])))
                                 selected
                             @endif>{{ $user->name }}</option>
                     @endforeach

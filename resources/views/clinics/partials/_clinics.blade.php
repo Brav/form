@@ -3,34 +3,48 @@
         <th>{{ $clinic->id }}</th>
         <th>{{ $clinic->name }}</th>
         <th>
-            @foreach ($clinic->leadVet as $user)
-                {{ $user->user->name }} <br>
-            @endforeach
+            @if (is_array($clinic->leadVet))
+                @foreach ($clinic->leadVet as $user)
+                    {{ $user->user->name }} <br>
+                @endforeach
+            @endif
+
         </th>
         <th>
-            @foreach ($clinic->practiseManager as $user)
-                {{ $user->user->name }} <br>
-            @endforeach
+            @if (is_array($clinic->practiseManager))
+                @foreach ($clinic->practiseManager as $user)
+                    {{ $user->user->name }} <br>
+                @endforeach
+            @endif
+
         </th>
         <th>
-            @foreach ($clinic->vetManager as $user)
-                {{ $user->user->name }} <br>
-            @endforeach
+            @if (is_array($clinic->vetManager))
+                @foreach ($clinic->vetManager as $user)
+                    {{ $user->user->name }} <br>
+                @endforeach
+            @endif
         </th>
         <th>
-            @foreach ($clinic->gmVeterinaryOperation as $user)
-                {{ $user->user->name }} <br>
-            @endforeach
+            @if (is_array($clinic->gmVeterinaryOperation))
+                @foreach ($clinic->gmVeterinaryOperation as $user)
+                    {{ $user->user->name }} <br>
+                @endforeach
+            @endif
         </th>
         <th>
-            @foreach ($clinic->generalManager as $user)
-                {{ $user->user->name }} <br>
-            @endforeach
+            @if (is_array($clinic->generalManager))
+                @foreach ($clinic->generalManager as $user)
+                    {{ $user->user->name }} <br>
+                @endforeach
+            @endif
         </th>
         <th>
-            @foreach ($clinic->regionalManager as $user)
-                {{ $user->user->name }} <br>
-            @endforeach
+            @if (is_array($clinic->regionalManager))
+                @foreach ($clinic->regionalManager as $user)
+                    {{ $user->user->name }} <br>
+                @endforeach
+            @endif
         </th>
         <th>
             <a href="{{ route('clinics.edit', $clinic->id) }}"
