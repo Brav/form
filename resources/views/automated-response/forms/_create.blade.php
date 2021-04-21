@@ -2,6 +2,8 @@
     role="formAjax"
     id=formAjax>
     @csrf
+    <input type="hidden" name="table" id=table value="response">
+    <input type="hidden" name="action" id=action value="create">
     <div class="form-group">
         <label for="name">Response Name</label>
         <input type="text" class="form-control"

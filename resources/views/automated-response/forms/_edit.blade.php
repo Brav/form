@@ -4,6 +4,8 @@
         id=formAjax>
     @csrf
     @method('PUT')
+    <input type="hidden" name="table" id=table value="response">
+    <input type="hidden" name="action" id=action value="edit">
     <div class="form-group">
         <label for="name">Response Name</label>
         <input type="text" class="form-control" name=name id="name" value="{{ old('name', $response->name) }}">
