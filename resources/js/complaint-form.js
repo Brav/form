@@ -36,5 +36,9 @@ $('body').on('change', '#clinic_id', function () {
 function setManager()
 {
     let manager = $("#clinic_id").find("option:selected").data("manager")
-    $("#regional_manager").val(manager);
+
+    if(manager)
+    {
+        $("#regional_manager").val(manager);
+    }
 }

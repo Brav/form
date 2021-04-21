@@ -23,6 +23,7 @@ class ClinicCreateRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->request->all());
         return [
             'name'                     => ['required', 'min:3', 'string', 'unique:App\Models\Clinic,name'],
             'lead_vet'                 => ['required'],
@@ -32,6 +33,8 @@ class ClinicCreateRequest extends FormRequest
             'gm_veterinary_operations' => ['required', 'numeric'],
             'general_manager'          => ['required', 'numeric'],
             'regional_manager'         => ['required', 'numeric'],
+            'gm_vet_services'          => ['required', 'numeric'],
+            'other'                    => ['nullable', 'numeric'],
         ];
     }
 }

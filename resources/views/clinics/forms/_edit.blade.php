@@ -152,7 +152,7 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="other">GM Vet Services</label>
+                <label for="other">Other</label>
                 <select class="form-control select2"
                     name=other
                     id="other">

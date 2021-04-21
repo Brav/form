@@ -25,6 +25,10 @@
                             @endif>{{ $user->name }}</option>
                     @endforeach
                 </select>
+
+                @error('lead_vet')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
@@ -40,6 +44,10 @@
                             >{{ $user->name }}</option>
                     @endforeach
                 </select>
+
+                @error('practise_manager')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
@@ -55,6 +63,10 @@
                             >{{ $user->name }}</option>
                     @endforeach
                 </select>
+
+                @error('vet_manager')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
@@ -75,6 +87,10 @@
                             >{{ $user->name }}</option>
                     @endforeach
                 </select>
+
+                @error('gm_veterinary_operations')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
@@ -131,12 +147,16 @@
                             @endif>{{ $user->name }}</option>
                     @endforeach
                 </select>
+
+                @error('gm_vet_services')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
         <div class="col">
              <div class="form-group">
-                <label for="other">GM Vet Services</label>
+                <label for="other">Other</label>
                 <select class="form-control select2"
                     name=other
                     id="other">
@@ -147,6 +167,10 @@
                             @endif>{{ $user->name }}</option>
                     @endforeach
                 </select>
+
+                @error('other')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
