@@ -6,13 +6,14 @@
         <div class="block-content">
 
                 <form
+                    class="max-1024" 
                     action="{{ route('complaint-form.store') }}"
                     method="POST">
                     @csrf
 
                     <div class="form-row align-items-center">
 
-                        <div class="col">
+                        <div class="col-md-4">
                             <div class="form-group">
 
                                   <label for="clinic_id">Clinic Name</label>
@@ -32,7 +33,7 @@
                             </div>
                         </div>
 
-                        <div class="col">
+                        <div class="col-md-4">
                             <div class="form-group">
 
                                 <div class="form-group">
@@ -47,13 +48,12 @@
                             </div>
                         </div>
 
-                        <div class="col"></div>
 
                     </div>
 
                     <div class="form-row align-items-center">
 
-                        <div class="col">
+                        <div class="col-md-4">
 
                             <div class="form-group">
                                 <label for="team_member">Team Member logging the complaint:</label>
@@ -71,7 +71,7 @@
 
                         </div>
 
-                        <div class="col">
+                        <div class="col-md-4">
 
                             <div class="form-group">
                                 <label for="team_member_position">Position of The Member</label>
@@ -89,13 +89,12 @@
 
                         </div>
 
-                        <div class="col"></div>
 
                     </div>
 
                     <div class="form-row align-items-center">
 
-                        <div class="col">
+                        <div class="col-md-4">
 
                             <div class="form-group">
                                 <label for="client_name">Client / Owner Name:</label>
@@ -112,7 +111,7 @@
 
                         </div>
 
-                        <div class="col">
+                        <div class="col-md-4">
 
                             <div class="form-group">
                                 <label for="patient_name">Patient Name</label>
@@ -129,7 +128,7 @@
 
                         </div>
 
-                        <div class="col">
+                        <div class="col-md-8">
 
                             <div class="form-group">
                                 <label for="pms_code">PMS Code</label>
@@ -150,7 +149,7 @@
 
                     <div class="form-row">
 
-                        <div class="col">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="date_of_incident">Date of the incident</label>
                                 <div class="input-group date datetimepicker-datetime" data-target-input="nearest">
@@ -173,9 +172,9 @@
                             </div>
                         </div>
 
-                        <div class="col">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="date_of_client_complaint">Date if client complaint: (if applicable)</label>
+                                <label for="date_of_client_complaint">Date to client complaint: (if applicable)</label>
                                 <div class="input-group date timepicker1" id="start_dt_2" data-target-input="nearest" >
                                     <input type="text"
                                         class="form-control datetimepicker-input datetimepicker"
@@ -197,12 +196,11 @@
                             </div>
                         </div>
 
-                        <div class="col"></div>
 
                     </div>
 
                      <div class="form-row">
-                         <div class="col">
+                         <div class="col-md-8">
                              <div class="form-group">
                                 <label for="description">Description of incident and/or complaint</label>
                                 <textarea class="form-control" name="description" id="description" rows="4">{{
@@ -215,7 +213,7 @@
                      </div>
 
                      <div class="form-row">
-                         <div class="col">
+                         <div class="col-md-4">
                              <div class="form-group">
                                <label for="location_id">Location</label>
                                <select class="form-control" name="location_id" id="location_id">
@@ -233,13 +231,11 @@
                                 @enderror
                              </div>
                          </div>
-                         <div class="col"></div>
-                         <div class="col"></div>
                      </div>
 
                      <div class="form-row align-items-center">
 
-                        <div class="col">
+                        <div class="col-md-4">
 
                             <div class="form-group">
                                 <label for="complaint_category_id">Category</label>
@@ -259,7 +255,7 @@
 
                         </div>
 
-                        <div class="col">
+                        <div class="col-md-4">
 
                             <div class="form-group">
                               <label for="complaint_type_id">Type of complaint</label>
@@ -280,7 +276,7 @@
 
                         </div>
 
-                        <div class="col">
+                        <div class="col-md-4">
 
                             <div class="form-group">
                                 <label for="complaint_channel_id">Channel</label>
@@ -304,7 +300,7 @@
 
                      </div>
 
-                    <button type="submit" class="btn btn-primary">Submit a complaint</button>
+                    <button type="submit" class="btn btn-primary mt-3">Submit a complaint</button>
                 </form>
 
         </div>
