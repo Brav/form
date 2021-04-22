@@ -29,7 +29,7 @@ class ClinicCreateRequest extends FormRequest
             'lead_vet'                 => ['required'],
             'lead_vet.*'               => ['numeric'],
             'practise_manager'         => ['required', 'numeric'],
-            'vet_manager'              => ['required', 'numeric'],
+            'veterinary_manager'       => ['required', 'numeric'],
             'gm_veterinary_operations' => ['required', 'numeric'],
             'general_manager'          => ['required', 'numeric'],
             'regional_manager'         => ['required', 'numeric'],

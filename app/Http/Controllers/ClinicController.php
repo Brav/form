@@ -17,7 +17,7 @@ class ClinicController extends Controller
      */
     public function index()
     {
-        $clinics = Clinic::with(['managers'])
+        $clinics = Clinic::with(['managers', 'managers.user'])
             ->when(!auth()->user()->admin, function($query){
             $userID = auth()->id();
 

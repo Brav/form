@@ -34,18 +34,18 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="practise_manager">Practise Manager</label>
-                <select class="form-control select2" name=practise_manager id="practise_manager">
+                <label for="practice_manager">Practice Manager</label>
+                <select class="form-control select2" name=practice_manager id="practice_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("practise_manager") == $user->id)
+                            @if (old("practice_manager") == $user->id)
                                 selected
                             @endif
                             >{{ $user->name }}</option>
                     @endforeach
                 </select>
 
-                @error('practise_manager')
+                @error('practice_manager')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -53,18 +53,18 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="vet_manager">Vet Manager</label>
-                <select class="form-control select2" name=vet_manager id="vet_manager">
+                <label for="veterinary_manager">Vet Manager</label>
+                <select class="form-control select2" name=veterinary_manager id="veterinary_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("vet_manager") == $user->id)
+                            @if (old("veterinary_manager") == $user->id)
                                 selected
                             @endif
                             >{{ $user->name }}</option>
                     @endforeach
                 </select>
 
-                @error('vet_manager')
+                @error('veterinary_manager')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

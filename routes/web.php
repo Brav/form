@@ -13,6 +13,7 @@ use App\Http\Controllers\OutcomeOptionsController;
 use App\Http\Controllers\OutcomeOptionsCategoriesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserImportController;
 use Illuminate\Support\Facades\Auth;
 
 require __DIR__.'/auth.php';
@@ -150,4 +151,9 @@ Route::prefix('outcome-options-categories')->middleware(['auth', 'admin'])->grou
     Route::post('store', [OutcomeOptionsCategoriesController::class, 'store'])->name('outcome-options-categories.store');
     Route::put('update/{category}', [OutcomeOptionsCategoriesController::class, 'update'])->name('outcome-options-categories.update');
     Route::delete('destroy/{category}', [OutcomeOptionsCategoriesController::class, 'destroy'])->name('outcome-options-categories.destroy');
+});
+
+Route::prefix('user-import')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('', [UserImportController::class, 'index'])->name('user-import.index');
+    Route::post('', [UserImportController::class, 'import'])->name('user-import.import');
 });

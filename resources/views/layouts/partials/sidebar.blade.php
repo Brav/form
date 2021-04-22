@@ -104,6 +104,12 @@ Sidebar -->
                                 <span class="nav-main-link-name">Automated Response</span>
                             </a>
                         </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{ route('user-import.index') }}">
+                                <i class="nav-main-link-icon fa fa-folder-open"></i>
+                                <span class="nav-main-link-name">Import Users</span>
+                            </a>
+                        </li>
                     @endif
 
                 @endauth

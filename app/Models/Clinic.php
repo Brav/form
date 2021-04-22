@@ -29,8 +29,8 @@ class Clinic extends Model
      */
     public static $userFields = [
         'lead_vet',
-        'practise_manager',
-        'vet_manager',
+        'practice_manager',
+        'veterinary_manager',
         'gm_veterinary_operations',
         'general_manager',
         'regional_manager',
@@ -72,7 +72,7 @@ class Clinic extends Model
     }
 
     /**
-     * Get the Practise Manager(s)
+     * Get the Practice Manager(s)
      *
      * @return Illuminate\Database\Eloquent\Collection[]
      */
@@ -82,7 +82,7 @@ class Clinic extends Model
             return null;
 
         return $this->managers->filter(function($item){
-            return $item->manager_type_id == ClinicManagers::managerID('practise_manager');
+            return $item->manager_type_id == ClinicManagers::managerID('practice_manager');
         });
     }
 
@@ -97,7 +97,7 @@ class Clinic extends Model
             return null;
 
         return $this->managers->filter(function($item){
-            return $item->manager_type_id == ClinicManagers::managerID('vet_manager');
+            return $item->manager_type_id == ClinicManagers::managerID('veterinary_manager');
         });
     }
 

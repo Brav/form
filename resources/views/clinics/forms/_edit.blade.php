@@ -32,12 +32,12 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="practise_manager">Practise Manager</label>
-                <select class="form-control select2" name=practise_manager id="practise_manager">
+                <label for="practice_manager">Practice Manager</label>
+                <select class="form-control select2" name=practice_manager id="practice_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
-                                old("practise_manager",
+                                old("practice_manager",
                                     $clinic->practiseManager ? $clinic->practiseManager->pluck('user_id')->toArray()
                                     : [])))
                                 selected
@@ -50,12 +50,12 @@
 
         <div class="col">
              <div class="form-group">
-                <label for="vet_manager">Vet Manager</label>
-                <select class="form-control select2" name=vet_manager id="vet_manager">
+                <label for="veterinary_manager">Vet Manager</label>
+                <select class="form-control select2" name=veterinary_manager id="veterinary_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
-                                old("vet_manager",
+                                old("veterinary_manager",
                                 $clinic->vetManager ? $clinic->vetManager->pluck('user_id')->toArray() : [])))
                                 selected
                             @endif

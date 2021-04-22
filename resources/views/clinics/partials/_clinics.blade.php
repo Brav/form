@@ -3,7 +3,7 @@
         <th>{{ $clinic->id }}</th>
         <th>{{ $clinic->name }}</th>
         <th>
-            @if (is_array($clinic->leadVet))
+            @if ($clinic->leadVet)
                 @foreach ($clinic->leadVet as $user)
                     {{ $user->user->name }} <br>
                 @endforeach
@@ -11,36 +11,36 @@
 
         </th>
         <th>
-            @if (is_array($clinic->practiseManager))
-                @foreach ($clinic->practiseManager as $user)
+            @if ($clinic->practiceManager)
+                @foreach ($clinic->practiceManager as $user)
                     {{ $user->user->name }} <br>
                 @endforeach
             @endif
 
         </th>
         <th>
-            @if (is_array($clinic->vetManager))
+            @if ($clinic->vetManager)
                 @foreach ($clinic->vetManager as $user)
                     {{ $user->user->name }} <br>
                 @endforeach
             @endif
         </th>
         <th>
-            @if (is_array($clinic->gmVeterinaryOperation))
+            @if ($clinic->gmVeterinaryOperation)
                 @foreach ($clinic->gmVeterinaryOperation as $user)
                     {{ $user->user->name }} <br>
                 @endforeach
             @endif
         </th>
         <th>
-            @if (is_array($clinic->generalManager))
+            @if ($clinic->generalManager)
                 @foreach ($clinic->generalManager as $user)
                     {{ $user->user->name }} <br>
                 @endforeach
             @endif
         </th>
         <th>
-            @if (is_array($clinic->regionalManager))
+            @if ($clinic->regionalManager)
                 @foreach ($clinic->regionalManager as $user)
                     {{ $user->user->name }} <br>
                 @endforeach

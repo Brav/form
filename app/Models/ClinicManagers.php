@@ -29,8 +29,8 @@ class ClinicManagers extends Model
      */
     static $managerTypes = [
         1 => 'lead_vet',
-        2 => 'practise_manager',
-        3 => 'vet_manager',
+        2 => 'practice_manager',
+        3 => 'veterinary_manager',
         4 => 'gm_veterinary_operations',
         5 => 'general_manager',
         6 => 'regional_manager',

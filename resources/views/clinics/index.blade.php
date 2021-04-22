@@ -12,7 +12,7 @@
                         </div>
                     @endif
                 </div>
-                
+
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-vcenter" id=clinics>
                         <thead>
@@ -20,8 +20,8 @@
                                 <th class="small">ID</th>
                                 <th class="small">Name</th>
                                 <th class="small">Lead Vet</th>
-                                <th class="small">Practise Manager</th>
-                                <th class="small">Vet Manager</th>
+                                <th class="small">Practice Manager</th>
+                                <th class="small">Veterinary Manager</th>
                                 <th class="small">GM Veterinary Options</th>
                                 <th class="small">GM Region</th>
                                 <th class="small">Regional Manager</th>
