@@ -3,6 +3,7 @@
 </span>
 <h1>Complaint Form Update</h1>
 <form
+    class="max-1024" 
     action="{{ route('complaint-form.update', $form->id) }}"
     method="POST"
     enctype="multipart/form-data">
@@ -10,7 +11,7 @@
     @method('PUT')
 
     <div class="form-row align-items-center">
-        <div class="col">
+        <div class="col-md-4">
             <div class="form-group">
               <label for="created_at">Date/Time</label>
               <input type="text"
@@ -23,8 +24,6 @@
             </div>
         </div>
 
-        <div class="col"></div>
-        <div class="col"></div>
     </div>
 
     <div class="form-row align-items-center">
@@ -36,7 +35,7 @@
                 $outcome = $form->outcome_options ? $form->outcome_options[$categoryKey]['option_id'] : null;
             @endphp
 
-            <div class="col">
+            <div class="col-md-4">
                 <div class="form-group">
                   <label for="outcomeOptions-{{ $option->selectName }}">{{ $option->name }}</label>
 
@@ -61,7 +60,7 @@
 
     <div class="form-row align-items-center">
 
-        <div class="col">
+        <div class="col-md-8">
             <div class="form-group">
               <label for="outcome">Outcome of incident and/or complaint</label>
               <textarea class="form-control"
@@ -78,7 +77,7 @@
     </div>
 
     <div class="form-row alight-items-center">
-        <div class="col">
+        <div class="col-md-4">
             <div class="form-group">
               <label for="completed_by">Completed by</label>
               <input type="text"
@@ -92,7 +91,7 @@
                 @enderror
             </div>
         </div>
-        <div class="col">
+        <div class="col-md-4">
             <div class="form-group">
 
                 <label for="date_completed">Date completed</label>
@@ -119,7 +118,7 @@
 
     <div class="form-row align-items-center">
 
-        <div class="col">
+        <div class="col-md-4">
             <div class="form-group">
 
                     <label for="clinic_id">Clinic Name</label>
@@ -143,7 +142,7 @@
             </div>
         </div>
 
-        <div class="col">
+        <div class="col-md-4">
             <div class="form-group">
 
                 <div class="form-group">
@@ -158,13 +157,12 @@
             </div>
         </div>
 
-        <div class="col"></div>
 
     </div>
 
     <div class="form-row align-items-center">
 
-        <div class="col">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="team_member">Team Member logging the complaint:</label>
@@ -183,7 +181,7 @@
 
         </div>
 
-        <div class="col">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="team_member_position">Position of The Member</label>
@@ -202,13 +200,12 @@
 
         </div>
 
-        <div class="col"></div>
 
     </div>
 
     <div class="form-row align-items-center">
 
-        <div class="col">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="client_name">Client / Owner Name:</label>
@@ -226,7 +223,7 @@
 
         </div>
 
-        <div class="col">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="patient_name">Patient Name</label>
@@ -244,7 +241,7 @@
 
         </div>
 
-        <div class="col">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="pms_code">PMS Code</label>
@@ -266,7 +263,7 @@
 
     <div class="form-row">
 
-        <div class="col">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="date_of_incident">Date of the incident</label>
                 <div class="input-group date date_of_incident" data-target-input="nearest">
@@ -290,11 +287,11 @@
             </div>
         </div>
 
-        <div class="col">
+        <div class="col-md-4">
 
             <div class="form-group">
 
-                <label for="date_of_client_complaint">Date if client complaint: (if applicable)</label>
+                <label for="date_of_client_complaint">Date to client complaint: (if applicable)</label>
                 <div class="input-group date date_of_client_complaint" id="start_dt_2" data-target-input="nearest" >
                     <input type="text"
                         class="form-control datetimepicker-input datetimepicker"
@@ -318,12 +315,10 @@
             </div>
         </div>
 
-        <div class="col"></div>
-
     </div>
 
         <div class="form-row">
-            <div class="col">
+            <div class="col-md-8">
                 <div class="form-group">
                 <label for="description">Description of incident and/or complaint</label>
                 <textarea class="form-control"
@@ -340,7 +335,7 @@
         </div>
 
         <div class="form-row">
-            <div class="col">
+            <div class="col-md-4">
                 <div class="form-group">
                 <label for="location_id">Location</label>
                 <select class="form-control" name="location_id" id="location_id" {{ $readonly }}>
@@ -358,13 +353,11 @@
                 @enderror
                 </div>
             </div>
-            <div class="col"></div>
-            <div class="col"></div>
         </div>
 
         <div class="form-row align-items-center">
 
-        <div class="col">
+        <div class="col-md-3">
 
             <div class="form-group">
                 <label for="complaint_category_id">Category</label>
@@ -388,7 +381,7 @@
 
         </div>
 
-        <div class="col">
+        <div class="col-md-3">
 
             <div class="form-group">
                 <label for="complaint_type_id">Type of complaint</label>
@@ -412,7 +405,7 @@
 
         </div>
 
-        <div class="col">
+        <div class="col-md-3">
 
             <div class="form-group">
                 <label for="complaint_channel_id">Channel</label>
@@ -437,7 +430,7 @@
 
         </div>
 
-        <div class="col">
+        <div class="col-md-3">
 
             <div class="form-group">
                 <label for="severity">Severity</label>

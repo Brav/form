@@ -7,7 +7,7 @@
 
         <title>{{ config('app.name', 'VetPartners') }}</title>
 
-        <meta name="description" content="RMA&reg; - The Art of Executive Search &amp; Executive Recrutment">
+        <meta name="description" content="Complaint Form">
         <meta name="author" content="dushan887mob3">
         <meta name="robots" content="noindex, nofollow">
 
