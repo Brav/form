@@ -219,7 +219,7 @@ class ComplaintForm extends Model
      * @param array $item
      * @return string
      */
-    public function option($outcomeOptions, $option) :string
+    public function option($options) :string
     {
         if(!$this->outcome_options)
         {
@@ -230,15 +230,15 @@ class ComplaintForm extends Model
 
         foreach($this->outcome_options as $item)
         {
-            $form = $outcomeOptions->where('id', $item['category_id'])->first()->options->where('id', $item['option_id']);
+            $form = $options->where('id', $item['option_id']);
 
-            if($form)
+            if($form->count())
             {
                 break;
             }
         }
 
-        return $form ? $form->first()->name : '/';
+        return $form->first() ? $form->first()->name : '/';
     }
 
 }

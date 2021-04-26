@@ -40,7 +40,7 @@
         @if ($canEdit)
 
             @foreach ($outcomeOptions as $option)
-                <th>{{ $form->option($outcomeOptions, $option) }}</th>
+                <th>{{ $form->option($option->options) }}</th>
             @endforeach
 
             <th class="text-break">{{ $form->outcome }}</th>
