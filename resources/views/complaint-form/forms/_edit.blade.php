@@ -3,7 +3,7 @@
 </span>
 <h1>Complaint Form Update</h1>
 <form
-    class="max-1024" 
+    class="max-1024"
     action="{{ route('complaint-form.update', $form->id) }}"
     method="POST"
     enctype="multipart/form-data">
@@ -455,6 +455,21 @@
 
         </div>
 
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-4">
+            <div class="custom-file">
+                <label for="documents" class="custom-file-label">Files/Documents</label>
+                <input type="file"
+                name="documents[]"
+                id="documents" multiple
+                class="custom-file-input">
+                @error('documents')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
     </div>
 
     @if ($form->files)
