@@ -1,8 +1,6 @@
 @php
     $canEdit = auth()->user()->admin == 1 ||
                 auth()->user()->role->hasPermission('w') ? true : false;
-
-    $outcomeOptionsCount = $outcomeOptions->count();
 @endphp
 <table>
     <thead>
@@ -55,26 +53,9 @@
                 <th>{{ $form->complaintLevel() ?? '/' }}</th>
                 @if ($canEdit)
 
-                    @if ($form->outcome_options)
-                        @foreach ($form->outcome_options as $item)
-                            <th>
-                                {{ $form->option($item) }}
-                            </th>
-                        @endforeach
-
-                        @if (count($form->outcome_options) < $outcomeOptionsCount )
-
-                            @for ($i = 0; $i < ($outcomeOptionsCount - count($form->outcome_options)); $i++)
-                            <th>/</th>
-                            @endfor
-
-                        @endif
-
-                    @else
-                        @for ($i = 0; $i < $outcomeOptionsCount; $i++)
-                            <th>/</th>
-                        @endfor
-                    @endif
+                    @foreach ($outcomeOptions as $option)
+                        <th>{{ $form->option($option->options) }}</th>
+                    @endforeach
 
                     <th class="text-break">{{ $form->outcome }}</th>
                     <th>{{ $form->completed_by }}</th>

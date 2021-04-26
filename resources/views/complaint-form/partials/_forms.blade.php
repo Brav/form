@@ -1,6 +1,3 @@
-@php
-    $outcomeOptionsCount = $outcomeOptions->count();
-@endphp
 @foreach ($forms as $form)
 
     <tr id="item-{{ $form->id }}">
