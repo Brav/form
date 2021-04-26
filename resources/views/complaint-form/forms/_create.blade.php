@@ -330,6 +330,11 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div id="files-for-upload" class='d-none mt-2'>
+                <p class="font-weight-bold">Files for upload:</p>
+                <div class="files"></div>
+            </div>
         </div>
     </div>
 

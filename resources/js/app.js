@@ -177,3 +177,20 @@ function showValidationErrors(errors)
         `).insertAfter($(`#${error}`));
     }
 }
+
+$('body').on('change', '#documents', function () {
+
+    let files    = $(this).prop('files')
+    let allFiles = []
+
+    for (var i = 0, l = files.length; i < l; i++)
+    {
+        allFiles.push(`<span class="font-weight-bold d-block">${files[i].name}</span>`);
+    }
+
+    $("#files-for-upload")
+        .removeClass('d-none')
+        .find('.files')
+        .html(allFiles.join(''))
+});
+
