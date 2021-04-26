@@ -1,3 +1,6 @@
+@php
+    $outcomeOptionsCount = $outcomeOptions->count();
+@endphp
 @foreach ($forms as $form)
 
     <tr id="item-{{ $form->id }}">
@@ -42,8 +45,17 @@
                         {{ $form->option($item) }}
                     </th>
                 @endforeach
+
+                @if (count($form->outcome_options) < $outcomeOptionsCount )
+
+                    @for ($i = 0; $i < ($outcomeOptionsCount - count($form->outcome_options)); $i++)
+                       <th>/</th>
+                    @endfor
+
+                @endif
+
             @else
-                @for ($i = 0; $i < $outcomeOptions->count(); $i++)
+                @for ($i = 0; $i < $outcomeOptionsCount; $i++)
                     <th>/</th>
                 @endfor
             @endif
