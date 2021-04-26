@@ -53,7 +53,7 @@ class FormsExport implements FromView
                 ->toArray();
         }
 
-        $forms = ComplaintForm::when(auth()->user()->admin !== 1, function($query) use($userClinics){
+        $forms = ComplaintForm::when(!auth()->user()->admin, function($query) use($userClinics){
             return $query->whereIn('clinic_id', $userClinics);
         })
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
