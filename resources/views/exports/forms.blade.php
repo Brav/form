@@ -23,7 +23,6 @@
                 <th class="small">Complaint Level</th>
                 <th class="small text-nowrap">Severity</th>
                 <th class="small text-nowrap">Files/Documets</th>
-                <th class="text-capitalize">{{ $severities[$form->severity] ?? '/' }}</th>
                 @if ($canEdit)
                     @foreach ($outcomeOptions as $option)
                         <th>{{ $option->name }}</th>
@@ -54,18 +53,19 @@
                 <th>{{ $form->type->name ?? '/' }}</th>
                 <th>{{ $form->channel->name ?? '/' }}</th>
                 <th>{{ $form->complaintLevel() ?? '/' }}</th>
+                <th class="text-capitalize">{{ $severities[$form->severity] ?? '/' }}</th>
                 <th>
                     @if ($form->files)
                         @foreach ($form->files as $file)
                             @php
                                 $fileInfo = explode('.', $file)
                             @endphp
-                            <a  class="d-block mb-1"
-                                href="{{ route('complaint-form.download', [
-                                'form'      => $form->id,
-                                'file'      => $fileInfo[0],
-                                'extension' => $fileInfo[1],
-                            ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
+                                {{ route('complaint-form.download', [
+                                        'form'      => $form->id,
+                                        'file'      => $fileInfo[0],
+                                        'extension' => $fileInfo[1],
+                                    ])
+                                }}<br/>
                         @endforeach
                     @endif
                 </th>
