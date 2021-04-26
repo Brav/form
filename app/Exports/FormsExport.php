@@ -43,8 +43,7 @@ class FormsExport implements FromView
     public function view(): View
     {
 
-        $clinics     = Clinic::$userFields;
-        $userClinics = null;
+        $userClinics = [];
 
         if(auth()->user()->admin !== 1)
         {
