@@ -45,7 +45,7 @@ class FormsExport implements FromView
 
         $userClinics = [];
 
-        if(auth()->user()->admin !== 1)
+        if(auth()->user()->admin != 1)
         {
             $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
@@ -56,10 +56,10 @@ class FormsExport implements FromView
         $forms = ComplaintForm::when(auth()->user()->admin !== 1, function($query) use($userClinics){
             return $query->whereIn('clinic_id', $userClinics);
         })
-        // ->with(['clinic', 'location', 'category', 'type', 'channel'])
+        ->with(['clinic', 'location', 'category', 'type', 'channel'])
         ->get();
 
-        dd($forms);
+        dd($userClinics);
 
         return view('exports.forms', [
             'forms'          => $forms,
