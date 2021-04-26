@@ -59,8 +59,6 @@ class FormsExport implements FromView
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
         ->get();
 
-        dd($forms);
-
         return view('exports.forms', [
             'forms'          => $forms,
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
