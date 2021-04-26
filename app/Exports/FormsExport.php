@@ -45,7 +45,7 @@ class FormsExport implements FromView
 
         $userClinics = [];
 
-        if(auth()->user()->admin != 1)
+        if(!auth()->user()->admin)
         {
             $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
