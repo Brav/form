@@ -59,7 +59,7 @@ class FormsExport implements FromView
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
         ->get();
 
-        dd($userClinics);
+        dd($forms);
 
         return view('exports.forms', [
             'forms'          => $forms,
