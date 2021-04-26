@@ -1,6 +1,8 @@
 @php
     $canEdit = auth()->user()->admin == 1 ||
                 auth()->user()->role->hasPermission('w') ? true : false;
+
+    $outcomeOptionsCount = $outcomeOptions->count();
 @endphp
 <table>
     <thead>
@@ -59,8 +61,17 @@
                                 {{ $form->option($item) }}
                             </th>
                         @endforeach
+
+                        @if (count($form->outcome_options) < $outcomeOptionsCount )
+
+                            @for ($i = 0; $i < ($outcomeOptionsCount - count($form->outcome_options)); $i++)
+                            <th>/</th>
+                            @endfor
+
+                        @endif
+
                     @else
-                        @for ($i = 0; $i < $outcomeOptions->count(); $i++)
+                        @for ($i = 0; $i < $outcomeOptionsCount; $i++)
                             <th>/</th>
                         @endfor
                     @endif
