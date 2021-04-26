@@ -5,7 +5,7 @@
 
 <form
     id=complaint_form
-    class="max-1024" 
+    class="max-1024"
     action="{{ route('complaint-form.store') }}"
     method="POST"
     enctype="multipart/form-data">
@@ -19,7 +19,8 @@
                     <select class="form-control select2" name="clinic_id" id="clinic_id">
                     @foreach ($clinics as $clinic)
                         <option value="{{ $clinic->id }}"
-                            data-manager="{{ $clinic->regionalManager }}"
+                            data-manager="{{ $clinic->regionalManager ?
+                                $clinic->regionalManager->first()->user->name : '' }}"
                             @if (old('clinic_id') == $clinic->id)
                                 selected
                             @endif
