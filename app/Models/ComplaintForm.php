@@ -219,13 +219,26 @@ class ComplaintForm extends Model
      * @param array $item
      * @return string
      */
-    public function option(array $item) :string
+    public function option($outcomeOptions, $option) :string
     {
-        $option = OutcomeOptions::where('id', '=', $item['option_id'])
-            ->where('category_id', '=', $item['category_id'])
-            ->first();
+        if(!$this->outcome_options)
+        {
+            return '/';
+        }
 
-        return $option->name ?? '/';
+        $form = null;
+
+        foreach($this->outcome_options as $item)
+        {
+            $form = $outcomeOptions->where('id', $item['category_id'])->first()->options->where('id', $item['option_id']);
+
+            if($form)
+            {
+                break;
+            }
+        }
+
+        return $form ? $form->first()->name : '/';
     }
 
 }
