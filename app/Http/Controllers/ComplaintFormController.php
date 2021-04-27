@@ -308,8 +308,11 @@ class ComplaintFormController extends Controller
      * @param extension $file
      * @return mixed
      */
-    public function download(ComplaintForm $form, string $file, string $extension)
+    public function download(ComplaintForm $form)
     {
+        $file      = \filter_var(request()->get('file'));
+        $extension = \filter_var(request()->get('extension'));
+
         return Storage::download('documents/complaint_form_' . $form->id . '/' . $file . '.' . $extension);
     }
 }
