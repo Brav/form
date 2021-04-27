@@ -50,14 +50,14 @@
     </head>
     <body>
         <!-- Page Container -->
-        <div id="page-container">
+        <div id="page-container" class="page-header-fixed main-content-boxed">
 
             <!-- Header -->
             @include('layouts.partials.public_header')
             <!-- END Header -->
 
             <!-- Main Container -->
-            <main id="main-container">
+            <main id="main-container" class="container mb-5">
                 @yield('content')
             </main>
             <!-- END Main Container -->

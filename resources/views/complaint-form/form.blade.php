@@ -275,6 +275,8 @@
                             </div>
 
                         </div>
+                    </div>
+                    <div class="form-row align-items-center">
 
                         <div class="col-md-4">
 
@@ -300,7 +302,7 @@
 
                      </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Submit a complaint</button>
+                    <button type="submit" class="btn btn-primary mt-3 mb-5">Submit a complaint</button>
                 </form>
 
         </div>
