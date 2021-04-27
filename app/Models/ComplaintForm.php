@@ -121,7 +121,7 @@ class ComplaintForm extends Model
      */
     public function clinic(): BelongsTo
     {
-        return $this->belongsTo(Clinic::class);
+        return $this->belongsTo(Clinic::class)->withTrashed();
     }
 
     /**

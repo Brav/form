@@ -276,27 +276,6 @@
         <div class="col-md-3">
 
             <div class="form-group">
-                <label for="complaint_channel_id">Channel</label>
-                <select class="form-control" name="complaint_channel_id" id="complaint_channel_id">
-                    @foreach ($channels as $channel)
-                        <option
-                            value="{{ $channel->id }}"
-                            @if (old('complaint_channel_id') == $channel->id)
-                                selected
-                            @endif
-                            >{{ $channel->name }}</option>
-                    @endforeach
-                </select>
-                @error('complaint_channel_id')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-        </div>
-
-        <div class="col-md-3">
-
-            <div class="form-group">
                 <label for="severity">Severity</label>
                 <select class="form-control" name="severity" id="severity">
                     <option value=null>None</option>
@@ -310,6 +289,27 @@
                     @endforeach
                 </select>
                 @error('severity')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="form-group">
+                <label for="complaint_channel_id">Channel</label>
+                <select class="form-control" name="complaint_channel_id" id="complaint_channel_id">
+                    @foreach ($channels as $channel)
+                        <option
+                            value="{{ $channel->id }}"
+                            @if (old('complaint_channel_id') == $channel->id)
+                                selected
+                            @endif
+                            >{{ $channel->name }}</option>
+                    @endforeach
+                </select>
+                @error('complaint_channel_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
