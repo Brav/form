@@ -341,6 +341,8 @@
         {{$errors->first('recaptcha_token')}}
     @endif
     <button type="submit" class="btn btn-primary mt-3">Submit a complaint</button>
+    
+            <div class="d-block pb-5"></div>
 </form>
 
 @section('js_after')
