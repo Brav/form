@@ -234,6 +234,29 @@ class ComplaintFormController extends Controller
 
         $result = $form->update($data);
 
+        $directory = 'documents/complaint_form_' . $form->id;
+
+        if(request()->hasFile('documents'))
+        {
+            foreach(request()->file('documents') as $file)
+            {
+                $fileName =
+                \strtolower(
+                    \str_replace(' ', '',
+                        \filter_var($file->getClientOriginalName(),
+                        FILTER_SANITIZE_STRING,
+                        FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+                        )
+                    )
+                );
+
+                Storage::putFileAs($directory,
+                    $file,
+                    $fileName);
+
+            }
+        }
+
         if($result)
         {
             \DB::table('complaint_forms_reminder_sent')

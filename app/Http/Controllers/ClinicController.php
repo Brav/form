@@ -160,7 +160,13 @@ class ClinicController extends Controller
      */
     public function update(Request $request, Clinic $clinic)
     {
-        $clinic->update($request->all());
+
+        $data = $request->all();
+        $data['owner_id'] = auth()->id();
+
+        $clinic->update($data);
+
+        ClinicManagers::saveManagers($clinic, $request);
 
         return redirect()->route('clinics.index')->with([
             'status' => [

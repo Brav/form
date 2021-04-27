@@ -10,6 +10,13 @@
     method="POST"
     enctype="multipart/form-data">
     @csrf
+    <input
+        type="file"
+        name="documents[]"
+        id="hidden-documents"
+        multiple
+        class="d-none"
+        >
     <input type=hidden name=recaptcha_token id=recaptcha_token>
     <div class="form-row align-items-center">
 
@@ -323,7 +330,7 @@
             <div class="custom-file">
                 <label for="documents" class="custom-file-label">Files/Documents</label>
                 <input type="file"
-                name="documents[]"
+                name="files[]"
                 id="documents" multiple
                 class="custom-file-input">
                 @error('documents')

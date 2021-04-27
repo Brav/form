@@ -9,7 +9,13 @@
     enctype="multipart/form-data">
     @csrf
     @method('PUT')
-
+    <input
+        type="file"
+        name="documents[]"
+        id="hidden-documents"
+        multiple
+        class="d-none"
+        >
     <div class="form-row align-items-center">
         <div class="col-md-4">
             <div class="form-group">
@@ -462,7 +468,7 @@
             <div class="custom-file">
                 <label for="documents" class="custom-file-label">Files/Documents</label>
                 <input type="file"
-                name="documents[]"
+                name="files[]"
                 id="documents" multiple
                 class="custom-file-input">
                 @error('documents')
@@ -478,19 +484,57 @@
     </div>
 
     @if ($form->files)
-        <div class=mb-2>
+        <div class="mb-2 col-md-4">
             <h4>Files</h4>
-            @foreach ($form->files as $file)
-                @php
-                    $fileInfo = explode('.', $file)
-                @endphp
-                <a  class="d-block mb-1"
-                    href="{{ route('complaint-form.download', [
-                    'form'      => $form->id,
-                    'file'      => $fileInfo[0],
-                    'extension' => $fileInfo[1],
-                ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
-            @endforeach
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Download</th>
+                    <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @php
+                        $i = 1;
+                    @endphp
+                    @foreach ($form->files as $file)
+
+                        @php
+                            $fileInfo = explode('.', $file);
+                        @endphp
+                        <tr id="file-{{ $form->id . '-' . $i  }}">
+
+                            <th>{{ $file }}</th>
+
+                            <th>
+                                <a  class="d-block mb-1"
+                                    href="{{ route('complaint-form.download', [
+                                    'form'      => $form->id,
+                                    'file'      => $fileInfo[0],
+                                    'extension' => $fileInfo[1],
+                                ]) }}"><i class="fas fa-download"></i></a>
+                            </th>
+
+                            <th>
+                                <a  class="d-block mb-1 file-delete"
+                                    href="#"
+                                    data-route="{{ route('file.delete', $form->id) }}"
+                                    data-file="{{ $file }}"
+                                    data-id="file-{{ $form->id . '-' . $i  }}""><i class="fas fa-trash"></i></a>
+                            </th>
+
+                        </tr>
+                        @php
+                            $i++
+                        @endphp
+                    @endforeach
+
+                </tbody>
+            </table>
+
+
         </div>
     @endif
 

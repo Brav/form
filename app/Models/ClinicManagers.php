@@ -48,6 +48,8 @@ class ClinicManagers extends Model
     {
         $managers = [];
 
+        self::where('clinic_id', '=', $clinic->id)->delete();
+
         foreach (self::$managerTypes as $key => $type)
         {
             if($request->post($type))

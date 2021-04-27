@@ -180,17 +180,84 @@ function showValidationErrors(errors)
 
 $('body').on('change', '#documents', function () {
 
-    let files    = $(this).prop('files')
-    let allFiles = []
+    let files       = $(this).prop('files')
+    let fileInput   = document.getElementById("hidden-documents");
+    let hiddenFiles = fileInput.files
 
-    for (var i = 0, l = files.length; i < l; i++)
+    document.getElementById("hidden-documents").files = new FileListItems([
+        ...files,
+        ...hiddenFiles,
+    ]);
+
+    appendFileNames(document.getElementById("hidden-documents").files);
+});
+
+$('body').on('click', '.file-remove', function (e)
+{
+    e.preventDefault()
+
+    let index    = $(this).data('order')
+    let files    = Array.from(document.getElementById("hidden-documents").files)
+
+    files.splice(index, 1)
+
+    document.getElementById("hidden-documents").files = new FileListItems(files);
+
+    appendFileNames(files)
+
+});
+
+$("body").on("click", ".file-delete", function (e) {
+    e.preventDefault();
+
+    let $this = $(this);
+
+    if(!confirm("Are you sure you want to delete this file?"))
     {
-        allFiles.push(`<span class="font-weight-bold d-block">${files[i].name}</span>`);
+        return;
+    }
+
+    $.ajax({
+        url: $this.data("route"),
+        type: "DELETE",
+        data: {
+            file: $this.data("file"),
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            $(`#${$this.data("id")}`).remove();
+        },
+    });
+});
+
+/**
+ * @params {File[]} files Array of files to add to the FileList
+ * @return {FileList}
+ */
+function FileListItems (files) {
+
+  let b = new ClipboardEvent("").clipboardData || new DataTransfer()
+  for (let i = 0, len = files.length; i<len; i++) b.items.add(files[i])
+
+  return b.files
+}
+
+function appendFileNames(files)
+{
+
+    let allFiles = [];
+
+    for (let i = 0, l = files.length; i < l; i++) {
+        allFiles.push(
+            `<span class="font-weight-bold d-block">${files[i].name}
+                <i class="fas fa-trash-alt file-remove"
+                data-order="${i}"></i>
+            </span>`
+        );
     }
 
     $("#files-for-upload")
-        .removeClass('d-none')
-        .find('.files')
-        .html(allFiles.join(''))
-});
-
+        .removeClass("d-none")
+        .find(".files")
+        .html(allFiles.join(""));
+}

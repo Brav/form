@@ -14,6 +14,7 @@ use App\Http\Controllers\OutcomeOptionsCategoriesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserImportController;
+use App\Http\Controllers\FilesController;
 use Illuminate\Support\Facades\Auth;
 
 require __DIR__.'/auth.php';
@@ -156,4 +157,10 @@ Route::prefix('outcome-options-categories')->middleware(['auth', 'admin'])->grou
 Route::prefix('user-import')->middleware(['auth', 'admin'])->group(function () {
     Route::get('', [UserImportController::class, 'index'])->name('user-import.index');
     Route::post('', [UserImportController::class, 'import'])->name('user-import.import');
+});
+
+Route::prefix('files')->middleware(['auth'])->group(function () {
+
+    Route::delete('delete/{id}', [FilesController::class, 'delete'])->name('file.delete');
+
 });
