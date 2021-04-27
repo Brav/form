@@ -9,7 +9,7 @@
         <th>{{ $form->client_name }}</th>
         <th>{{ $form->patient_name }}</th>
         <th>{{ $form->pms_code }}</th>
-        <th>{{ $form->date_of_incident->format('d/m/Y g:i A') }}</th>
+        <th>{{ $form->date_of_incident->format('d/m/Y') }}</th>
         <th>{{ $form->date_of_client_complaint !== null ?
             date('d/m/Y', \strtotime($form->date_of_client_complaint)) : '/'}}</th>
         <th class="text-break">{{ $form->description }}</th>

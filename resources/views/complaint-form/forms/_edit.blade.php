@@ -276,7 +276,7 @@
                         data-target=".datetimepicker-datetime"
                         name="date_of_incident"
                         id="date_of_incident"
-                        value="{{ old('date_of_incident', $form->date_of_incident->format('d/m/Y g:i A')) }}"
+                        value="{{ old('date_of_incident', $form->date_of_incident->format('d/m/Y')) }}"
                         {{ $readonly }}/>
                     <div class="input-group-append"
                         data-target=".datetimepicker-datetime"

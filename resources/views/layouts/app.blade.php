@@ -94,8 +94,7 @@
                 $(function () {
 
                     dateOfIncident = {
-                        dateFormat: "d/m/Y h:i K",
-                        enableTime: true,
+                        dateFormat: "d/m/Y",
                     };
 
                     if (dateOfIncidentDate !== '') {

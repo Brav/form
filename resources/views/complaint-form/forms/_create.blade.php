@@ -157,7 +157,7 @@
                 <div class="input-group date date_of_incident" data-target-input="nearest">
 
                     <input type="text"
-                        class="form-control datetimepicker-input"
+                        class="form-control datetimepicker-input datetimepicker"
                         data-target=".date_of_incident"
                         name="date_of_incident"
                         id="date_of_incident"
@@ -348,7 +348,7 @@
         {{$errors->first('recaptcha_token')}}
     @endif
     <button type="submit" class="btn btn-primary mt-3">Submit a complaint</button>
-    
+
             <div class="d-block pb-5"></div>
 </form>
 
