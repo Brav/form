@@ -63,7 +63,7 @@ class ComplaintForm extends Model
      */
     public function format(array $data, bool $update = false) :array
     {
-        $date = DateTime::createFromFormat('d/m/Y g:i A', $data['date_of_incident']);
+        $date = DateTime::createFromFormat('d/m/Y', $data['date_of_incident']);
 
         if(isset($data['date_of_incident']))
         {
