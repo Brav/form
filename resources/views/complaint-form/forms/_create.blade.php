@@ -1,6 +1,3 @@
-<span class="smini-hidden">
-    <img src="{{ asset('media/logos/logo-1x.png')}}" alt="VetsDirect" class="img-fluid">
-</span>
 <h1>Complaint Form</h1>
 
 <form
@@ -239,7 +236,7 @@
 
     <div class="form-row align-items-center">
 
-        <div class="col-md-3">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="complaint_category_id">Category</label>
@@ -259,7 +256,7 @@
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="complaint_type_id">Type of complaint</label>
@@ -279,8 +276,10 @@
             </div>
 
         </div>
+    </div>
+     <div class="form-row align-items-center">
 
-        <div class="col-md-3">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="severity">Severity</label>
@@ -302,7 +301,7 @@
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="complaint_channel_id">Channel</label>
@@ -349,6 +348,8 @@
         {{$errors->first('recaptcha_token')}}
     @endif
     <button type="submit" class="btn btn-primary mt-3">Submit a complaint</button>
+    
+            <div class="d-block pb-5"></div>
 </form>
 
 @section('js_after')
