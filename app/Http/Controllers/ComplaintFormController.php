@@ -105,13 +105,21 @@ class ComplaintFormController extends Controller
             'view'       => 'complaint-form',
             'clinics'    => Clinic::with([
                 'managers' => function($query){
-                    return $query->where('manager_type_id', '=', ClinicManagers::managerID('regional_manager'));
+                    return $query->whereIn('manager_type_id',
+                        [
+                            ClinicManagers::managerID('regional_manager'),
+                            ClinicManagers::managerID('veterinary_manager'),
+                            ClinicManagers::managerID('general_manager'),
+
+                        ]);
                 },
-                'managers.user'])->get(),
-            'categories'     => ComplaintCategory::get(),
-            'types'          => ComplaintType::get(),
-            'channels'       => ComplaintChannel::get(),
-            'locations'      => Location::get(),
+                'managers.user'])
+                ->orderBy('name', 'asc')
+                ->get(),
+            'categories'     => ComplaintCategory::orderBy('name')->get(),
+            'types'          => ComplaintType::orderBy('name')->get(),
+            'channels'       => ComplaintChannel::orderBy('name')->get(),
+            'locations'      => Location::orderBy('name')->get(),
             'severities'     => Severity::SEVERITIES,
         ]);
     }
@@ -198,11 +206,23 @@ class ComplaintFormController extends Controller
             'task'           => 'edit',
             'view'           => 'complaint-form',
             'readonly'       => auth()->user()->admin ? '' : 'readonly',
-            'clinics'        => Clinic::with(['managers'])->get(),
-            'categories'     => ComplaintCategory::get(),
-            'types'          => ComplaintType::get(),
-            'channels'       => ComplaintChannel::get(),
-            'locations'      => Location::get(),
+            'clinics'    => Clinic::with([
+                'managers' => function($query){
+                    return $query->whereIn('manager_type_id',
+                        [
+                            ClinicManagers::managerID('regional_manager'),
+                            ClinicManagers::managerID('veterinary_manager'),
+                            ClinicManagers::managerID('general_manager'),
+
+                        ]);
+                },
+                'managers.user'])
+                ->orderBy('name', 'asc')
+                ->get(),
+            'categories'     => ComplaintCategory::orderBy('name')->get(),
+            'types'          => ComplaintType::orderBy('name')->get(),
+            'channels'       => ComplaintChannel::orderBy('name')->get(),
+            'locations'      => Location::orderBy('name')->get(),
             'form'           => $form->load(['clinic', 'location', 'category', 'type', 'channel']),
             'severities'     => Severity::SEVERITIES,
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),

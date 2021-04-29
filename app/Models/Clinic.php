@@ -98,9 +98,14 @@ class Clinic extends Model
         if($this->managers->count() === 0)
             return null;
 
-        return $this->managers->filter(function($item){
+        $data = $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('veterinary_manager');
         });
+
+        if($data->count() === 0)
+            return null;
+
+        return $data;
     }
 
     /**
@@ -128,9 +133,14 @@ class Clinic extends Model
         if($this->managers->count() === 0)
             return null;
 
-        return $this->managers->filter(function($item){
+        $data = $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('general_manager');
         });
+
+        if($data->count() === 0)
+            return null;
+
+        return $data;
     }
 
     /**

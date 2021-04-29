@@ -11,8 +11,8 @@
 
         </th>
         <th>
-            @if ($clinic->practiceManager)
-                @foreach ($clinic->practiceManager as $user)
+            @if ($clinic->practiseManager)
+                @foreach ($clinic->practiseManager as $user)
                     {{ $user->user->name }} <br>
                 @endforeach
             @endif

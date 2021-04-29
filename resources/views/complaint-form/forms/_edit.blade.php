@@ -1,4 +1,4 @@
-<h1>Complaint Form Update</h1>
+<h1>Complaints Reporting Form Update</h1>
 <form
     class="max-1024"
     action="{{ route('complaint-form.update', $form->id) }}"
@@ -128,15 +128,16 @@
                     <select class="form-control select2" name="clinic_id"
                         id="clinic_id"
                         {{ $readonly }}>
-                    @foreach ($clinics as $clinic)
-                        <option value="{{ $clinic->id }}"
-                            data-manager="{{
-                                $clinic->regionalManager ? $clinic->regionalManager->first()->user->name : '' }}"
-                            @if (old('clinic_id', $form->clinic_id) == $clinic->id)
-                                selected
-                            @endif
-                            >{{ $clinic->name }}</option>
-                    @endforeach
+                        <option></option>
+                        @foreach ($clinics as $clinic)
+                            <option value="{{ $clinic->id }}"
+                                data-manager="{{
+                                    $clinic->regionalManager ? $clinic->regionalManager->first()->user->name : '' }}"
+                                @if (old('clinic_id', $form->clinic_id) == $clinic->id)
+                                    selected
+                                @endif
+                                >{{ $clinic->name }}</option>
+                        @endforeach
                     </select>
 
                 @error('clinic_id')
@@ -145,7 +146,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col">
             <div class="form-group">
 
                 <div class="form-group">
@@ -154,6 +155,36 @@
                     class="form-control" name="regional_manager"
                     id="regional_manager"
                     placeholder="Regional Manager"
+                    readonly>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label for="veterinary_manager">Veterinary Manager</label>
+                    <input type="text"
+                    class="form-control" name="veterinary_manager"
+                    id="veterinary_manager"
+                    placeholder="Veterinary Manager"
+                    readonly>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label for="general_manager">General Manager</label>
+                    <input type="text"
+                    class="form-control" name="general_manager"
+                    id="general_manager"
+                    placeholder="General Manager"
                     readonly>
                 </div>
 
@@ -342,6 +373,7 @@
                 <div class="form-group">
                 <label for="location_id">Location</label>
                 <select class="form-control" name="location_id" id="location_id" {{ $readonly }}>
+                    <option></option>
                     @foreach ($locations as $location)
                         <option value="{{ $location->id }}"
                             @if (old('location_id', $form->location_id) == $location->id)
@@ -369,6 +401,7 @@
                     name="complaint_category_id"
                     id="complaint_category_id"
                     {{ $readonly }}>
+                    <option></option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
                             @if (old('complaint_category_id', $form->complaint_category_id) == $category->id)

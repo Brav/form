@@ -1,4 +1,4 @@
-<h1>Complaint Form</h1>
+<h1>Complaints Reporting Form</h1>
 
 <form
     id=complaint_form
@@ -21,10 +21,17 @@
             <div class="form-group">
                     <label for="clinic_id">Clinic Name</label>
                     <select class="form-control select2" name="clinic_id" id="clinic_id">
+                    <option></option>
                     @foreach ($clinics as $clinic)
                         <option value="{{ $clinic->id }}"
                             data-manager="{{ $clinic->regionalManager ?
                                 $clinic->regionalManager->first()->user->name : '' }}"
+
+                            data-veterinary="{{ $clinic->vetManager ?
+                                $clinic->vetManager->first()->user->name : '' }}"
+
+                            data-general="{{ $clinic->generalManager ?
+                                $clinic->generalManager->first()->user->name : '' }}"
                             @if (old('clinic_id') == $clinic->id)
                                 selected
                             @endif
@@ -38,7 +45,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col">
             <div class="form-group">
 
                 <div class="form-group">
@@ -52,6 +59,37 @@
 
             </div>
         </div>
+
+        <div class="col">
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label for="veterinary_manager">Veterinary Manager</label>
+                    <input type="text"
+                    class="form-control" name="veterinary_manager"
+                    id="veterinary_manager"
+                    placeholder="Veterinary Manager"
+                    readonly>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label for="general_manager">General Manager</label>
+                    <input type="text"
+                    class="form-control" name="general_manager"
+                    id="general_manager"
+                    placeholder="General Manager"
+                    readonly>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
     <div class="form-row align-items-center">
@@ -218,6 +256,7 @@
             <div class="form-group">
             <label for="location_id">Location</label>
             <select class="form-control" name="location_id" id="location_id">
+                <option></option>
                 @foreach ($locations as $location)
                     <option value="{{ $location->id }}"
                         @if (old('location_id') == $location->id)
@@ -241,6 +280,7 @@
             <div class="form-group">
                 <label for="complaint_category_id">Category</label>
                 <select class="form-control" name="complaint_category_id" id="complaint_category_id">
+                    <option></option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
                             @if (old('complaint_category_id') == $category->id)
@@ -306,6 +346,7 @@
             <div class="form-group">
                 <label for="complaint_channel_id">Channel</label>
                 <select class="form-control" name="complaint_channel_id" id="complaint_channel_id">
+                    <option></option>
                     @foreach ($channels as $channel)
                         <option
                             value="{{ $channel->id }}"

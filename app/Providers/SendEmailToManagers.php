@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use App\Models\ClinicManagers;
 use App\Models\Roles;
 use App\Models\User;
 use App\Providers\ComplaintFilled;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
+/**
+ *
+ * @package App\Providers
+ */
 class SendEmailToManagers
 {
     /**

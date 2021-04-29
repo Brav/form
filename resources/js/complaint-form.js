@@ -1,6 +1,12 @@
 const categoryID = $("#complaint_category_id").val();
 
-$("#complaint_type_id").children().not(`[data-category=${categoryID}]`).hide();
+if(categoryID)
+{
+    $("#complaint_type_id")
+        .children()
+        .not(`[data-category=${categoryID}]`)
+        .hide();
+}
 
 $('body').on('change', '#complaint_category_id', function (e) {
 
@@ -35,10 +41,23 @@ $('body').on('change', '#clinic_id', function () {
 
 function setManager()
 {
-    let manager = $("#clinic_id").find("option:selected").data("manager")
+    let clinic     = $("#clinic_id")
+    let manager    = clinic.find("option:selected").data("manager")
+    let veterinary = clinic.find("option:selected").data("veterinary");
+    let general = clinic.find("option:selected").data("general");
 
     if(manager)
     {
         $("#regional_manager").val(manager);
+    }
+
+    if (veterinary)
+    {
+        $("#veterinary_manager").val(veterinary);
+    }
+
+    if (general)
+    {
+        $("#general_manager").val(general);
     }
 }
