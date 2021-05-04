@@ -28,7 +28,7 @@
                     <a  class="d-block mb-1"
                         href="{{ route('complaint-form.download', [
                         'form'      => $form->id,
-                        'file'      => $fileInfo,
+                        'file'      => $file,
                         // 'extension' => end($fileInfo),
                     ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
                 @endforeach
