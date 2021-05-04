@@ -29,7 +29,7 @@
                         href="{{ route('complaint-form.download', [
                         'form'      => $form->id,
                         'file'      => $fileInfo[0],
-                        'extension' => $fileInfo[1],
+                        'extension' => end($fileInfo),
                     ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
                 @endforeach
             @endif
