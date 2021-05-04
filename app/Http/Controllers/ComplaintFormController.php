@@ -354,8 +354,8 @@ class ComplaintFormController extends Controller
     public function download(ComplaintForm $form)
     {
         $file      = \filter_var(request()->get('file'));
-        $extension = \filter_var(request()->get('extension'));
+        // $extension = \filter_var(request()->get('extension'));
 
-        return Storage::download('documents/complaint_form_' . $form->id . '/' . $file . '.' . $extension);
+        return Storage::download('documents/complaint_form_' . $form->id . '/' . $file);
     }
 }
