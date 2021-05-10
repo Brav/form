@@ -231,7 +231,7 @@
                     placeholder="Email of Team Member"
                     {{ $readonly }}>
 
-                    @error('team_member_email@')
+                    @error('team_member_email')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
             </div>
