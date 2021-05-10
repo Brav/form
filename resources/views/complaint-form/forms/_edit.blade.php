@@ -1,4 +1,7 @@
 <h1>Complaints Reporting Form Update</h1>
+@php
+    dump($errors)
+@endphp
 <form
     class="max-1024"
     action="{{ route('complaint-form.update', $form->id) }}"
@@ -219,12 +222,12 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="team_member_email@">Email of Team Member</label>
+                <label for="team_member_email">Email of Team Member</label>
                 <input type="email"
                     class="form-control"
-                    name="team_member_email@"
-                    id="team_member_email@"
-                    value="{{ old('team_member_email@', $form->team_member_email) }}"
+                    name="team_member_email"
+                    id="team_member_email"
+                    value="{{ old('team_member_email', $form->team_member_email) }}"
                     placeholder="Email of Team Member"
                     {{ $readonly }}>
 
