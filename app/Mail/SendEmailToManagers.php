@@ -31,7 +31,7 @@ class SendEmailToManagers extends Mailable
      */
     public function build()
     {
-        return $this->from('no-replay@complaintsreporting.vet.partners')
+        return $this->from('complaintsreporting@vet.partners')
             ->subject('Complaint Form Filled')
             ->view('emails/complaint-form')
             ->with([
