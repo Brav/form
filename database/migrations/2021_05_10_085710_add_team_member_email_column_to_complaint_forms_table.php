@@ -14,7 +14,7 @@ class AddTeamMemberEmailColumnToComplaintFormsTable extends Migration
     public function up()
     {
         Schema::table('complaint_forms', function (Blueprint $table) {
-            $table->string('team_member_remember')
+            $table->string('team_member_email')
                 ->default(null)
                 ->nullable()
                 ->after('team_member');
@@ -29,7 +29,7 @@ class AddTeamMemberEmailColumnToComplaintFormsTable extends Migration
     public function down()
     {
         Schema::table('complaint_forms', function (Blueprint $table) {
-            $table->dropColumn('team_member_remember');
+            $table->dropColumn('team_member_email');
         });
     }
 }
