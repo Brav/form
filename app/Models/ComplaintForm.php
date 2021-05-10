@@ -23,6 +23,7 @@ class ComplaintForm extends Model
     protected $fillable = [
         'clinic_id',
         'team_member',
+        'team_member_email',
         'team_member_position',
         'client_name',
         'patient_name',

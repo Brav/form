@@ -99,10 +99,6 @@
                         dateFormat: "d/m/Y",
                     };
 
-                    if (dateOfClientComplaintDate !== '') {
-                        dateConfiguration.defaultDate = dateOfClientComplaintDate;
-                    }
-
                     $("#date_of_client_complaint").flatpickr(dateConfiguration);
 
                     if($('#date_completed').length){

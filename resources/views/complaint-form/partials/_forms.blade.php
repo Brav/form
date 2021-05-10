@@ -1,7 +1,9 @@
 @foreach ($forms as $form)
 
     <tr id="item-{{ $form->id }}">
-        <th>{{ date('d/m/Y g:i A', strtotime($form->created_at)) }}</th>
+        <th>{{ $form->created_at
+            ->timezone('Australia/Sydney')
+            ->format('d/m/Y g:i A') }}</th>
         <th>{{ $form->clinic->name }}</th>
         <th>{{ $form->clinic->regionalManager ? $form->clinic->regionalManager->first()->user->name : '/'}}</th>
         <th>{{ $form->team_member }}</th>

@@ -35,6 +35,7 @@ class ComplaintFormCreateRequest extends FormRequest
                 Rule::in(Clinic::all()->pluck('id')->toArray()),
             ],
             'team_member'              => ['required', 'string', 'min:2'],
+            'team_member_email'        => ['required', 'email'],
             'team_member_position'     => ['required', 'string', 'min:2'],
             'client_name'              => ['required', 'string', 'min:2'],
             'patient_name'             => ['required', 'string', 'min:2'],

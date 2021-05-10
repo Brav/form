@@ -45,72 +45,75 @@ Sidebar -->
                         <span class="nav-main-link-name">Add New</span>
                     </a>
                 </li>
-                <li class="nav-main-heading">Users</li>
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{ route('users.index') }}">
-                        <i class="nav-main-link-icon fa fa-folder-open"></i>
-                        <span class="nav-main-link-name">Manage Users</span>
-                    </a>
-                </li>
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{ route('users.create') }}">
-                        <i class="nav-main-link-icon fa fa-folder-open"></i>
-                        <span class="nav-main-link-name">Add New</span>
-                    </a>
-                </li>
-                <li class="nav-main-heading">Clinics</li>
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{ route('clinics.index') }}">
-                        <i class="nav-main-link-icon fa fa-folder-open"></i>
-                        <span class="nav-main-link-name">Manage Clinics</span>
-                    </a>
-                </li>
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{ route('clinics.create') }}">
-                        <i class="nav-main-link-icon fa fa-folder-open"></i>
-                        <span class="nav-main-link-name">Add New</span>
-                    </a>
-                </li>
 
-                    @if (auth()->user()->admin)
-                        <li class="nav-main-heading">Admin Options</li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('roles.index') }}">
-                                <i class="nav-main-link-icon fa fa-folder-open"></i>
-                                <span class="nav-main-link-name">Manage Roles</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('complaint-category.index') }}">
-                                <i class="nav-main-link-icon fa fa-folder-open"></i>
-                                <span class="nav-main-link-name">Complaint Categories</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('location.index') }}">
-                                <i class="nav-main-link-icon fa fa-folder-open"></i>
-                                <span class="nav-main-link-name">Locations</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('outcome-options.index') }}">
-                                <i class="nav-main-link-icon fa fa-folder-open"></i>
-                                <span class="nav-main-link-name">Outcome Options</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('automated-response.index') }}">
-                                <i class="nav-main-link-icon fa fa-folder-open"></i>
-                                <span class="nav-main-link-name">Automated Response</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('user-import.index') }}">
-                                <i class="nav-main-link-icon fa fa-folder-open"></i>
-                                <span class="nav-main-link-name">Import Users</span>
-                            </a>
-                        </li>
-                    @endif
+                @if (auth()->user()->admin)
+                    <li class="nav-main-heading">Admin Options</li>
+
+                    <li class="nav-main-heading">Users</li>
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('users.index') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Manage Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('users.create') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Add New</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-heading">Clinics</li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('clinics.index') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Manage Clinics</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('clinics.create') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Add New</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('roles.index') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Manage Roles</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('complaint-category.index') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Complaint Categories</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('location.index') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Locations</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('outcome-options.index') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Outcome Options</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('automated-response.index') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Automated Response</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('user-import.index') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Import Users</span>
+                        </a>
+                    </li>
+                @endif
 
                 @endauth
 

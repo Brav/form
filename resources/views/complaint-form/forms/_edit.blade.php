@@ -45,6 +45,7 @@
                   <select class="form-control"
                     name="outcomeOptions[{{ $option->selectName }}]"
                     id="outcomeOptions-{{ $option->selectName }}">
+                    <option></option>
                     @foreach ($option->options as $item)
                         <option value="{{ $item->id }}"
                             @if (old('outcomeOptions-' . $option->selectName, $outcome)
@@ -218,13 +219,32 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="team_member_position">Position of The Member</label>
+                <label for="team_member_email@">Email of Team Member</label>
+                <input type="email"
+                    class="form-control"
+                    name="team_member_email@"
+                    id="team_member_email@"
+                    value="{{ old('team_member_email@', $form->team_member_email) }}"
+                    placeholder="Email of Team Member"
+                    {{ $readonly }}>
+
+                    @error('team_member_email@')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label for="team_member_position">Position of Team Member</label>
                 <input type="text"
                     class="form-control"
                     name="team_member_position"
                     id="team_member_position"
                     value="{{ old('team_member_position', $form->team_member_position) }}"
-                    placeholder="Position of the Member"
+                    placeholder="Position of Team Member"
                     {{ $readonly }}>
 
                     @error('team_member_position')
