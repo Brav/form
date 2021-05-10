@@ -1,7 +1,4 @@
 <h1>Complaints Reporting Form Update</h1>
-@php
-    dump($errors)
-@endphp
 <form
     class="max-1024"
     action="{{ route('complaint-form.update', $form->id) }}"
