@@ -44,7 +44,7 @@ class SendEmailToManagers
                             })
                             ->get();
 
-        \Mail::to(array_merge($users->pluck('email')->toArray(), $form->team_member_email))
+        \Mail::to(array_merge($users->pluck('email')->toArray(), [$form->team_member_email]))
             ->send(new \App\Mail\SendEmailToManagers($form));
     }
 }
