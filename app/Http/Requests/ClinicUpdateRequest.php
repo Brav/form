@@ -30,7 +30,7 @@ class ClinicUpdateRequest extends FormRequest
             ],
             'lead_vet'              => ['required'],
             'lead_vet.*'            => ['numeric'],
-            'practise_manager'      => ['required', 'numeric'],
+            'practice_manager'      => ['required', 'numeric'],
             'veterinary_manager'    => ['required', 'numeric'],
             'gm_veterinary_options' => ['required', 'numeric'],
             'gm_region'             => ['required', 'numeric'],

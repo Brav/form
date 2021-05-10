@@ -28,7 +28,7 @@ class ClinicCreateRequest extends FormRequest
             'name'                     => ['required', 'min:3', 'string', 'unique:App\Models\Clinic,name'],
             'lead_vet'                 => ['required'],
             'lead_vet.*'               => ['numeric'],
-            'practise_manager'         => ['required', 'numeric'],
+            'practice_manager'         => ['required', 'numeric'],
             'veterinary_manager'       => ['required', 'numeric'],
             'gm_veterinary_operations' => ['required', 'numeric'],
             'general_manager'          => ['required', 'numeric'],
