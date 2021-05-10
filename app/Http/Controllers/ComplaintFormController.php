@@ -353,8 +353,21 @@ class ComplaintFormController extends Controller
      */
     public function download(ComplaintForm $form)
     {
+
+        if(!auth()->user()->admin)
+        {
+            $result = ClinicManagers::where('user_id', '=', auth()->id())
+                ->where('clinic_id', '=', $form->clinic_id)
+                ->get();
+
+            if($result->isEmpty())
+            {
+
+                return redirect()->route('complaint-form.manage');
+            }
+        }
+
         $file      = \filter_var(request()->get('file'));
-        // $extension = \filter_var(request()->get('extension'));
 
         return Storage::download('documents/complaint_form_' . $form->id . '/' . $file);
     }
