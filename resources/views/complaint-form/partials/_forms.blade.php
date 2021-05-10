@@ -1,6 +1,13 @@
 @foreach ($forms as $form)
 
     <tr id="item-{{ $form->id }}">
+        @if ($canEdit)
+            <th>
+                <a href="{{ route('complaint-form.edit', $form->id) }}"
+                    class="btn btn-primary btn-sm active"
+                    role="button" aria-pressed="true">Edit</a>
+            </th>
+        @endif
         <th>{{ $form->created_at
             ->timezone('Australia/Sydney')
             ->format('d/m/Y g:i A') }}</th>
@@ -48,21 +55,12 @@
                 date('d/m/Y', \strtotime($form->date_completed)) : '/'}}</th>
         @endif
         <th>
-
-            @if ($canEdit)
-                <a href="{{ route('complaint-form.edit', $form->id) }}"
-                    class="btn btn-primary btn-sm active"
-                    role="button" aria-pressed="true">Edit</a>
-            @endif
-
             @if ($canDelete)
                 <a data-toggle="modal"
                     class="btn btn-danger btn-sm"
                     role="smallModal"
                     data-target="#smallModal"
-                    data-attr="{{ route('complaint-form.delete', $form->id) }}" title="Delete Form">
-                        <i class="fa fa-trash-o  fa-lg"></i> Delete
-                </a>
+                    data-attr="{{ route('complaint-form.delete', $form->id) }}" title="Delete Form">Delete</a>
             @endif
 
         </th>

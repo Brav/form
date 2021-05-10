@@ -9,7 +9,7 @@
                     <div class="alert alert-{{ session('status.type') }}" role="alert">
                         {{ session('status.message') }}
                     </div>
-                </div>                
+                </div>
                 @endif
 
                 <a name="exportToExcel" id="exportToExcel" class="btn btn-primary mb-3"
@@ -22,6 +22,9 @@
                     <table class="table table-bordered table-striped table-vcenter" id="forms">
                         <thead>
                             <tr class="bg-white">
+                                @if ($canEdit)
+                                    <th>Edit</th>
+                                @endif
                                 <th class="small text-nowrap">Date/Time Submitted</th>
                                 <th class="small text-nowrap">Clinic Name</th>
                                 <th class="small text-nowrap">Regional Manager</th>
