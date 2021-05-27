@@ -29,12 +29,13 @@ class NewAccount extends Mailable
      */
     public function build()
     {
-        return $this->from('awardnominations.vet@vet.partners')
-        ->subject('Account Created')
-        ->view('emails/new-account')
-        ->with([
-            'user'     => $this->user,
-            'password' => $this->password,
-        ]);
+        return true;
+        // return $this->from('awardnominations.vet@vet.partners')
+        // ->subject('Account Created')
+        // ->view('emails/new-account')
+        // ->with([
+        //     'user'     => $this->user,
+        //     'password' => $this->password,
+        // ]);
     }
 }
