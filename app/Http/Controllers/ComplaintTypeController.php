@@ -80,6 +80,11 @@ class ComplaintTypeController extends Controller
 
         $data['level'] = null;
 
+        if($data['severity'] === 'none')
+        {
+            $data['severity'] = null;
+        }
+
         $type = ComplaintType::create($data);
 
         return response()->json(
@@ -135,6 +140,11 @@ class ComplaintTypeController extends Controller
         if(isset($data['level']) && $data['level'] === 'None')
         {
             $data['level'] = null;
+        }
+
+        if($data['severity'] === 'none')
+        {
+            $data['severity'] = null;
         }
 
         $type->update($data);
