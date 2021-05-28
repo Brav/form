@@ -6,7 +6,7 @@
         <div class="block-content">
 
                 <form
-                    class="max-1024" 
+                    class="max-1024"
                     action="{{ route('complaint-form.store') }}"
                     method="POST">
                     @csrf
@@ -174,7 +174,7 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="date_of_client_complaint">Date to client complaint: (if applicable)</label>
+                                <label for="date_of_client_complaint">Date of client complaint: (if applicable)</label>
                                 <div class="input-group date timepicker1" id="start_dt_2" data-target-input="nearest" >
                                     <input type="text"
                                         class="form-control datetimepicker-input datetimepicker"

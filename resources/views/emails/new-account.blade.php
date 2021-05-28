@@ -13,7 +13,7 @@
         You can  <a href="{{ route('login') }}">login here</a>.
     </p>
     <p>
-        <a href="{{ route('login') }}">You can log here</a>
+        <a href="{{ route('login') }}">You can login here</a>
     </p>
 </body>
 </html>

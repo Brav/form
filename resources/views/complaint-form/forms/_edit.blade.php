@@ -88,7 +88,6 @@
                 class="form-control"
                 name="completed_by"
                 id="completed_by"
-                placeholder="Completed by"
                 value="{{ old('completed_by', $form->completed_by) }}">
                 @error('completed_by')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -155,7 +154,6 @@
                     <input type="text"
                     class="form-control" name="regional_manager"
                     id="regional_manager"
-                    placeholder="Regional Manager"
                     readonly>
                 </div>
 
@@ -170,7 +168,6 @@
                     <input type="text"
                     class="form-control" name="veterinary_manager"
                     id="veterinary_manager"
-                    placeholder="Veterinary Manager"
                     readonly>
                 </div>
 
@@ -185,7 +182,6 @@
                     <input type="text"
                     class="form-control" name="general_manager"
                     id="general_manager"
-                    placeholder="General Manager"
                     readonly>
                 </div>
 
@@ -206,7 +202,6 @@
                 name="team_member"
                 id="team_member"
                 value="{{ old('team_member', $form->team_member) }}"
-                placeholder="Team Member logging the complaint"
                 {{ $readonly }}>
 
                 @error('team_member')
@@ -225,7 +220,6 @@
                     name="team_member_email"
                     id="team_member_email"
                     value="{{ old('team_member_email', $form->team_member_email) }}"
-                    placeholder="Email of Team Member"
                     {{ $readonly }}>
 
                     @error('team_member_email')
@@ -244,7 +238,6 @@
                     name="team_member_position"
                     id="team_member_position"
                     value="{{ old('team_member_position', $form->team_member_position) }}"
-                    placeholder="Position of Team Member"
                     {{ $readonly }}>
 
                     @error('team_member_position')
@@ -268,7 +261,6 @@
                 name="client_name"
                 id="client_name"
                 value="{{ old('client_name', $form->client_name) }}"
-                placeholder="Client / Owner Name"
                 {{ $readonly }}>
                 @error('client_name')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -286,7 +278,6 @@
                     name="patient_name"
                     id="patient_name"
                     value="{{ old('patient_name', $form->patient_name) }}"
-                    placeholder="Patient Name"
                     {{ $readonly }}>
                 @error('patient_name')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -304,7 +295,6 @@
                     name="pms_code"
                     id="pms_code"
                     value="{{ old('pms_code', $form->pms_code) }}"
-                    placeholder="PMS Code"
                     {{ $readonly }}>
                 @error('pms_code')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -345,7 +335,7 @@
 
             <div class="form-group">
 
-                <label for="date_of_client_complaint">Date to client complaint: (if applicable)</label>
+                <label for="date_of_client_complaint">Date of client complaint: (if applicable)</label>
                 <div class="input-group date date_of_client_complaint" id="start_dt_2" data-target-input="nearest" >
                     <input type="text"
                         class="form-control datetimepicker-input datetimepicker"
@@ -471,7 +461,6 @@
                     name="severity"
                     id="severity"
                     {{ $readonly }}>
-                    <option value=null>None</option>
                     @foreach ($severities as $key => $value)
                         <option
                             value="{{ $key }}"

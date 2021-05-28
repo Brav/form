@@ -132,7 +132,7 @@ class ComplaintTypeController extends Controller
     {
         $data = $request->all();
 
-        if($data['level'] === 'None')
+        if(isset($data['level']) && $data['level'] === 'None')
         {
             $data['level'] = null;
         }

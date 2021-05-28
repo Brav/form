@@ -33,7 +33,7 @@ class ComplaintTypeCreateRequest extends FormRequest
             'complaint_category_id' => ['required',
                 Rule::in(ComplaintCategory::all()->pluck('id')->toArray()),
             ],
-            'severity' => ['required',
+            'severity' => ['nullable',
                 Rule::in(\array_keys(Severity::SEVERITIES)),
             ],
             'complaint_channels_affected'   => ['nullable'],

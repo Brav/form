@@ -24,7 +24,6 @@
             <div class="form-group">
               <label for="severity">Severity</label>
               <select class="form-control" name="severity" id="severity">
-                  <option value="none">None</option>
                   @foreach ($severities as $key => $value)
                     <option
                         @if (old('severity') == $key)

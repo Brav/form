@@ -27,10 +27,12 @@ class ComplaintTypeUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        dd(\implode(',', \array_keys(Severity::SEVERITIES)));
         return [
             'name' => ['required', 'min:3',
                 Rule::unique('complaint_types')->ignore($this->type->id)
+            ],
+            'severity' => ['nullable',
+                Rule::in(\array_keys(Severity::SEVERITIES)),
             ],
             'complaint_category_id' => ['required',
                 Rule::in(ComplaintCategory::all()->pluck('id')->toArray()),

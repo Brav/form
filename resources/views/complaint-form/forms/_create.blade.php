@@ -53,7 +53,6 @@
                     <input type="text"
                     class="form-control" name="regional_manager"
                     id="regional_manager"
-                    placeholder="Regional Manager"
                     readonly>
                 </div>
 
@@ -68,7 +67,6 @@
                     <input type="text"
                     class="form-control" name="veterinary_manager"
                     id="veterinary_manager"
-                    placeholder="Veterinary Manager"
                     readonly>
                 </div>
 
@@ -83,7 +81,6 @@
                     <input type="text"
                     class="form-control" name="general_manager"
                     id="general_manager"
-                    placeholder="General Manager"
                     readonly>
                 </div>
 
@@ -102,8 +99,7 @@
                 class="form-control"
                 name="team_member"
                 id="team_member"
-                value="{{ old('team_member') }}"
-                placeholder="Team Member logging the complaint">
+                value="{{ old('team_member') }}">
 
                 @error('team_member')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -120,8 +116,7 @@
                     class="form-control"
                     name="team_member_email"
                     id="team_member_email"
-                    value="{{ old('team_member_email') }}"
-                    placeholder="Email of Team Member">
+                    value="{{ old('team_member_email') }}">
 
                     @error('team_member_email')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -138,8 +133,7 @@
                     class="form-control"
                     name="team_member_position"
                     id="team_member_position"
-                    value="{{ old('team_member_position') }}"
-                    placeholder="Position of Team Member">
+                    value="{{ old('team_member_position') }}">
 
                     @error('team_member_position')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -160,8 +154,7 @@
                 class="form-control"
                 name="client_name"
                 id="client_name"
-                value="{{ old('client_name') }}"
-                placeholder="Client / Owner Name">
+                value="{{ old('client_name') }}">
                 @error('client_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -177,8 +170,7 @@
                     class="form-control"
                     name="patient_name"
                     id="patient_name"
-                    value="{{ old('patient_name') }}"
-                    placeholder="Patient Name">
+                    value="{{ old('patient_name') }}">
                 @error('patient_name')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -194,8 +186,7 @@
                     class="form-control"
                     name="pms_code"
                     id="pms_code"
-                    value="{{ old('pms_code') }}"
-                    placeholder="PMS Code">
+                    value="{{ old('pms_code') }}">
                 @error('pms_code')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -232,7 +223,7 @@
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="date_of_client_complaint">Date to client complaint: (if applicable)</label>
+                <label for="date_of_client_complaint">Date of client complaint: (if applicable)</label>
                 <div class="input-group date date_of_client_complaint" id="start_dt_2" data-target-input="nearest" >
                     <input type="text"
                         class="form-control datetimepicker-input datetimepicker"
@@ -342,7 +333,6 @@
             <div class="form-group">
                 <label for="severity">Severity</label>
                 <select class="form-control" name="severity" id="severity">
-                    <option value=null>None</option>
                     @foreach ($severities as $key => $value)
                         <option
                             value="{{ $key }}"
