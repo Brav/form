@@ -25,7 +25,6 @@
         <div class="col">
             <div class="form-group">
               <label for="severity">Severity</label>
-              <option value="none">None</option>
               <select class="form-control" name="severity" id="severity">
                   @foreach ($severities as $key => $value)
                     <option
