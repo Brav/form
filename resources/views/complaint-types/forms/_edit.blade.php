@@ -45,7 +45,7 @@
                   @foreach ($categories as $category)
                       <option
                         value="{{ $category->id }}"
-                        @if ($type->complaint_category_id === $category->id)
+                        @if ((int) $type->complaint_category_id === (int) $category->id)
                             selected
                         @endif
                         >{{ $category->name }}</option>
