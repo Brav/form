@@ -67,6 +67,9 @@
         <div class="form-row align-items-center" id="channel_settings">
         <div class="col">
             <div id="accordion2" role="tablist" aria-multiselectable="true">
+                <p class="text-info">
+                    Don't select any roles if you want for that channel to use default roles for sending emails.
+                </p>
             @foreach ($severities as $key => $value)
 
                 @if ($key !== 'none')
@@ -86,6 +89,7 @@
                                     <div class="form-group row">
                                         <label for="{{ $channel->name . '_' . $value }}" class="col-sm-4 col-form-label">{{ $channel->name }}</label>
                                         <div class="col-md-8">
+                                            <label for="{{ $channel->name . '_' . $value }}">Level</label>
                                             <select class="form-control" name="channel_settings[{{ $channelKey }}][{{ $channel->id }}]" id="{{ $channel->name . '_' . $value }}">
                                                 <option value="no_sending">Don't send</option>
                                                 @foreach ($levels as $level)
@@ -96,6 +100,7 @@
                                                 @endforeach
                                             </select>
 
+                                            <label for="{{ $channel->name . '_' . $value . '_roles'}}">Roles</label>
                                             <select class="form-control"
                                             name="channel_settings[{{ $channelKey }}][{{ $channel->id }}][roles][]"
                                             multiple
@@ -109,6 +114,7 @@
                                                     value={{ $role->id }}>{{ $role->name }}</option>
                                                 @endforeach
                                             </select>
+                                            <small class="form-text text-muted">Leave empty if you want to use default settings</small>
                                         </div>
                                     </div>
                                 @endforeach
