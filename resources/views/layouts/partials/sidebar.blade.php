@@ -36,7 +36,7 @@ Sidebar -->
                 <li class="nav-main-item">
                     <a class="nav-main-link" href="{{ route('complaint-form.manage') }}">
                         <i class="nav-main-link-icon fa fa-folder-open"></i>
-                        <span class="nav-main-link-name">Manage Forms</span>
+                        <span class="nav-main-link-name">Manage Complaints</span>
                     </a>
                 </li>
                 <li class="nav-main-item">

@@ -142,7 +142,7 @@ class ComplaintForm extends Model
      */
     public function category(): BelongsTo
     {
-        return $this->belongsTo(ComplaintCategory::class, 'complaint_category_id');
+        return $this->belongsTo(ComplaintCategory::class, 'complaint_category_id')->withTrashed();
     }
 
     /**
@@ -152,7 +152,7 @@ class ComplaintForm extends Model
      */
     public function type(): BelongsTo
     {
-        return $this->belongsTo(ComplaintType::class, 'complaint_type_id');
+        return $this->belongsTo(ComplaintType::class, 'complaint_type_id')->withTrashed();
     }
 
     /**
@@ -162,7 +162,7 @@ class ComplaintForm extends Model
      */
     public function channel(): BelongsTo
     {
-        return $this->belongsTo(ComplaintChannel::class, 'complaint_channel_id');
+        return $this->belongsTo(ComplaintChannel::class, 'complaint_channel_id')->withTrashed();
     }
 
     /**
@@ -183,7 +183,7 @@ class ComplaintForm extends Model
                 return $this->channel->level;
             }
 
-            $severity = \str_replace(' ', '_', $this->severity);
+            $severity = \str_replace(' ', '_', Severity::SEVERITIES[$this->severity]);
 
             return  $this->type->complaint_channels_settings[$severity][$this->channel->id];
 
