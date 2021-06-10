@@ -174,22 +174,19 @@ class ComplaintForm extends Model
     {
         if($this->channel !== null)
         {
-            $level = $this->channel->level;
 
-            if($level == 3)
+            /**
+             * If the complaint type is using default settings, return channel level for sending emails
+             */
+            if($this->type->complaint_channels_settings === null)
             {
-                return $level;
+                return $this->channel->level;
             }
 
-            if($this->type->complaint_channels_affected)
-            {
-                if (\in_array($this->channel->id, $this->type->complaint_channels_affected))
-                {
-                    return $level + 1;
-                }
-            }
+            $severity = \str_replace(' ', '_', $this->severity);
 
-            return $level;
+            return  $this->type->complaint_channels_settings[$severity][$this->channel->id];
+
         }
 
         return $this->type->level ?? '/';

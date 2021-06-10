@@ -7,6 +7,7 @@ use App\Http\Requests\ComplaintTypeUpdateRequest;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintType;
+use App\Models\Roles;
 use App\Models\Severity;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class ComplaintTypeController extends Controller
 
         return [
             'html' => view('complaint-types/partials/_container', [
-                'types' => $types,
+                'types'    => $types,
+                'channels' => ComplaintChannel::all(),
             ])->render(),
             'pagination' => view('pagination', [
                 'paginator' => $types,
@@ -64,6 +66,7 @@ class ComplaintTypeController extends Controller
                 'severities' => Severity::SEVERITIES,
                 'categories' => ComplaintCategory::all(),
                 'channels'   => ComplaintChannel::all(),
+                'levels'     => Roles::$levels,
             ])->render()
         , 200);
     }
@@ -78,11 +81,11 @@ class ComplaintTypeController extends Controller
     {
         $data = $request->all();
 
-        $data['level'] = null;
+        $data['complaint_channels_settings'] = null;
 
-        if($data['severity'] === 'none')
+        if($data['channel_settings_select'] === 'custom')
         {
-            $data['severity'] = null;
+            $data['complaint_channels_settings'] = $data['channel_settings'];
         }
 
         $type = ComplaintType::create($data);
@@ -122,6 +125,7 @@ class ComplaintTypeController extends Controller
                 'severities' => Severity::SEVERITIES,
                 'categories' => ComplaintCategory::all(),
                 'channels'   => ComplaintChannel::all(),
+                'levels'     => Roles::$levels,
             ])->render()
         , 200);
     }
@@ -137,22 +141,19 @@ class ComplaintTypeController extends Controller
     {
         $data = $request->all();
 
-        if(isset($data['level']) && $data['level'] === 'None')
-        {
-            $data['level'] = null;
-        }
+        $data['complaint_channels_settings'] = null;
 
-        if($data['severity'] === 'none')
+        if($data['channel_settings_select'] === 'custom')
         {
-            $data['severity'] = null;
+            $data['complaint_channels_settings'] = $data['channel_settings'];
         }
 
         $type->update($data);
 
         return response()->json(
             view('complaint-types/partials/_type', [
-                'type'       => $type,
-                'severities' => Severity::SEVERITIES,
+                'type'     => $type,
+                'channels' => ComplaintChannel::all(),
             ])->render()
             , 200);
     }

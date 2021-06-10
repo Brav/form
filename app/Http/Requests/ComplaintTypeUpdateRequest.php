@@ -31,16 +31,11 @@ class ComplaintTypeUpdateRequest extends FormRequest
             'name' => ['required', 'min:3',
                 Rule::unique('complaint_types')->ignore($this->type->id)
             ],
-            'severity' => ['nullable',
-                Rule::in(\array_keys(Severity::SEVERITIES)),
-            ],
             'complaint_category_id' => ['required',
                 Rule::in(ComplaintCategory::all()->pluck('id')->toArray()),
             ],
-            'complaint_channels_affected'   => ['nullable'],
-            'complaint_channels_affected.*' => [
-                Rule::in(ComplaintChannel::all()->pluck('id')->toArray()),
-            ]
+            'channel_settings_select' => ['required', Rule::in(['null', 'custom'])],
+            'channel_settings'        => ['nullable'],
         ];
     }
 }

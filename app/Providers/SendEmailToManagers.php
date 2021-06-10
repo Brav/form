@@ -34,6 +34,11 @@ class SendEmailToManagers
 
         $complaintLevel = $form->complaintLevel();
 
+        if($complaintLevel === 'no_sending')
+        {
+            return;
+        }
+
         $roles          = Roles::where('level' , 'like', '%"' . $complaintLevel . '"%')->get();
 
         $users          = User::whereIn('role_id', $roles->pluck('id')->toArray())

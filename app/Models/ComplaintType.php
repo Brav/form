@@ -19,13 +19,11 @@ class ComplaintType extends Model
     protected $fillable = [
         'name',
         'complaint_category_id',
-        'level',
-        'severity',
-        'complaint_channels_affected',
+        'complaint_channels_settings',
     ];
 
     protected $casts = [
-        'complaint_channels_affected' => 'array',
+        'complaint_channels_settings' => 'array',
     ];
     /**
      * Get all of the channels for the ComplaintType

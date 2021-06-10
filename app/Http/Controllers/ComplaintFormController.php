@@ -136,7 +136,10 @@ class ComplaintFormController extends Controller
         $data  = $model->format($request->all());
         $model = $model->create($data);
 
-        ComplaintFilled::dispatch($model);
+        if($model->severity !== 'none')
+        {
+            ComplaintFilled::dispatch($model);
+        }
 
         $directory = 'documents/complaint_form_' . $model->id;
 

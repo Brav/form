@@ -2,7 +2,15 @@
         <th>{{ $type->id }}</th>
         <th>{{ $type->name }}</th>
         <th class="complaint-type-category-{{ $type->category->id }}">{{ $type->category->name }}</th>
-        <th class="text-capitalize">{{  $type->severity ? $severities[$type->severity] : '/' }}</th>
+        <th class="text-capitalize">
+            @if ($type->complaint_channels_settings == null)
+                Default
+            @else
+                @include('complaint-types/partials/channel_settings', [
+                    'settings' => $type->complaint_channels_settings
+                ])
+            @endif
+        </th>
         <th>
             <a href="{{ route('complaint-type.edit', $type->id) }}"
                 class="btn btn-primary btn-sm active"

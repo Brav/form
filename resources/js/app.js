@@ -165,6 +165,15 @@ $(document).on("click", "#can_login", function (e) {
     }
 });
 
+$(document).on("click", "input[name=channel_settings]", function (e) {
+    $('#channel_settings').addClass('d-none')
+
+    if ($(this).val() === 'custom')
+    {
+        $("#channel_settings").removeClass("d-none");
+    }
+});
+
 function showValidationErrors(errors)
 {
     for(error in errors)
