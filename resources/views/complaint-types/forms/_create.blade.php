@@ -71,12 +71,21 @@
                                     <div class="form-group row">
                                         <label for="{{ $channel->name . '_' . $value }}" class="col-sm-4 col-form-label">{{ $channel->name }}</label>
                                         <div class="col-md-8">
-                                            <select class="form-control" name="channel_settings[{{ $channelKey }}][{{ $channel->id }}]" id="{{ $channel->name . '_' . $value }}">
+                                            <select class="form-control" name="channel_settings[{{ $channelKey }}][{{ $channel->id }}][level]" id="{{ $channel->name . '_' . $value }}">
                                                 <option value="no_sending">Don't send</option>
                                                 @foreach ($levels as $level)
                                                     <option @if ($channel->level == $level)
                                                         selected
                                                     @endif>{{ $level }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            <select class="form-control"
+                                            name="channel_settings[{{ $channelKey }}][{{ $channel->id }}][roles][]"
+                                            multiple
+                                                id="{{ $channel->name . '_' . $value . '_roles'}}">
+                                                @foreach ($roles as $role)
+                                                    <option value={{ $role->id }}>{{ $role->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

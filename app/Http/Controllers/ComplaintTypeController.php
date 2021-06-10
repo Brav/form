@@ -67,6 +67,7 @@ class ComplaintTypeController extends Controller
                 'categories' => ComplaintCategory::all(),
                 'channels'   => ComplaintChannel::all(),
                 'levels'     => Roles::$levels,
+                'roles'      => Roles::all(),
             ])->render()
         , 200);
     }
@@ -94,6 +95,7 @@ class ComplaintTypeController extends Controller
             view('complaint-types/partials/_type', [
                 'type'       => $type,
                 'severities' => Severity::SEVERITIES,
+                'channels'   => ComplaintChannel::all(),
             ])->render()
             , 200);
     }
@@ -126,6 +128,7 @@ class ComplaintTypeController extends Controller
                 'categories' => ComplaintCategory::all(),
                 'channels'   => ComplaintChannel::all(),
                 'levels'     => Roles::$levels,
+                'roles'      => Roles::all(),
             ])->render()
         , 200);
     }

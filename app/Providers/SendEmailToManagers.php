@@ -34,14 +34,29 @@ class SendEmailToManagers
 
         $complaintLevel = $form->complaintLevel();
 
-        if($complaintLevel === 'no_sending')
+        if($complaintLevel['level'] === 'no_sending')
         {
             return;
         }
 
-        $roles          = Roles::where('level' , 'like', '%"' . $complaintLevel . '"%')->get();
+        if(\is_numeric($complaintLevel) && $form->type->complaint_channels_settings === null)
+        {
+            $roles = Roles::where('level' , 'like', '%"' . $complaintLevel . '"%')->get();
+        }
 
-        $users          = User::whereIn('role_id', $roles->pluck('id')->toArray())
+        if($form->type->complaint_channels_settings !== null)
+        {
+            if(isset($complaintLevel['roles']))
+            {
+                $roles = Roles::whereIn('id' , $complaintLevel['roles'])->get();
+            }
+            else
+            {
+                $roles = Roles::where('level' , 'like', '%"' . $complaintLevel['level'] . '"%')->get();
+            }
+        }
+
+        $users = User::whereIn('role_id', $roles->pluck('id')->toArray())
                             ->whereIn('id', function($query) use ($form){
                                 return $query->from('clinic_managers')->select('user_id')
                                     ->where('clinic_id', '=', $form->clinic_id)

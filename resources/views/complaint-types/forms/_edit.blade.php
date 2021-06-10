@@ -90,9 +90,23 @@
                                                 <option value="no_sending">Don't send</option>
                                                 @foreach ($levels as $level)
                                                     <option
-                                                        @if ($type->complaint_channels_settings[$channelKey][$channel->id] == $level)
+                                                        @if ($type->complaint_channels_settings[$channelKey][$channel->id]['level'] == $level)
                                                         selected
                                                     @endif>{{ $level }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            <select class="form-control"
+                                            name="channel_settings[{{ $channelKey }}][{{ $channel->id }}][roles][]"
+                                            multiple
+                                                id="{{ $channel->name . '_' . $value . '_roles'}}">
+                                                @foreach ($roles as $role)
+                                                    <option
+                                                    @if (isset($type->complaint_channels_settings[$channelKey][$channel->id]['roles']) &&
+                                                    in_array($role->id, $type->complaint_channels_settings[$channelKey][$channel->id]['roles']))
+                                                        selected
+                                                    @endif
+                                                    value={{ $role->id }}>{{ $role->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
