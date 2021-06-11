@@ -52,7 +52,7 @@ class SendEmailToManagers
             }
             else
             {
-                $roles = Roles::where('level' , 'like', '%"' . $complaintLevel['level'] . '"%')->get();
+                $roles = Roles::where('level' , 'like', '%"' . $complaintLevel['levelz< f'] . '"%')->get();
             }
         }
 
