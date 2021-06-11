@@ -396,7 +396,7 @@
     @if($errors->has('recaptcha_token'))
         {{$errors->first('recaptcha_token')}}
     @endif
-    <button type="submit" class="btn btn-primary mt-3">Submit a complaint</button>
+    <button type="submit" class="btn btn-hero-primary mt-3">Submit a complaint</button>
 
             <div class="d-block pb-5"></div>
 </form>

@@ -10,8 +10,7 @@
 
         <!-- Right Section -->
         <div>
-
-  
+            <a href="{{ route('complaint-form.create') }}" class="btn btn-hero btn-hero-primary btn-hero-lg header-scroll">Submit a complaint</a>
         </div>
         <!-- END Right Section -->
     </div>
