@@ -26,6 +26,7 @@
 
         <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
         <link rel="stylesheet" id="css-theme" href="{{ asset('css/themes/xinspire.css') }}">
+        <link rel="stylesheet" id="css-theme" href="{{ asset('css/custom.css') }}">
         @yield('css_after')
 
         <!-- Scripts -->
@@ -64,7 +65,7 @@
                                         @yield('content')
                                     </div>
                                 </div>
-                                <div class="col-md-6 order-md-0 bg-primary-dark-op d-flex align-items-center">
+                                <div class="col-md-6 order-md-0 bg-primary d-flex align-items-center">
                                     <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6">
                                         <div class="media">
                                            <!--  <a class="img-link mr-3" href="javascript:void(0)">

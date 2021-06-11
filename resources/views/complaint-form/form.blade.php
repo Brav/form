@@ -302,7 +302,7 @@
 
                      </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Submit a complaint</button>
+                    <button type="submit" class="btn btn-hero-primary mt-3">Submit a complaint</button>
                 </form>
                 <div class="d-block pb-5"></div>
 
