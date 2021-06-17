@@ -162,14 +162,12 @@ class ComplaintFormController extends Controller
             ->whereJsonContains('scenario->channels', $model->complaint_channel_id)
             ->first();
 
-        $response = $autoResponse->response ?? null;
-
         return redirect()->route('complaint-form.sent')
             ->with([
                 'status' => [
                     'message'  => "You have file the complaint successfully",
                 ],
-                'response' => $response,
+                'response' => $autoResponse->response ?? null,
             ]);
     }
 
