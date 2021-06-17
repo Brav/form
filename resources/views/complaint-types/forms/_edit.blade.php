@@ -92,7 +92,10 @@
                                             <option value="no_sending">Don't send</option>
                                             @foreach ($levels as $level)
                                                 <option
-                                                    @if ($type->complaint_channels_settings[$channelKey][$channel->id]['level'] == $level)
+                                                    @if (
+                                                    isset($type->complaint_channels_settings[$channelKey][$channel->id])
+                                                    &&
+                                                    $type->complaint_channels_settings[$channelKey][$channel->id]['level'] == $level)
                                                     selected
                                                 @endif>{{ $level }}</option>
                                             @endforeach
@@ -113,6 +116,20 @@
                                             @endforeach
                                         </select>
                                         <small class="form-text text-muted">Leave empty if you want to use default settings</small>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label for="{{ $channel->name . '_' . $value . '_additional_emails'}}">Additional emails</label>
+                                          <textarea class="form-control"
+                                            name="channel_settings[{{ $channelKey }}][{{ $channel->id }}]['additional_emails']"
+                                            id="{{ $channel->name . '_' . $value . '_additional_emails'}}"
+                                            rows="3">@if (isset($type->complaint_channels_settings[$channelKey])
+                                            && isset($type->complaint_channels_settings[$channelKey][$channel->id]['additional_emails']))
+                                                {{ $type->complaint_channels_settings[$channelKey][$channel->id]['additional_emails'] }}
+                                            @endif</textarea>
+                                            <small class="form-text text-muted">Add additional user emails which will reacive notification when the complaint is created (use comma to sepparate multiple emails (test@test.com, second@test.com, another@test.com ...))</small>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
