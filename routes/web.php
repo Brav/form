@@ -110,15 +110,20 @@ Route::get('complaint-form/manage', [ComplaintFormController::class, 'index'])
 Route::get('complaint-form/create', [ComplaintFormController::class, 'create'])->name('complaint-form.create');
 Route::post('complaint-form/store', [ComplaintFormController::class, 'store'])->name('complaint-form.store');
 
-Route::prefix('complaint-form')->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('complaint-form')->middleware(['auth'])->group(function () {
 
     Route::get('export/',  [ComplaintFormController::class, 'export'])->name('complaint-form.export');
     Route::match(['GET', 'POST'], 'download/{form}',  [ComplaintFormController::class, 'download'])->name('complaint-form.download');
-    Route::get('delete/{form}', [ComplaintFormController::class, 'delete'])->name('complaint-form.delete');
     Route::get('edit/{form}', [ComplaintFormController::class, 'edit'])->name('complaint-form.edit');
-
     Route::put('update/{form}', [ComplaintFormController::class, 'update'])->name('complaint-form.update');
+
+});
+
+Route::prefix('complaint-form')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('delete/{form}', [ComplaintFormController::class, 'delete'])->name('complaint-form.delete');
     Route::delete('destroy/{form}', [ComplaintFormController::class, 'destroy'])->name('complaint-form.destroy');
+
 });
 
 Route::prefix('automated-response')->middleware(['auth', 'admin'])->group(function () {
