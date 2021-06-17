@@ -602,8 +602,7 @@
                         <th scope="col">Delete</th>
                     @endif
 
-                    </tr>
-                </thead>
+                </tr>                </thead>
                 <tbody>
 
                     @php

@@ -117,13 +117,13 @@ class AutomatedResponseController extends Controller
      * @param  \Illuminate\Http\AutomatedResponseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(AutomatedResponseRequest $request)
+    public function update(AutomatedResponseRequest $request, AutomatedResponse $response)
     {
         $data = $request->all();
 
         $data['scenario'] = AutomatedResponse::scenario($request);
 
-        $response = AutomatedResponse::create($data);
+        $response->update($data);
 
         return response()->json(
             view('automated-response/partials/_response', [

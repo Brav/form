@@ -164,7 +164,7 @@ Route::prefix('user-import')->middleware(['auth', 'admin'])->group(function () {
     Route::post('', [UserImportController::class, 'import'])->name('user-import.import');
 });
 
-Route::prefix('files')->middleware(['auth'])->group(function () {
+Route::prefix('files')->middleware(['auth', 'admin'])->group(function () {
 
     Route::delete('delete/{id}', [FilesController::class, 'delete'])->name('file.delete');
 

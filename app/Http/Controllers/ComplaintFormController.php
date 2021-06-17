@@ -48,8 +48,7 @@ class ComplaintFormController extends Controller
         $canEdit = auth()->user()->admin == 1 ||
                 auth()->user()->role->hasPermission('w') ? true : false;
 
-        $canDelete = auth()->user()->admin == 1 ||
-                auth()->user()->role->hasPermission('d') ? true : false;
+        $canDelete = auth()->user()->admin == 1 ? true : false;
 
         $data = [
             'forms'          => $forms,
