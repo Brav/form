@@ -205,7 +205,7 @@ class ComplaintFormController extends Controller
         return view('form', [
             'task'           => 'edit',
             'view'           => 'complaint-form',
-            'readonly'       => auth()->user()->admin ? '' : 'readonly',
+            'readonly'       => 'readonly',
             'clinics'    => Clinic::with([
                 'managers' => function($query){
                     return $query->whereIn('manager_type_id',

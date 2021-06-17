@@ -388,7 +388,7 @@
                     id="location_id"
                     {{ $readonly }}
                     @if ($readonly === 'readonly')
-                        'disabled'
+                        disabled="disabled"
                     @endif
 
                     @if ($readonly !== 'readonly')
@@ -426,7 +426,7 @@
                     class="form-control"
                     id="complaint_category_id"
                     @if ($readonly === 'readonly')
-                        'disabled'
+                        disabled="disabled"
                     @endif
 
                     @if ($readonly !== 'readonly')
@@ -462,7 +462,7 @@
                     id="complaint_type_id"
 
                     @if ($readonly === 'readonly')
-                        'disabled'
+                        disabled="disabled"
                     @endif
 
                     @if ($readonly !== 'readonly')
@@ -501,7 +501,7 @@
                     id="severity"
 
                     @if ($readonly === 'readonly')
-                        'disabled'
+                        disabled="disabled"
                     @endif
 
                     @if ($readonly !== 'readonly')
@@ -538,7 +538,7 @@
                     id="complaint_channel_id"
 
                     @if ($readonly === 'readonly')
-                        'disabled'
+                        disabled="disabled"
                     @endif
 
                     @if ($readonly !== 'readonly')
