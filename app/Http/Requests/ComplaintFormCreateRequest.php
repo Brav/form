@@ -76,7 +76,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'location_id.required'           => 'Location is required',
             'complaint_category_id.required' => 'Complaint category is required',
             'complaint_type_id.in'           => "Complaint type doesn't have valid value",
-            'complaint_channel_id.in'        => "Complaint type doesn't have valid value",
+            'complaint_channel_id.in'        => "Complaint channlel doesn't have valid value",
         ];
     }
 }
