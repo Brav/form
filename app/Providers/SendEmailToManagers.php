@@ -36,7 +36,8 @@ class SendEmailToManagers
 
         $complaintLevel = $form->complaintLevel();
 
-        $roles = null;
+        $roles          = null;
+        $categoryRoles  = null;
 
         $users = [];
 
@@ -73,7 +74,7 @@ class SendEmailToManagers
         {
             $where = \filter_var_array($form->category->email_to_roles, FILTER_VALIDATE_INT);
 
-            $roles = Roles::whereIn('id' , $where)->get();
+            $categoryRoles = Roles::whereIn('id' , $where)->get();
         }
 
         if(optional($form->type)->complaint_channels_settings !== null)
@@ -94,9 +95,22 @@ class SendEmailToManagers
                      FILTER_VALIDATE_EMAIL);
         }
 
-        if($roles)
+        if($roles || $categoryRoles)
         {
-            $users = User::whereIn('role_id', $roles->pluck('id')->toArray())
+
+            $where = [];
+
+            if($roles)
+            {
+                $where = $roles->pluck('id')->toArray();
+            }
+
+            if($categoryRoles)
+            {
+                $where = \array_merge($where, $categoryRoles->pluck('id')->toArray());
+            }
+
+            $users = User::whereIn('role_id', $where)
                             ->whereIn('id', function($query) use ($form){
                                 return $query->from('clinic_managers')->select('user_id')
                                     ->where('clinic_id', '=', $form->clinic_id)
