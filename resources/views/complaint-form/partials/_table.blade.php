@@ -1,7 +1,7 @@
 <table class="table table-bordered table-striped table-vcenter" id="forms">
     <thead>
         <tr class="bg-white">
-            @if ($export && $canEdit)
+            @if (!$export && $canEdit)
                 <th>Edit</th>
             @endif
             <th class="small text-nowrap">Date/Time Submitted</th>

@@ -20,17 +20,34 @@ class UserController extends Controller
     public function index()
     {
 
+        $queryData = \filter_var_array(
+            \array_filter(request()->all(), function($element){
+            return is_array($element);
+            }), FILTER_SANITIZE_STRING
+        );
+
+        $roles = Roles::all();
+
         $users = User::query();
 
         $users->when(!auth()->user()->admin, function($query){
             return $query->where('created_by', '=', auth()->id());
         });
 
+        foreach ($queryData as $data)
+        {
+            if(isset($data['column'], $data['search'], $data['type']))
+            {
+                $this->createQuery($users, $data);
+            }
+        }
+
         $users = $users->with(['role'])->paginate(20);
 
         if(!request()->ajax())
             return view('users/index', [
                 'users' => $users,
+                'roles' => $roles,
             ]);
 
         return [
@@ -42,6 +59,7 @@ class UserController extends Controller
                 'layout'    => 'vendor.pagination.bootstrap-4',
                 'role'      => 'users',
                 'container' => 'users-container',
+                'filter'    => 'user-filters',
             ])->render()
         ];
 
@@ -245,5 +263,32 @@ class UserController extends Controller
         return response()->json([
             'Something went wrong!'
         ], 500);
+    }
+
+    /**
+     * Create query for filters
+     *
+     * @param mixed $query
+     * @param mixed $data
+     * @return void
+     */
+    private function createQuery($query, $data) :void
+    {
+        $search = \trim($data['search']);
+
+        switch ($data['type'])
+        {
+            case 'text':
+                if(\strlen($search) > 2)
+                {
+                    $query->where($data['column'], 'like', '%' . $search . '%');
+                }
+
+                break;
+            case 'select':
+                $query->where($data['column'], '=', $search);
+                break;
+        }
+
     }
 }

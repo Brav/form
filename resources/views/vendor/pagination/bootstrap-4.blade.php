@@ -3,6 +3,7 @@
         <ul class="pagination justify-content-center push"
             role="{{ $role }}"
             data-container="{{ $container ?? ''}}"
+            data-filter="{{ $filter ?? ''}}"
             data-total="{{ $paginator->total()}}"
             data-lastpage={{$paginator->lastPage()}}
         >

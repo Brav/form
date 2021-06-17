@@ -17,7 +17,15 @@ class ClinicController extends Controller
      */
     public function index()
     {
-        $clinics = Clinic::with(['managers', 'managers.user'])
+        $query = Clinic::query();
+
+        $queryData = \filter_var_array(
+            \array_filter(request()->all(), function($element){
+            return is_array($element);
+            }), FILTER_SANITIZE_STRING
+        );
+
+        $query->with(['managers', 'managers.user'])
             ->when(!auth()->user()->admin, function($query){
             $userID = auth()->id();
 
@@ -33,8 +41,17 @@ class ClinicController extends Controller
                         ]);
 
                 });
-        })
-        ->paginate(20);
+        });
+
+        foreach ($queryData as $data)
+        {
+            if(isset($data['column'], $data['search'], $data['type']))
+            {
+                $this->createQuery($query, $data);
+            }
+        }
+
+        $clinics = $query->paginate(20);
 
         if(!request()->ajax())
             return view('clinics/index', [
@@ -50,6 +67,7 @@ class ClinicController extends Controller
                 'layout'    => 'vendor.pagination.bootstrap-4',
                 'role'      => 'clinics',
                 'container' => 'clinics-container',
+                'filter'    => 'clinic-filters',
             ])->render()
         ];
     }
@@ -201,5 +219,54 @@ class ClinicController extends Controller
         return response()->json([
             'Something went wrong!'
         ], 500);
+    }
+
+    /**
+     * Create query for filters
+     *
+     * @param mixed $query
+     * @param mixed $data
+     * @return void
+     */
+    private function createQuery($query, $data) :void
+    {
+        switch ($data['type'])
+        {
+            case 'text':
+                $search = \trim($data['search']);
+
+                if(\strlen($search) > 2)
+                {
+                    switch ($data['column']) {
+                        case 'name':
+                            $query->where($data['column'], 'like', '%' . $search . '%');
+                            break;
+                        case 'lead_vet':
+                        case 'practice_manager':
+                        case 'veterinary_manager':
+                        case 'gm_veterinary_operations':
+                        case 'general_manager':
+                        case 'regional_manager':
+                        case 'gm_vet_services':
+                        case 'other':
+                            $userID = array_search($data['column'], ClinicManagers::$managerTypes);
+                            $query->whereIn('id', function($query) use($userID, $search)
+                            {
+                                return $query->select('clinic_id')
+                                ->from('clinic_managers')
+                                ->where('manager_type_id', '=', $userID)
+                                ->whereIn('user_id', function($query) use($search){
+                                    $query->select('id')
+                                    ->from('users')
+                                    ->where('name', 'like', '%' . $search . '%');
+                                });
+                            });
+                            break;
+                    }
+                }
+
+                break;
+        }
+
     }
 }

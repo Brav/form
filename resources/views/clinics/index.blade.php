@@ -27,6 +27,86 @@
                                 <th class="small">Regional Manager</th>
                                 <th class="small">Actions</th>
                             </tr>
+                            <tr id="clinic-filters"
+                                class="filters"
+                                data-url="{{ route('clinics.index') }}"
+                                data-pagination="pagination"
+                                data-container="clinics-container">
+                                <th></th>
+                                <th>
+                                    <input
+                                        type="text"
+                                        class="form-control filter filter-text"
+                                        placeholder="Name"
+                                        data-column="name"
+                                        data-operator="like"
+                                        data-type="text">
+                                </th>
+
+                                <th>
+                                    <input
+                                        type="text"
+                                        class="form-control filter filter-text"
+                                        placeholder="Lead Vet"
+                                        data-column="lead_vet"
+                                        data-operator="like"
+                                        data-type="text">
+                                </th>
+
+                                <th>
+                                    <input
+                                        type="text"
+                                        class="form-control filter filter-text"
+                                        placeholder="Practice Manager"
+                                        data-column="practice_manager"
+                                        data-operator="like"
+                                        data-type="text">
+                                </th>
+
+                                <th>
+                                    <input
+                                        type="text"
+                                        class="form-control filter filter-text"
+                                        placeholder="Veterinary Manager"
+                                        data-column="veterinary_manager"
+                                        data-operator="like"
+                                        data-type="text">
+                                </th>
+
+                                <th>
+                                    <input
+                                        type="text"
+                                        class="form-control filter filter-text"
+                                        placeholder="GM Veterinary Operations"
+                                        data-column="gm_veterinary_operations"
+                                        data-operator="like"
+                                        data-type="text">
+                                </th>
+
+                                <th>
+                                    <input
+                                        type="text"
+                                        class="form-control filter filter-text"
+                                        placeholder="General Manager"
+                                        data-column="general_manager"
+                                        data-operator="like"
+                                        data-type="text">
+                                </th>
+
+                                <th>
+                                    <input
+                                        type="text"
+                                        class="form-control filter filter-text"
+                                        placeholder="Regional Manager"
+                                        data-column="regional_manager"
+                                        data-operator="like"
+                                        data-type="text">
+                                </th>
+                                <th>
+                                    <button type="button" id="filter-reset"
+                                    class="btn btn-primary active">Reset</button>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody id=clinics-container>
                             @include('clinics/partials/_clinics')
@@ -40,6 +120,7 @@
                         'layout'    => 'vendor.pagination.bootstrap-4',
                         'role'      => 'clinics',
                         'container' => 'clinics-container',
+                        'filter'    => 'clinic-filters',
                     ])
                 </div>
             </div>

@@ -1,7 +1,7 @@
 @foreach ($forms as $form)
 
     <tr id="item-{{ $form->id }}">
-        @if ($export && $canEdit)
+        @if (!$export && $canEdit)
             <th>
                 <a href="{{ route('complaint-form.edit', $form->id) }}"
                     class="btn btn-primary btn-sm active"
@@ -58,7 +58,7 @@
             <th>{{ $form->date_completed !== null ?
                 date('d/m/Y', \strtotime($form->date_completed)) : '/'}}</th>
         @endif
-        @if ($export)
+        @if (!$export)
             <th>
                 @if (isset($canDelete) && $canDelete)
                     <a data-toggle="modal"
