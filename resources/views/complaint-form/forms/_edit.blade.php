@@ -125,8 +125,19 @@
             <div class="form-group">
 
                     <label for="clinic_id">Clinic Name</label>
-                    <select class="form-control select2" name="clinic_id"
+                    <select class="form-control @if ($readonly !== 'readonly')
+                        select2
+                    @endif"
                         id="clinic_id"
+
+                        @if ($readonly === 'readonly')
+                            disabled="disabled"
+                        @endif
+
+                        @if ($readonly !== 'readonly')
+                            name="clinic_id"
+                        @endif
+
                         {{ $readonly }}>
                         <option></option>
                         @foreach ($clinics as $clinic)
@@ -139,6 +150,10 @@
                                 >{{ $clinic->name }}</option>
                         @endforeach
                     </select>
+
+                    @if ($readonly === 'readonly')
+                        <input type="hidden" name="clinic_id" value="{{ $form->clinic_id }}">
+                    @endif
 
                 @error('clinic_id')
                     <div class="alert alert-danger">{{ $message }}</div>
