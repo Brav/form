@@ -184,7 +184,7 @@ class ComplaintForm extends Model
 
             $severity = \str_replace(' ', '_', Severity::SEVERITIES[$this->severity]);
 
-            return  $this->type->complaint_channels_settings[$severity][$this->channel->id];
+            return  $this->type->complaint_channels_settings[$severity][$this->channel->id]['level'];
 
         }
 

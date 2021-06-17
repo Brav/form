@@ -1,7 +1,7 @@
 @foreach ($forms as $form)
 
     <tr id="item-{{ $form->id }}">
-        @if ($canEdit)
+        @if ($export && $canEdit)
             <th>
                 <a href="{{ route('complaint-form.edit', $form->id) }}"
                     class="btn btn-primary btn-sm active"
@@ -34,12 +34,16 @@
                     @php
                         $fileInfo = explode('.', $file)
                     @endphp
-                    <a  class="d-block mb-1"
-                        href="{{ route('complaint-form.download', [
-                        'form'      => $form->id,
-                        'file'      => $file,
-                        // 'extension' => end($fileInfo),
-                    ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
+                    @if (!$export)
+                        <a  class="d-block mb-1"
+                            href="{{ route('complaint-form.download', [
+                            'form'      => $form->id,
+                            'file'      => $file,
+                            // 'extension' => end($fileInfo),
+                        ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
+                    @else
+                        <p>{{ $file }}</p>
+                    @endif
                 @endforeach
             @endif
         </th>
@@ -54,15 +58,18 @@
             <th>{{ $form->date_completed !== null ?
                 date('d/m/Y', \strtotime($form->date_completed)) : '/'}}</th>
         @endif
-        <th>
-            @if ($canDelete)
-                <a data-toggle="modal"
-                    class="btn btn-danger btn-sm"
-                    role="smallModal"
-                    data-target="#smallModal"
-                    data-attr="{{ route('complaint-form.delete', $form->id) }}" title="Delete Form">Delete</a>
-            @endif
+        @if ($export)
+            <th>
+                @if (isset($canDelete) && $canDelete)
+                    <a data-toggle="modal"
+                        class="btn btn-danger btn-sm"
+                        role="smallModal"
+                        data-target="#smallModal"
+                        data-attr="{{ route('complaint-form.delete', $form->id) }}" title="Delete Form">Delete</a>
+                @endif
 
-        </th>
+            </th>
+        @endif
+
     </tr>
 @endforeach

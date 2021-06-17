@@ -51,23 +51,20 @@ class ComplaintFormController extends Controller
         $canDelete = auth()->user()->admin == 1 ||
                 auth()->user()->role->hasPermission('d') ? true : false;
 
+        $data = [
+            'forms'          => $forms,
+            'canEdit'        => $canEdit,
+            'canDelete'      => $canDelete,
+            'severities'     => Severity::SEVERITIES,
+            'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
+            'export'         => false,
+        ];
+
         if(!request()->ajax())
-            return view('complaint-form/index', [
-                'forms'          => $forms,
-                'canEdit'        => $canEdit,
-                'canDelete'      => $canDelete,
-                'severities'     => Severity::SEVERITIES,
-                'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
-            ]);
+            return view('complaint-form/index', $data);
 
         return [
-            'html' => view('complaint-form/partials/_forms', [
-                'forms'          => $forms,
-                'canEdit'        => $canEdit,
-                'canDelete'      => $canDelete,
-                'severities'     => Severity::SEVERITIES,
-                'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
-            ])->render(),
+            'html' => view('complaint-form/partials/_forms', $data)->render(),
             'pagination' => view('pagination', [
                 'paginator' => $forms,
                 'layout'    => 'vendor.pagination.bootstrap-4',

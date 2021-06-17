@@ -6,6 +6,7 @@ use App\Models\Clinic;
 use App\Models\ClinicManagers;
 use App\Models\ComplaintForm;
 use App\Models\OutcomeOptionsCategories;
+use App\Models\Severity;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
@@ -59,9 +60,16 @@ class FormsExport implements FromView
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
         ->get();
 
-        return view('exports.forms', [
+        $canEdit = auth()->user()->admin == 1 ||
+                auth()->user()->role->hasPermission('w') ? true : false;
+
+        return view('complaint-form/partials/_table', [
             'forms'          => $forms,
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
+            'export'         => true,
+            'canEdit'        => $canEdit,
+            'severities'     => Severity::SEVERITIES,
+
         ]);
     }
 }
