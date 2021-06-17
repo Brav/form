@@ -34,7 +34,7 @@ class SendEmailToManagers
 
         $complaintLevel = $form->complaintLevel();
 
-        if($complaintLevel['level'] === 'no_sending')
+        if(isset($complaintLevel['level']) && $complaintLevel['level'] === 'no_sending')
         {
             return;
         }
