@@ -132,11 +132,6 @@ class ComplaintFormController extends Controller
         $data  = $model->format($request->all());
         $model = $model->create($data);
 
-        if($model->severity !== 'none')
-        {
-            ComplaintFilled::dispatch($model);
-        }
-
         $directory = 'documents/complaint_form_' . $model->id;
 
         if(request()->hasFile('documents'))
@@ -159,6 +154,8 @@ class ComplaintFormController extends Controller
 
             }
         }
+
+        ComplaintFilled::dispatch($model);
 
         $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories', $model->complaint_category_id)
             ->whereJsonContains('scenario->types', $model->complaint_type_id)

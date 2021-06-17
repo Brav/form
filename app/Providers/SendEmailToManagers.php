@@ -36,6 +36,10 @@ class SendEmailToManagers
 
         $complaintLevel = $form->complaintLevel();
 
+        $roles = null;
+
+        $users = [];
+
         if(isset($complaintLevel['level']) && $complaintLevel['level'] === 'no_sending')
         {
             return;
@@ -65,7 +69,14 @@ class SendEmailToManagers
             }
         }
 
-        if($form->type->complaint_channels_settings !== null)
+        if($form->category->email_to_roles !== null)
+        {
+            $where = \filter_var_array($form->category->email_to_roles, FILTER_VALIDATE_INT);
+
+            $roles = Roles::whereIn('id' , $where)->get();
+        }
+
+        if(optional($form->type)->complaint_channels_settings !== null)
         {
             if(isset($complaintLevel['roles']))
             {
@@ -73,15 +84,8 @@ class SendEmailToManagers
             }
             else
             {
-                $roles = Roles::where('level' , 'like', '%"' . $complaintLevel['level'] . '"%')->get();
+                $roles = Roles::where('level' , 'like', '%"' . $complaintLevel . '"%')->get();
             }
-        }
-
-        if($form->category->email_to_roles !== null)
-        {
-            $where = \filter_var_array($form->category->email_to_roles, FILTER_VALIDATE_INT);
-
-            $roles = Roles::whereIn('id' , $where)->get();
         }
 
         if($form->category->additional_emails !== null)
@@ -90,19 +94,30 @@ class SendEmailToManagers
                      FILTER_VALIDATE_EMAIL);
         }
 
-        $users = User::whereIn('role_id', $roles->pluck('id')->toArray())
+        if($roles)
+        {
+            $users = User::whereIn('role_id', $roles->pluck('id')->toArray())
                             ->whereIn('id', function($query) use ($form){
                                 return $query->from('clinic_managers')->select('user_id')
                                     ->where('clinic_id', '=', $form->clinic_id)
                                     ->get();
                             })
                             ->get();
+        }
 
-        \Mail::to(array_merge(
-                $users->pluck('email')->toArray(),
-                [$form->team_member_email],
-                $additionalEmails
-            ))
+        $mailTo = array_merge(
+            $users ? $users->pluck('email')->toArray() : [],
+            [$form->team_member_email],
+            $additionalEmails
+        );
+
+        if($mailTo)
+        {
+            \Mail::to($mailTo)
             ->send(new \App\Mail\SendEmailToManagers($form));
+        }
+
+
+
     }
 }

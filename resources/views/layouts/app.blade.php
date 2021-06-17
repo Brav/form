@@ -85,7 +85,7 @@
         <script src="{{ asset('js/dashmix.app.js') }}"></script>
         <script src="{{ asset('js/flatpickr.min.js') }}"></script>
 
-        @if (isset($readonly) && $readonly !== 'readonly')
+        @if (!isset($readonly) || $readonly !== 'readonly')
             <script>
                 $(document).ready(function () {
 

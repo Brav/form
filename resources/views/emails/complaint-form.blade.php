@@ -14,7 +14,7 @@
   <meta name="x-apple-disable-message-reformatting">
   <!--[if !mso]><!--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]-->
   <title>Complaint Form Filled</title>
-  
+
   <style type="text/css">
       table, td { color: #00434f; } @media only screen and (min-width: 670px) {
   .u-row {
@@ -82,8 +82,8 @@ a[x-apple-data-detectors='true'] {
 }
 
 </style>
-  
-  
+
+
 
 <!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" type="text/css"><!--<![endif]-->
 
@@ -97,29 +97,29 @@ a[x-apple-data-detectors='true'] {
   <tr style="vertical-align: top">
     <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
     <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #f2f2f2;"><![endif]-->
-    
+
 
 <div class="u-row-container" style="padding: 25px 10px 0px;background-color: rgba(255,255,255,0)">
   <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 650px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
     <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
       <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 25px 10px 0px;background-color: rgba(255,255,255,0);" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:650px;"><tr style="background-color: #ffffff;"><![endif]-->
-      
+
 <!--[if (mso)|(IE)]><td align="center" width="650" style="width: 650px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
 <div class="u-col u-col-100" style="max-width: 320px;min-width: 650px;display: table-cell;vertical-align: top;">
   <div style="width: 100% !important;">
   <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
-  
+
 <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
   <tbody>
     <tr>
       <td style="overflow-wrap:break-word;word-break:break-word;padding:30px 20px;font-family:arial,helvetica,sans-serif;" align="left">
-        
+
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr>
     <td style="padding-right: 0px;padding-left: 0px;" align="center">
-      
+
       <img align="center" border="0" src="https://complaintsreporting.vet.partners/media/logos/logo.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 300px;" width="300"/>
-      
+
     </td>
   </tr>
 </table>
@@ -144,17 +144,17 @@ a[x-apple-data-detectors='true'] {
   <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 650px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #00434f;">
     <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
       <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px 10px;background-color: rgba(255,255,255,0);" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:650px;"><tr style="background-color: #00434f;"><![endif]-->
-      
+
 <!--[if (mso)|(IE)]><td align="center" width="650" style="width: 650px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
 <div class="u-col u-col-100" style="max-width: 320px;min-width: 650px;display: table-cell;vertical-align: top;">
   <div style="width: 100% !important;">
   <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
-  
+
 <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
   <tbody>
     <tr>
       <td style="overflow-wrap:break-word;word-break:break-word;padding:50px 20px 20px;font-family:arial,helvetica,sans-serif;" align="left">
-        
+
   <div style="color: #a5cf4c; line-height: 120%; text-align: center; word-wrap: break-word;">
     <p style="font-size: 14px; line-height: 120%;"><span style="font-family: Montserrat, sans-serif; font-size: 40px; line-height: 48px;"><span style="line-height: 48px; font-size: 40px;">Complaints Reporting</span></span></p>
   </div>
@@ -179,17 +179,17 @@ a[x-apple-data-detectors='true'] {
   <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 650px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
     <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
       <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px 10px;background-color: rgba(255,255,255,0);" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:650px;"><tr style="background-color: #ffffff;"><![endif]-->
-      
+
 <!--[if (mso)|(IE)]><td align="center" width="650" style="width: 650px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
 <div class="u-col u-col-100" style="max-width: 320px;min-width: 650px;display: table-cell;vertical-align: top;">
   <div style="width: 100% !important;">
   <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
-  
+
 <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
   <tbody>
     <tr>
       <td style="overflow-wrap:break-word;word-break:break-word;padding:40px 20px 10px;font-family:arial,helvetica,sans-serif;" align="left">
-        
+
   <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
     <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 20px; line-height: 30px;">
       <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
@@ -206,8 +206,8 @@ a[x-apple-data-detectors='true'] {
         <strong>Description of the incident and/or complaint:</strong> {{$form->description  }} <br>
         <strong>Location of the incident:</strong> {{$form->location->name  }} <br>
         <strong>Category:</strong> {{$form->category->name  }} <br>
-        <strong>Type:</strong> {{$form->type->name  }} <br>
-        <strong>Channel:</strong> {{$form->channel->name  }} <br>
+        <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>
+        <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }} <br>
         <strong>Complaint Level:</strong> {{ $form->complaintLevel() ?? '/'  }} <br>
         <strong>Severity:</strong> {{$severities[$form->severity] ?? '/'  }} <br>
     </span></p>
@@ -224,7 +224,7 @@ a[x-apple-data-detectors='true'] {
   <tbody>
     <tr>
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px 20px;font-family:arial,helvetica,sans-serif;" align="left">
-        
+
   <table height="0px" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #CCC;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
     <tbody>
       <tr style="vertical-align: top">
@@ -255,17 +255,17 @@ a[x-apple-data-detectors='true'] {
   <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 650px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;">
     <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
       <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 10px;background-color: rgba(255,255,255,0);" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:650px;"><tr style="background-color: transparent;"><![endif]-->
-      
+
 <!--[if (mso)|(IE)]><td align="center" width="650" style="width: 650px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
 <div class="u-col u-col-100" style="max-width: 320px;min-width: 650px;display: table-cell;vertical-align: top;">
   <div style="width: 100% !important;">
   <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->
-  
+
 <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
   <tbody>
     <tr>
       <td style="overflow-wrap:break-word;word-break:break-word;padding:20px;font-family:arial,helvetica,sans-serif;" align="left">
-        
+
   <div style="color: #999999; line-height: 120%; text-align: center; word-wrap: break-word;">
     <a style="font-size: 14px; line-height: 120%; color: #00616d; text-decoration: none" href="{{ route('complaint-form.manage') }}">Check the complaint</a>
   </div>

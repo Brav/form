@@ -106,10 +106,7 @@ class ComplaintForm extends Model
             $data['outcome'] = '';
         }
 
-        if(!\is_numeric($data['severity']))
-        {
-            $data['severity'] = null;
-        }
+        $data['severity'] = \filter_var( $data['severity'], \FILTER_SANITIZE_STRING);
 
         return $data;
     }
@@ -174,17 +171,22 @@ class ComplaintForm extends Model
         if($this->channel !== null)
         {
 
+            if($this->type !== null)
+            {
+                return null;
+            }
+
             /**
              * If the complaint type is using default settings, return channel level for sending emails
              */
-            if($this->type->complaint_channels_settings === null)
+            if($this->type && $this->type->complaint_channels_settings === null)
             {
                 return $this->channel->level;
             }
 
-            $severity = \str_replace(' ', '_', Severity::SEVERITIES[$this->severity]);
+            $severity = \strtolower(\str_replace(' ', '_', Severity::SEVERITIES[$this->severity ?? 'none']));
 
-            return  $this->type->complaint_channels_settings[$severity][$this->channel->id]['level'];
+            return  optional($this->type)->complaint_channels_settings[$severity][$this->channel->id]['level'] ?? null;
 
         }
 
