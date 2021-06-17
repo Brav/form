@@ -171,17 +171,17 @@ class ComplaintForm extends Model
         if($this->channel !== null)
         {
 
-            if($this->type !== null)
-            {
-                return null;
-            }
-
             /**
              * If the complaint type is using default settings, return channel level for sending emails
              */
             if($this->type && $this->type->complaint_channels_settings === null)
             {
                 return $this->channel->level;
+            }
+
+            if($this->type === null)
+            {
+                return null;
             }
 
             $severity = \strtolower(\str_replace(' ', '_', Severity::SEVERITIES[$this->severity ?? 'none']));
