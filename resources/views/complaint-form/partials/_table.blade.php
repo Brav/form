@@ -30,7 +30,7 @@
                 <th class="small text-nowrap">Completed by</th>
                 <th class="small text-nowrap">Date completed</th>
             @endif
-            @if ($export)
+            @if (!$export)
                 <th class="small text-nowrap">Actions</th>
             @endif
         </tr>
