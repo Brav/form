@@ -190,7 +190,7 @@ class ComplaintForm extends Model
 
         }
 
-        return $this->type->level ?? '/';
+        return optional($this->type)->level ?? '/';
     }
 
     /**
