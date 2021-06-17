@@ -72,57 +72,54 @@
                 </p>
             @foreach ($severities as $key => $value)
 
-                @if ($key !== 'none')
-
-                    @php
-                        $channelKey = str_replace(' ',  '_', $value);
-                    @endphp
-                    <div class="block block-rounded mb-1">
-                        <div class="block-header block-header-default" role="tab" id="accordion2_h{{ $key }}">
-                        <a class="font-w600" data-toggle="collapse" data-parent="#accordion2" href="#accordion2_q{{ $key }}" aria-expanded="true" aria-controls="accordion2_q{{ $key }}">
-                        {{ ucwords($value) }}</a>
-                        </div>
-                        <div id="accordion2_q{{ $key }}" class="collapse" role="tabpanel" aria-labelledby="accordion2_h{{ $key }}" >
-                        <div class="block-content">
-
-                                @foreach ($channels as $channel)
-                                    <div class="form-group row">
-                                        <label for="{{ $channel->name . '_' . $value }}" class="col-sm-4 col-form-label">{{ $channel->name }}</label>
-                                        <div class="col-md-8">
-                                            <label for="{{ $channel->name . '_' . $value }}">Level</label>
-                                            <select class="form-control" name="channel_settings[{{ $channelKey }}][{{ $channel->id }}]" id="{{ $channel->name . '_' . $value }}">
-                                                <option value="no_sending">Don't send</option>
-                                                @foreach ($levels as $level)
-                                                    <option
-                                                        @if ($type->complaint_channels_settings[$channelKey][$channel->id]['level'] == $level)
-                                                        selected
-                                                    @endif>{{ $level }}</option>
-                                                @endforeach
-                                            </select>
-
-                                            <label for="{{ $channel->name . '_' . $value . '_roles'}}">Roles</label>
-                                            <select class="form-control"
-                                            name="channel_settings[{{ $channelKey }}][{{ $channel->id }}][roles][]"
-                                            multiple
-                                                id="{{ $channel->name . '_' . $value . '_roles'}}">
-                                                @foreach ($roles as $role)
-                                                    <option
-                                                    @if (isset($type->complaint_channels_settings[$channelKey][$channel->id]['roles']) &&
-                                                    in_array($role->id, $type->complaint_channels_settings[$channelKey][$channel->id]['roles']))
-                                                        selected
-                                                    @endif
-                                                    value={{ $role->id }}>{{ $role->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <small class="form-text text-muted">Leave empty if you want to use default settings</small>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-                        </div>
-                        </div>
+                @php
+                    $channelKey = strtolower(str_replace(' ',  '_', $value));
+                @endphp
+                <div class="block block-rounded mb-1">
+                    <div class="block-header block-header-default" role="tab" id="accordion2_h{{ $key }}">
+                    <a class="font-w600" data-toggle="collapse" data-parent="#accordion2" href="#accordion2_q{{ $key }}" aria-expanded="true" aria-controls="accordion2_q{{ $key }}">
+                    {{ ucwords($value) }}</a>
                     </div>
-                @endif
+                    <div id="accordion2_q{{ $key }}" class="collapse" role="tabpanel" aria-labelledby="accordion2_h{{ $key }}" >
+                    <div class="block-content">
+
+                            @foreach ($channels as $channel)
+                                <div class="form-group row">
+                                    <label for="{{ $channel->name . '_' . $value }}" class="col-sm-4 col-form-label">{{ $channel->name }}</label>
+                                    <div class="col-md-8">
+                                        <label for="{{ $channel->name . '_' . $value }}">Level</label>
+                                        <select class="form-control" name="channel_settings[{{ $channelKey }}][{{ $channel->id }}]" id="{{ $channel->name . '_' . $value }}">
+                                            <option value="no_sending">Don't send</option>
+                                            @foreach ($levels as $level)
+                                                <option
+                                                    @if ($type->complaint_channels_settings[$channelKey][$channel->id]['level'] == $level)
+                                                    selected
+                                                @endif>{{ $level }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        <label for="{{ $channel->name . '_' . $value . '_roles'}}">Roles</label>
+                                        <select class="form-control"
+                                        name="channel_settings[{{ $channelKey }}][{{ $channel->id }}][roles][]"
+                                        multiple
+                                            id="{{ $channel->name . '_' . $value . '_roles'}}">
+                                            @foreach ($roles as $role)
+                                                <option
+                                                @if (isset($type->complaint_channels_settings[$channelKey][$channel->id]['roles']) &&
+                                                in_array($role->id, $type->complaint_channels_settings[$channelKey][$channel->id]['roles']))
+                                                    selected
+                                                @endif
+                                                value={{ $role->id }}>{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <small class="form-text text-muted">Leave empty if you want to use default settings</small>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                    </div>
+                    </div>
+                </div>
 
             @endforeach
 

@@ -30,6 +30,7 @@ class ComplaintChannelCreateRequest extends FormRequest
             'level' => ['nullable',
                 Rule::in([1, 2, 3, "None"]),
             ],
+            'additional_emails' => ['nullable', 'string',],
         ];
     }
 }

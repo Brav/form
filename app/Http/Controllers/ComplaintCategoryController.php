@@ -7,6 +7,7 @@ use App\Http\Requests\ComplaintCategoryUpdateRequest;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintType;
+use App\Models\Roles;
 use App\Models\Severity;
 use Illuminate\Http\Request;
 
@@ -70,8 +71,9 @@ class ComplaintCategoryController extends Controller
     {
         return response()->json(
                 view('form-ajax', [
-                    'task' => 'create',
-                    'view' => 'complaint-category',
+                    'roles' => Roles::all(),
+                    'task'  => 'create',
+                    'view'  => 'complaint-category',
                 ])->render()
             , 200);
     }
@@ -115,6 +117,7 @@ class ComplaintCategoryController extends Controller
         return response()->json(
             view('form-ajax', [
                 'category' => $complaint,
+                'roles'    => Roles::all(),
                 'task'     => 'edit',
                 'view'     => 'complaint-category',
             ])->render()

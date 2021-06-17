@@ -30,6 +30,8 @@ class SendEmailToManagers
     public function handle(ComplaintFilled $event)
     {
 
+        $additionalEmails = [];
+
         $form           = $event->form;
 
         $complaintLevel = $form->complaintLevel();
@@ -39,9 +41,28 @@ class SendEmailToManagers
             return;
         }
 
-        if(\is_numeric($complaintLevel) && $form->type->complaint_channels_settings === null)
+        if(\is_numeric($complaintLevel) )
         {
-            $roles = Roles::where('level' , 'like', '%"' . $complaintLevel . '"%')->get();
+            if ($form->type->complaint_channels_settings === null)
+            {
+                $roles = Roles::where('level' , 'like', '%"' . $complaintLevel . '"%')->get();
+            }
+
+            if ($form->type->complaint_channels_settings !== null &&
+                isset($form->type->complaint_channels_settings[$form->severity]['additional_emails']))
+            {
+                $emails = \explode(',', $form->type->complaint_channels_settings[$form->severity]['additional_emails']);
+
+                $additionalEmails = \filter_var_array($emails, FILTER_VALIDATE_EMAIL);
+            }
+            else
+            {
+                if($form->channel !== null && $form->channel->additonal_emails !== null)
+                {
+                    $additionalEmails = \filter_var_array(\explode(',', $form->channel->additonal_emails),
+                     FILTER_VALIDATE_EMAIL);
+                }
+            }
         }
 
         if($form->type->complaint_channels_settings !== null)
@@ -52,8 +73,21 @@ class SendEmailToManagers
             }
             else
             {
-                $roles = Roles::where('level' , 'like', '%"' . $complaintLevel['levelz< f'] . '"%')->get();
+                $roles = Roles::where('level' , 'like', '%"' . $complaintLevel['level'] . '"%')->get();
             }
+        }
+
+        if($form->category->email_to_roles !== null)
+        {
+            $where = \filter_var_array($form->category->email_to_roles, FILTER_VALIDATE_INT);
+
+            $roles = Roles::whereIn('id' , $where)->get();
+        }
+
+        if($form->category->additional_emails !== null)
+        {
+            $additionalEmails = \filter_var_array(\explode(',', $form->category->additional_emails),
+                     FILTER_VALIDATE_EMAIL);
         }
 
         $users = User::whereIn('role_id', $roles->pluck('id')->toArray())
@@ -64,7 +98,11 @@ class SendEmailToManagers
                             })
                             ->get();
 
-        \Mail::to(array_merge($users->pluck('email')->toArray(), [$form->team_member_email]))
+        \Mail::to(array_merge(
+                $users->pluck('email')->toArray(),
+                [$form->team_member_email],
+                $additionalEmails
+            ))
             ->send(new \App\Mail\SendEmailToManagers($form));
     }
 }

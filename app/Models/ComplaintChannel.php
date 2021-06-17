@@ -19,6 +19,7 @@ class ComplaintChannel extends Model
     protected $fillable = [
         'name',
         'level',
+        'additional_emails',
     ];
 
 }

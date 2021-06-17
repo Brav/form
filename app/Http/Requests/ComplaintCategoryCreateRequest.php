@@ -24,7 +24,9 @@ class ComplaintCategoryCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:3', 'unique:App\Models\ComplaintCategory,name']
+            'name'              => ['required', 'min:3', 'unique:App\Models\ComplaintCategory,name'],
+            'email_to_roles'    => ['nullable'],
+            'additional_emails' => ['nullable', 'string'],
         ];
     }
 }

@@ -46,5 +46,14 @@
 
     </div>
 
+    <div class="form-row align-items-center">
+        <label for="additional_emails">Additional emails</label>
+        <textarea class="form-control"
+        name="additional_emails"
+        id="additional_emails"
+        rows="3">{{ old("additional_emails") }}</textarea>
+        <small class="form-text text-muted">Add additional user emails which will reacive notification when the complaint is created (use comma to sepparate multiple emails (test@test.com, second@test.com, another@test.com ...))</small>
+    </div>
+
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
