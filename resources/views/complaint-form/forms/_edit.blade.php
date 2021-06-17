@@ -382,7 +382,19 @@
             <div class="col-md-4">
                 <div class="form-group">
                 <label for="location_id">Location</label>
-                <select class="form-control" name="location_id" id="location_id" {{ $readonly }}>
+                <select
+                    class="form-control"
+
+                    id="location_id"
+                    {{ $readonly }}
+                    @if ($readonly === 'readonly')
+                        'disabled'
+                    @endif
+
+                    @if ($readonly !== 'readonly')
+                        name="location_id"
+                    @endif
+                    >
                     <option></option>
                     @foreach ($locations as $location)
                         <option value="{{ $location->id }}"
@@ -392,6 +404,10 @@
                             >{{ $location->name }}</option>
                     @endforeach
                 </select>
+
+                @if ($readonly === 'readonly')
+                    <input type="hidden" name="location_id" value="{{ $form->location_id }}">
+                @endif
 
                 @error('location_id')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -408,8 +424,14 @@
                 <label for="complaint_category_id">Category</label>
                 <select
                     class="form-control"
-                    name="complaint_category_id"
                     id="complaint_category_id"
+                    @if ($readonly === 'readonly')
+                        'disabled'
+                    @endif
+
+                    @if ($readonly !== 'readonly')
+                        name="complaint_category_id"
+                    @endif
                     {{ $readonly }}>
                     <option></option>
                     @foreach ($categories as $category)
@@ -420,6 +442,11 @@
                             >{{ $category->name }}</option>
                     @endforeach
                 </select>
+
+                @if ($readonly === 'readonly')
+                    <input type="hidden" name="complaint_category_id" value="{{ $form->complaint_category_id }}">
+                @endif
+
                 @error('complaint_category_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -432,8 +459,16 @@
             <div class="form-group">
                 <label for="complaint_type_id">Type of complaint</label>
                 <select class="form-control"
-                    name="complaint_type_id"
                     id="complaint_type_id"
+
+                    @if ($readonly === 'readonly')
+                        'disabled'
+                    @endif
+
+                    @if ($readonly !== 'readonly')
+                        name="complaint_type_id"
+                    @endif
+
                     {{ $readonly }}>
                     <option></option>
                     @foreach ($types as $type)
@@ -444,6 +479,10 @@
                             @endif>{{ $type->name }}</option>
                     @endforeach
                 </select>
+
+                @if ($readonly === 'readonly')
+                    <input type="hidden" name="complaint_type_id" value="{{ $form->complaint_type_id }}">
+                @endif
                 @error('complaint_type_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -458,8 +497,17 @@
             <div class="form-group">
                 <label for="severity">Severity</label>
                 <select class="form-control"
-                    name="severity"
+
                     id="severity"
+
+                    @if ($readonly === 'readonly')
+                        'disabled'
+                    @endif
+
+                    @if ($readonly !== 'readonly')
+                        name="severity"
+                    @endif
+
                     {{ $readonly }}>
                     @foreach ($severities as $key => $value)
                         <option
@@ -470,6 +518,11 @@
                             >{{ \ucwords($value) }}</option>
                     @endforeach
                 </select>
+
+                @if ($readonly === 'readonly')
+                    <input type="hidden" name="severity" value="{{ $form->severity }}">
+                @endif
+
                 @error('severity')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -482,8 +535,16 @@
             <div class="form-group">
                 <label for="complaint_channel_id">Channel</label>
                 <select class="form-control"
-                    name="complaint_channel_id"
                     id="complaint_channel_id"
+
+                    @if ($readonly === 'readonly')
+                        'disabled'
+                    @endif
+
+                    @if ($readonly !== 'readonly')
+                        name="complaint_channel_id"
+                    @endif
+
                     {{ $readonly }}>
                     <option></option>
                     @foreach ($channels as $channel)
@@ -494,6 +555,10 @@
                             @endif
                             >{{ $channel->name }}</option>
                     @endforeach
+
+                    @if ($readonly === 'readonly')
+                        <input type="hidden" name="complaint_channel_id" value="{{ $form->complaint_channel_id }}">
+                    @endif
                 </select>
                 @error('complaint_channel_id')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -532,7 +597,11 @@
                     <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Download</th>
-                    <th scope="col">Delete</th>
+
+                    @if (auth()->user()->admin)
+                        <th scope="col">Delete</th>
+                    @endif
+
                     </tr>
                 </thead>
                 <tbody>
@@ -558,13 +627,15 @@
                                 ]) }}"><i class="fas fa-download"></i></a>
                             </th>
 
-                            <th>
-                                <a  class="d-block mb-1 file-delete"
-                                    href="#"
-                                    data-route="{{ route('file.delete', $form->id) }}"
-                                    data-file="{{ $file }}"
-                                    data-id="file-{{ $form->id . '-' . $i  }}""><i class="fas fa-trash"></i></a>
-                            </th>
+                            @if (auth()->user()->admin)
+                                <th>
+                                    <a  class="d-block mb-1 file-delete"
+                                        href="#"
+                                        data-route="{{ route('file.delete', $form->id) }}"
+                                        data-file="{{ $file }}"
+                                        data-id="file-{{ $form->id . '-' . $i  }}""><i class="fas fa-trash"></i></a>
+                                </th>
+                            @endif
 
                         </tr>
                         @php
