@@ -84,44 +84,53 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/dashmix.app.js') }}"></script>
         <script src="{{ asset('js/flatpickr.min.js') }}"></script>
-        <script>
-            $(document).ready(function () {
 
-                let dateOfIncidentDate        = $("#date_of_incident").val();
-                let dateOfClientComplaintDate = $("#date_of_client_complaint").val();
-                let dateCompletedDate         = $("#date_completed").val();
+        @if (isset($readonly) && $readonly !== 'readonly')
+            <script>
+                $(document).ready(function () {
 
-                $(function () {
+                    let dateOfIncidentDate        = $("#date_of_incident").val();
+                    let dateOfClientComplaintDate = $("#date_of_client_complaint").val();
 
-                    dateOfIncident = {
-                        dateFormat: "d/m/Y",
-                    };
+                    $(function () {
 
-                    if (dateOfIncidentDate !== '') {
-                        dateOfIncident.defaultDate = dateOfIncidentDate;
-                    }
+                        dateOfIncident = {
+                            dateFormat: "d/m/Y",
+                        };
 
-                    $("#date_of_incident").flatpickr(dateOfIncident);
-
-                    dateConfiguration = {
-                        dateFormat: "d/m/Y",
-                    };
-
-                    $("#date_of_client_complaint").flatpickr(dateConfiguration);
-
-                    if($('#date_completed').length){
-
-                        if (dateCompletedDate !== '') {
-                            dateConfiguration.defaultDate = dateCompletedDate;
+                        if (dateOfIncidentDate !== '') {
+                            dateOfIncident.defaultDate = dateOfIncidentDate;
                         }
 
-                        $("#date_completed").flatpickr(dateConfiguration);
+                        $("#date_of_incident").flatpickr(dateOfIncident);
+
+                        dateConfiguration = {
+                            dateFormat: "d/m/Y",
+                        };
+
+                        $("#date_of_client_complaint").flatpickr(dateConfiguration);
+
+                    });
+                });
+            </script>
+        @endif
+        <script>
+            $(document).ready(function () {
+                let dateCompletedDate = $("#date_completed").val();
+
+                if($('#date_completed').length)
+                {
+
+                    if (dateCompletedDate !== '') {
+                        dateConfiguration.defaultDate = dateCompletedDate;
                     }
 
-                });
+                    $("#date_completed").flatpickr({
+                         dateFormat: "d/m/Y",
+                    });
+                }
             });
         </script>
-
         <!-- Laravel Scaffolding JS -->
 
         @yield('js_after')
