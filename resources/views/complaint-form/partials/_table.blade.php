@@ -34,8 +34,39 @@
                 <th class="small text-nowrap">Actions</th>
             @endif
         </tr>
+        @if (!$export)
+            @include('complaint-form/partials/_filters')
+        @endif
     </thead>
     <tbody id=forms-container>
         @include('complaint-form/partials/_forms')
     </tbody>
 </table>
+
+@section('js_after')
+    <script>
+        $("#date_range").flatpickr({
+            dateFormat: "d/m/Y",
+            mode: "range",
+            maxDate: "today",
+        });
+
+        $("#date_of_incident_filter").flatpickr({
+            dateFormat: "d/m/Y",
+            mode: "range",
+            maxDate: "today",
+        });
+
+        $("#date_of_client_complaint_filter").flatpickr({
+            dateFormat: "d/m/Y",
+            mode: "range",
+            maxDate: "today",
+        });
+
+        $("#date_completed_filter").flatpickr({
+            dateFormat: "d/m/Y",
+            mode: "range",
+            maxDate: "today",
+        });
+</script>
+@endsection

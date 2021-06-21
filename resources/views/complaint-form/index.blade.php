@@ -28,6 +28,7 @@
                         'layout'    => 'vendor.pagination.bootstrap-4',
                         'role'      => 'forms',
                         'container' => 'forms-container',
+                        'filter'    => 'forms-filters',
                     ])
                 </div>
 

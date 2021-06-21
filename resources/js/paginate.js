@@ -31,11 +31,12 @@ $("body").on("click", ".page-link", function (e) {
 
 let timer = null;
 
-$(".filters").on("input", ".filter-text", function (e) {
-    let $this = $(this);
-    let parent = $this.closest(".filters");
-    let url = parent.data("url");
-    let container = parent.data("container");
+$(".filters").on("input", ".filter-text", function (e)
+{
+    let $this      = $(this);
+    let parent     = $this.closest(".filters");
+    let url        = parent.data("url");
+    let container  = parent.data("container");
     let searchData = [];
 
     if (timer !== null) {
@@ -63,6 +64,17 @@ $(".filters").on("input", ".filter-text", function (e) {
 });
 
 $(".filters").on("change", ".filter-select", function (e) {
+    let $this = $(this);
+    let parent = $this.closest(".filters");
+    let url = parent.data("url");
+    let container = parent.data("container");
+
+    $("#filter-reset").removeClass("active");
+
+    doSearch(url, filterFilters(parent), container);
+});
+
+$(".filters").on("change", ".filter-options", function (e) {
     let $this = $(this);
     let parent = $this.closest(".filters");
     let url = parent.data("url");
@@ -135,6 +147,19 @@ function filterFilters(parent) {
                 column: element.dataset.column,
                 type: element.dataset.type,
                 operator: element.dataset.operator,
+                search: text,
+            });
+        }
+
+        if (
+            element.dataset.type === "options" &&
+            element.value !== "all"
+        ) {
+            data.push({
+                column: element.dataset.column,
+                type: element.dataset.type,
+                option: text,
+                option_category: element.dataset.categoryid,
                 search: text,
             });
         }

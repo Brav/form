@@ -13,9 +13,11 @@ use App\Models\ComplaintChannel;
 use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
 use App\Models\Location;
+use App\Models\OutcomeOptions;
 use App\Models\OutcomeOptionsCategories;
 use App\Models\Severity;
 use App\Providers\ComplaintFilled;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -39,7 +41,23 @@ class ComplaintFormController extends Controller
                 ->toArray();
         }
 
-        $forms = ComplaintForm::when(!auth()->user()->admin, function($query) use($userClinics){
+        $queryData = \filter_var_array(
+            \array_filter(request()->all(), function($element){
+            return is_array($element);
+            }), FILTER_SANITIZE_STRING
+        );
+
+        $forms = ComplaintForm::query();
+
+        foreach ($queryData as $data)
+        {
+            if(isset($data['column'], $data['search'], $data['type']))
+            {
+                $this->createQuery($forms, $data);
+            }
+        }
+
+        $forms = $forms->when(!auth()->user()->admin, function($query) use($userClinics){
             return $query->whereIn('clinic_id', $userClinics);
         })
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
@@ -56,12 +74,21 @@ class ComplaintFormController extends Controller
             'canEdit'        => $canEdit,
             'canDelete'      => $canDelete,
             'severities'     => Severity::SEVERITIES,
+            'outcomes'       => OutcomeOptions::orderBy('name', 'asc')->get(),
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'export'         => false,
         ];
 
         if(!request()->ajax())
+        {
+            $data['locations']  = Location::orderBy('name', 'asc')->get();
+            $data['categories'] = ComplaintCategory::orderBy('name', 'asc')->get();
+            $data['types']      = ComplaintType::orderBy('name', 'asc')->get();
+            $data['channels']   = ComplaintChannel::orderBy('name', 'asc')->get();
+
             return view('complaint-form/index', $data);
+        }
+
 
         return [
             'html' => view('complaint-form/partials/_forms', $data)->render(),
@@ -70,6 +97,7 @@ class ComplaintFormController extends Controller
                 'layout'    => 'vendor.pagination.bootstrap-4',
                 'role'      => 'forms',
                 'container' => 'forms-container',
+                'filter'    => 'forms-filter',
             ])->render()
         ];
     }
@@ -365,5 +393,96 @@ class ComplaintFormController extends Controller
         $file      = \filter_var(request()->get('file'));
 
         return Storage::download('documents/complaint_form_' . $form->id . '/' . $file);
+    }
+
+    /**
+     * Create query for filters
+     *
+     * @param mixed $query
+     * @param mixed $data
+     * @return void
+     */
+    private function createQuery($query, $data) :void
+    {
+        $search = \trim($data['search']);
+
+        switch ($data['type'])
+        {
+            case 'text':
+
+                if(\strlen($search) > 2)
+                {
+                    switch ($data['column'])
+                    {
+                        case 'created_at':
+                        case 'date_of_incident':
+                        case 'date_of_client_complaint':
+                        case 'date_completed':
+
+                            $dates = \explode('to', $data['search']);
+
+                            if(count($dates) === 1)
+                            {
+                                $date = Carbon::createFromFormat('d/m/Y', trim($dates[0]));
+
+                                $query->whereDate($data['column'], '=', $date);
+                            }
+
+                            if(count($dates) === 2)
+                            {
+                                $dateFrom = Carbon::createFromFormat('d/m/Y', trim($dates[0]));
+                                $dateTo   = Carbon::createFromFormat('d/m/Y', trim($dates[1]));
+
+                                $query->whereBetween($data['column'], [$dateFrom, $dateTo]);
+                            }
+
+                            break;
+
+                        case 'clinic_name';
+                            $query->whereIn('clinic_id', function($query) use ($search)
+                            {
+                                return $query->select('id')
+                                ->from('clinics')
+                                ->where('name', 'like', '%' . $search . '%');
+                            });
+                            break;
+
+                        case 'regional_manager';
+                                $userID = array_search($data['column'], ClinicManagers::$managerTypes);
+                                $query->whereIn('clinic_id', function($query) use($userID, $search)
+                                {
+                                    return $query->select('clinic_id')
+                                    ->from('clinic_managers')
+                                    ->where('manager_type_id', '=', $userID)
+                                    ->whereIn('user_id', function($query) use($search){
+                                        $query->select('id')
+                                        ->from('users')
+                                        ->where('name', 'like', '%' . $search . '%');
+                                    });
+                                });
+                                break;
+                            break;
+
+                        case 'team_member';
+                        case 'team_member_position';
+                        case 'client_name';
+                        case 'patient_name';
+                        case 'pms_code';
+                                $query->where($data['column'], 'like', '%' . $search . '%');
+                            break;
+                    }
+                }
+
+                break;
+
+            case 'select':
+                $query->where($data['column'], '=', $search);
+                break;
+
+            case 'options':
+                $query->whereJsonContains('outcome_options', ['option_id' => (int) $data['option']]);
+                break;
+        }
+
     }
 }

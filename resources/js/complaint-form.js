@@ -3,12 +3,18 @@ const categoryID = $("#complaint_category_id").val();
 if(categoryID)
 {
     $("#complaint_type_id")
+        .not(".filter")
         .children()
         .not(`[data-category=${categoryID}]`)
         .hide();
 }
 
 $('body').on('change', '#complaint_category_id', function (e) {
+
+    if($(this).hasClass('filter'))
+    {
+        return
+    }
 
     let category = $(this).val()
     let type     = $("#complaint_type_id")
