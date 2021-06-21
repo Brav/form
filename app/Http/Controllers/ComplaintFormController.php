@@ -43,6 +43,7 @@ class ComplaintFormController extends Controller
             return $query->whereIn('clinic_id', $userClinics);
         })
         ->with(['clinic', 'location', 'category', 'type', 'channel'])
+        ->orderBy('created_at', 'DESC')
         ->paginate(20);
 
         $canEdit = auth()->user()->admin == 1 ||

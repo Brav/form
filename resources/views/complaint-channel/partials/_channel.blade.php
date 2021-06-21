@@ -2,6 +2,7 @@
         <th>{{ $channel->id }}</th>
         <th>{{ $channel->name }}</th>
         <th>{{ $channel->level ?? '/' }}</th>
+        <th>{{ $channel->additional_email ?? '/' }}</th>
         <th>
             <a href="{{ route('complaint-channel.edit', $channel->id) }}"
                 class="btn btn-primary btn-sm active"
