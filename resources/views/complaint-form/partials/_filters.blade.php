@@ -3,7 +3,8 @@
     data-url="{{ route('complaint-form.manage') }}"
     data-pagination="pagination"
     data-container="forms-container">
-    <th></th>
+    <th>
+    </th>
     <th>
         <input type="text"
             class="form-control filter filter-text"
@@ -87,7 +88,7 @@
 
     <th>
         <input type="text"
-            class="form-control filter filter-data-target="
+            class="form-control filter filter-text"
             placeholder="Date of the incident"
             data-column="date_of_incident"
             data-operator="like"
@@ -98,7 +99,7 @@
 
     <th>
         <input type="text"
-            class="form-control filter filter-data-target="
+            class="form-control filter filter-text"
             placeholder="Date of client complaint"
             data-column="date_of_client_complaint"
             data-operator="like"
@@ -109,7 +110,7 @@
 
     <th></th>
     <th>
-        <select class="form-control filter filter-select"
+        <select class="form-control filter filter-select select-one"
         name="location_id"
         id="location_id"
         data-column="location_id"
@@ -122,7 +123,7 @@
     </th>
 
     <th>
-        <select class="form-control filter filter-select"
+        <select class="form-control filter filter-select select-one"
         name="complaint_category_id"
         id="complaint_category_id"
         data-column="complaint_category_id"
@@ -135,7 +136,7 @@
     </th>
 
     <th>
-        <select class="form-control filter filter-select"
+        <select class="form-control filter filter-select select-one"
         name="complaint_type_id"
         id="complaint_type_id"
         data-column="complaint_type_id"
@@ -148,7 +149,7 @@
     </th>
 
     <th>
-        <select class="form-control filter filter-select"
+        <select class="form-control filter filter-select select-one"
         name="complaint_channel_id"
         id="complaint_channel_id"
         data-column="complaint_channel_id"
@@ -162,7 +163,7 @@
 
     <th></th>
     <th>
-        <select class="form-control filter filter-select"
+        <select class="form-control filter filter-select select-one"
         name="severity"
         id="severity"
         data-column="severity"
@@ -179,7 +180,7 @@
     @if ($canEdit)
         @foreach ($outcomeOptions as $option)
             <th>
-                <select class="form-control filter filter-select"
+                <select class="form-control filter filter-select select-one"
                     name="option_category"
                     id="option_category"
                     data-categoryid="{{ $option->id }}"

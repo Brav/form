@@ -88,7 +88,8 @@ $(".filters").on("change", ".filter-options", function (e) {
 $(".filters").on("click", "#filter-reset", function (e) {
     let $this = $(this);
 
-    if ($this.hasClass("active")) {
+    if ($this.hasClass("active"))
+    {
         return;
     }
 
@@ -97,12 +98,19 @@ $(".filters").on("click", "#filter-reset", function (e) {
     let container = parent.data("container");
 
     parent.find(".filter").each((index, element) => {
-        if (element.type === "text") {
+
+
+        if (element.type === "text")
+        {
             element.value = "";
         }
 
-        if (element.type === "select-one") {
-            element.selectedIndex = 0;
+        if (element.classList.contains("select-one"))
+        {
+            if (element.value !== 'all')
+            {
+                element.selectedIndex = 0;
+            }
         }
     });
 
