@@ -18,7 +18,7 @@
                 <i class="fa fa-table" aria-hidden="true"></i>
                 Export</a>
 
-                <div class="table-responsive">
+                <div class="table-responsive" style="height: 100vh">
                     @include('complaint-form/partials/_table')
                 </div>
 
