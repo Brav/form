@@ -27,9 +27,30 @@
 
     </div>
 
-    Scenario <hr>
-
     <div class="form-row align-items-center">
+
+        <div class="col">
+            <div class="form-group">
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="default" name="default"
+                    @if ($response->default)
+                        checked
+                    @endif
+                    >
+                    <label class="custom-control-label" for="default">Default Response</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-row align-items-center scenario @if ($response->default)
+        d-none
+    @endif">
+
+        <div class="col-md-12">
+        Scenario <hr>
+        </div>
 
         <div class="col">
             <div class="form-group">

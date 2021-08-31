@@ -9,7 +9,8 @@
                     <hr>
                     @if (session('response'))
                         <p class="alert alert-success">
-                            {{ session('response') }}
+                            <span>Dear {{ session('user') }},</span><br>
+                            {! session('response') !!}
                         </p>
                     @endif
                 </div>

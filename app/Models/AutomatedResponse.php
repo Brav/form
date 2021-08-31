@@ -17,6 +17,8 @@ class AutomatedResponse extends Model
         'name',
         'response',
         'scenario',
+        'default',
+        'additional_contacts',
     ];
 
     /**
@@ -32,11 +34,18 @@ class AutomatedResponse extends Model
      * @var array
      */
     protected $casts = [
-        'scenario' => 'array',
+        'scenario'            => 'array',
+        'additional_contacts' => 'array',
+        'default'             => 'boolean',
     ];
 
     public function getScenarioCaseAttribute()
     {
+        if($this->default)
+        {
+            return "Default";
+        }
+
         return 'test';
     }
 
@@ -49,6 +58,11 @@ class AutomatedResponse extends Model
     public static function scenario(AutomatedResponseRequest $request) :array
     {
         $scenario = [];
+
+        if($request->default)
+        {
+            return [];
+        }
 
         if(is_array($request->post('category')))
         {
@@ -63,6 +77,11 @@ class AutomatedResponse extends Model
         if(is_array($request->post('channel')))
         {
             $scenario['channels'] = $request->post('channel');
+        }
+
+        if(is_array($request->post('severity')))
+        {
+            $scenario['severity'] = $request->post('severity');
         }
 
         return $scenario;

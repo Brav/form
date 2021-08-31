@@ -184,12 +184,18 @@ class ComplaintFormController extends Controller
             }
         }
 
-        ComplaintFilled::dispatch($model);
-
         $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories', $model->complaint_category_id)
             ->whereJsonContains('scenario->types', $model->complaint_type_id)
             ->whereJsonContains('scenario->channels', $model->complaint_channel_id)
+            ->whereJsonContains('scenario->severity', $model->severity)
             ->first();
+
+        if(!$autoResponse)
+        {
+            $autoResponse = AutomatedResponse::where('default', '=', true)->first();
+        }
+
+        ComplaintFilled::dispatch($model, $autoResponse->additional_contacts ?? null);
 
         return redirect()->route('complaint-form.sent')
             ->with([
@@ -197,6 +203,7 @@ class ComplaintFormController extends Controller
                     'message'  => "You have file the complaint successfully",
                 ],
                 'response' => $autoResponse->response ?? null,
+                'user'     => $model->team_member,
             ]);
     }
 

@@ -138,4 +138,22 @@ class FileController extends Controller
 
         return response()->json('error', 500);
     }
+
+    /**
+     * Downloads the selected file
+     *
+     * @param string $name Name of the file
+     * @return mixed
+     */
+    public function download(string $name)
+    {
+        $file = File::where('name', 'like', '%' . $name . '%')->first();
+
+        if(!$file)
+        {
+            abort(404);
+        }
+
+        return Storage::download('public/files/' . $file->name);
+    }
 }

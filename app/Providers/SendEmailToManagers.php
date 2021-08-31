@@ -32,7 +32,8 @@ class SendEmailToManagers
 
         $additionalEmails = [];
 
-        $form           = $event->form;
+        $form               = $event->form;
+        $additionalContacts = $event->additionalContacts ?? [];
 
         $complaintLevel = $form->complaintLevel();
 
@@ -119,10 +120,23 @@ class SendEmailToManagers
                             ->get();
         }
 
+        if($additionalContacts)
+        {
+            $additionalContacts = User::whereIn('role_id', $where)
+                                    ->whereIn('id', function($query) use ($form){
+                                        return $query->from('clinic_managers')->select('user_id')
+                                            ->where('clinic_id', '=', $form->clinic_id)
+                                            ->whereIn('manager_type_id', $additionalContacts)
+                                            ->get();
+                                    })
+                                ->get();
+        }
+
         $mailTo = array_merge(
             $users ? $users->pluck('email')->toArray() : [],
             [$form->team_member_email],
-            $additionalEmails
+            $additionalEmails,
+            $additionalContacts ? $additionalContacts->pluck('email')->toArray() : [],
         );
 
         if($mailTo)

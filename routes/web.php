@@ -165,11 +165,13 @@ Route::prefix('user-import')->middleware(['auth', 'admin'])->group(function () {
     Route::post('', [UserImportController::class, 'import'])->name('user-import.import');
 });
 
-Route::prefix('files')->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('documents')->middleware(['auth', 'admin'])->group(function () {
 
     Route::delete('delete/{id}', [DocumentController::class, 'delete'])->name('document.delete');
 
 });
+
+Route::get('files/download/{name}', [FileController::class, 'download'])->name('file.download');
 
 Route::prefix('files')->middleware(['auth', 'admin'])->group(function () {
 
@@ -180,5 +182,4 @@ Route::prefix('files')->middleware(['auth', 'admin'])->group(function () {
     Route::post('store', [FileController::class, 'store'])->name('file.store');
     Route::put('update/{file}', [FileController::class, 'update'])->name('file.update');
     Route::delete('destroy/{file}', [FileController::class, 'destroy'])->name('file.destroy');
-
 });

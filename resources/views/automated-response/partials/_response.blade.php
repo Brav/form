@@ -1,7 +1,7 @@
 <tr id="item-{{ $response->id }}">
     <th>{{ $response->id }}</th>
     <th>{{ $response->name }}</th>
-    <th>{{ $response->response }}</th>
+    <th>{!! $response->response !!}</th>
     <th>
         @if ($response->scenario)
             {{ $response->scenarioCase }}

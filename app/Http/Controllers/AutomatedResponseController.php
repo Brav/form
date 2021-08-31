@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AutomatedResponseRequest;
 use App\Models\AutomatedResponse;
+use App\Models\ClinicManagers;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintType;
+use App\Models\File;
 use App\Models\Severity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AutomatedResponseController extends Controller
 {
@@ -21,6 +24,7 @@ class AutomatedResponseController extends Controller
     {
         return view('automated-response/index', [
             'responses' => AutomatedResponse::paginate(20),
+            'files'     => File::orderBy('title', 'ASC')->get(),
         ]);
     }
 
@@ -54,6 +58,7 @@ class AutomatedResponseController extends Controller
                 'types'      => ComplaintType::all(),
                 'channels'   => ComplaintChannel::all(),
                 'severities' => Severity::SEVERITIES,
+                'managers'   => ClinicManagers::$managersLabel,
             ])->render(),
             200);
     }
@@ -69,6 +74,8 @@ class AutomatedResponseController extends Controller
         $data = $request->all();
 
         $data['scenario'] = AutomatedResponse::scenario($request);
+        $data['response'] = \trim(\strip_tags($data['response'], '<br><p><em><strong><a>'));
+        $data['default']  = \filter_var($request->default, \FILTER_VALIDATE_BOOLEAN);
 
         $response = AutomatedResponse::create($data);
 
@@ -122,6 +129,8 @@ class AutomatedResponseController extends Controller
         $data = $request->all();
 
         $data['scenario'] = AutomatedResponse::scenario($request);
+        $data['response'] = \trim(\strip_tags($data['response'], '<br><p><em><strong><a>'));
+        $data['default']  = \filter_var($request->default, \FILTER_VALIDATE_BOOLEAN);
 
         $response->update($data);
 
@@ -149,4 +158,5 @@ class AutomatedResponseController extends Controller
             'Something went wrong!'
         ], 500);
     }
+
 }

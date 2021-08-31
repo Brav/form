@@ -39,6 +39,22 @@ class ClinicManagers extends Model
     ];
 
     /**
+     * Manager Label
+     *
+     * @var string[]
+     */
+    static $managersLabel = [
+        1 => 'Lead Vet',
+        2 => 'Practise Manager',
+        3 => 'Veterinary Manager',
+        4 => 'GM Veterinary Operation',
+        5 => 'General Manager',
+        6 => 'Regional Manager',
+        7 => 'GM Vets Services',
+        8 => 'Other',
+    ];
+
+    /**
      *
      * @param \App\Models\Clinic $clinic
      * @param  \App\Http\Requests\ClinicCreateRequest  $request

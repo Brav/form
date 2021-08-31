@@ -26,42 +26,94 @@
 
     </div>
 
-    Scenario <hr>
-
     <div class="form-row align-items-center">
 
         <div class="col">
             <div class="form-group">
-              <label for="category">Categories</label>
-              <select multiple class="form-control" name="category[]" id="category">
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-              </select>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="default" name="default" checked="" value=true>
+                    <label class="custom-control-label" for="default">Default Response</label>
+                </div>
             </div>
         </div>
 
-        <div class="col">
-            <div class="form-group">
-              <label for="type">Types</label>
-              <select multiple class="form-control" name="type[]" id="type">
-                @foreach ($types as $type)
-                    <option value="{{ $type->id }}">{{ $type->name }}</option>
-                @endforeach
-              </select>
+    </div>
+
+    <div class="scenario d-none">
+
+        <div class="form-row align-items-center">
+            <div class="col-md-12">
+            Scenario <hr>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                <label for="category">Categories</label>
+                <select multiple class="form-control" name="category[]" id="category">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                <label for="type">Types</label>
+                <select multiple class="form-control" name="type[]" id="type">
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                <label for="channel">Channels</label>
+                <select multiple class="form-control" name="channel[]" id="channel">
+                    @foreach ($channels as $channel)
+                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                    @endforeach
+                </select>
+                </div>
             </div>
         </div>
 
-        <div class="col">
-            <div class="form-group">
-              <label for="channel">Channels</label>
-              <select multiple class="form-control" name="channel[]" id="channel">
-                @foreach ($channels as $channel)
-                    <option value="{{ $channel->id }}">{{ $channel->name }}</option>
-                @endforeach
-              </select>
+        <div class="form-row align-items-center">
+
+            <div class="col">
+                <div class="form-group">
+                <label for="severity">Severity</label>
+                <select multiple class="form-control" name="severity[]" id="severity">
+                    @foreach ($severities as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+                </div>
             </div>
+
+            <div class="col">
+                <div class="form-group">
+                <label>Escalation contacts</label>
+
+                @foreach ($managers as $key => $value)
+                    <div class="custom-control custom-checkbox col">
+                        <input type="checkbox"
+                            class="custom-control-input"
+                            id="additional_contact-{{ $key }}"
+                            name="additional_contacts[]"
+                            value="{{ $key }}">
+                        <label class="custom-control-label" for="additional_contact-{{ $key }}">{{ $value }}</label>
+                    </div>
+                @endforeach
+
+                </div>
+            </div>
+
         </div>
+
+
 
     </div>
 
