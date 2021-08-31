@@ -14,7 +14,9 @@
             <th scope="col" class="small text-nowrap">PMS code</th>
             <th scope="col" class="small text-nowrap">Date of the incident</th>
             <th scope="col" class="small text-nowrap">Date of client complaint (if applicable)</th>
-            <th scope="col" class="small text-nowrap">Description of the incident and/or complaint</th>
+            <th scope="col" class="small text-nowrap"
+                style="min-width: 550px"
+            >Description of the incident and/or complaint</th>
             <th scope="col" class="small text-nowrap">Location of the incident</th>
             <th scope="col" class="small text-nowrap">Category</th>
             <th scope="col" class="small text-nowrap">Type of complaint</th>
