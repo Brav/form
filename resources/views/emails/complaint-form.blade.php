@@ -192,6 +192,7 @@ a[x-apple-data-detectors='true'] {
 
   <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
     <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 20px; line-height: 30px;">
+      <span>Details of the report you have submitted is below:</span><br><br>
       <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
         <strong>Regional Manager:</strong> {{ $form->clinic->regionalManager ?
             $form->clinic->regionalManager->first()->user->name : '/'  }} <br>
@@ -211,6 +212,9 @@ a[x-apple-data-detectors='true'] {
         <strong>Complaint Level:</strong> {{ $form->complaintLevel() ?? '/'  }} <br>
         <strong>Severity:</strong> {{$severities[$form->severity] ?? '/'  }} <br>
     </span></p>
+    <p style="font-size: 13px; line-height: 150%;">
+      <a href="{{ route('complaint-form.manage') }}" style="font-size: 26px; line-height: 30px;">View and update the report here.</a>
+    </p>
   </div>
 
       </td>
