@@ -108,6 +108,12 @@ Sidebar -->
                         </a>
                     </li>
                     <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('file.index') }}">
+                            <i class="nav-main-link-icon fa fa-folder-open"></i>
+                            <span class="nav-main-link-name">Files</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('user-import.index') }}">
                             <i class="nav-main-link-icon fa fa-folder-open"></i>
                             <span class="nav-main-link-name">Import Users</span>

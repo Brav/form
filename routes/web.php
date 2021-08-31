@@ -14,7 +14,8 @@ use App\Http\Controllers\OutcomeOptionsCategoriesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserImportController;
-use App\Http\Controllers\FilesController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Auth;
 
 require __DIR__.'/auth.php';
@@ -166,6 +167,18 @@ Route::prefix('user-import')->middleware(['auth', 'admin'])->group(function () {
 
 Route::prefix('files')->middleware(['auth', 'admin'])->group(function () {
 
-    Route::delete('delete/{id}', [FilesController::class, 'delete'])->name('file.delete');
+    Route::delete('delete/{id}', [DocumentController::class, 'delete'])->name('document.delete');
+
+});
+
+Route::prefix('files')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [FileController::class, 'index'])->name('file.index');
+    Route::get('create', [FileController::class, 'create'])->name('file.create');
+    Route::get('delete/{file}', [FileController::class, 'delete'])->name('file.delete');
+    Route::get('edit/{file}', [FileController::class, 'edit'])->name('file.edit');
+    Route::post('store', [FileController::class, 'store'])->name('file.store');
+    Route::put('update/{file}', [FileController::class, 'update'])->name('file.update');
+    Route::delete('destroy/{file}', [FileController::class, 'destroy'])->name('file.destroy');
 
 });
