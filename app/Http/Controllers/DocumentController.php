@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClinicManagers;
 use App\Models\ComplaintForm;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class FilesController extends Controller
+class DocumentController extends Controller
 {
     /**
      *
