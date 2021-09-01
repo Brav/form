@@ -3,9 +3,7 @@
     <th>{{ $response->name }}</th>
     <th>{!! $response->response !!}</th>
     <th>
-        @if ($response->scenario)
-            {{ $response->scenarioCase }}
-        @endif
+        {{ $response->scenarioCase }}
     </th>
     <th>
         <a href="{{ route('automated-response.edit', $response->id) }}"

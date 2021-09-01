@@ -10,8 +10,8 @@
                     @if (session('response'))
                         <p class="alert alert-success">
                             <span>Dear {{ session('user') }},</span><br>
-                            {! session('response') !!}
                         </p>
+                        {!! session('response') !!}
                     @endif
                 </div>
         </div>
