@@ -21,7 +21,7 @@
         <div class="col">
             <div class="form-group">
             <label for="response">Response</label>
-            <textarea class="form-control" name="response" id="response" rows="5">{{ old('response', $response->response) }}</textarea>
+            <textarea class="form-control" name="response" id="response" rows="5">{!! old('response', $response->response) !!}</textarea>
             </div>
         </div>
 

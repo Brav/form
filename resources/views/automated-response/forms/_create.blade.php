@@ -31,7 +31,7 @@
         <div class="col">
             <div class="form-group">
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="default" name="default" checked="" value=true>
+                    <input type="checkbox" class="custom-control-input" id="default" name="default" value=true>
                     <label class="custom-control-label" for="default">Default Response</label>
                 </div>
             </div>
@@ -39,7 +39,7 @@
 
     </div>
 
-    <div class="scenario d-none">
+    <div class="scenario">
 
         <div class="form-row align-items-center">
             <div class="col-md-12">

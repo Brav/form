@@ -113,8 +113,6 @@
             }
         };
 
-        console.log(dialogConfig);
-
         $('body').on('input', '#default', function(e)
         {
 
