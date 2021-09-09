@@ -123,7 +123,7 @@ class SendEmailToManagers
         if($additionalContacts)
         {
             $additionalContacts = User::whereIn('role_id', $where)
-                                    ->whereIn('id', function($query) use ($form){
+                                    ->whereIn('id', function($query) use ($form, $additionalContacts){
                                         return $query->from('clinic_managers')->select('user_id')
                                             ->where('clinic_id', '=', $form->clinic_id)
                                             ->whereIn('manager_type_id', $additionalContacts)
