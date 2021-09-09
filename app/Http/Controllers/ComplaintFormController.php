@@ -195,7 +195,7 @@ class ComplaintFormController extends Controller
             $autoResponse = AutomatedResponse::where('default', '=', true)->first();
         }
 
-        // ComplaintFilled::dispatch($model, $autoResponse->additional_contacts ?? null);
+        ComplaintFilled::dispatch($model, $autoResponse->additional_contacts ?? null);
 
         return redirect()->route('complaint-form.sent')
             ->with([
