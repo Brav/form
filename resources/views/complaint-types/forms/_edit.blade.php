@@ -48,103 +48,11 @@
                     @endif>
                     <label class="form-check-label" for="channel_settings_default">Use default channels settings</label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio"
-                    id="channel_settings_custom"
-                    name="channel_settings_select" value="custom"
-                    @if ($type->complaint_channels_settings !== null)
-                        checked
-                    @endif>
 
-                    <label class="form-check-label" for="channel_settings_custom">Custom Settings</label>
-                </div>
             </div>
         </div>
 
     </div>
-
-    @if ($type->complaint_channels_settings !== null)
-        <div class="form-row align-items-center" id="channel_settings">
-        <div class="col">
-            <div id="accordion2" role="tablist" aria-multiselectable="true">
-                <p class="text-info">
-                    Don't select any roles if you want for that channel to use default roles for sending emails.
-                </p>
-            @foreach ($severities as $key => $value)
-
-                @php
-                    $channelKey = strtolower(str_replace(' ',  '_', $value));
-                @endphp
-                <div class="block block-rounded mb-1">
-                    <div class="block-header block-header-default" role="tab" id="accordion2_h{{ $key }}">
-                    <a class="font-w600" data-toggle="collapse" data-parent="#accordion2" href="#accordion2_q{{ $key }}" aria-expanded="true" aria-controls="accordion2_q{{ $key }}">
-                    {{ ucwords($value) }}</a>
-                    </div>
-                    <div id="accordion2_q{{ $key }}" class="collapse" role="tabpanel" aria-labelledby="accordion2_h{{ $key }}" >
-                    <div class="block-content">
-
-                            @foreach ($channels as $channel)
-                                <div class="form-group row">
-                                    <label for="{{ $channel->name . '_' . $value }}" class="col-sm-4 col-form-label">{{ $channel->name }}</label>
-                                    <div class="col-md-8">
-                                        <label for="{{ $channel->name . '_' . $value }}">Level</label>
-                                        <select class="form-control" name="channel_settings[{{ $channelKey }}][{{ $channel->id }}]" id="{{ $channel->name . '_' . $value }}">
-                                            <option value="no_sending">Don't send</option>
-                                            @foreach ($levels as $level)
-                                                <option
-                                                    @if (
-                                                    isset($type->complaint_channels_settings[$channelKey][$channel->id])
-                                                    &&
-                                                    $type->complaint_channels_settings[$channelKey][$channel->id]['level'] == $level)
-                                                    selected
-                                                @endif>{{ $level }}</option>
-                                            @endforeach
-                                        </select>
-
-                                        <label for="{{ $channel->name . '_' . $value . '_roles'}}">Roles</label>
-                                        <select class="form-control"
-                                        name="channel_settings[{{ $channelKey }}][{{ $channel->id }}][roles][]"
-                                        multiple
-                                            id="{{ $channel->name . '_' . $value . '_roles'}}">
-                                            @foreach ($roles as $role)
-                                                <option
-                                                @if (isset($type->complaint_channels_settings[$channelKey][$channel->id]['roles']) &&
-                                                in_array($role->id, $type->complaint_channels_settings[$channelKey][$channel->id]['roles']))
-                                                    selected
-                                                @endif
-                                                value={{ $role->id }}>{{ $role->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <small class="form-text text-muted">Leave empty if you want to use default settings</small>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                          <label for="{{ $channel->name . '_' . $value . '_additional_emails'}}">Additional emails</label>
-                                          <textarea class="form-control"
-                                            name="channel_settings[{{ $channelKey }}][{{ $channel->id }}]['additional_emails']"
-                                            id="{{ $channel->name . '_' . $value . '_additional_emails'}}"
-                                            rows="3">@if (isset($type->complaint_channels_settings[$channelKey])
-                                            && isset($type->complaint_channels_settings[$channelKey][$channel->id]['additional_emails']))
-                                                {{ $type->complaint_channels_settings[$channelKey][$channel->id]['additional_emails'] }}
-                                            @endif</textarea>
-                                            <small class="form-text text-muted">Add additional user emails which will reacive notification when the complaint is created (use comma to sepparate multiple emails (test@test.com, second@test.com, another@test.com ...))</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                    </div>
-                    </div>
-                </div>
-
-            @endforeach
-
-            </div>
-        </div>
-    </div>
-    @endif
-
 
     <button type="submit" class="btn btn-primary">Update</button>
 </form>

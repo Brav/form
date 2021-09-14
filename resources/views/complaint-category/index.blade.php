@@ -38,6 +38,14 @@
                                 data-table="complaint-channel"
                                 data-attr="{{ route('complaint-channel.create') }}"
                                 class="btn btn-primary my-2">Create Complaint Channel</a>
+
+                            <a href="{{ route('severity.create') }}"
+                                role="bigModal"
+                                data-toggle="modal"
+                                data-target="#bigModal"
+                                data-table="severity"
+                                data-attr="{{ route('severity.create') }}"
+                                class="btn btn-primary my-2">Create Severity</a>
                     </div>
                 </div>
 
@@ -57,7 +65,7 @@
                     </li>
 
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="severity-tab" data-toggle="tab" href="#severity" role="tab" aria-controls="severity" aria-selected="false">Severity</a>
+                        <a class="nav-link" id="severities-tab" data-toggle="tab" href="#severities" role="tab" aria-controls="severities" aria-selected="false">Severity</a>
                     </li>
 
                 </ul>
@@ -70,7 +78,7 @@
 
                     @include('complaint-channel/partials/_channels')
 
-                    @include('severity/partials/_severities')
+                    @include('severities/partials/_items')
                 </div>
 
 

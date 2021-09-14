@@ -26,8 +26,8 @@
         <th>{{ $form->category->name }}</th>
         <th>{{ $form->type->name ?? '/' }}</th>
         <th>{{ $form->channel->name ?? '/' }}</th>
-        <th>{{ $form->complaintLevel() ?? '/' }}</th>
-        <th class="text-capitalize">{{ $severities[$form->severity] ?? '/' }}</th>
+        <th>{{ $form->level }}</th>
+        <th class="text-capitalize">{{ $form->severity->name }}</th>
         <th>
             @if ($form->files)
                 @foreach ($form->files as $file)

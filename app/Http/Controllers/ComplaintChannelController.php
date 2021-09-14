@@ -72,11 +72,6 @@ class ComplaintChannelController extends Controller
     {
         $data = $request->all();
 
-        if($data['level'] === 'None')
-        {
-            $data['level'] = null;
-        }
-
         $channel = ComplaintChannel::create($data);
 
         return response()->json(
@@ -125,11 +120,6 @@ class ComplaintChannelController extends Controller
     {
         $data = $request->all();
 
-        if($data['level'] === 'None')
-        {
-            $data['level'] = null;
-        }
-
         $channel->update($data);
 
         return response()->json(
@@ -148,12 +138,12 @@ class ComplaintChannelController extends Controller
     public function destroy(ComplaintChannel $channel)
     {
         if($channel->delete())
-        return response()->json([
-            'Deleted'
-        ], 200);
+            return response()->json([
+                'Deleted'
+            ], 200);
 
-    return response()->json([
-        'Something went wrong!'
-    ], 500);
+        return response()->json([
+            'Something went wrong!'
+        ], 500);
     }
 }

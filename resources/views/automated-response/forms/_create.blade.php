@@ -86,8 +86,8 @@
                 <div class="form-group">
                 <label for="severity">Severity</label>
                 <select multiple class="form-control" name="severity[]" id="severity">
-                    @foreach ($severities as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                    @foreach ($severities as $severity)
+                        <option value="{{ $severity->id }}">{{ $severity->name }}</option>
                     @endforeach
                 </select>
                 </div>

@@ -6,7 +6,6 @@
                     <th class="small">ID</th>
                     <th class="small">Name</th>
                     <th class="small">Complaint Category</th>
-                    <th class="small">Channels Settings</th>
                     <th class="small">Actions</th>
                 </tr>
             </thead>

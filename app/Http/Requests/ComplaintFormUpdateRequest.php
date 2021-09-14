@@ -55,14 +55,15 @@ class ComplaintFormUpdateRequest extends FormRequest
             'complaint_channel_id' => ['required',
                 Rule::in(ComplaintChannel::all()->pluck('id')->toArray()),
             ],
-            'severity'    => ['nullable',
-                Rule::in(array_keys(Severity::SEVERITIES))],
+            'severity_id'    => ['nullable',
+                Rule::in(Severity::get()->pluck('id')->toArray())],
             'documents'       => 'nullable',
             'documents.*'     => 'max:10000',
             'outcome'         => ['nullable', 'string', 'min:2'],
             'completed_by'    => ['nullable', 'string', 'min:2'],
             'date_completed'  => ['nullable', 'date_format:d/m/Y'],
             'outcome_options' => ['nullable'],
+            'recaptcha_token' => ['required', new \App\Rules\ReCaptchaRule($this->recaptcha_token)],
 
         ];
     }

@@ -209,8 +209,8 @@ a[x-apple-data-detectors='true'] {
         <strong>Category:</strong> {{$form->category->name  }} <br>
         <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>
         <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }} <br>
-        <strong>Complaint Level:</strong> {{ $form->complaintLevel() ?? '/'  }} <br>
-        <strong>Severity:</strong> {{$severities[$form->severity] ?? '/'  }} <br>
+        <strong>Complaint Level:</strong> {{ $form->level  }} <br>
+        <strong>Severity:</strong> {{$form->severity->name  }} <br>
     </span></p>
     <p style="font-size: 13px; line-height: 150%;">
       <a href="{{ route('complaint-form.manage') }}" style="font-size: 26px; line-height: 30px;">View and update the report here.</a>

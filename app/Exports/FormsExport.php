@@ -57,7 +57,7 @@ class FormsExport implements FromView
         $forms = ComplaintForm::when(!auth()->user()->admin, function($query) use($userClinics){
             return $query->whereIn('clinic_id', $userClinics);
         })
-        ->with(['clinic', 'location', 'category', 'type', 'channel'])
+        ->with(['clinic', 'location', 'category', 'type', 'channel', 'severity'])
         ->get();
 
         $canEdit = auth()->user()->admin == 1 ||
@@ -68,7 +68,6 @@ class FormsExport implements FromView
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'export'         => true,
             'canEdit'        => $canEdit,
-            'severities'     => Severity::SEVERITIES,
 
         ]);
     }

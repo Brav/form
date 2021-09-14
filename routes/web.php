@@ -16,6 +16,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserImportController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\SeverityController;
 use Illuminate\Support\Facades\Auth;
 
 require __DIR__.'/auth.php';
@@ -182,4 +183,15 @@ Route::prefix('files')->middleware(['auth', 'admin'])->group(function () {
     Route::post('store', [FileController::class, 'store'])->name('file.store');
     Route::put('update/{file}', [FileController::class, 'update'])->name('file.update');
     Route::delete('destroy/{file}', [FileController::class, 'destroy'])->name('file.destroy');
+});
+
+Route::prefix('severity')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [SeverityController::class, 'index'])->name('severity.index');
+    Route::get('create', [SeverityController::class, 'create'])->name('severity.create');
+    Route::get('delete/{item}', [SeverityController::class, 'delete'])->name('severity.delete');
+    Route::get('edit/{item}', [SeverityController::class, 'edit'])->name('severity.edit');
+    Route::post('store', [SeverityController::class, 'store'])->name('severity.store');
+    Route::put('update/{item}', [SeverityController::class, 'update'])->name('severity.update');
+    Route::delete('destroy/{item}', [SeverityController::class, 'destroy'])->name('severity.destroy');
 });

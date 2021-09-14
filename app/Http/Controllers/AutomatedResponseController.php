@@ -57,7 +57,7 @@ class AutomatedResponseController extends Controller
                 'categories' => ComplaintCategory::all(),
                 'types'      => ComplaintType::all(),
                 'channels'   => ComplaintChannel::all(),
-                'severities' => Severity::SEVERITIES,
+                'severities' => Severity::get(),
                 'managers'   => ClinicManagers::$managersLabel,
             ])->render(),
             200);
@@ -113,7 +113,7 @@ class AutomatedResponseController extends Controller
                 'categories' => ComplaintCategory::all(),
                 'types'      => ComplaintType::all(),
                 'channels'   => ComplaintChannel::all(),
-                'severities' => Severity::SEVERITIES,
+                'severities' => Severity::get(),
             ])->render()
         , 200);
     }

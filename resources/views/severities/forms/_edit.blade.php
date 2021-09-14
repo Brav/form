@@ -1,20 +1,20 @@
 <form
-    action="{{ route('complaint-channel.update', $channel->id) }}"
+    action="{{ route('severity.update', $item->id) }}"
     method="POST"
     role="formAjax"
     id=formAjax>
     @csrf
     @method('PUT')
-    <input type="hidden" name="table" id=table value="complaint-channel">
+    <input type="hidden" name="table" id=table value="severities">
     <input type="hidden" name="action" id=action value="edit">
-    <input type="hidden" name="_id" id=_id value="{{ $channel->id }}">
+    <input type="hidden" name="_id" id=_id value="{{ $item->id }}">
 
     <div class="form-row align-items-center">
 
         <div class="col">
             <div class="form-group">
-                <label for="name">Type Name</label>
-                <input type="text" class="form-control" name=name id="name" value="{{ old('name', $channel->name) }}">
+                <label for="name">Severity Name</label>
+                <input type="text" class="form-control" name=name id="name" value="{{ old('name', $item->name) }}">
 
                 @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>

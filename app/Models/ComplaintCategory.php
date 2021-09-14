@@ -14,17 +14,6 @@ class ComplaintCategory extends Model
 
     protected $fillable = [
         'name',
-        'email_to_roles',
-        'additional_emails',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_to_roles' => 'json',
     ];
 
     /**

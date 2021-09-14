@@ -73,7 +73,7 @@ class ComplaintFormController extends Controller
             'forms'          => $forms,
             'canEdit'        => $canEdit,
             'canDelete'      => $canDelete,
-            'severities'     => Severity::SEVERITIES,
+            'severities'     => Severity::get(),
             'outcomes'       => OutcomeOptions::orderBy('name', 'asc')->get(),
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'export'         => false,
@@ -145,7 +145,7 @@ class ComplaintFormController extends Controller
             'types'          => ComplaintType::orderBy('name')->get(),
             'channels'       => ComplaintChannel::orderBy('name')->get(),
             'locations'      => Location::orderBy('name')->get(),
-            'severities'     => Severity::SEVERITIES,
+            'severities'     => Severity::get(),
         ]);
     }
 
@@ -157,6 +157,17 @@ class ComplaintFormController extends Controller
      */
     public function store(ComplaintFormCreateRequest $request)
     {
+        $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories', $request->complaint_category_id)
+            ->whereJsonContains('scenario->types', $request->complaint_type_id)
+            ->whereJsonContains('scenario->channels', $request->complaint_channel_id)
+            ->whereJsonContains('scenario->severity', $request->severity_id)
+            ->first();
+
+        if(!$autoResponse)
+        {
+            $autoResponse = AutomatedResponse::where('default', '=', true)->first();
+        }
+
         $model = new ComplaintForm();
         $data  = $model->format($request->all());
         $model = $model->create($data);
@@ -182,17 +193,6 @@ class ComplaintFormController extends Controller
                     $fileName);
 
             }
-        }
-
-        $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories', $model->complaint_category_id)
-            ->whereJsonContains('scenario->types', $model->complaint_type_id)
-            ->whereJsonContains('scenario->channels', $model->complaint_channel_id)
-            ->whereJsonContains('scenario->severity', $model->severity)
-            ->first();
-
-        if(!$autoResponse)
-        {
-            $autoResponse = AutomatedResponse::where('default', '=', true)->first();
         }
 
         ComplaintFilled::dispatch($model, $autoResponse->additional_contacts ?? null);
@@ -253,8 +253,7 @@ class ComplaintFormController extends Controller
             'types'          => ComplaintType::orderBy('name')->get(),
             'channels'       => ComplaintChannel::orderBy('name')->get(),
             'locations'      => Location::orderBy('name')->get(),
-            'form'           => $form->load(['clinic', 'location', 'category', 'type', 'channel']),
-            'severities'     => Severity::SEVERITIES,
+            'form'           => $form->load(['clinic', 'location', 'category', 'type', 'channel', 'severity']),
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
         ]);
     }

@@ -510,35 +510,35 @@
         <div class="col-md-3">
 
             <div class="form-group">
-                <label for="severity">Severity</label>
+                <label for="severity_id">Severity</label>
                 <select class="form-control"
 
-                    id="severity"
+                    id="severity_id"
 
                     @if ($readonly === 'readonly')
                         disabled="disabled"
                     @endif
 
                     @if ($readonly !== 'readonly')
-                        name="severity"
+                        name="severity_id"
                     @endif
 
                     {{ $readonly }}>
-                    @foreach ($severities as $key => $value)
+                    @foreach ($severities as $severity)
                         <option
-                            value="{{ $key }}"
-                            @if (old('severity', $form->severity) == $key)
+                            value="{{ $severity->id }}"
+                            @if (old('severity_id', $form->severity_id) == $severity->id)
                                 selected
                             @endif
-                            >{{ \ucwords($value) }}</option>
+                            >{{ \ucwords($severity->name) }}</option>
                     @endforeach
                 </select>
 
                 @if ($readonly === 'readonly')
-                    <input type="hidden" name="severity" value="{{ $form->severity }}">
+                    <input type="hidden" name="severity_id" value="{{ $form->severity_id }}">
                 @endif
 
-                @error('severity')
+                @error('severity_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

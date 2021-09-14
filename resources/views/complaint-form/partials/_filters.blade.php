@@ -169,8 +169,8 @@
         data-column="severity"
         data-type="select">
             <option value="all">All</option>
-        @foreach ($severities as $key => $value)
-            <option value="{{ $key }}">{{ $value }}</option>
+        @foreach ($severities as $severity)
+            <option value="{{ $severity->id }}">{{ $severity->name }}</option>
         @endforeach
         </select>
     </th>

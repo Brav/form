@@ -30,7 +30,7 @@ class ComplaintCategoryController extends Controller
                     ->withPath(route('complaint-type.index')),
                 'channels'   => ComplaintChannel::orderBy('name', "ASC")->paginate(20)
                     ->withPath(route('complaint-channel.index')),
-                'severities' => Severity::SEVERITIES,
+                'severities' => Severity::paginate(20),
             ]);
 
         return [

@@ -28,8 +28,6 @@ class ComplaintCategoryUpdateRequest extends FormRequest
             'name' => ['required', 'min:3',
                 Rule::unique('complaint_categories')->ignore($this->complaint->id)
             ],
-            'email_to_roles'    => ['nullable'],
-            'additional_emails' => ['nullable', 'string'],
         ];
     }
 }

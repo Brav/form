@@ -40,7 +40,7 @@ class AutomatedResponseRequest extends FormRequest
             'channel'              => 'nullable',
             'channel.*'            => [Rule::in(ComplaintChannel::all()->pluck('id')->toArray())],
             'severity'             => 'nullable',
-            'severity.*'           => [Rule::in(\array_keys(Severity::SEVERITIES))],
+            'severity.*'           => [Rule::in(Severity::all()->pluck('id')->toArray())],
             'additinal_contacts'   => 'nullable',
             'additinal_contacts.*' => [Rule::in(\array_keys(ClinicManagers::$managersLabel))],
         ];

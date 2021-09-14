@@ -35,8 +35,7 @@ class SendEmailToManagers extends Mailable
             ->subject('Complaint Form Filled')
             ->view('emails/complaint-form')
             ->with([
-                'form'       => $this->form,
-                'severities' => Severity::SEVERITIES,
+                'form' => $this->form,
             ]);
     }
 }

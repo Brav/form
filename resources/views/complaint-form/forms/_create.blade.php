@@ -331,18 +331,18 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="severity">Severity</label>
-                <select class="form-control" name="severity" id="severity">
-                    @foreach ($severities as $key => $value)
+                <label for="severity_id">Severity</label>
+                <select class="form-control" name="severity_id" id="severity_id">
+                    @foreach ($severities as $severity)
                         <option
-                            value="{{ $key }}"
-                            @if (old('severity') == $key)
+                            value="{{ $severity->id }}"
+                            @if (old('severity_id') == $severity->id)
                                 selected
                             @endif
-                            >{{ \ucwords($value) }}</option>
+                            >{{ \ucwords($severity->name) }}</option>
                     @endforeach
                 </select>
-                @error('severity')
+                @error('severity_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

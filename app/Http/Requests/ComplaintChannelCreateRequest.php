@@ -26,11 +26,7 @@ class ComplaintChannelCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'              => ['required', 'min:3', 'unique:App\Models\ComplaintChannel,name'],
-            'level' => ['nullable',
-                Rule::in([1, 2, 3, "None"]),
-            ],
-            'additional_emails' => ['nullable', 'string',],
+            'name' => ['required', 'min:3', 'unique:App\Models\ComplaintChannel,name'],
         ];
     }
 }

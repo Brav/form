@@ -5,8 +5,6 @@
                 <tr>
                     <th class="small">ID</th>
                     <th class="small">Name</th>
-                    <th class="small">Level</th>
-                    <th class="small">Additional Emails</th>
                     <th class="small">Actions</th>
                 </tr>
             </thead>

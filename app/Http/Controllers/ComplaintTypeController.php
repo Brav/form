@@ -63,10 +63,8 @@ class ComplaintTypeController extends Controller
             view('form-ajax', [
                 'task'       => 'create',
                 'view'       => 'complaint-types',
-                'severities' => Severity::SEVERITIES,
                 'categories' => ComplaintCategory::all(),
                 'channels'   => ComplaintChannel::all(),
-                'levels'     => Roles::$levels,
                 'roles'      => Roles::all(),
             ])->render()
         , 200);
@@ -82,19 +80,11 @@ class ComplaintTypeController extends Controller
     {
         $data = $request->all();
 
-        $data['complaint_channels_settings'] = null;
-
-        if($data['channel_settings_select'] === 'custom')
-        {
-            $data['complaint_channels_settings'] = $data['channel_settings'];
-        }
-
         $type = ComplaintType::create($data);
 
         return response()->json(
             view('complaint-types/partials/_type', [
                 'type'       => $type,
-                'severities' => Severity::SEVERITIES,
                 'channels'   => ComplaintChannel::all(),
             ])->render()
             , 200);
@@ -124,7 +114,6 @@ class ComplaintTypeController extends Controller
                 'type'       => $type,
                 'task'       => 'edit',
                 'view'       => 'complaint-types',
-                'severities' => Severity::SEVERITIES,
                 'categories' => ComplaintCategory::all(),
                 'channels'   => ComplaintChannel::all(),
                 'levels'     => Roles::$levels,
@@ -143,13 +132,6 @@ class ComplaintTypeController extends Controller
     public function update(ComplaintTypeUpdateRequest $request, ComplaintType $type)
     {
         $data = $request->all();
-
-        $data['complaint_channels_settings'] = null;
-
-        if($data['channel_settings_select'] === 'custom')
-        {
-            $data['complaint_channels_settings'] = $data['channel_settings'];
-        }
 
         $type->update($data);
 

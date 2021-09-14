@@ -33,9 +33,6 @@ class ComplaintTypeCreateRequest extends FormRequest
             'complaint_category_id' => ['required',
                 Rule::in(ComplaintCategory::all()->pluck('id')->toArray()),
             ],
-            'channel_settings_select' => ['required', Rule::in(['null', 'custom'])],
-            'channel_settings'        => ['nullable'],
-
         ];
     }
 }

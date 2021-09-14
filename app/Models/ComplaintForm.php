@@ -106,8 +106,6 @@ class ComplaintForm extends Model
             $data['outcome'] = '';
         }
 
-        $data['severity'] = \filter_var( $data['severity'], \FILTER_SANITIZE_STRING);
-
         return $data;
     }
 
@@ -162,35 +160,23 @@ class ComplaintForm extends Model
     }
 
     /**
+     * Get the severity associated with the ComplaintForm
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function severity(): BelongsTo
+    {
+        return $this->belongsTo(Severity::class)->withTrashed();
+    }
+
+    /**
      * Return complaint level
      *
      * @return string
      */
     public function complaintLevel() :?string
     {
-        if($this->channel !== null)
-        {
-
-            /**
-             * If the complaint type is using default settings, return channel level for sending emails
-             */
-            if($this->type && $this->type->complaint_channels_settings === null)
-            {
-                return $this->channel->level;
-            }
-
-            if($this->type === null)
-            {
-                return null;
-            }
-
-            $severity = \strtolower(\str_replace(' ', '_', Severity::SEVERITIES[$this->severity ?? 'none']));
-
-            return  optional($this->type)->complaint_channels_settings[$severity][$this->channel->id]['level'] ?? null;
-
-        }
-
-        return optional($this->type)->level ?? '/';
+        return '/';
     }
 
     /**
