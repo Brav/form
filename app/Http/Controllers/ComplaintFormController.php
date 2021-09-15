@@ -258,6 +258,7 @@ class ComplaintFormController extends Controller
             'locations'      => Location::orderBy('name')->get(),
             'form'           => $form->load(['clinic', 'location', 'category', 'type', 'channel', 'severity']),
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
+            'severities'     => Severity::get(),
         ]);
     }
 
@@ -399,7 +400,7 @@ class ComplaintFormController extends Controller
             }
         }
 
-        $file      = \filter_var(request()->get('file'));
+        $file = \filter_var(request()->get('file'));
 
         return Storage::download('documents/complaint_form_' . $form->id . '/' . $file);
     }

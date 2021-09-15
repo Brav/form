@@ -35,12 +35,12 @@ class SendEmailToManagers
         $managers = User::whereIn('id', function($query) use ($form, $autoResponse){
                     return $query->from('clinic_managers')->select('user_id')
                         ->where('clinic_id', '=', $form->clinic_id)
-                        ->whereIn('manager_type_id', $autoResponse->additional_contacts)
+                        ->whereIn('manager_type_id', $autoResponse->additional_contacts ?? [])
                         ->get();
                 })
             ->get();
 
-        $mailTo = array_merge($managers, $autoResponse->additional_emails);
+        $mailTo = array_merge($managers->pluck('email')->toArray(), $autoResponse->additional_emails ?? []);
 
         if($mailTo)
         {

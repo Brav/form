@@ -63,8 +63,6 @@ class ComplaintFormUpdateRequest extends FormRequest
             'completed_by'    => ['nullable', 'string', 'min:2'],
             'date_completed'  => ['nullable', 'date_format:d/m/Y'],
             'outcome_options' => ['nullable'],
-            'recaptcha_token' => ['required', new \App\Rules\ReCaptchaRule($this->recaptcha_token)],
-
         ];
     }
 

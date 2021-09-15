@@ -27,7 +27,7 @@
         <th>{{ $form->type->name ?? '/' }}</th>
         <th>{{ $form->channel->name ?? '/' }}</th>
         <th>{{ $form->level }}</th>
-        <th class="text-capitalize">{{ $form->severity->name }}</th>
+        <th class="text-capitalize">{{ $form->severity->name ?? '/' }}</th>
         <th>
             @if ($form->files)
                 @foreach ($form->files as $file)
@@ -37,8 +37,8 @@
                     @if (!$export)
                         <a  class="d-block mb-1"
                             href="{{ route('complaint-form.download', [
-                            'form'      => $form->id,
-                            'file'      => $file,
+                            'form' => $form->id,
+                            'file' => $file,
                             // 'extension' => end($fileInfo),
                         ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
                     @else

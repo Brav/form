@@ -232,13 +232,13 @@ a[x-apple-data-detectors='true'] {
                     @php
                         $fileInfo = explode('.', $file)
                     @endphp
-                    @if (!$export)
+
                         <a  class="d-block mb-1"
                             href="{{ route('complaint-form.download', [
                             'form' => $form->id,
                             'file' => $file,
                         ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
-                    @endif
+
                 @endforeach
             @endif
     </span></p>

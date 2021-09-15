@@ -34,7 +34,7 @@ class ComplaintForm extends Model
         'complaint_category_id',
         'complaint_type_id',
         'complaint_channel_id',
-        'severity',
+        'severity_id',
         'outcome',
         'outcome_options',
         'completed_by',

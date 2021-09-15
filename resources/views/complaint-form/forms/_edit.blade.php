@@ -635,9 +635,8 @@
                             <th>
                                 <a  class="d-block mb-1"
                                     href="{{ route('complaint-form.download', [
-                                    'form'      => $form->id,
-                                    'file'      => $fileInfo[0],
-                                    'extension' => $fileInfo[1],
+                                    'form'  => $form->id,
+                                    'file' => $file,
                                 ]) }}"><i class="fas fa-download"></i></a>
                             </th>
 
@@ -666,3 +665,4 @@
 
     <button type="submit" class="btn btn-primary">Update the complaint</button>
 </form>
+
