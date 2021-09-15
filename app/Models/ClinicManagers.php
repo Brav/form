@@ -70,24 +70,26 @@ class ClinicManagers extends Model
         {
             if($request->post($type))
             {
-                if($type === 'lead_vet')
-                {
-                    foreach ($request->post('lead_vet') as $user)
-                    {
+                switch ($type) {
+                    case 'lead_vet':
+                    case 'other':
+                        foreach ($request->post($type) as $user)
+                        {
+                            $managers[] = [
+                                'clinic_id'       => $clinic->id,
+                                'user_id'         => $user,
+                                'manager_type_id' => $key,
+                            ];
+                        }
+                        break;
+
+                    default:
                         $managers[] = [
                             'clinic_id'       => $clinic->id,
-                            'user_id'         => $user,
+                            'user_id'         => $request->post($type),
                             'manager_type_id' => $key,
                         ];
-                    }
-                }
-                else
-                {
-                    $managers[] = [
-                        'clinic_id'       => $clinic->id,
-                        'user_id'         => $request->post($type),
-                        'manager_type_id' => $key,
-                    ];
+                        break;
                 }
             }
         }

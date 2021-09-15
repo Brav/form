@@ -154,7 +154,8 @@
              <div class="form-group">
                 <label for="other">Other</label>
                 <select class="form-control select2"
-                    name=other
+                    multiple
+                    name=other[]
                     id="other">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"

@@ -1,5 +1,9 @@
+@php
+    $fileData = pathinfo($file->name);
+@endphp
 <tr id="item-{{ $file->id }}">
-    <th class="col-md-9"> <i class="fas fa-file"></i> {{ $file->title }}</th>
+    <th class="col-md-9"> <i class="fas fa-file"></i>
+        <a href="{{ route("file.download", $fileData['filename']) }}">{{ $file->title }}</a></th>
     <th>
         <a href="{{ route('file.edit', $file->id) }}"
         class="btn btn-primary btn-sm active"

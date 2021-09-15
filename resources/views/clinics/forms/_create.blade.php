@@ -158,11 +158,12 @@
              <div class="form-group">
                 <label for="other">Other</label>
                 <select class="form-control select2"
-                    name=other
+                    multiple
+                    name=other[]
                     id="other">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            @if (old("other") == $user->id)
+                           @if (in_array($user->id, old("other") ?? []))
                                 selected
                             @endif>{{ $user->name }}</option>
                     @endforeach

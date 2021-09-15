@@ -34,7 +34,8 @@ class ClinicCreateRequest extends FormRequest
             'general_manager'          => ['required', 'numeric'],
             'regional_manager'         => ['required', 'numeric'],
             'gm_vet_services'          => ['required', 'numeric'],
-            'other'                    => ['nullable', 'numeric'],
+            'other'                    => ['nullable'],
+            'other.*'                  => ['numeric'],
         ];
     }
 }

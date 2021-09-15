@@ -37,7 +37,8 @@ class ClinicUpdateRequest extends FormRequest
             'regional_manager'      => ['required', 'numeric'],
             'regional_manager'      => ['required', 'numeric'],
             'gm_vet_services'       => ['required', 'numeric'],
-            'other'                 => ['required', 'numeric'],
+            'other'                 => ['nullable'],
+            'other.*'               => ['numeric'],
         ];
     }
 }
