@@ -28,6 +28,41 @@
     </div>
 
     <div class="form-row align-items-center">
+        <div class="col">
+            <div class="form-group">
+            <label>Escalation contacts</label>
+
+            @foreach ($managers as $key => $value)
+                <div class="custom-control custom-checkbox col">
+                    <input type="checkbox"
+                        class="custom-control-input"
+                        id="additional_contact-{{ $key }}"
+                        name="additional_contacts[]"
+                        value="{{ $key }}"
+                        @if (\in_array($key, $response->additional_contacts ?? []))
+                            checked
+                        @endif>
+                    <label class="custom-control-label" for="additional_contact-{{ $key }}">{{ $value }}</label>
+                </div>
+            @endforeach
+
+            </div>
+        </div>
+
+        <div class="col">
+
+            <label for="additional_emails">Additional emails</label>
+            <textarea class="form-control"
+            name="additional_emails"
+            id="additional_emails"
+            rows="3">{{ old("additional_emails", implode(',', $response->additional_emails ?? [])) }}</textarea>
+            <small class="form-text text-muted">Add additional user emails which will reacive notification when the complaint is created (use comma to sepparate multiple emails (test@test.com, second@test.com, another@test.com ...))</small>
+
+        </div>
+
+    </div>
+
+    <div class="form-row align-items-center">
 
         <div class="col">
             <div class="form-group">
@@ -98,6 +133,25 @@
         </div>
 
     </div>
+
+    <div class="form-row align-items-center">
+
+            <div class="col">
+                <div class="form-group">
+                <label for="severity">Severity</label>
+                <select multiple class="form-control" name="severity[]" id="severity">
+                    @foreach ($severities as $severity)
+                        <option value="{{ $severity->id }}"
+                            @if (in_array($severity->id, $response->scenario['severity'] ?? []))
+                                selected
+                            @endif
+                            >{{ $severity->name }}</option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
+
+        </div>
 
     <button type="submit" class="btn btn-primary">Update</button>
 </form>

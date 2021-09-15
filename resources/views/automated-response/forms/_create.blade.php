@@ -27,6 +27,49 @@
     </div>
 
     <div class="form-row align-items-center">
+        <div class="col">
+            <div class="form-group">
+            <label>Escalation contacts</label>
+
+            @foreach ($managers as $key => $value)
+                <div class="custom-control custom-checkbox col">
+                    <input type="checkbox"
+                        class="custom-control-input"
+                        id="additional_contact-{{ $key }}"
+                        name="additional_contacts[]"
+                        value="{{ $key }}">
+                    <label class="custom-control-label" for="additional_contact-{{ $key }}">{{ $value }}</label>
+                </div>
+            @endforeach
+
+            </div>
+        </div>
+
+        <div class="col">
+
+            <label for="additional_emails">Additional emails</label>
+            <textarea class="form-control"
+            name="additional_emails"
+            id="additional_emails"
+            rows="3">{{ old("additional_emails") }}</textarea>
+            <small class="form-text text-muted">Add additional user emails which will reacive notification when the complaint is created (use comma to sepparate multiple emails (test@test.com, second@test.com, another@test.com ...))</small>
+
+        </div>
+
+    </div>
+
+    <div class="form-row align-items-center">
+
+        <div class="col">
+            <div class="form-group">
+              <label for="level">Complaint Level</label>
+              <select class="form-control" name="level" id="level">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+        </div>
 
         <div class="col">
             <div class="form-group">
@@ -90,24 +133,6 @@
                         <option value="{{ $severity->id }}">{{ $severity->name }}</option>
                     @endforeach
                 </select>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="form-group">
-                <label>Escalation contacts</label>
-
-                @foreach ($managers as $key => $value)
-                    <div class="custom-control custom-checkbox col">
-                        <input type="checkbox"
-                            class="custom-control-input"
-                            id="additional_contact-{{ $key }}"
-                            name="additional_contacts[]"
-                            value="{{ $key }}">
-                        <label class="custom-control-label" for="additional_contact-{{ $key }}">{{ $value }}</label>
-                    </div>
-                @endforeach
-
                 </div>
             </div>
 

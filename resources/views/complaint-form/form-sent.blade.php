@@ -8,9 +8,6 @@
                     <h4 class="alert-heading">Complaint Sent!</h4>
                     <hr>
                     @if (session('response'))
-                        <p class="alert alert-success">
-                            <span>Dear {{ session('user') }},</span><br>
-                        </p>
                         {!! session('response') !!}
                     @endif
                 </div>

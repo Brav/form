@@ -170,6 +170,9 @@ class ComplaintFormController extends Controller
 
         $model = new ComplaintForm();
         $data  = $model->format($request->all());
+
+        $data['level'] = $autoResponse->level;
+
         $model = $model->create($data);
 
         $directory = 'documents/complaint_form_' . $model->id;
@@ -195,7 +198,7 @@ class ComplaintFormController extends Controller
             }
         }
 
-        ComplaintFilled::dispatch($model, $autoResponse->additional_contacts ?? null);
+        ComplaintFilled::dispatch($model, $autoResponse);
 
         return redirect()->route('complaint-form.sent')
             ->with([

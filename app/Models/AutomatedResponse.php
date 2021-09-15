@@ -19,6 +19,8 @@ class AutomatedResponse extends Model
         'scenario',
         'default',
         'additional_contacts',
+        'additional_emails',
+        'level',
     ];
 
     /**
@@ -36,6 +38,7 @@ class AutomatedResponse extends Model
     protected $casts = [
         'scenario'            => 'array',
         'additional_contacts' => 'array',
+        'additional_emails'   => 'array',
         'default'             => 'boolean',
     ];
 
@@ -85,5 +88,33 @@ class AutomatedResponse extends Model
         }
 
         return $scenario;
+    }
+
+     /**
+     * Set the additional emails
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function setAdditionalEmailsAttribute($value) :array
+    {
+        $return = [];
+
+        $emails = \explode(',', $value);
+
+        if(!empty($emails))
+        {
+            foreach ($emails as $email)
+            {
+                $data = \filter_var(\trim($email), \FILTER_SANITIZE_EMAIL);
+
+                if($data)
+                {
+                    $return[] = $data;
+                }
+            }
+        }
+
+        return $return;
     }
 }

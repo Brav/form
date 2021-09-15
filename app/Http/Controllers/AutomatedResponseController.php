@@ -73,9 +73,10 @@ class AutomatedResponseController extends Controller
     {
         $data = $request->all();
 
-        $data['scenario'] = AutomatedResponse::scenario($request);
-        $data['response'] = \trim(\strip_tags($data['response'], '<br><p><em><strong><a>'));
-        $data['default']  = \filter_var($request->default, \FILTER_VALIDATE_BOOLEAN);
+        $data['scenario']          = AutomatedResponse::scenario($request);
+        $data['response']          = \trim(\strip_tags($data['response'], '<br><p><em><strong><a>'));
+        $data['default']           = \filter_var($request->default, \FILTER_VALIDATE_BOOLEAN);
+        $data['additional_emails'] = AutomatedResponse::additionalEmails($request->additional_emails);
 
         $response = AutomatedResponse::create($data);
 
@@ -114,6 +115,7 @@ class AutomatedResponseController extends Controller
                 'types'      => ComplaintType::all(),
                 'channels'   => ComplaintChannel::all(),
                 'severities' => Severity::get(),
+                'managers'   => ClinicManagers::$managersLabel,
             ])->render()
         , 200);
     }
@@ -128,9 +130,10 @@ class AutomatedResponseController extends Controller
     {
         $data = $request->all();
 
-        $data['scenario'] = AutomatedResponse::scenario($request);
-        $data['response'] = \trim(\strip_tags($data['response'], '<br><p><em><strong><a>'));
-        $data['default']  = \filter_var($request->default, \FILTER_VALIDATE_BOOLEAN);
+        $data['scenario']          = AutomatedResponse::scenario($request);
+        $data['response']          = \trim(\strip_tags($data['response'], '<br><p><em><strong><a>'));
+        $data['default']           = \filter_var($request->default, \FILTER_VALIDATE_BOOLEAN);
+        $data['additional_emails'] = AutomatedResponse::additionalEmails($request->additional_emails);
 
         $response->update($data);
 

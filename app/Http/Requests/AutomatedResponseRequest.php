@@ -43,6 +43,8 @@ class AutomatedResponseRequest extends FormRequest
             'severity.*'           => [Rule::in(Severity::all()->pluck('id')->toArray())],
             'additinal_contacts'   => 'nullable',
             'additinal_contacts.*' => [Rule::in(\array_keys(ClinicManagers::$managersLabel))],
+            'additional_emails'    => 'nullable|string',
+            'level'                => ["required", Rule::in([1, 2, 3])],
         ];
     }
 }

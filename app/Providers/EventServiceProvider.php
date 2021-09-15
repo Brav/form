@@ -21,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
 
         ComplaintFilled::class => [
             SendEmailToManagers::class,
+            SendEmailToUser::class,
         ],
 
         ComplaintReminderEvent::class => [

@@ -122,7 +122,7 @@
 
         $('#bigModal').on('shown.bs.modal', function () {
             tinymce.init({
-                selector: "textarea",
+                selector: "textarea:not(#additional_emails)",
                 menubar: false,
                 toolbar: "undo redo | paragraph bold italic | customInsertButton",
                 setup: function (editor) {

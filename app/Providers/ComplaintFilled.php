@@ -12,17 +12,17 @@ class ComplaintFilled
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $form;
-    public $additionalContacts;
+    public $autoResponse;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(ComplaintForm $form, ?array $additionalContacts)
+    public function __construct(ComplaintForm $form, $autoResponse)
     {
         $this->form = $form;
-        $this->additionalContacts = $additionalContacts;
+        $this->autoResponse = $autoResponse;
     }
 
     /**
