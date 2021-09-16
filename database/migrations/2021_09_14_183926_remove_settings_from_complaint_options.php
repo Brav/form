@@ -13,23 +13,23 @@ class RemoveSettingsFromComplaintOptions extends Migration
      */
     public function up() :void
     {
-        // Schema::table('complaint_categories', function (Blueprint $table) {
-        //     $table->dropColumn('email_to_roles');
-        //     $table->dropColumn('additional_emails');
-        // });
+        Schema::table('complaint_categories', function (Blueprint $table) {
+            $table->dropColumn('email_to_roles');
+            $table->dropColumn('additional_emails');
+        });
 
-        // Schema::table('complaint_channels', function (Blueprint $table) {
-        //     $table->dropColumn('level');
-        //     $table->dropColumn('additional_emails');
-        // });
+        Schema::table('complaint_channels', function (Blueprint $table) {
+            $table->dropColumn('level');
+            $table->dropColumn('additional_emails');
+        });
 
-        // Schema::table('complaint_types', function (Blueprint $table) {
-        //     $table->dropColumn('complaint_channels_settings');
-        // });
+        Schema::table('complaint_types', function (Blueprint $table) {
+            $table->dropColumn('complaint_channels_settings');
+        });
 
-        // Schema::table('automated_response', function (Blueprint $table) {
-        //     $table->json('additional_emails')->nullable()->after('additional_contacts');
-        // });
+        Schema::table('automated_response', function (Blueprint $table) {
+            $table->json('additional_emails')->nullable()->after('additional_contacts');
+        });
 
         Schema::dropIfExists('severities');
 
