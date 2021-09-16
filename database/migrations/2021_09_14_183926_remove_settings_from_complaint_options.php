@@ -31,6 +31,8 @@ class RemoveSettingsFromComplaintOptions extends Migration
         //     $table->json('additional_emails')->nullable()->after('additional_contacts');
         // });
 
+        Schema::dropIfExists('severities');
+
         Schema::create('severities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 191);
