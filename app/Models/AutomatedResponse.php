@@ -96,7 +96,7 @@ class AutomatedResponse extends Model
      * @param  string  $value
      * @return array
      */
-    public function setAdditionalEmailsAttribute($value) :array
+    public static function additionalEmails($value) :array
     {
         $return = [];
 

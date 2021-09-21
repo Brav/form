@@ -77,6 +77,26 @@
             </div>
         </div>
 
+        <div class="col">
+            <div class="form-group">
+              <label for="level">Complaint Level</label>
+              <select class="form-control" name="level" id="level">
+                <option value="1"
+                @if ($response->level == 1)
+                    checked
+                @endif>1</option>
+                <option value="2"
+                @if ($response->level == 2)
+                    checked
+                @endif>2</option>
+                <option value="3"
+                @if ($response->level == 3)
+                    checked
+                @endif>3</option>
+              </select>
+            </div>
+        </div>
+
     </div>
 
     <div class="form-row align-items-center scenario @if ($response->default)
