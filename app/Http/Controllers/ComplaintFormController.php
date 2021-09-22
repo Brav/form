@@ -171,7 +171,7 @@ class ComplaintFormController extends Controller
         $model = new ComplaintForm();
         $data  = $model->format($request->all());
 
-        $data['level'] = $autoResponse->level;
+        $data['level'] = $autoResponse->level ?? null;
 
         $model = $model->create($data);
 
