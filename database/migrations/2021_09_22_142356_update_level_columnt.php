@@ -14,7 +14,7 @@ class UpdateLevelColumnt extends Migration
     public function up()
     {
 
-        \DB::statement("ALTER TABLE `complaint_form`.`complaint_forms`
+            \DB::statement("ALTER TABLE `complaint_forms`
             CHANGE COLUMN `level` `level` TINYINT UNSIGNED NULL DEFAULT NULL ;
             ");
 
