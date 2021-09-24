@@ -50,7 +50,12 @@ class SendReminder
         })
         ->get();
 
-        \Mail::to($managers->pluck('email')->toArray())->send(new \App\Mail\SendReminder($form, $event->week));
+        $mailTo = array_merge($managers->pluck('email')->toArray(), $autoResponse->additional_emails ?? []);
+
+        if($mailTo)
+        {
+            \Mail::to()->send(new \App\Mail\SendReminder($form, $event->week));
+        }
 
         $column = \str_replace(' ', '_', $event->week) . '_reminder';
 
