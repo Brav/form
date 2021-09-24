@@ -203,7 +203,7 @@ a[x-apple-data-detectors='true'] {
         <strong>PMS code:</strong> {{ $form->pms_code  }} <br>
         <strong>Date of the incident:</strong> {{$form->date_of_incident->format('d/m/Y')  }} <br>
         <strong>Date of client complaint (if applicable):</strong> {{ $form->date_of_client_complaint !== null ?
-            date('d/m/Y', \strtotime($form->date_of_client_complaint)) : '/' }} <br>
+            date('d/m/Y', \strtotime($form->date_of_client_complaint)) : 'n/a'}} <br>
         <strong>Description of the incident and/or complaint:</strong> {{$form->description  }} <br>
         <strong>Location of the incident:</strong> {{$form->location->name  }} <br>
         <strong>Category:</strong> {{$form->category->name  }} <br>
