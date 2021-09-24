@@ -100,7 +100,7 @@ a[x-apple-data-detectors='true'] {
             <span>Dear {{ $form->team_member }},</span><br>
             <span>This complaint has a level of {{ $form->level }}
                 and severity of {{ $form->severity->name }}</span><br>
-            <span>{!! $response->response !!}</span>
+            <span>{!! $response->response ?? '/' !!}</span>
         </p>
     </div>
   </div>

@@ -116,7 +116,7 @@ Sidebar -->
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('user-import.index') }}">
                             <i class="nav-main-link-icon fa fa-folder-open"></i>
-                            <span class="nav-main-link-name">Import Users</span>
+                            <span class="nav-main-link-name">Import Clinics</span>
                         </a>
                     </li>
                 @endif

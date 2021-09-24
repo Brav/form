@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\AutomatedResponse;
 use App\Models\ClinicManagers;
 use App\Models\Roles;
 use App\Models\User;
@@ -28,21 +29,28 @@ class SendReminder
      */
     public function handle($event)
     {
-        $form           = $event->form;
+        $form = $event->form;
 
-        $complaintLevel = $form->complaintLevel();
+        $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories', $form->complaint_category_id)
+            ->whereJsonContains('scenario->types', $form->complaint_type_id)
+            ->whereJsonContains('scenario->channels', $form->complaint_channel_id)
+            ->whereJsonContains('scenario->severity', $form->severity_id)
+            ->first();
 
-        $roles          = Roles::where('level' , 'like', '%"' . $complaintLevel . '"%')->get();
+        if(!$autoResponse)
+        {
+            $autoResponse = AutomatedResponse::where('default', '=', true)->first();
+        }
 
-        $users          = User::whereIn('role_id', $roles->pluck('id')->toArray())
-                            ->whereIn('id', function($query) use ($form){
-                                return $query->from('clinic_managers')->select('user_id')
-                                    ->where('clinic_id', '=', $form->clinic_id)
-                                    ->get();
-                            })
-                            ->get();
+        $managers = User::whereIn('id', function($query) use ($form, $autoResponse){
+            return $query->from('clinic_managers')->select('user_id')
+                ->where('clinic_id', '=', $form->clinic_id)
+                ->whereIn('manager_type_id', $autoResponse->additional_contacts ?? [])
+                ->get();
+        })
+        ->get();
 
-        \Mail::to($users->pluck('email')->toArray())->send(new \App\Mail\SendReminder($form, $event->week));
+        \Mail::to($managers->pluck('email')->toArray())->send(new \App\Mail\SendReminder($form, $event->week));
 
         $column = \str_replace(' ', '_', $event->week) . '_reminder';
 
