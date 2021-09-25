@@ -16,6 +16,46 @@
   <title>Complaint Form Filled</title>
 
   <style type="text/css">
+
+  @font-face {
+        font-family: 'EuropaGroteskSH-Ext';
+        src: url('https://vet.partners/wp-content/uploads/2021/05/EuropaGroteskSH-Ext.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('https://vet.partners/wp-content/uploads/2021/05/EuropaGroteskSH-Ext.woff2') format('woff2'), /* Super Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/EuropaGroteskSH-Ext.woff') format('woff'), /* Pretty Modern Browsers */
+             /*url('webfont.ttf')  format('truetype'), */
+             url('https://vet.partners/wp-content/uploads/2021/05/EuropaGroteskSH-Ext.svg') format('svg'); /* Legacy iOS */
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+    }
+
+    @font-face {
+        font-family: 'Objektiv Mk2 Rg';
+        src: url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2_Rg.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-Regular.svg') format('svg'); /* Legacy iOS */
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+    }
+
+    @font-face {
+        font-family: 'Objektiv Mk2 Bd';
+        src: url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.woff2') format('woff2'), /* Super Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.woff') format('woff'), /* Pretty Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.svg') format('svg'); /* Legacy iOS */
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+    }
+    table {
+      font-family: 'EuropaGroteskSH-Ext';
+    }
+
       table, td { color: #00434f; } @media only screen and (min-width: 670px) {
   .u-row {
     width: 650px !important;
@@ -83,32 +123,11 @@ a[x-apple-data-detectors='true'] {
 
 </style>
 
-
-
-<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" type="text/css"><!--<![endif]-->
-
 </head>
 
 <body class="clean-body" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #f2f2f2;color: #000000">
   <!--[if IE]><div class="ie-container"><![endif]-->
   <!--[if mso]><div class="mso-container"><![endif]-->
-
-<div class="u-row-container" style="padding: 25px 10px 0px;background-color: rgba(255,255,255,0)">
-  <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 650px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
-    <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
-        <p class="alert alert-success">
-            <span>Dear {{ $form->team_member }},</span>
-        </p>
-        <p class="alert alert-success">
-          <span>Thank you for submitting this complaint,</span>
-          <span>This complaint has a level of {{ $form->level ?? '1'}}
-                and severity of {{ $form->severity->name }}</span><br>
-            <span>{!! $response->response ?? '/' !!}</span>
-        </p>
-
-    </div>
-  </div>
-</div>
 
   <table style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #f2f2f2;width:100%" cellpadding="0" cellspacing="0">
   <tbody>
@@ -174,7 +193,7 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:50px 20px 20px;font-family:arial,helvetica,sans-serif;" align="left">
 
   <div style="color: #a5cf4c; line-height: 120%; text-align: center; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 120%;"><span style="font-family: Montserrat, sans-serif; font-size: 40px; line-height: 48px;"><span style="line-height: 48px; font-size: 40px;">Complaints Reporting</span></span></p>
+    <p style="font-size: 14px; line-height: 120%;"><span style="font-family: Objektiv Mk2 Bd, sans-serif; font-size: 40px; line-height: 48px;"><span style="line-height: 48px; font-size: 40px;">Complaints Reporting</span></span></p>
   </div>
 
       </td>
@@ -210,6 +229,14 @@ a[x-apple-data-detectors='true'] {
 
   <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
     <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 20px; line-height: 30px;">
+
+
+      <span>Dear {{ $form->team_member }},</span><br><br>
+      <span>Thank you for submitting this complaint,</span><br>
+      <span>This complaint has a level of {{ $form->level ?? '1'}}
+          and severity of {{ $form->severity->name }}</span><br>
+      <span>{!! $response->response ?? '/' !!}</span><br><br>
+
       <span>Details of the report you have submitted is below:</span><br><br>
       <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
         <strong>Regional Manager:</strong> {{ $form->clinic->regionalManager ?
@@ -241,7 +268,7 @@ a[x-apple-data-detectors='true'] {
                             href="{{ route('complaint-form.download', [
                             'form' => $form->id,
                             'file' => $file,
-                        ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
+                        ]) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">{{ $file }}</a>
 
                 @endforeach
             @endif

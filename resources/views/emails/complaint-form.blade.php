@@ -16,6 +16,46 @@
   <title>Complaint Form Filled</title>
 
   <style type="text/css">
+
+  @font-face {
+        font-family: 'EuropaGroteskSH-Ext';
+        src: url('https://vet.partners/wp-content/uploads/2021/05/EuropaGroteskSH-Ext.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('https://vet.partners/wp-content/uploads/2021/05/EuropaGroteskSH-Ext.woff2') format('woff2'), /* Super Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/EuropaGroteskSH-Ext.woff') format('woff'), /* Pretty Modern Browsers */
+             /*url('webfont.ttf')  format('truetype'), */
+             url('https://vet.partners/wp-content/uploads/2021/05/EuropaGroteskSH-Ext.svg') format('svg'); /* Legacy iOS */
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+    }
+
+    @font-face {
+        font-family: 'Objektiv Mk2 Rg';
+        src: url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2_Rg.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-Regular.svg') format('svg'); /* Legacy iOS */
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+    }
+
+    @font-face {
+        font-family: 'Objektiv Mk2 Bd';
+        src: url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.woff2') format('woff2'), /* Super Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.woff') format('woff'), /* Pretty Modern Browsers */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('https://vet.partners/wp-content/uploads/2021/05/ObjektivMk2-XBold.svg') format('svg'); /* Legacy iOS */
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+    }
+    table {
+      font-family: 'EuropaGroteskSH-Ext';
+    }
+    
       table, td { color: #00434f; } @media only screen and (min-width: 670px) {
   .u-row {
     width: 650px !important;
@@ -84,8 +124,6 @@ a[x-apple-data-detectors='true'] {
 </style>
 
 
-
-<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" type="text/css"><!--<![endif]-->
 
 </head>
 
@@ -156,7 +194,7 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:50px 20px 20px;font-family:arial,helvetica,sans-serif;" align="left">
 
   <div style="color: #a5cf4c; line-height: 120%; text-align: center; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 120%;"><span style="font-family: Montserrat, sans-serif; font-size: 40px; line-height: 48px;"><span style="line-height: 48px; font-size: 40px;">Complaints Reporting</span></span></p>
+    <p style="font-size: 14px; line-height: 120%;"><span style="font-family: Objektiv Mk2 Bd, sans-serif; font-size: 40px; line-height: 48px;"><span style="line-height: 48px; font-size: 40px;">Complaints Reporting</span></span></p>
   </div>
 
       </td>
@@ -213,7 +251,7 @@ a[x-apple-data-detectors='true'] {
         <strong>Severity:</strong> {{$form->severity->name  }} <br>
     </span></p>
     <p style="font-size: 13px; line-height: 150%;">
-      <a href="{{ route('complaint-form.edit', $form->id) }}" style="font-size: 26px; line-height: 30px;">View and update the report here.</a>
+      <a href="{{ route('complaint-form.edit', $form->id) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">View and update the report here.</a>
     </p>
   </div>
 
