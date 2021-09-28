@@ -14,7 +14,7 @@
                                     <p class="text-white h3" style="opacity: .85;">Please use the form to lodge any formal complaints. If the complaint is of an urgent nature please flag you have submitted this to your regional manager</p>
                                     <a href="{{ route('complaint-form.create') }}" class="btn btn-hero btn-hero-primary btn-hero-lg m-1">Submit a complaint</a>
 
-                                    <a href="{{ route('login') }}" class="btn btn-hero btn-hero-light btn-hero-lg m-1">View Submitted Complaints</a>
+                                    <a href="{{ route('complaint-form.manage') }}" class="btn btn-hero btn-hero-light btn-hero-lg m-1">View Submitted Complaints</a>
 
                                 </div>
                             </div>
