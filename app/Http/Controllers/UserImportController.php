@@ -102,7 +102,7 @@ class UserImportController extends Controller
      */
     private function clinic(string $clinicName, array $data) :void
     {
-        $clinic = $clinic = Clinic::updateOrCreate([
+        $clinic = Clinic::updateOrCreate([
             'name' => $data['clinic_name'],
         ]);
 
