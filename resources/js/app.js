@@ -124,6 +124,8 @@ $(document).on("submit", "#delete-form", function (event) {
         data: { _token: $('meta[name="csrf-token"]').attr("content") },
         beforeSend: function () {
             $("#loader").show();
+
+            $('body').addClass('avoid-clics')
         },
         // return the result
         success: function (result) {
@@ -137,6 +139,8 @@ $(document).on("submit", "#delete-form", function (event) {
         },
         complete: function () {
             $("#loader").hide();
+
+            $("body").removeClass("avoid-clics");
         },
         error: function (jqXHR, testStatus, error) {
             alert("Page " + error + " cannot open. Error:" + error);

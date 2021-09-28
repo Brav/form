@@ -233,9 +233,9 @@ a[x-apple-data-detectors='true'] {
 
       <span>Dear {{ $form->team_member }},</span><br><br>
       <span>Thank you for submitting this complaint,</span><br>
-      <span>This complaint has a level of {{ $form->level ?? '1'}}
+      <span>This complaint has a level of {{ $form->level ?? 'n/a'}}
           and severity of {{ $form->severity->name }}</span><br>
-      <span>{!! $response->response ?? '/' !!}</span><br><br>
+      <span>{!! $response->response ?? 'n/a' !!}</span><br><br>
 
       <span>Details of the report you have submitted is below:</span><br><br>
       <strong>Clinic:</strong> {{ $form->clinic->name }} <br>

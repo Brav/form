@@ -40,6 +40,17 @@ class UserImportController extends Controller
 
     public function import()
     {
+
+        if (!request()->file('document'))
+        {
+            return redirect()->route('user-import.index')->with([
+                'status' => [
+                    'message' => 'Please select file to import',
+                    'type'    => 'danger',
+                ]
+            ]);
+        }
+
         $data = (new UsersImport)->toArray(request()->file('document'))[0];
 
         foreach ($data as $datum)
@@ -91,14 +102,9 @@ class UserImportController extends Controller
      */
     private function clinic(string $clinicName, array $data) :void
     {
-        $clinic = Clinic::where('name', '=', $clinicName)->first();
-
-        if(!$clinic)
-        {
-            $clinic = Clinic::create([
-                'name' => $data['clinic_name'],
-            ]);
-        }
+        $clinic = $clinic = Clinic::updateOrCreate([
+            'name' => $data['clinic_name'],
+        ]);
 
         ClinicManagers::where('clinic_id', '=', $clinic->id)->delete();
 
