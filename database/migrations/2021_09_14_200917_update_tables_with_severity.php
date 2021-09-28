@@ -19,7 +19,7 @@ class UpdateTablesWithSeverity extends Migration
             // $table->foreignId('severity_id')->after('complaint_channel_id');
             // $table->tinyInteger('level')->after('severity_id')->default(1);
 
-            $table->foreign('severity_id')->references('id')->on('severities');
+            // $table->foreign('severity_id')->references('id')->on('severities');
         });
 
         Schema::table('automated_response', function (Blueprint $table) {
