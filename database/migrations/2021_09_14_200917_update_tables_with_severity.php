@@ -14,10 +14,10 @@ class UpdateTablesWithSeverity extends Migration
     public function up()
     {
         Schema::table('complaint_forms', function (Blueprint $table) {
-            $table->dropColumn('severity');
+            // $table->dropColumn('severity');
 
-            $table->foreignId('severity_id')->after('complaint_channel_id');
-            $table->tinyInteger('level')->after('severity_id')->default(1);
+            // $table->foreignId('severity_id')->after('complaint_channel_id');
+            // $table->tinyInteger('level')->after('severity_id')->default(1);
 
             $table->foreign('severity_id')->references('id')->on('severities');
         });
