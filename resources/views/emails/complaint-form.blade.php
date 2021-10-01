@@ -55,7 +55,7 @@
     table {
       font-family: 'EuropaGroteskSH-Ext';
     }
-    
+
       table, td { color: #00434f; } @media only screen and (min-width: 670px) {
   .u-row {
     width: 650px !important;
@@ -247,7 +247,7 @@ a[x-apple-data-detectors='true'] {
         <strong>Category:</strong> {{$form->category->name  }} <br>
         <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>
         <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }} <br>
-        <strong>Complaint Level:</strong> {{ $form->level  }} <br>
+        <strong>Complaint Level:</strong> {{ $form->level ?? 'n/a'  }} <br>
         <strong>Severity:</strong> {{$form->severity->name  }} <br>
     </span></p>
     <p style="font-size: 13px; line-height: 150%;">

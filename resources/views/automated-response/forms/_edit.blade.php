@@ -83,15 +83,15 @@
               <select class="form-control" name="level" id="level">
                 <option value="1"
                 @if ($response->level == 1)
-                    checked
+                    selected
                 @endif>1</option>
                 <option value="2"
                 @if ($response->level == 2)
-                    checked
+                    selected
                 @endif>2</option>
                 <option value="3"
                 @if ($response->level == 3)
-                    checked
+                    selected
                 @endif>3</option>
               </select>
             </div>
