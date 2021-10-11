@@ -107,8 +107,6 @@ class UserImportController extends Controller
             'name' => $data['clinic_name'],
         ]);
 
-
-
         ClinicManagers::where('clinic_id', '=', $clinic->id)->delete();
 
         $clinicManagers = [];
