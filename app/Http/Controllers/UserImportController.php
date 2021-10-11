@@ -103,7 +103,7 @@ class UserImportController extends Controller
     private function clinic(string $clinicName, array $data) :void
     {
 
-        $clinic = Clinic::where('name', '=', trim($data['clinic_name']))->first();
+        $clinic = Clinic::where('name', 'like', trim($data['clinic_name']))->first();
 
         dd($clinic);
 
