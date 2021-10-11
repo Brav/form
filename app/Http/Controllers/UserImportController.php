@@ -102,11 +102,13 @@ class UserImportController extends Controller
      */
     private function clinic(string $clinicName, array $data) :void
     {
+
+        dd($data['clinic_name']);
         $clinic = Clinic::updateOrCreate([
             'name' => $data['clinic_name'],
         ]);
 
-        dd($clinic);
+
 
         ClinicManagers::where('clinic_id', '=', $clinic->id)->delete();
 
