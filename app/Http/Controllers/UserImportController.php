@@ -103,11 +103,7 @@ class UserImportController extends Controller
     private function clinic(string $clinicName, array $data) :void
     {
 
-        $clinic = Clinic::where('name', 'like', trim($data['clinic_name']))->toSql();
-
-        dd($clinic);
-
-        $clinic = Clinic::updateOrCreate([
+        $clinic = Clinic::withTrashed()->updateOrCreate([
             'name' => $data['clinic_name'],
         ]);
 
