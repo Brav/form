@@ -27,6 +27,9 @@ class UserImportController extends Controller
         'regional_manager',
         'veterinary_manager',
         'general_manager',
+        'gm_veterinary_operations',
+        'gm_vet_services',
+        'other',
     ];
 
     function __construct ()
@@ -60,7 +63,7 @@ class UserImportController extends Controller
                 switch ($key)
                 {
                     case 'clinic_name':
-                        $this->clinic($value, $datum);
+                        $this->clinic($datum);
                         break;
                     case 'practice_manager_email':
                         $this->user($data, 'practice_manager');
@@ -74,8 +77,20 @@ class UserImportController extends Controller
                     case 'veterinary_manager_email':
                         $this->user($data, 'veterinary_manager');
                         break;
-                        case 'general_manager_email':
-                    $this->user($data, 'general_manager');
+                    case 'general_manager_email':
+                        $this->user($data, 'general_manager');
+                    break;
+
+                    case 'gm_veterinary_operations_email':
+                        $this->user($data, 'gm_veterinary_operations');
+                    break;
+
+                    case 'gm_vet_services_email':
+                        $this->user($data, 'gm_vet_services');
+                    break;
+
+                    case 'other_email':
+                        $this->user($data, 'other');
                     break;
                 }
             }
@@ -100,8 +115,14 @@ class UserImportController extends Controller
      * @throws CharactersNotFoundException
      * @throws InvalidOptionException
      */
-    private function clinic(string $clinicName, array $data) :void
+    private function clinic(array $data) :void
     {
+
+        if(!$data['clinic_name'])
+        {
+            return;
+        }
+
         $clinic = Clinic::updateOrCreate([
             'name' => $data['clinic_name'],
         ]);
@@ -112,15 +133,19 @@ class UserImportController extends Controller
 
         foreach ($this->importManagers as $manager)
         {
-            $user = $this->user($data, $manager);
+            $users = $this->user($data, $manager);
 
-            if($user)
+            if($users)
             {
-                $clinicManagers[] = [
-                    'clinic_id'       => $clinic->id,
-                    'user_id'         => $user->id,
-                    'manager_type_id' => \array_search($manager, $this->managerTypes),
-                ];
+                foreach ($users as $user)
+                {
+                    $clinicManagers[] = [
+                        'clinic_id'       => $clinic->id,
+                        'user_id'         => $user->id,
+                        'manager_type_id' => \array_search($manager, $this->managerTypes),
+                    ];
+                }
+
             }
 
         }
@@ -130,43 +155,61 @@ class UserImportController extends Controller
 
     private function user(array $data, string $key)
     {
-        $email = $data[$key . '_email'] ?? null;
+        $emails = $data[$key . '_email'] ?? null;
 
-        if(!$email)
+        if(!$emails)
         {
             return null;
         }
 
-        $user  = User::where('email', '=', $email)->first();
+        $emails = \explode(',', $emails);
+        $names  = explode(',', $data[$key . '_name']);
 
-        $name = trim($data[$key . '_name']);
+        $users  = [];
 
-        if($user)
+        $counter = 0;
+
+        foreach($emails as $email)
         {
-            $user->update([
-                'name' => $name,
-            ]);
-            return $user;
+            $user  = User::where('email', '=', $email)->first();
+
+            $name = $names[$counter];
+
+            if($user)
+            {
+                $user->update([
+                    'name' => $name,
+                ]);
+
+                $users[] = $user;
+            }
+            else
+            {
+                $generator = new ComputerPasswordGenerator();
+
+                $password = $generator
+                ->setUppercase()
+                ->setLowercase()
+                ->setNumbers()
+                ->setSymbols(false)
+                ->setLength(12)->generatePassword();
+
+                $user = User::create([
+                    'email'    => $email,
+                    'name'     => $name === '' ? "Name Placeholder" : $name,
+                    'login'    => true,
+                    'password' => Hash::make($password),
+                ]);
+
+                \Mail::to($email)->send(new \App\Mail\NewAccount($user, $password));
+
+                $users[] = $user;
+            }
+
+            $counter++;
+
         }
 
-        $generator = new ComputerPasswordGenerator();
-
-        $password = $generator
-        ->setUppercase()
-        ->setLowercase()
-        ->setNumbers()
-        ->setSymbols(false)
-        ->setLength(12)->generatePassword();
-
-        $user = User::create([
-            'email'    => $email,
-            'name'     => $name === '' ? "Name Placeholder" : $name,
-            'login'    => true,
-            'password' => Hash::make($password),
-        ]);
-
-        \Mail::to($email)->send(new \App\Mail\NewAccount($user, $password));
-
-        return $user;
+        return $users;
     }
 }
