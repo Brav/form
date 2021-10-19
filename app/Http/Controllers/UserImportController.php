@@ -125,6 +125,10 @@ class UserImportController extends Controller
 
         $clinic = Clinic::updateOrCreate([
             'name' => $data['clinic_name'],
+        ],
+        [
+            'name'       => $data['clinic_name'],
+            'deleted_at' => null,
         ]);
 
         ClinicManagers::where('clinic_id', '=', $clinic->id)->delete();
