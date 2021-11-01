@@ -73,7 +73,15 @@
         @if ($canEdit)
 
             @foreach ($outcomeOptions as $option)
-                <th>{{ $form->option($option->options) }}</th>
+                @php
+                    $data = $form->option($option->options);
+
+                    if($export)
+                    {
+                        $data = rtrim($data, '/');
+                    }
+                @endphp
+                <th>{{  $data }}</th>
             @endforeach
 
             <th class="text-break">{{ $form->outcome }}</th>
