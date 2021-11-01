@@ -81,7 +81,7 @@ class FormsExport implements FromView
 
             $lastFriday =  $currentDate->subDays($currentDate->dayOfWeek)->subWeek();
 
-            return $query->whereBetween['created_at', [$lastFriday, $currentDate]];
+            return $query->whereBetween('created_at', [$lastFriday, $currentDate]);
 
         })
         ->with(['clinic', 'location', 'category', 'type', 'channel', 'severity'])
