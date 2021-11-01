@@ -75,15 +75,6 @@ class FormsExport implements FromView
         $forms = ComplaintForm::when(!$this->commandExport && !auth()->user()->admin, function($query) use($userClinics){
             return $query->whereIn('clinic_id', $userClinics);
         })
-        ->when($this->commandExport, function($query){
-
-            $currentDate = \Carbon\Carbon::now();
-
-            $lastFriday =  $currentDate->subDays($currentDate->dayOfWeek)->subWeek();
-
-            return $query->whereBetween('created_at', [$lastFriday, $currentDate]);
-
-        })
         ->with(['clinic', 'location', 'category', 'type', 'channel', 'severity'])
         ->get();
 
