@@ -41,12 +41,30 @@ class FormsExport implements FromView
     //     return $forms;
     // }
 
+    /**
+     * Command Export
+     *
+     * @var boolean
+     */
+    protected $commandExport = false;
+
+    /**
+     * @param bool $commandExport
+     * @return void
+     */
+    function __construct (bool $commandExport = false)
+    {
+
+        $this->commandExport = $commandExport;
+
+    }
+
     public function view(): View
     {
 
         $userClinics = [];
 
-        if(!auth()->user()->admin)
+        if(auth()->check() && !auth()->user()->admin)
         {
             $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
@@ -54,14 +72,30 @@ class FormsExport implements FromView
                 ->toArray();
         }
 
-        $forms = ComplaintForm::when(!auth()->user()->admin, function($query) use($userClinics){
+        $forms = ComplaintForm::when(!$this->commandExport && !auth()->user()->admin, function($query) use($userClinics){
             return $query->whereIn('clinic_id', $userClinics);
+        })
+        ->when($this->commandExport, function($query){
+
+            $currentDate = \Carbon\Carbon::now();
+
+            $lastFriday =  $currentDate->subDays($currentDate->dayOfWeek)->subWeek();
+
+            return $query->whereBetween['created_at', [$lastFriday, $currentDate]];
+
         })
         ->with(['clinic', 'location', 'category', 'type', 'channel', 'severity'])
         ->get();
 
-        $canEdit = auth()->user()->admin == 1 ||
+        if($this->commandExport === true)
+        {
+            $canEdit = true;
+        }
+        else
+        {
+            $canEdit = auth()->user()->admin == 1 ||
                 auth()->user()->role->hasPermission('w') ? true : false;
+        }
 
         return view('complaint-form/partials/_table', [
             'forms'          => $forms,

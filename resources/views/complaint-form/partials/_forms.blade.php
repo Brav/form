@@ -1,5 +1,29 @@
 @foreach ($forms as $form)
 
+    @php
+        $dateOfClientComplaint = $form->date_of_client_complaint !== null ?
+            date('d/m/Y', \strtotime($form->date_of_client_complaint)) : '/';
+
+        $regionalManager =  $form->clinic->regionalManager ? $form->clinic->regionalManager->first()->user->name : '/';
+
+        $typeName     = $form->type->name ?? '/';
+        $channelName  = $form->channel->name ?? '/';
+        $severityName = $form->severity->name ?? '/';
+
+        $dateCompleted = $form->date_completed !== null ?
+                date('d/m/Y', \strtotime($form->date_completed)) : '/';
+
+        if ($export)
+        {
+            $dateOfClientComplaint = rtrim($dateOfClientComplaint, '/');
+            $regionalManager       = rtrim($regionalManager, '/');
+            $typeName              = rtrim($typeName, '/');
+            $channelName           = rtrim($channelName, '/');
+            $severityName          = rtrim($severityName, '/');
+            $dateCompleted         = rtrim($dateCompleted, '/');
+        }
+    @endphp
+
     <tr id="item-{{ $form->id }}">
         @if (!$export && $canEdit)
             <th>
@@ -12,22 +36,21 @@
             ->timezone('Australia/Sydney')
             ->format('d/m/Y g:i A') }}</th>
         <th>{{ $form->clinic->name }}</th>
-        <th>{{ $form->clinic->regionalManager ? $form->clinic->regionalManager->first()->user->name : '/'}}</th>
+        <th>{{ $regionalManager }}</th>
         <th>{{ $form->team_member }}</th>
         <th>{{ $form->team_member_position }}</th>
         <th>{{ $form->client_name }}</th>
         <th>{{ $form->patient_name }}</th>
         <th>{{ $form->pms_code }}</th>
         <th>{{ $form->date_of_incident->format('d/m/Y') }}</th>
-        <th>{{ $form->date_of_client_complaint !== null ?
-            date('d/m/Y', \strtotime($form->date_of_client_complaint)) : '/'}}</th>
+        <th>{{ $dateOfClientComplaint }}</th>
         <th class="text-break">{{ $form->description }}</th>
         <th>{{ $form->location->name }}</th>
         <th>{{ $form->category->name }}</th>
-        <th>{{ $form->type->name ?? '/' }}</th>
-        <th>{{ $form->channel->name ?? '/' }}</th>
+        <th>{{ $typeName }}</th>
+        <th>{{ $channelName }}</th>
         <th>{{ $form->level }}</th>
-        <th class="text-capitalize">{{ $form->severity->name ?? '/' }}</th>
+        <th class="text-capitalize">{{ $severityName }}</th>
         <th>
             @if ($form->files)
                 @foreach ($form->files as $file)
@@ -55,8 +78,7 @@
 
             <th class="text-break">{{ $form->outcome }}</th>
             <th>{{ $form->completed_by }}</th>
-            <th>{{ $form->date_completed !== null ?
-                date('d/m/Y', \strtotime($form->date_completed)) : '/'}}</th>
+            <th>{{ $dateCompleted }}</th>
         @endif
         @if (!$export)
             <th>

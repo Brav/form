@@ -27,6 +27,11 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('reminder:send')
             ->everyFourHours();
+
+        $schedule->command('excel:export')
+            ->weekly()
+            ->fridays()
+            ->at('09:00');
     }
 
     /**
