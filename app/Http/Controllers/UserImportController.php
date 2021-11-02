@@ -127,6 +127,11 @@ class UserImportController extends Controller
 
         $clinic = Clinic::whereRaw('LOWER(name)', strtolower($clinicName))->first();
 
+        if($clinicName === 'Albion Vet Surgery')
+        {
+            dd($clinic);
+        }
+
         if($clinic)
         {
             $clinic->name       = $clinicName;
