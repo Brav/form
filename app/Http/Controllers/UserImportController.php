@@ -142,8 +142,9 @@ class UserImportController extends Controller
             ]);
         }
 
-        if(!$clinic)
+        if(!isset($clinic->id))
         {
+            dump($clinic);
             dd($data);
         }
 
