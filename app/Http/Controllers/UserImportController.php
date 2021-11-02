@@ -123,15 +123,15 @@ class UserImportController extends Controller
             return;
         }
 
-        $clinic = Clinic::whereRaw('LOWER(name)', strtolower($data['clinic_name']))->first();
+        $clinicName = trim($data['clinic_name']);
+
+        $clinic = Clinic::whereRaw('LOWER(name)', strtolower($clinicName))->first();
 
         dump($clinic);
 
         if($clinic)
         {
-
-            dd(123);
-            $clinic->name       = $data['clinic_name'];
+            $clinic->name       = $clinicName;
             $clinic->deleted_at = null;
 
             $clinic->update();
