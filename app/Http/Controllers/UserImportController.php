@@ -123,6 +123,10 @@ class UserImportController extends Controller
             return;
         }
 
+        $clinicData = Clinic::where('name', $data['clinic_name'])->first();
+
+        dd($clinicData);
+
         $clinic = Clinic::updateOrCreate([
             'name' => $data['clinic_name'],
         ],
