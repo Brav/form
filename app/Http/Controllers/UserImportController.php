@@ -125,7 +125,7 @@ class UserImportController extends Controller
 
         $clinicName = trim($data['clinic_name']);
 
-        $clinic = Clinic::whereRaw('name', strtolower('dad'))->withTrashed()->get();
+        $clinic = Clinic::whereRaw('name', strtolower($clinicName))->withTrashed()->get();
 
         if($clinicName === 'Albion Vet Surgery')
         {
