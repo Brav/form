@@ -125,8 +125,12 @@ class UserImportController extends Controller
 
         $clinic = Clinic::whereRaw('LOWER(name)', strtolower($data['clinic_name']))->first();
 
+        dump($clinic);
+
         if($clinic)
         {
+
+            dd(123);
             $clinic->name       = $data['clinic_name'];
             $clinic->deleted_at = null;
 
