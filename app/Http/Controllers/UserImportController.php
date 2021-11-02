@@ -130,6 +130,7 @@ class UserImportController extends Controller
         if($clinicName === 'Albion Vet Surgery')
         {
             dd($clinic);
+            dd($data);
         }
 
         if($clinic)
