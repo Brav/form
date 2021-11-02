@@ -123,20 +123,22 @@ class UserImportController extends Controller
             return;
         }
 
-        $clinicData = Clinic::where('name', $data['clinic_name'])->first();
-        $clinicData1 = Clinic::whereRaw('LOWER(name)', strtolower($data['clinic_name']))->first();
+        $clinic = Clinic::whereRaw('LOWER(name)', strtolower($data['clinic_name']))->first();
 
-        dump($data);
-        dump($clinicData1);
-        dd($clinicData);
+        if($clinic)
+        {
+            $clinic->name       = $data['clinic_name'];
+            $clinic->deleted_at = null;
 
-        $clinic = Clinic::updateOrCreate([
-            'name' => $data['clinic_name'],
-        ],
-        [
-            'name'       => $data['clinic_name'],
-            'deleted_at' => null,
-        ]);
+            $clinic->update();
+
+        }
+        else
+        {
+            $clinic = Clinic::insert([
+                'name' => $data['clinic_name'],
+            ]);
+        }
 
         ClinicManagers::where('clinic_id', '=', $clinic->id)->delete();
 
