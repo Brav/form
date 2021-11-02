@@ -124,7 +124,9 @@
             tinymce.init({
                 selector: "textarea:not(#additional_emails)",
                 menubar: false,
-                toolbar: "undo redo | paragraph bold italic | customInsertButton",
+                plugins: 'link',
+                toolbar: "undo redo | paragraph bold italic | link",
+
                 setup: function (editor) {
 
                     editor.ui.registry.addButton('customInsertButton', {
@@ -136,7 +138,7 @@
                     }
 
                 });
-            }
+                }
             });
         })
 
@@ -144,8 +146,12 @@
             tinymce.remove('textarea');
         });
 
-    </script>
-<script>
+        $(document).on('focusin', function(e)
+        {
+            e.stopImmediatePropagation();
+        });
 
-</script>
+
+    </script>
+
 @endsection

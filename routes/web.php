@@ -195,3 +195,5 @@ Route::prefix('severity')->middleware(['auth', 'admin'])->group(function () {
     Route::put('update/{item}', [SeverityController::class, 'update'])->name('severity.update');
     Route::delete('destroy/{item}', [SeverityController::class, 'destroy'])->name('severity.destroy');
 });
+
+Route::view('operational_policy', 'operationalPolicy');

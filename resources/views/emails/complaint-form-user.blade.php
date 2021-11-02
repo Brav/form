@@ -258,20 +258,28 @@ a[x-apple-data-detectors='true'] {
         <strong>Severity:</strong> {{$form->severity->name  }} <br>
 
         @if ($form->files)
-            <strong>The following file(s) have been attached for your reference.</strong><br>
-                @foreach ($form->files as $file)
-                    @php
-                        $fileInfo = explode('.', $file)
-                    @endphp
+          <strong>The following file(s) have been attached for your reference.</strong><br>
+            @foreach ($form->files as $file)
+              @php
+                  $fileInfo = explode('.', $file)
+              @endphp
 
-                        <a  class="d-block mb-1"
-                            href="{{ route('complaint-form.download', [
-                            'form' => $form->id,
-                            'file' => $file,
-                        ]) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">{{ $file }}</a>
+                  <a  class="d-block mb-1"
+                      href="{{ route('complaint-form.download', [
+                      'form' => $form->id,
+                      'file' => $file,
+                  ]) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">{{ $file }}</a>
 
-                @endforeach
-            @endif
+            @endforeach
+        @endif
+
+        <p>
+          <strong>Useful resources for dealing with complaints</strong><br>
+          <span><a href="https://rise.articulate.com/share/ebvbTT1KJhQKagctvBlQGhcH1F5ACXN8#/">Difficult Conversation Planning </a></span><br>
+            <span><a href="https://rise.articulate.com/share/9WMRd5wNr9CVkiIlFSWRnI3TQlW6NMX7#/">How to Have a Difficult Conversation</a></span><br>
+            <span><a href="https://rise.articulate.com/share/IrnA9Lkdv_7s6S7QMrlV9BetXvHjidXl#/">Managing Client Complaints and Angry Customers</a></span><br>
+            <span><a href="{{ route('operational_policy') }}">Clients Complaints and Concerns - Operational Policy</a></span><br>
+        </p>
     </span></p>
   </div>
 
