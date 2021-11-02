@@ -142,6 +142,11 @@ class UserImportController extends Controller
             ]);
         }
 
+        if(!$clinic)
+        {
+            dd($data);
+        }
+
         ClinicManagers::where('clinic_id', '=', $clinic->id)->delete();
 
         $clinicManagers = [];
