@@ -124,9 +124,10 @@ class UserImportController extends Controller
         }
 
         $clinicData = Clinic::where('name', $data['clinic_name'])->first();
-        $clinicData1 = Clinic::where('LOWER(name)', strtolower($data['clinic_name']))->first();
+        $clinicData1 = Clinic::whereRaw('LOWER(name)', strtolower($data['clinic_name']))->first();
 
         dump($data);
+        dump($clinicData1);
         dd($clinicData);
 
         $clinic = Clinic::updateOrCreate([
