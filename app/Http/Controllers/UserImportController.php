@@ -137,15 +137,9 @@ class UserImportController extends Controller
         }
         else
         {
-            $clinic = Clinic::insert([
+            $clinic = Clinic::create([
                 'name' => $data['clinic_name'],
             ]);
-        }
-
-        if(!isset($clinic->id))
-        {
-            dump($clinic);
-            dd($data);
         }
 
         ClinicManagers::where('clinic_id', '=', $clinic->id)->delete();
