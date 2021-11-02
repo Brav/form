@@ -186,6 +186,8 @@ class UserImportController extends Controller
 
         foreach($emails as $email)
         {
+            $email = trim($email);
+
             $user  = User::where('email', '=', $email)->first();
 
             $name = $names[$counter];
