@@ -240,8 +240,8 @@ a[x-apple-data-detectors='true'] {
       <span>Details of the report you have submitted is below:</span><br><br>
       <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
         <strong>Regional Manager:</strong> {{ $form->clinic->regionalManager ?
-            $form->clinic->regionalManager->first()->user->name : '/'  }} <br>
-        <strong>Team member logging the complaint:</strong> {{ $form->team_member  }} <br>
+            optional($form->clinic->regionalManager->first()->user)->name : '/'  }} <br>
+        <strong>Team member logging the complaint:</strong> {{ $form->team_member ?? '/' }} <br>
         <strong>Position of the team member:</strong> {{ $form->team_member_position  }} <br>
         <strong>Client/Owner name:</strong> {{ $form->client_name  }} <br>
         <strong>Patient name:</strong> {{ $form->patient_name  }} <br>
