@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imports\UsersImport;
 use App\Models\Clinic;
 use App\Models\ClinicManagers;
+use App\Models\Roles;
 use App\Models\User;
 use Hackzilla\PasswordGenerator\Exception\CharactersNotFoundException;
 use Hackzilla\PasswordGenerator\Exception\InvalidOptionException;
@@ -184,6 +185,23 @@ class UserImportController extends Controller
 
         $counter = 0;
 
+        switch ($key)
+        {
+            case 'gm_vet_services':
+                $roleName = 'GM - Veterinary Services';
+                break;
+
+            case 'gm_veterinary_operations':
+                $roleName = 'GM - Veterinary Operations';
+                break;
+
+            default:
+                $roleName = \ucfirst(\str_replace('_', ' ', $key));
+                break;
+        }
+
+        $role = Roles::where('name', '=', $roleName)->first();
+
         foreach($emails as $email)
         {
             $email = trim($email);
@@ -194,9 +212,16 @@ class UserImportController extends Controller
 
             if($user)
             {
-                $user->update([
+                $data = [
                     'name' => $name,
-                ]);
+                ];
+
+                if($key !== 'other')
+                {
+                    $data['role_id'] = $role->id ?? null;
+                }
+
+                $user->update($data);
 
                 $users[] = $user;
             }
@@ -211,14 +236,21 @@ class UserImportController extends Controller
                 ->setSymbols(false)
                 ->setLength(12)->generatePassword();
 
-                $user = User::create([
-                    'email'    => $email,
-                    'name'     => $name === '' ? "Name Placeholder" : $name,
-                    'login'    => true,
-                    'password' => Hash::make($password),
-                ]);
+                $data = [
+                    'email'     => $email,
+                    'name'      => $name === '' ? "Name Placeholder" : $name,
+                    'can_login' => true,
+                    'password'  => Hash::make($password),
+                ];
 
-                \Mail::to($email)->send(new \App\Mail\NewAccount($user, $password));
+                if($key !== 'other')
+                {
+                    $data['role_id'] = $role->id ?? null;
+                }
+
+                $user = User::create($data);
+
+                // \Mail::to($email)->send(new \App\Mail\NewAccount($user, $password));
 
                 $users[] = $user;
             }
