@@ -190,11 +190,6 @@ class UserImportController extends Controller
 
             $user  = User::where('email', '=', $email)->first();
 
-            if($email === 'hester.raijmakers@vet.partners')
-            {
-                dd($user);
-            }
-
             $name = $names[$counter];
 
             if($user)
