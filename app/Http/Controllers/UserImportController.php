@@ -16,6 +16,7 @@ use InvalidArgumentException;
 class UserImportController extends Controller
 {
     private $managerTypes;
+    private $roles;
 
     /**
      * Managers types from the excel file
@@ -36,6 +37,7 @@ class UserImportController extends Controller
     function __construct ()
     {
         $this->managerTypes = ClinicManagers::$managerTypes;
+        $this->roles        = Roles::all();
     }
     public function index()
     {
@@ -185,22 +187,33 @@ class UserImportController extends Controller
 
         $counter = 0;
 
+        $roleID = null;
+
         switch ($key)
         {
             case 'gm_vet_services':
-                $roleName = 'GM - Veterinary Services';
+                $roleName = 'gm - veterinary services';
                 break;
 
             case 'gm_veterinary_operations':
-                $roleName = 'GM - Veterinary Operations';
+                $roleName = 'gm - veterinary operations';
                 break;
 
             default:
-                $roleName = \ucfirst(\str_replace('_', ' ', $key));
+                $roleName = \strtolower(\str_replace('_', ' ', $key));
                 break;
         }
 
-        $role = Roles::where('name', '=', $roleName)->first();
+        if($key !== 'other')
+        {
+            $role = $this->roles->filter(function($value, $key) use ($roleName)
+            {
+                return strtolower($value->name) === $roleName;
+            });
+
+            $roleID = $role ? $role->first()->id : null;
+        }
+
 
         foreach($emails as $email)
         {
@@ -213,12 +226,13 @@ class UserImportController extends Controller
             if($user)
             {
                 $data = [
-                    'name' => $name,
+                    'name'      => $name,
+                    'can_login' => true,
                 ];
 
                 if($key !== 'other')
                 {
-                    $data['role_id'] = $role->id ?? null;
+                    $data['role_id'] = $roleID;
                 }
 
                 $user->update($data);
@@ -245,7 +259,7 @@ class UserImportController extends Controller
 
                 if($key !== 'other')
                 {
-                    $data['role_id'] = $role->id ?? null;
+                    $data['role_id'] = $roleID;
                 }
 
                 $user = User::create($data);
