@@ -196,4 +196,4 @@ Route::prefix('severity')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('destroy/{item}', [SeverityController::class, 'destroy'])->name('severity.destroy');
 });
 
-Route::view('operational_policy', 'operationalPolicy');
+Route::view('operational_policy', 'operationalPolicy')->name('operational_policy');
