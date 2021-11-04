@@ -131,13 +131,13 @@
                         <div class="col-md-8">
 
                             <div class="form-group">
-                                <label for="pms_code">PMS Code</label>
+                                <label for="pms_code">Patient Number</label>
                                 <input type="text"
                                     class="form-control"
                                     name="pms_code"
                                     id="pms_code"
                                     value="{{ old('pms_code') }}"
-                                    placeholder="PMS Code">
+                                    placeholder="Patient Number">
                                 @error('pms_code')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

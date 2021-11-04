@@ -181,7 +181,7 @@
         <div class="col-8">
 
             <div class="form-group">
-                <label for="pms_code">PMS Code</label>
+                <label for="pms_code">Patient Number</label>
                 <input type="text"
                     class="form-control"
                     name="pms_code"

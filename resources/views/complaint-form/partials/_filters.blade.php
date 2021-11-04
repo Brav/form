@@ -80,7 +80,7 @@
         <input
             type="text"
             class="form-control filter filter-text"
-            placeholder="PMS code"
+            placeholder="Patient Number"
             data-column="pms_code"
             data-operator="like"
             data-type="text">

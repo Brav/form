@@ -245,7 +245,7 @@ a[x-apple-data-detectors='true'] {
         <strong>Position of the team member:</strong> {{ $form->team_member_position  }} <br>
         <strong>Client/Owner name:</strong> {{ $form->client_name  }} <br>
         <strong>Patient name:</strong> {{ $form->patient_name  }} <br>
-        <strong>PMS code:</strong> {{ $form->pms_code  }} <br>
+        <strong>Patient number:</strong> {{ $form->pms_code  }} <br>
         <strong>Date of the incident:</strong> {{$form->date_of_incident->format('d/m/Y')  }} <br>
         <strong>Date of client complaint (if applicable):</strong> {{ $form->date_of_client_complaint !== null ?
             date('d/m/Y', \strtotime($form->date_of_client_complaint)) : 'n/a' }} <br>

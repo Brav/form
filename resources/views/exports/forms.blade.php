@@ -12,7 +12,7 @@
                 <th class="small">Position of the team member</th>
                 <th class="small">Client/Owner name</th>
                 <th class="small">Patient name</th>
-                <th class="small">PMS code</th>
+                <th class="small">Patient number</th>
                 <th class="small">Date of the incident</th>
                 <th class="small">Date of client complaint (if applicable)</th>
                 <th class="small">Description of the incident and/or complaint</th>
