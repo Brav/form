@@ -265,3 +265,18 @@ function appendFileNames(files)
         .find(".files")
         .html(allFiles.join(""));
 }
+
+$(function () {
+
+    let width = document.getElementById("main-table").scrollWidth;
+
+    $(".wrapper1").width(width);
+
+    $(".main-wrapper").on("scroll", function () {
+        $(".table-responsive").scrollLeft($(".main-wrapper").scrollLeft());
+    });
+    $(".table-responsive").on("scroll", function () {
+        $(".main-wrapper").scrollLeft($(".table-responsive").scrollLeft());
+    });
+
+});

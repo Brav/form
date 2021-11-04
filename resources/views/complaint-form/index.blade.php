@@ -18,7 +18,10 @@
                 <i class="fa fa-table" aria-hidden="true"></i>
                 Export</a>
 
-                <div class="table-responsive" style="height: 100vh">
+                <div class="main-wrapper" style="overflow-x: scroll;height: 20px; display: block;">
+                    <div class="wrapper1" style="min-height: 20px"></div>
+                </div>
+                <div class="table-responsive" style="height: 100vh" id="main-table">
                     @include('complaint-form/partials/_table')
                 </div>
 
@@ -40,4 +43,5 @@
 
         </div>
     </div>
+
 @endsection
