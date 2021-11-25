@@ -4,8 +4,10 @@
 
     <div class="content">
         <div class="block-content">
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Complaint Sent!</h4>
+            <div class="container">
+                <div class="alert alert-success text-center" role="alert">
+                    <hr>
+                    <h4 class="h1 alert-heading my-3">Complaint Sent!</h4>
                     <hr>
                     @if (session('response'))
                         {!! session('response') !!}
