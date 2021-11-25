@@ -197,3 +197,4 @@ Route::prefix('severity')->middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::view('operational_policy', 'operationalPolicy')->name('operational_policy');
+Route::view('responding_to_review', 'respondingToReview')->name('responding_to_review');
