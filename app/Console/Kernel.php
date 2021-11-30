@@ -32,9 +32,6 @@ class Kernel extends ConsoleKernel
             ->weekly()
             ->fridays()
             ->at('09:00');
-
-        $schedule->command('test:minute')
-            ->everyMinute();
     }
 
     /**
