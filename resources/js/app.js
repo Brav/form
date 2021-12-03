@@ -268,15 +268,20 @@ function appendFileNames(files)
 
 $(function () {
 
-    let width = document.getElementById("main-table").scrollWidth;
+    let mainTable = document.getElementById("main-table");
 
-    $(".wrapper1").width(width);
+    if(mainTable)
+    {
+        $(".wrapper1").width(mainTable.scrollWidth);
 
-    $(".main-wrapper").on("scroll", function () {
-        $(".table-responsive").scrollLeft($(".main-wrapper").scrollLeft());
-    });
-    $(".table-responsive").on("scroll", function () {
-        $(".main-wrapper").scrollLeft($(".table-responsive").scrollLeft());
-    });
+        $(".main-wrapper").on("scroll", function () {
+            $(".table-responsive").scrollLeft($(".main-wrapper").scrollLeft());
+        });
+        $(".table-responsive").on("scroll", function () {
+            $(".main-wrapper").scrollLeft($(".table-responsive").scrollLeft());
+        });
+    }
+
+
 
 });

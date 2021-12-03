@@ -25,7 +25,7 @@
             </div>
 
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-vcenter" id=response>
+                <table class="table table-bordered table-striped table-vcenter" id=responses>
                     <thead>
                         <tr>
                             <th class="small">ID</th>

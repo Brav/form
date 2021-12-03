@@ -22,10 +22,29 @@ class AutomatedResponseController extends Controller
      */
     public function index()
     {
-        return view('automated-response/index', [
-            'responses' => AutomatedResponse::paginate(20),
-            'files'     => File::orderBy('title', 'ASC')->get(),
-        ]);
+        $responses = AutomatedResponse::paginate(20);
+        $files = File::orderBy('title', 'ASC')->get();
+
+        if(!request()->ajax())
+        {
+            return view('automated-response/index', [
+                'responses' => $responses,
+                'files'     => $files,
+            ]);
+        }
+
+        return [
+            'html' => view('automated-response/partials/_responses', [
+                'responses' => $responses,
+            ])->render(),
+            'pagination' => view('pagination', [
+                'paginator' => $responses,
+                'layout'    => 'vendor.pagination.bootstrap-4',
+                'role'      => 'responses',
+                'container' => 'responses-container',
+            ])->render()
+        ];
+
     }
 
     /**
