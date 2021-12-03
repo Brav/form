@@ -70,6 +70,6 @@ class ReCaptchaRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'There was a problem with captcha. Please try again.';
     }
 }

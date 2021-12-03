@@ -55,17 +55,17 @@
             @if ($form->files)
                 @foreach ($form->files as $file)
                     @php
-                        $fileInfo = explode('.', $file)
+                        $fileInfo = explode('.', $file);
+                        $route = route('complaint-form.download', [
+                            'form' => $form->id,
+                            'file' => $file,
+                        ]);
                     @endphp
                     @if (!$export)
                         <a  class="d-block mb-1"
-                            href="{{ route('complaint-form.download', [
-                            'form' => $form->id,
-                            'file' => $file,
-                            // 'extension' => end($fileInfo),
-                        ]) }}">{{ $file }} <i class="fas fa-download"></i></a>
+                            href="{{ $route }}">{{ $file }} <i class="fas fa-download"></i></a>
                     @else
-                        <p>{{ $file }}</p>
+                        <p>{{ $route }}</p>
                     @endif
                 @endforeach
             @endif

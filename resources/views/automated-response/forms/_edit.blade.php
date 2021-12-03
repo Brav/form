@@ -137,24 +137,24 @@
             </div>
         </div>
 
-        <div class="col">
-            <div class="form-group">
-              <label for="channel">Channels</label>
-              <select multiple class="form-control" name="channel[]" id="channel">
-                @foreach ($channels as $channel)
-                    <option
-                    @if (in_array($channel->id, $response->scenario['channels'] ?? []))
-                        selected
-                    @endif
-                    value="{{ $channel->id }}">{{ $channel->name }}</option>
-                @endforeach
-              </select>
-            </div>
-        </div>
-
     </div>
 
     <div class="form-row align-items-center">
+
+            <div class="col">
+                <div class="form-group">
+                <label for="channel">Channels</label>
+                <select multiple class="form-control" name="channel[]" id="channel">
+                    @foreach ($channels as $channel)
+                        <option
+                        @if (in_array($channel->id, $response->scenario['channels'] ?? []))
+                            selected
+                        @endif
+                        value="{{ $channel->id }}">{{ $channel->name }}</option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
 
             <div class="col">
                 <div class="form-group">
