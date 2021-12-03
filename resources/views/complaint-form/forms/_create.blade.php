@@ -394,8 +394,11 @@
     </div>
 
     @if($errors->has('recaptcha_token'))
-        {{ $errors->first('recaptcha_token') }}
+        <div class="form-row">
+            {{ $errors->first('recaptcha_token') }}
+        </div>
     @endif
+
     <button type="submit" class="btn btn-hero-primary mt-3">Submit a complaint</button>
 
             <div class="d-block pb-5"></div>
