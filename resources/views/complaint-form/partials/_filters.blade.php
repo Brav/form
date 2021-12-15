@@ -3,8 +3,9 @@
     data-url="{{ route('complaint-form.manage') }}"
     data-pagination="pagination"
     data-container="forms-container">
-    <th>
-    </th>
+    @if (!$export && $canEdit)
+        <th></th>
+    @endif
     <th>
         <input type="text"
             class="form-control filter filter-text"
