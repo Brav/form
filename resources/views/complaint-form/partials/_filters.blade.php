@@ -21,6 +21,15 @@
         <input
             type="text"
             class="form-control filter filter-text"
+            placeholder="Clinic Code"
+            data-column="clinic_code"
+            data-operator="like"
+            data-type="text">
+    </th>
+    <th>
+        <input
+            type="text"
+            class="form-control filter filter-text"
             placeholder="Clinic Name"
             data-column="clinic_name"
             data-operator="like"
@@ -33,6 +42,16 @@
             class="form-control filter filter-text"
             placeholder="Regional Manager"
             data-column="regional_manager"
+            data-operator="like"
+            data-type="text">
+    </th>
+
+    <th>
+        <input
+            type="text"
+            class="form-control filter filter-text"
+            placeholder="General Manager"
+            data-column="general_manager"
             data-operator="like"
             data-type="text">
     </th>

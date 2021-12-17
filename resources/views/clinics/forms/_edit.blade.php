@@ -1,13 +1,31 @@
 <form action="{{ route('clinics.update', $clinic->id) }}" method="POST">
     @csrf
     @method('PUT')
-    <div class="form-group">
-        <label for="name">Clinic Name</label>
-        <input type="text" class="form-control" name=name id="name" value="{{ old('name', $clinic->name) }}">
 
-        @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+    <div class="form-row align-items-center">
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="name">Clinic Code</label>
+                <input type="text" class="form-control" name=code id="code" value="{{ old('code', $clinic->code) }}">
+
+                @error('code')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="name">Clinic Name</label>
+                <input type="text" class="form-control" name=name id="name" value="{{ old('name', $clinic->name) }}">
+
+                @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
     </div>
 
     <div class="form-row align-items-center">

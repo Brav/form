@@ -1,12 +1,31 @@
 <form action="{{ route('clinics.store') }}" method="POST">
     @csrf
-    <div class="form-group">
-        <label for="name">Clinic Name</label>
-        <input type="text" class="form-control" name=name id="name" value="{{ old('name') }}">
 
-        @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+
+    <div class="form-row align-items-center">
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="name">Clinic Code</label>
+                <input type="text" class="form-control" name=code id="code" value="{{ old('code') }}">
+
+                @error('code')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="name">Clinic Name</label>
+                <input type="text" class="form-control" name=name id="name" value="{{ old('name') }}">
+
+                @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
     </div>
 
     <div class="form-row align-items-center">

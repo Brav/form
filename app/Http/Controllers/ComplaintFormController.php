@@ -457,20 +457,43 @@ class ComplaintFormController extends Controller
                             });
                             break;
 
+                        case 'clinic_code';
+                            $query->whereIn('clinic_id', function($query) use ($search)
+                            {
+                                return $query->select('id')
+                                ->from('clinics')
+                                ->where('code', 'like', '%' . $search . '%');
+                            });
+                            break;
+
                         case 'regional_manager';
-                                $userID = array_search($data['column'], ClinicManagers::$managerTypes);
-                                $query->whereIn('clinic_id', function($query) use($userID, $search)
-                                {
-                                    return $query->select('clinic_id')
-                                    ->from('clinic_managers')
-                                    ->where('manager_type_id', '=', $userID)
-                                    ->whereIn('user_id', function($query) use($search){
-                                        $query->select('id')
-                                        ->from('users')
-                                        ->where('name', 'like', '%' . $search . '%');
-                                    });
+                            $userID = array_search($data['column'], ClinicManagers::$managerTypes);
+                            $query->whereIn('clinic_id', function($query) use($userID, $search)
+                            {
+                                return $query->select('clinic_id')
+                                ->from('clinic_managers')
+                                ->where('manager_type_id', '=', $userID)
+                                ->whereIn('user_id', function($query) use($search){
+                                    $query->select('id')
+                                    ->from('users')
+                                    ->where('name', 'like', '%' . $search . '%');
                                 });
-                                break;
+                            });
+                            break;
+
+                        case 'general_manager';
+                            $userID = array_search($data['column'], ClinicManagers::$managerTypes);
+                            $query->whereIn('clinic_id', function($query) use($userID, $search)
+                            {
+                                return $query->select('clinic_id')
+                                ->from('clinic_managers')
+                                ->where('manager_type_id', '=', $userID)
+                                ->whereIn('user_id', function($query) use($search){
+                                    $query->select('id')
+                                    ->from('users')
+                                    ->where('name', 'like', '%' . $search . '%');
+                                });
+                            });
                             break;
 
                         case 'team_member';

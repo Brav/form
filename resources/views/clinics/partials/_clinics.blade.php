@@ -2,6 +2,7 @@
     <tr id="item-{{ $clinic->id }}">
         <th>{{ $clinic->id }}</th>
         <th>{{ $clinic->name }}</th>
+        <th>{{ $clinic->code ?? '/' }}</th>
         <th>
             @if ($clinic->leadVet)
                 @foreach ($clinic->leadVet as $user)

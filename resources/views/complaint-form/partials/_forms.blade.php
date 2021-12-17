@@ -4,7 +4,8 @@
         $dateOfClientComplaint = $form->date_of_client_complaint !== null ?
             date('d/m/Y', \strtotime($form->date_of_client_complaint)) : '/';
 
-        $regionalManager =  $form->clinic->regionalManager ? $form->clinic->regionalManager->first()->user->name : '/';
+        $regionalManager = $form->clinic->regionalManager ? $form->clinic->regionalManager->first()->user->name : '/';
+        $generalManager  = $form->clinic->generalManager ? $form->clinic->generalManager->first()->user->name : '/';
 
         $typeName     = $form->type->name ?? '/';
         $channelName  = $form->channel->name ?? '/';
@@ -35,8 +36,10 @@
         <th>{{ $form->created_at
             ->timezone('Australia/Sydney')
             ->format('d/m/Y g:i A') }}</th>
+        <th>{{ $form->clinic->code }}</th>
         <th>{{ $form->clinic->name }}</th>
         <th>{{ $regionalManager }}</th>
+        <th>{{ $generalManager }}</th>
         <th>{{ $form->team_member }}</th>
         <th>{{ $form->team_member_position }}</th>
         <th>{{ $form->client_name }}</th>

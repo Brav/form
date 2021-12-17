@@ -5,8 +5,10 @@
                 <th scope="col">Edit</th>
             @endif
             <th scope="col" class="small text-nowrap">Date/Time Submitted</th>
+            <th scope="col" class="small text-nowrap">Clinic Code</th>
             <th scope="col" class="small text-nowrap">Clinic Name</th>
             <th scope="col" class="small text-nowrap">Regional Manager</th>
+            <th scope="col" class="small text-nowrap">General Manager</th>
             <th scope="col" class="small text-nowrap">Team member logging the complaint</th>
             <th scope="col" class="small text-nowrap">Position of the team member</th>
             <th scope="col" class="small text-nowrap">Client/Owner name</th>

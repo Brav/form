@@ -19,6 +19,7 @@
                             <tr>
                                 <th class="small">ID</th>
                                 <th class="small">Name</th>
+                                <th class="small">Code</th>
                                 <th class="small">Lead Vet</th>
                                 <th class="small">Practice Manager</th>
                                 <th class="small">Veterinary Manager</th>
@@ -39,6 +40,16 @@
                                         class="form-control filter filter-text"
                                         placeholder="Name"
                                         data-column="name"
+                                        data-operator="like"
+                                        data-type="text">
+                                </th>
+
+                                <th>
+                                    <input
+                                        type="text"
+                                        class="form-control filter filter-text"
+                                        placeholder="Code"
+                                        data-column="code"
                                         data-operator="like"
                                         data-type="text">
                                 </th>

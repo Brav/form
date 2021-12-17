@@ -148,8 +148,6 @@ class ClinicController extends Controller
     {
         $userID = auth()->id();
 
-
-
         if (!auth()->user()->admin &&
             $clinic->lead_vet != $userID &&
             $clinic->practise_manager != $userID
