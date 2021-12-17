@@ -237,6 +237,7 @@ class ClinicController extends Controller
                 {
                     switch ($data['column']) {
                         case 'name':
+                        case 'code':
                             $query->where($data['column'], 'like', '%' . $search . '%');
                             break;
                         case 'lead_vet':
