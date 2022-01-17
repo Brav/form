@@ -164,7 +164,7 @@ class Clinic extends Model
      *
      * @return Illuminate\Database\Eloquent\Collection[]
      */
-    public function getGmVetsServicesAttribute()
+public function getGmVetsServicesAttribute()
     {
         if($this->managers->count() === 0)
             return null;
@@ -187,5 +187,25 @@ class Clinic extends Model
         return $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('other');
         });
+    }
+
+    /**
+     * Print comma separated users
+     *
+     * @param object $users
+     * @param string $field
+     *
+     * @return string
+     */
+    public static function printUsers(object $users, string $field) :string
+    {
+        $data = [];
+
+        foreach ($users as $user)
+        {
+            $data[] = $user->user->$field;
+        }
+
+        return implode(',', $data);
     }
 }

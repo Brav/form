@@ -134,7 +134,7 @@ class UserImportController extends Controller
         if($clinic)
         {
             $clinic->name       = $clinicName;
-            $clinic->name       = !empty($clinicCode) ? $clinicCode : null;
+            $clinic->code       = !empty($clinicCode) ? $clinicCode : null;
             $clinic->deleted_at = null;
 
             $clinic->update();
@@ -184,7 +184,7 @@ class UserImportController extends Controller
         }
 
         $emails = \explode(',', $emails);
-        $names  = explode(',', $data[$key . '_name']);
+        $names  = \explode(',', $data[$key . '_name']);
 
         $users  = [];
 

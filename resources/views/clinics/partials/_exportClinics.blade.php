@@ -1,131 +1,134 @@
+<?php
+    use App\Models\Clinic;
+?>
 @foreach ($clinics as $clinic)
     <tr>
         <th>{{ $clinic->name }}</th>
         <th>
             @if ($clinic->practiseManager)
-                @foreach ($clinic->practiseManager as $user)
-                    {{ $user->user->name ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->practiseManager, 'name');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->practiseManager)
-                @foreach ($clinic->practiseManager as $user)
-                    {{ $user->user->email ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->practiseManager, 'email');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->leadVet)
-                @foreach ($clinic->leadVet as $user)
-                    {{ $user->user->name ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->leadVet, 'name');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->leadVet)
-                @foreach ($clinic->leadVet as $user)
-                    {{ $user->user->email ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->leadVet, 'email');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->regionalManager)
-                @foreach ($clinic->regionalManager as $user)
-                    {{ $user->user->name ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->regionalManager, 'name');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->regionalManager)
-                @foreach ($clinic->regionalManager as $user)
-                    {{ $user->user->email ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->regionalManager, 'email');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->vetManager)
-                @foreach ($clinic->vetManager as $user)
-                    {{ $user->user->name ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->vetManager, 'name');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->vetManager)
-                @foreach ($clinic->vetManager as $user)
-                    {{ $user->user->email ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->vetManager, 'email');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->generalManager)
-                @foreach ($clinic->generalManager as $user)
-                    {{ $user->user->name ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->generalManager, 'name');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->generalManager)
-                @foreach ($clinic->generalManager as $user)
-                    {{ $user->user->email ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->generalManager, 'email');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->gmVeterinaryOperation)
-                @foreach ($clinic->gmVeterinaryOperation as $user)
-                    {{ $user->user->name ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->gmVeterinaryOperation, 'name');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->gmVeterinaryOperation)
-                @foreach ($clinic->gmVeterinaryOperation as $user)
-                    {{ $user->user->email ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->gmVeterinaryOperation, 'email');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->gmVetsServices)
-                @foreach ($clinic->gmVetsServices as $user)
-                    {{ $user->user->name ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->gmVetsServices, 'name');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->gmVetsServices)
-                @foreach ($clinic->gmVetsServices as $user)
-                    {{ $user->user->email ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->gmVetsServices, 'email');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->other)
-                @foreach ($clinic->other as $user)
-                    {{ $user->user->name ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->other, 'name');
+                ?>
             @endif
         </th>
 
         <th>
             @if ($clinic->other)
-                @foreach ($clinic->other as $user)
-                    {{ $user->user->email ?? '' }} <br>
-                @endforeach
+                <?php
+                    echo Clinic::printUsers($clinic->other, 'email');
+                ?>
             @endif
         </th>
 
