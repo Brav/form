@@ -13,6 +13,12 @@
                     @endif
                 </div>
 
+                <a name="exportToExcel" id="exportToExcel" class="btn btn-primary mb-3"
+                    href="{{ route('clinics.export') }}"
+                    role="button">
+                <i class="fa fa-table" aria-hidden="true"></i>
+                Export</a>
+
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-vcenter" id=clinics>
                         <thead>

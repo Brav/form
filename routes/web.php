@@ -57,6 +57,8 @@ Route::prefix('clinic')->middleware(['auth'])->group(function () {
     Route::post('store', [ClinicController::class, 'store'])->name('clinics.store');
     Route::put('update/{clinic}', [ClinicController::class, 'update'])->name('clinics.update');
     Route::delete('destroy/{clinic}', [ClinicController::class, 'destroy'])->name('clinics.destroy');
+
+    Route::get('export', [ClinicController::class, 'export'])->name('clinics.export');
 });
 
 Route::prefix('complaint-category')->middleware(['auth', 'admin'])->group(function () {

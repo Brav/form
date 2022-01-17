@@ -87,15 +87,18 @@ class FormsExport implements FromView
         ->with(['clinic', 'location', 'category', 'type', 'channel', 'severity'])
         ->get();
 
-        if($this->commandExport === true)
-        {
-            $canEdit = true;
-        }
-        else
-        {
-            $canEdit = auth()->user()->admin == 1 ||
-                auth()->user()->role->hasPermission('w') ? true : false;
-        }
+        $canEdit = true;
+
+        // if($this->commandExport === true)
+        // {
+        //     $canEdit = true;
+        // }
+        // else
+        // {
+        //     $canEdit = true;
+        //     // $canEdit = auth()->user()->admin == 1 ||
+        //     //     auth()->user()->role->hasPermission('w') ? true : false;
+        // }
 
         return view('complaint-form/partials/_table', [
             'forms'          => $forms,

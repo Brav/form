@@ -20,6 +20,7 @@ use App\Providers\ComplaintFilled;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ComplaintFormController extends Controller
 {
@@ -64,8 +65,14 @@ class ComplaintFormController extends Controller
         ->orderBy('created_at', 'DESC')
         ->paginate(20);
 
-        $canEdit = auth()->user()->admin == 1 ||
-                auth()->user()->role->hasPermission('w') ? true : false;
+        /**
+         * Original project had functionallity where you could set individial permissions
+         * for each user - this has been removed, but for simplicity $canEdit is set to be true always
+         */
+        // $canEdit = auth()->user()->admin == 1 ||
+        //         auth()->user()->role->hasPermission('w') ? true : false;
+
+        $canEdit = true;
 
         $canDelete = auth()->user()->admin == 1 ? true : false;
 
@@ -229,10 +236,18 @@ class ComplaintFormController extends Controller
      */
     public function edit(ComplaintForm $form)
     {
-        if(!auth()->user()->admin &&
-            !auth()->user()->role->hasPermission('w'))
+        if(!auth()->user()->admin)
         {
-            return redirect()->route('complaint-form.create');
+            $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
+                ->get()
+                ->pluck('clinic_id')
+                ->toArray();
+
+            if(!\in_array($form->clinic_id, $userClinics))
+            {
+                return redirect()->route('complaint-form.create');
+            }
+
         }
 
         return view('form', [
@@ -371,6 +386,7 @@ class ComplaintFormController extends Controller
         ], 500);
     }
 
+    /** @return BinaryFileResponse  */
     public function export()
     {
         return Excel::download(new FormsExport, 'forms.xlsx');

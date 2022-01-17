@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ClinicExport;
 use App\Http\Requests\ClinicCreateRequest;
 use App\Models\Clinic;
 use App\Models\ClinicManagers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClinicController extends Controller
 {
@@ -217,6 +219,12 @@ class ClinicController extends Controller
         return response()->json([
             'Something went wrong!'
         ], 500);
+    }
+
+    /** @return BinaryFileResponse  */
+    public function export()
+    {
+        return Excel::download(new ClinicExport, 'clinics.xlsx');
     }
 
     /**

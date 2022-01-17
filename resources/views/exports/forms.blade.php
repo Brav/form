@@ -22,7 +22,7 @@
                 <th class="small">Channel</th>
                 <th class="small">Complaint Level</th>
                 <th class="small text-nowrap">Severity</th>
-                <th class="small text-nowrap">Files/Documets</th>
+                <th class="small text-nowrap">Files/Documents</th>
                 @if ($canEdit)
                     @foreach ($outcomeOptions as $option)
                         <th>{{ $option->name }}</th>

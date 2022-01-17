@@ -134,7 +134,7 @@ class UserImportController extends Controller
         if($clinic)
         {
             $clinic->name       = $clinicName;
-            $clinic->name       = !empty($clinicCode) ? $clinicCode : null,
+            $clinic->name       = !empty($clinicCode) ? $clinicCode : null;
             $clinic->deleted_at = null;
 
             $clinic->update();
