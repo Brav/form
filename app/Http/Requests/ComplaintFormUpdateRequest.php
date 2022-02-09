@@ -55,7 +55,7 @@ class ComplaintFormUpdateRequest extends FormRequest
             'complaint_channel_id' => ['required',
                 Rule::in(ComplaintChannel::all()->pluck('id')->toArray()),
             ],
-            'severity_id'    => ['nullable',
+            'severity_id'    => ['required',
                 Rule::in(Severity::get()->pluck('id')->toArray())],
             'documents'       => 'nullable',
             'documents.*'     => 'max:10000',
@@ -74,6 +74,9 @@ class ComplaintFormUpdateRequest extends FormRequest
     public function messages()
     {
         return [
+            'severity_id.required'           => 'Please select severity',
+            'complaint_type_id.required'     => 'Please select complaint type',
+            'complaint_channel_id.required'  => 'Please select channel',
             'date_of_incident.date_format'   => 'Please use timepicker',
             'date_completed.date_format'     => 'Please use timepicker',
             'location_id.required'           => 'Location is required',
