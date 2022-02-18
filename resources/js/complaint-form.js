@@ -35,6 +35,8 @@ $('body').on('change', '#complaint_category_id', function (e) {
         type.attr('disabled', true)
     }
 
+    type.prop("selectedIndex", 0);
+
 });
 
 $(document).ready(function () {

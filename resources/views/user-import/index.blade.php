@@ -29,5 +29,11 @@
 
             <button type="submit" class="btn btn-primary">Import</button>
         </form>
+
+        <a name="exportToExcel" id="exportToExcel" class="btn btn-primary mb-3 my-1"
+            href="{{ route('clinics.export') }}"
+            role="button">
+        <i class="fa fa-table" aria-hidden="true"></i>
+        Export</a>
     </div>
 @endsection
