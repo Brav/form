@@ -63,8 +63,6 @@ class FormsExport implements FromView
     public function view(): View
     {
 
-        DB::enableQueryLog();
-
         $userClinics = [];
 
         if(auth()->check() && !auth()->user()->admin)
@@ -82,11 +80,11 @@ class FormsExport implements FromView
 
             $currentDate = \Carbon\Carbon::now();
 
+            $today = $currentDate->toDateTimeString();
+
             $lastFriday =  $currentDate->subDays($currentDate->dayOfWeek)->subWeek();
 
-            dd($lastFriday->toDateTimeString());
-
-            return $query->whereBetween('created_at', [$lastFriday->toDateTimeString(), $currentDate->toDateTimeString()]);
+            return $query->whereBetween('created_at', [$lastFriday->toDateTimeString(), $today]);
 
         })
         ->with(['clinic', 'location', 'category', 'type', 'channel', 'severity'])
@@ -104,8 +102,6 @@ class FormsExport implements FromView
         //     // $canEdit = auth()->user()->admin == 1 ||
         //     //     auth()->user()->role->hasPermission('w') ? true : false;
         // }
-
-        dd(DB::getQueryLog());
 
         return view('complaint-form/partials/_table', [
             'forms'          => $forms,
