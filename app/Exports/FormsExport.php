@@ -89,6 +89,8 @@ class FormsExport implements FromView
 
         $canEdit = true;
 
+        dd($forms->count());
+
         // if($this->commandExport === true)
         // {
         //     $canEdit = true;
