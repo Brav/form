@@ -8,6 +8,7 @@ use App\Models\ComplaintForm;
 use App\Models\OutcomeOptionsCategories;
 use App\Models\Severity;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromView;
 
 class FormsExport implements FromView
