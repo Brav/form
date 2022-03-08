@@ -84,6 +84,8 @@ class FormsExport implements FromView
 
             $lastFriday =  $currentDate->subDays($currentDate->dayOfWeek)->subWeek();
 
+            dd($lastFriday->toDateTimeString());
+
             return $query->whereBetween('created_at', [$lastFriday->toDateTimeString(), $currentDate->toDateTimeString()]);
 
         })
