@@ -62,6 +62,8 @@ class FormsExport implements FromView
     public function view(): View
     {
 
+        DB::enableQueryLog();
+
         $userClinics = [];
 
         if(auth()->check() && !auth()->user()->admin)
@@ -89,8 +91,6 @@ class FormsExport implements FromView
 
         $canEdit = true;
 
-        dd($forms->count());
-
         // if($this->commandExport === true)
         // {
         //     $canEdit = true;
@@ -101,6 +101,8 @@ class FormsExport implements FromView
         //     // $canEdit = auth()->user()->admin == 1 ||
         //     //     auth()->user()->role->hasPermission('w') ? true : false;
         // }
+
+        dd(DB::getQueryLog());
 
         return view('complaint-form/partials/_table', [
             'forms'          => $forms,
