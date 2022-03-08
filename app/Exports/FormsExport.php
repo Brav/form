@@ -102,6 +102,12 @@ class FormsExport implements FromView
         //     //     auth()->user()->role->hasPermission('w') ? true : false;
         // }
 
+        $currentDate = \Carbon\Carbon::now();
+
+        $lastFriday =  $currentDate->subDays($currentDate->dayOfWeek)->subWeek();
+
+        dump($currentDate);
+        dump($lastFriday);
         dd(\DB::getQueryLog());
 
         return view('complaint-form/partials/_table', [
