@@ -62,7 +62,7 @@ class FormsExport implements FromView
     public function view(): View
     {
 
-        DB::enableQueryLog();
+        \DB::enableQueryLog();
 
         $userClinics = [];
 
@@ -102,7 +102,7 @@ class FormsExport implements FromView
         //     //     auth()->user()->role->hasPermission('w') ? true : false;
         // }
 
-        dd(DB::getQueryLog());
+        dd(\DB::getQueryLog());
 
         return view('complaint-form/partials/_table', [
             'forms'          => $forms,
