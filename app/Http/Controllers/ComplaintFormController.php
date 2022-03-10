@@ -286,10 +286,18 @@ class ComplaintFormController extends Controller
      */
     public function update(ComplaintFormUpdateRequest $request, ComplaintForm $form)
     {
-        if(!auth()->user()->admin &&
-            !auth()->user()->role->hasPermission('w'))
+        if(!auth()->user()->admin)
         {
-            return redirect()->route('complaint-form.create');
+            $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
+                ->get()
+                ->pluck('clinic_id')
+                ->toArray();
+
+            if(!\in_array($form->clinic_id, $userClinics))
+            {
+                return redirect()->route('complaint-form.create');
+            }
+
         }
 
         if(!auth()->user()->admin)
