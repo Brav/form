@@ -23,7 +23,7 @@ class UserController extends Controller
         $queryData = \filter_var_array(
             \array_filter(request()->all(), function($element){
             return is_array($element);
-            }), FILTER_SANITIZE_STRING
+            }), FILTER_SANITIZE_FULL_SPECIAL_CHARS
         );
 
         $roles = Roles::all();

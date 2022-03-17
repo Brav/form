@@ -35,6 +35,7 @@ class ComplaintForm extends Model
         'complaint_type_id',
         'complaint_channel_id',
         'severity_id',
+        'animal_id',
         'level',
         'outcome',
         'outcome_options',
@@ -100,6 +101,11 @@ class ComplaintForm extends Model
             }
 
             $data['outcome_options'] = $outcomeOptions;
+        }
+
+        if(!isset($data['animal_id']) || $data['animal_id'] === 'other')
+        {
+            $data['animal_id'] = null;
         }
 
         if(!isset($data['outcome']))
@@ -168,6 +174,16 @@ class ComplaintForm extends Model
     public function severity(): BelongsTo
     {
         return $this->belongsTo(Severity::class)->withTrashed();
+    }
+
+    /**
+     * Get the animal associated with the ComplaintForm
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function animal(): BelongsTo
+    {
+        return $this->belongsTo(Animal::class);
     }
 
     /**

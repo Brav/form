@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Animal;
 use App\Models\Clinic;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
@@ -57,6 +58,9 @@ class ComplaintFormUpdateRequest extends FormRequest
             ],
             'severity_id'    => ['required',
                 Rule::in(Severity::get()->pluck('id')->toArray())],
+            'animal_id' => ['required',
+                Rule::in(\array_merge(Animal::all()->pluck('id')->toArray(), ['other']) ),
+            ],
             'documents'       => 'nullable',
             'documents.*'     => 'max:10000',
             'outcome'         => ['nullable', 'string', 'min:2'],
@@ -74,6 +78,7 @@ class ComplaintFormUpdateRequest extends FormRequest
     public function messages()
     {
         return [
+            'animal_id.required'             => 'Please select animal, or if not on the list select other',
             'severity_id.required'           => 'Please select severity',
             'complaint_type_id.required'     => 'Please select complaint type',
             'complaint_channel_id.required'  => 'Please select channel',

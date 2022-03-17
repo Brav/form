@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\FormsExport;
 use App\Http\Requests\ComplaintFormCreateRequest;
 use App\Http\Requests\ComplaintFormUpdateRequest;
+use App\Models\Animal;
 use App\Models\AutomatedResponse;
 use App\Models\Clinic;
 use App\Models\ClinicManagers;
@@ -45,7 +46,7 @@ class ComplaintFormController extends Controller
         $queryData = \filter_var_array(
             \array_filter(request()->all(), function($element){
             return is_array($element);
-            }), FILTER_SANITIZE_STRING
+            }), FILTER_SANITIZE_FULL_SPECIAL_CHARS
         );
 
         $forms = ComplaintForm::query();
@@ -61,7 +62,7 @@ class ComplaintFormController extends Controller
         $forms = $forms->when(!auth()->user()->admin, function($query) use($userClinics){
             return $query->whereIn('clinic_id', $userClinics);
         })
-        ->with(['clinic', 'location', 'category', 'type', 'channel'])
+        ->with(['clinic', 'location', 'category', 'type', 'channel', 'animal', 'severity'])
         ->orderBy('created_at', 'DESC')
         ->paginate(20);
 
@@ -148,11 +149,12 @@ class ComplaintFormController extends Controller
                 'managers.user'])
                 ->orderBy('name', 'asc')
                 ->get(),
-            'categories'     => ComplaintCategory::orderBy('name')->get(),
-            'types'          => ComplaintType::orderBy('name')->get(),
-            'channels'       => ComplaintChannel::orderBy('name')->get(),
-            'locations'      => Location::orderBy('name')->get(),
-            'severities'     => Severity::get(),
+            'categories' => ComplaintCategory::orderBy('name')->get(),
+            'types'      => ComplaintType::orderBy('name')->get(),
+            'channels'   => ComplaintChannel::orderBy('name')->get(),
+            'locations'  => Location::orderBy('name')->get(),
+            'severities' => Severity::get(),
+            'animals'    => Animal::get(),
         ]);
     }
 
@@ -192,7 +194,7 @@ class ComplaintFormController extends Controller
                 \strtolower(
                     \str_replace(' ', '',
                         \filter_var($file->getClientOriginalName(),
-                        FILTER_SANITIZE_STRING,
+                        FILTER_SANITIZE_FULL_SPECIAL_CHARS,
                         FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
                         )
                     )
@@ -274,6 +276,7 @@ class ComplaintFormController extends Controller
             'form'           => $form->load(['clinic', 'location', 'category', 'type', 'channel', 'severity']),
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'severities'     => Severity::get(),
+            'animals'        => Animal::get(),
         ]);
     }
 
@@ -320,7 +323,7 @@ class ComplaintFormController extends Controller
                 \strtolower(
                     \str_replace(' ', '',
                         \filter_var($file->getClientOriginalName(),
-                        FILTER_SANITIZE_STRING,
+                        FILTER_SANITIZE_FULL_SPECIAL_CHARS,
                         FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
                         )
                     )

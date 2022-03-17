@@ -47,7 +47,7 @@ class FileController extends Controller
     {
         $fileName = Str::random(16) . '.' . $request->file('file')->extension();
 
-        $data['title'] = \filter_var($request->title, \FILTER_SANITIZE_STRING);
+        $data['title'] = \filter_var($request->title, \FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $data['name']  = $fileName;
 
         if(!Storage::putFileAs(
@@ -108,7 +108,7 @@ class FileController extends Controller
     public function update(FileUpdateRequest $request, File $file)
     {
         $file->update([
-            'title' => \filter_var($request->title, \FILTER_SANITIZE_STRING),
+            'title' => \filter_var($request->title, \FILTER_SANITIZE_FULL_SPECIAL_CHARS),
         ]);
 
         return response()->json(

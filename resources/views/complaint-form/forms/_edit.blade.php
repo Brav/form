@@ -304,6 +304,28 @@
         <div class="col-md-4">
 
             <div class="form-group">
+                <label for="animal_id">Species</label>
+                <select class="form-control" name="animal_id" id="animal_id">
+                @foreach ($animals as $animal)
+                    <option value="{{ $animal->id }}"
+                        @if (old('animal_id') == $animal->id)
+                            selected
+                        @endif
+                        >{{ $animal->name }}</option>
+                @endforeach
+                <option value="other">Other</option>
+            </select>
+
+            @error('animal_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="form-group">
                 <label for="pms_code">Patient Number</label>
                 <input type="text"
                     class="form-control"

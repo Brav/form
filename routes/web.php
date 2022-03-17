@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\AutomatedResponseController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,18 @@ Route::group(['prefix' => 'roles', 'middleware' => ['auth', 'admin']], function 
     Route::post('store', [RolesController::class, 'store'])->name('roles.store');
     Route::put('update/{roles}', [RolesController::class, 'update'])->name('roles.update');
     Route::delete('destroy/{roles}', [RolesController::class, 'destroy'])->name('roles.destroy');
+
+});
+
+Route::group(['prefix' => 'animals', 'middleware' => ['auth', 'admin']], function () {
+
+    Route::get('', [AnimalController::class, 'index'])->name('animals.index');
+    Route::get('create', [AnimalController::class, 'create'])->name('animals.create');
+    Route::get('delete/{item}', [AnimalController::class, 'delete'])->name('animals.delete');
+    Route::get('edit/{item}', [AnimalController::class, 'edit'])->name('animals.edit');
+    Route::post('store', [AnimalController::class, 'store'])->name('animals.store');
+    Route::put('update/{item}', [AnimalController::class, 'update'])->name('animals.update');
+    Route::delete('destroy/{item}', [AnimalController::class, 'destroy'])->name('animals.destroy');
 
 });
 

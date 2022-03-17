@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SeverityCreateRequest;
-use App\Models\Severity;
+use App\Models\Animal;
 use Illuminate\Http\Request;
 
-class SeverityController extends Controller
+class AnimalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,35 +14,20 @@ class SeverityController extends Controller
      */
     public function index()
     {
-        $severities = Severity::paginate(20);
+        $animals = Animal::paginate(20);
 
         return [
-            'html' => view('severities/partials/_container', [
-                'severities'    => $severities,
+            'html' => view('animals/partials/_container', [
+                'animals'    => $animals,
             ])->render(),
             'pagination' => view('pagination', [
-                'paginator' => $severities,
+                'paginator' => $animals,
                 'layout'    => 'vendor.pagination.bootstrap-4',
-                'role'      => 'severities',
-                'container' => 'severities-container',
+                'role'      => 'animals',
+                'container' => 'animals-container',
             ])->render(),
             'id' => 'type'
         ];
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(Severity $item)
-    {
-        return view('modals/partials/_delete', [
-            'id'        => $item->id,
-            'routeName' => route('severity.destroy', $item->id),
-            'itemName'  => $item->name,
-            'table'     => 'severities',
-        ]);
     }
 
     /**
@@ -56,7 +40,7 @@ class SeverityController extends Controller
         return response()->json(
             view('form-ajax', [
                 'task'  => 'create',
-                'view'  => 'severities',
+                'view'  => 'animals',
             ])->render()
         , 200);
     }
@@ -64,35 +48,35 @@ class SeverityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\SeverityRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SeverityCreateRequest $request)
+    public function store(Request $request)
     {
-        $item = Severity::create([
+        $item = Animal::create([
             'name' => \filter_var( $request->name, \FILTER_SANITIZE_FULL_SPECIAL_CHARS),
         ]);
 
         return response()->json(
-            view('severities/partials/_item', [
+            view('animals/partials/_item', [
                 'item' => $item,
             ])->render()
             , 200);
     }
 
-     /**
+    /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Severity  $item
+     * @param  \App\Models\Animal  $animal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Severity $item)
+    public function edit(Animal $item)
     {
         return response()->json(
             view('form-ajax', [
                 'item' => $item,
                 'task' => 'edit',
-                'view' => 'severities',
+                'view' => 'animals',
             ])->render()
         , 200);
     }
@@ -101,30 +85,44 @@ class SeverityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Severity  $item
+     * @param  \App\Models\Animal  $animal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Severity $item)
+    public function update(Request $request, Animal $item)
     {
-
         $item->update([
             'name' => \filter_var( $request->name, \FILTER_SANITIZE_FULL_SPECIAL_CHARS),
         ]);
 
         return response()->json(
-            view('severities/partials/_item', [
+            view('animals/partials/_item', [
                 'item' => $item,
             ])->render()
             , 200);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display a listing of the resource.
      *
-     * @param  \App\Models\Severity  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Severity $item)
+    public function delete(Animal $item)
+    {
+        return view('modals/partials/_delete', [
+            'id'        => $item->id,
+            'routeName' => route('animals.destroy', $item->id),
+            'itemName'  => $item->name,
+            'table'     => 'animals',
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Animal  $animal
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Animal $item)
     {
         if($item->delete())
             return response()->json([
@@ -136,3 +134,4 @@ class SeverityController extends Controller
         ], 500);
     }
 }
+

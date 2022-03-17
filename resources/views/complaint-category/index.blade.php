@@ -46,6 +46,14 @@
                                 data-table="severity"
                                 data-attr="{{ route('severity.create') }}"
                                 class="btn btn-primary my-2">Create Severity</a>
+
+                            <a href="{{ route('animals.create') }}"
+                                role="bigModal"
+                                data-toggle="modal"
+                                data-target="#bigModal"
+                                data-table="animals"
+                                data-attr="{{ route('animals.create') }}"
+                                class="btn btn-primary my-2">Add Animal</a>
                     </div>
                 </div>
 
@@ -68,6 +76,10 @@
                         <a class="nav-link" id="severities-tab" data-toggle="tab" href="#severities" role="tab" aria-controls="severities" aria-selected="false">Severity</a>
                     </li>
 
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="animals-tab" data-toggle="tab" href="#animals" role="tab" aria-controls="animals" aria-selected="false">Animals</a>
+                    </li>
+
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
@@ -79,6 +91,8 @@
                     @include('complaint-channel/partials/_channels')
 
                     @include('severities/partials/_items')
+
+                    @include('animals/partials/_items')
                 </div>
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ComplaintCategoryCreateRequest;
 use App\Http\Requests\ComplaintCategoryUpdateRequest;
+use App\Models\Animal;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
 use App\Models\ComplaintType;
@@ -31,6 +32,7 @@ class ComplaintCategoryController extends Controller
                 'channels'   => ComplaintChannel::orderBy('name', "ASC")->paginate(20)
                     ->withPath(route('complaint-channel.index')),
                 'severities' => Severity::paginate(20),
+                'animals'    => Animal::paginate(20),
             ]);
 
         return [

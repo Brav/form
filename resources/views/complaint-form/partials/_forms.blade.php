@@ -44,6 +44,7 @@
         <th>{{ $form->team_member_position }}</th>
         <th>{{ $form->client_name }}</th>
         <th>{{ $form->patient_name }}</th>
+        <th>{{ $form->animal->name ?? 'Other' }}</th>
         <th>{{ $form->pms_code }}</th>
         <th>{{ $form->date_of_incident->format('d/m/Y') }}</th>
         <th>{{ $dateOfClientComplaint }}</th>
