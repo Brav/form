@@ -120,6 +120,7 @@ $(".filters").on("click", "#filter-reset", function (e) {
 });
 
 function doSearch(url, searchData, container) {
+
     $.get(
         url,
         Object.assign({}, searchData),
@@ -150,7 +151,7 @@ function filterFilters(parent) {
             });
         }
 
-        if (element.dataset.type === "select" && element.value !== "all") {
+        if ((element.dataset.type === "select" || element.dataset.type === 'other') && element.value !== "all") {
             data.push({
                 column: element.dataset.column,
                 type: element.dataset.type,

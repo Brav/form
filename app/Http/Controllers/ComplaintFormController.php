@@ -93,10 +93,10 @@ class ComplaintFormController extends Controller
             $data['categories'] = ComplaintCategory::orderBy('name', 'asc')->get();
             $data['types']      = ComplaintType::orderBy('name', 'asc')->get();
             $data['channels']   = ComplaintChannel::orderBy('name', 'asc')->get();
+            $data['animals']    = Animal::orderBy('name', 'asc')->get();
 
             return view('complaint-form/index', $data);
         }
-
 
         return [
             'html' => view('complaint-form/partials/_forms', $data)->render(),
@@ -541,6 +541,13 @@ class ComplaintFormController extends Controller
 
             case 'options':
                 $query->whereJsonContains('outcome_options', ['option_id' => (int) $data['option']]);
+                break;
+
+            case 'other';
+                $search === 'other' ?
+                $query->whereNull($data['column'])
+                :
+                $query->where($data['column'], $search);
                 break;
         }
 

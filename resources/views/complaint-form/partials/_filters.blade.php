@@ -97,6 +97,20 @@
     </th>
 
     <th>
+        <select class="form-control filter filter-select select-one"
+        name="animal_id"
+        id="animal_id"
+        data-column="animal_id"
+        data-type="other">
+            <option value="all">All</option>
+        @foreach ($animals as $animal)
+            <option value="{{ $animal->id }}">{{ $animal->name }}</option>
+        @endforeach
+            <option value="other">Other</option>
+        </select>
+    </th>
+
+    <th>
         <input
             type="text"
             class="form-control filter filter-text"

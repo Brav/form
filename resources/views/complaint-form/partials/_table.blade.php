@@ -13,7 +13,7 @@
             <th scope="col" class="small text-nowrap">Position of the team member</th>
             <th scope="col" class="small text-nowrap">Client/Owner name</th>
             <th scope="col" class="small text-nowrap">Patient name</th>
-            <th scope="col" class="small text-nowrap">Species</th>
+            <th scope="col" class="small text-nowrap" style="min-width: 100px">Species</th>
             <th scope="col" class="small text-nowrap">Patient number</th>
             <th scope="col" class="small text-nowrap">Date of the incident</th>
             <th scope="col" class="small text-nowrap">Date of client complaint (if applicable)</th>
