@@ -19,6 +19,35 @@ $('body').on('change', '#complaint_category_id', function (e) {
     let category = $(this).val()
     let type     = $("#complaint_type_id")
 
+    let channels   = $(this).find(':selected').data('channels')
+    let severities = $(this).find(":selected").data("severities");
+
+    const channelOptions  = $("#complaint_channel_id option");
+    const severityOptions = $("#severity_id option");
+
+    channelOptions.show()
+    severityOptions.show();
+
+    if (channels !== undefined) {
+
+        channelOptions.each(function(){
+
+            if(!Object.values(channels).includes($(this).val()))
+            {
+                $(this).hide()
+            }
+        });
+
+    }
+
+    if (severities !== undefined) {
+        severityOptions.each(function () {
+            if (!Object.values(severities).includes($(this).val())) {
+                $(this).hide();
+            }
+        });
+    }
+
     type.find('option').hide()
 
     let options = type.find(`option[data-category=${category}]`)

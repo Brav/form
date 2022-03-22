@@ -473,6 +473,19 @@
                     <option></option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
+
+                            @if ($category->values_used)
+
+                                @if ($category->values_used['channels'])
+                                        data-channels="{{ json_encode($category->values_used['channels']) }}"
+                                @endif
+
+                                @if ($category->values_used['severities'])
+                                    data-severities="{{ json_encode($category->values_used['severities']) }}"
+                                @endif
+
+                            @endif
+
                             @if (old('complaint_category_id', $form->complaint_category_id) == $category->id)
                                 selected
                             @endif

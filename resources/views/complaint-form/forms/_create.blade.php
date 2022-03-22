@@ -314,6 +314,19 @@
                     <option></option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
+
+                            @if ($category->values_used)
+
+                                @if ($category->values_used['channels'])
+                                    data-channels="{{ json_encode($category->values_used['channels']) }}"
+                                @endif
+
+                                @if ($category->values_used['severities'])
+                                    data-severities="{{ json_encode($category->values_used['severities']) }}"
+                                @endif
+
+                            @endif
+
                             @if (old('complaint_category_id') == $category->id)
                                 selected
                             @endif
@@ -334,7 +347,8 @@
                 <select class="form-control" name="complaint_type_id" id="complaint_type_id">
                     <option></option>
                     @foreach ($types as $type)
-                        <option data-category="{{ $type->complaint_category_id }}"
+                        <option
+                            data-category="{{ $type->complaint_category_id }}"
                             value="{{ $type->id }}"
                             @if (old('complaint_type_id') == $type->id)
                                 selected

@@ -73,9 +73,11 @@ class ComplaintCategoryController extends Controller
     {
         return response()->json(
                 view('form-ajax', [
-                    'roles' => Roles::all(),
-                    'task'  => 'create',
-                    'view'  => 'complaint-category',
+                    'roles'      => Roles::all(),
+                    'task'       => 'create',
+                    'view'       => 'complaint-category',
+                    'channels'   => ComplaintChannel::all(),
+                    'severities' => Severity::all(),
                 ])->render()
             , 200);
     }
@@ -88,7 +90,7 @@ class ComplaintCategoryController extends Controller
      */
     public function store(ComplaintCategoryCreateRequest $request)
     {
-        $category = ComplaintCategory::create($request->all());
+        $category = ComplaintCategory::create(ComplaintCategory::formatData($request->all()));
 
         return response()->json(
             view('complaint-category/partials/_category', [
@@ -118,10 +120,12 @@ class ComplaintCategoryController extends Controller
     {
         return response()->json(
             view('form-ajax', [
-                'category' => $complaint,
-                'roles'    => Roles::all(),
-                'task'     => 'edit',
-                'view'     => 'complaint-category',
+                'category'   => $complaint,
+                'roles'      => Roles::all(),
+                'task'       => 'edit',
+                'view'       => 'complaint-category',
+                'channels'   => ComplaintChannel::all(),
+                'severities' => Severity::all(),
             ])->render()
         , 200);
     }
@@ -135,7 +139,7 @@ class ComplaintCategoryController extends Controller
      */
     public function update(ComplaintCategoryUpdateRequest $request, ComplaintCategory $complaint)
     {
-        $complaint->update($request->all());
+        $complaint->update(ComplaintCategory::formatData($request->all()));
 
         return response()->json(
             view('complaint-category/partials/_category', [
