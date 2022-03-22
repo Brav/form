@@ -16,7 +16,7 @@ $('body').on('change', '#complaint_category_id', function (e) {
         return
     }
 
-    let category = $(this).val()
+    let category = $(this).val() || 'empty'
     let type     = $("#complaint_type_id")
 
     let channels   = $(this).find(':selected').data('channels')
@@ -36,6 +36,17 @@ $('body').on('change', '#complaint_category_id', function (e) {
             {
                 $(this).hide()
             }
+
+        });
+
+        channelOptions.each(function () {
+
+            if ($(this).css("display") === "block") {
+                $(this).prop("selected", true);
+
+                return false;
+            }
+
         });
 
     }
@@ -46,6 +57,15 @@ $('body').on('change', '#complaint_category_id', function (e) {
                 $(this).hide();
             }
         });
+
+        severityOptions.each(function () {
+            if ($(this).css("display") === "block") {
+                $(this).prop("selected", true);
+
+                return false;
+            }
+        });
+
     }
 
     type.find('option').hide()
@@ -68,8 +88,8 @@ $('body').on('change', '#complaint_category_id', function (e) {
 
 });
 
-$(document).ready(function () {
-    setManager()
+$(function () {
+   setManager();
 });
 
 $('body').on('change', '#clinic_id', function () {
