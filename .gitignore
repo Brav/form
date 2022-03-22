@@ -13,4 +13,3 @@ npm-debug.log
 yarn-error.log
 .babelrc
 storage/framework/laravel-excel
-resources/views
