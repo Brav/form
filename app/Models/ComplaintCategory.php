@@ -44,12 +44,12 @@ class ComplaintCategory extends Model
             'severities' => [],
         ];
 
-        if(count($data['channels']))
+        if(count($data['channels'] ?? []))
         {
             $format['values_used']['channels'] = \array_filter($data['channels'], 'is_numeric');
         }
 
-        if(count($data['severities']))
+        if(count($data['severities'] ?? []))
         {
             $format['values_used']['severities'] = \array_filter($data['severities'], 'is_numeric');
         }
