@@ -59,7 +59,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'animal_id' => ['required',
                 Rule::in(\array_merge(Animal::all()->pluck('id')->toArray(), ['other']) ),
             ],
-            // 'recaptcha_token' => ['required', new \App\Rules\ReCaptchaRule($this->recaptcha_token)],
+            'recaptcha_token' => ['required', new \App\Rules\ReCaptchaRule($this->recaptcha_token)],
             'severity_id'    => ['required',
                 Rule::in(Severity::get()->pluck('id')->toArray())],
             'documents'   => 'nullable',
