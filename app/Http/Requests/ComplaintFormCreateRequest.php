@@ -59,11 +59,11 @@ class ComplaintFormCreateRequest extends FormRequest
             'animal_id' => ['required',
                 Rule::in(\array_merge(Animal::all()->pluck('id')->toArray(), ['other']) ),
             ],
-            'recaptcha_token' => ['required', new \App\Rules\ReCaptchaRule($this->recaptcha_token)],
+            // 'recaptcha_token' => ['required', new \App\Rules\ReCaptchaRule($this->recaptcha_token)],
             'severity_id'    => ['required',
                 Rule::in(Severity::get()->pluck('id')->toArray())],
             'documents'   => 'nullable',
-            'documents.*' => 'max:10000',
+            'documents.*' => 'max:20000',
 
         ];
     }
@@ -85,6 +85,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'complaint_category_id.required' => 'Complaint category is required',
             'complaint_type_id.in'           => "Complaint type doesn't have valid value",
             'complaint_channel_id.in'        => "Complaint channlel doesn't have valid value",
+            'documents.max' => "Please note that maximum file upload size needs to be less than 20MB",
         ];
     }
 }

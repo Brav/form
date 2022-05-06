@@ -62,7 +62,7 @@ class ComplaintFormUpdateRequest extends FormRequest
                 Rule::in(\array_merge(Animal::all()->pluck('id')->toArray(), ['other']) ),
             ],
             'documents'       => 'nullable',
-            'documents.*'     => 'max:10000',
+            'documents.*'     => 'max:20000',
             'outcome'         => ['nullable', 'string', 'min:2'],
             'completed_by'    => ['nullable', 'string', 'min:2'],
             'date_completed'  => ['nullable', 'date_format:d/m/Y'],
@@ -88,6 +88,7 @@ class ComplaintFormUpdateRequest extends FormRequest
             'complaint_category_id.required' => 'Complaint category is required',
             'complaint_type_id.in'           => "Complaint type doesn't have valid value",
             'complaint_channel_id.in'        => "Complaint type doesn't have valid value",
+            'documents.max' => "Please note that maximum file upload size needs to be less than 20MB"
         ];
     }
 }
