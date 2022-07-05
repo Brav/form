@@ -203,7 +203,8 @@ public function getGmVetsServicesAttribute()
 
         foreach ($users as $user)
         {
-            $data[] = $user->user->$field;
+            if(isset($user->user))
+                $data[] = $user->user->$field;
         }
 
         return implode(',', $data);

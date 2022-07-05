@@ -6,129 +6,97 @@
         <th>{{ $clinic->name }}</th>
         <th>
             @if ($clinic->practiseManager)
-                <?php
-                    echo Clinic::printUsers($clinic->practiseManager, 'name');
-                ?>
+                {{ Clinic::printUsers($clinic->practiseManager, 'name') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->practiseManager)
-                <?php
-                    echo Clinic::printUsers($clinic->practiseManager, 'email');
-                ?>
+                {{ Clinic::printUsers($clinic->practiseManager, 'email') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->leadVet)
-                <?php
-                    echo Clinic::printUsers($clinic->leadVet, 'name');
-                ?>
+                {{ Clinic::printUsers($clinic->leadVet, 'name') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->leadVet)
-                <?php
-                    echo Clinic::printUsers($clinic->leadVet, 'email');
-                ?>
+                {{ Clinic::printUsers($clinic->leadVet, 'email') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->regionalManager)
-                <?php
-                    echo Clinic::printUsers($clinic->regionalManager, 'name');
-                ?>
+                {{ Clinic::printUsers($clinic->regionalManager, 'name') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->regionalManager)
-                <?php
-                    echo Clinic::printUsers($clinic->regionalManager, 'email');
-                ?>
+                {{ Clinic::printUsers($clinic->regionalManager, 'email') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->vetManager)
-                <?php
-                    echo Clinic::printUsers($clinic->vetManager, 'name');
-                ?>
+                {{ Clinic::printUsers($clinic->vetManager, 'name') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->vetManager)
-                <?php
-                    echo Clinic::printUsers($clinic->vetManager, 'email');
-                ?>
+                {{ Clinic::printUsers($clinic->vetManager, 'email') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->generalManager)
-                <?php
-                    echo Clinic::printUsers($clinic->generalManager, 'name');
-                ?>
+                {{ Clinic::printUsers($clinic->generalManager, 'name') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->generalManager)
-                <?php
-                    echo Clinic::printUsers($clinic->generalManager, 'email');
-                ?>
+                {{ Clinic::printUsers($clinic->generalManager, 'email') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->gmVeterinaryOperation)
-                <?php
-                    echo Clinic::printUsers($clinic->gmVeterinaryOperation, 'name');
-                ?>
+                {{ Clinic::printUsers($clinic->gmVeterinaryOperation, 'name') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->gmVeterinaryOperation)
-                <?php
-                    echo Clinic::printUsers($clinic->gmVeterinaryOperation, 'email');
-                ?>
+                {{ Clinic::printUsers($clinic->gmVeterinaryOperation, 'email') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->gmVetsServices)
-                <?php
-                    echo Clinic::printUsers($clinic->gmVetsServices, 'name');
-                ?>
+                {{ Clinic::printUsers($clinic->gmVetsServices, 'name') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->gmVetsServices)
-                <?php
-                    echo Clinic::printUsers($clinic->gmVetsServices, 'email');
-                ?>
+                {{ Clinic::printUsers($clinic->gmVetsServices, 'email') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->other)
-                <?php
-                    echo Clinic::printUsers($clinic->other, 'name');
-                ?>
+                {{ Clinic::printUsers($clinic->other, 'name') }}
             @endif
         </th>
 
         <th>
             @if ($clinic->other)
-                <?php
-                    echo Clinic::printUsers($clinic->other, 'email');
-                ?>
+                {{ Clinic::printUsers($clinic->other, 'email') }}
             @endif
         </th>
 
