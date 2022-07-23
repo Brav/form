@@ -37,7 +37,8 @@ class ExportExceltToMail extends Command
      */
     public function handle()
     {
-        \Mail::to(['sayali.joshi@vet.partners', 'cheryl.loredo@vet.partners',])
+        // sayali.joshi@vet.partners - used to receive emails, maybe will start in the future again
+        \Mail::to(['cathy.zheng@vet.partners', 'cheryl.loredo@vet.partners',])
         ->send(new \App\Mail\SendExportedForms());
     }
 }

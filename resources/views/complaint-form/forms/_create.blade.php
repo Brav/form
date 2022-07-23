@@ -286,7 +286,7 @@
         <div class="col-md-4">
             <div class="form-group">
             <label for="location_id">Location</label>
-            <select class="form-control" name="location_id" id="location_id">
+            <select class="form-control no-keyboard" name="location_id" id="location_id">
                 <option></option>
                 @foreach ($locations as $location)
                     <option value="{{ $location->id }}"
@@ -310,7 +310,7 @@
 
             <div class="form-group">
                 <label for="complaint_category_id">Category</label>
-                <select class="form-control" name="complaint_category_id" id="complaint_category_id">
+                <select class="form-control no-keyboard" name="complaint_category_id" id="complaint_category_id">
                     <option></option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
@@ -344,7 +344,7 @@
 
             <div class="form-group">
                 <label for="complaint_type_id">Type of complaint</label>
-                <select class="form-control" name="complaint_type_id" id="complaint_type_id">
+                <select class="form-control no-keyboard" name="complaint_type_id" id="complaint_type_id">
                     <option></option>
                     @foreach ($types as $type)
                         <option
@@ -368,7 +368,7 @@
 
             <div class="form-group">
                 <label for="severity_id">Severity</label>
-                <select class="form-control" name="severity_id" id="severity_id">
+                <select class="form-control no-keyboard" name="severity_id" id="severity_id">
                     @foreach ($severities as $severity)
                         <option
                             value="{{ $severity->id }}"
@@ -389,7 +389,7 @@
 
             <div class="form-group">
                 <label for="complaint_channel_id">Channel</label>
-                <select class="form-control" name="complaint_channel_id" id="complaint_channel_id">
+                <select class="form-control no-keyboard" name="complaint_channel_id" id="complaint_channel_id">
                     <option></option>
                     @foreach ($channels as $channel)
                         <option

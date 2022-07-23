@@ -9,6 +9,11 @@ if(categoryID)
         .hide();
 }
 
+$('.no-keyboard').on('keypress', function (e)
+{
+    e.preventDefault()
+})
+
 $('body').on('change', '#complaint_category_id', function (e) {
 
     if($(this).hasClass('filter'))
