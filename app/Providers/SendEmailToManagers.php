@@ -42,6 +42,8 @@ class SendEmailToManagers
 
         $mailTo = array_merge($managers->pluck('email')->toArray(), $autoResponse->additional_emails ?? []);
 
+        $mailTo = \filter_var_array($mailTo, FILTER_VALIDATE_EMAIL, FILTER_SANITIZE_EMAIL);
+
         if($mailTo)
         {
             \Mail::to($mailTo)
