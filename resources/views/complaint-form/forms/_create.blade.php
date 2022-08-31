@@ -435,9 +435,17 @@
         </div>
     @endif
 
-    <button type="submit" class="btn btn-hero-primary mt-3">Submit a complaint</button>
+    <div class="form-row">
 
-            <div class="d-block pb-5"></div>
+        <button type="submit" id="submit-form"
+            class="btn btn-hero-primary mt-3">Submit a complaint</button>
+        <div class="mx-2 d-none" id="compaint-submitted" style="margin-top: 20px">
+            <i class="fas fa-spinner fa-2x fa-spin"></i>
+        </div>
+
+    </div>
+
+    <div class="d-block pb-5"></div>
 </form>
 
 @section('js_after')

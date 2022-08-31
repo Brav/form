@@ -123,3 +123,11 @@ function setManager()
         $("#general_manager").val(general);
     }
 }
+
+$("body").on("submit", "#complaint_form", function(e) {
+    $("#compaint-submitted")
+        .removeClass('d-none')
+        .addClass('d-inline')
+
+    $("#submit-form").attr("disabled", true);
+});
