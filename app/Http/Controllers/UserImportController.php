@@ -110,13 +110,9 @@ class UserImportController extends Controller
     /**
      * Check if clinic exist, and if not create one and populate with managers
      *
-     * @param string $clinicName Clinic Name
      * @param array $data Data
      *
      * @return void
-     * @throws InvalidArgumentException
-     * @throws CharactersNotFoundException
-     * @throws InvalidOptionException
      */
     private function clinic(array $data) :void
     {

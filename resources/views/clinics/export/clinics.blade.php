@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th class="small">Clinic Name</th>
+                <th class="small">Clinic Code</th>
                 <th class="small">Practice Manager Name</th>
                 <th class="small">Practice Manager Email</th>
                 <th class="small">Lead Vet Name</th>

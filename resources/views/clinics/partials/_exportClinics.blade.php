@@ -4,6 +4,7 @@
 @foreach ($clinics as $clinic)
     <tr>
         <th>{{ $clinic->name }}</th>
+        <th>{{ $clinic->code }}</th>
         <th>
             @if ($clinic->practiseManager)
                 {{ Clinic::printUsers($clinic->practiseManager, 'name') }}
