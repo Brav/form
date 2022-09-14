@@ -54,7 +54,7 @@ class ReCaptchaRule implements Rule
             return false;
         }
 
-        if ($response->getScore() < 0.5) {
+        if ($response->getScore() < 0.1) {
             $this->error_msg = 'Failed to validate captcha.';
 
             return false;
