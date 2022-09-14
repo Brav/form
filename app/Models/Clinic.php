@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\ClinicManagers;
+use App\Models\ClinicManagers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -151,8 +153,6 @@ class Clinic extends Model
      */
     public function getRegionalManagerAttribute()
     {
-
-        dump($this->managers);
         if($this->managers->count() === 0 || !$this->managers)
             return null;
 
@@ -189,6 +189,23 @@ public function getGmVetsServicesAttribute()
         return $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('other');
         });
+    }
+
+    /**
+     * Get the Other users
+     *
+     * @return Illuminate\Database\Eloquent\Collection[]
+     */
+    public function getFirstManager(string $managerType)
+    {
+        if($this->managers->count() === 0)
+            return null;
+
+        $managers = $this->managers->filter(function($item) use ($managerType) {
+            return $item->manager_type_id == ClinicManagers::managerID($managerType);
+        });
+
+        return $managers->first()->user ?? null;
     }
 
     /**
