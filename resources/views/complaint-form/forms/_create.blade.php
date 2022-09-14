@@ -25,22 +25,13 @@
                     @foreach ($clinics as $clinic)
                         <option value="{{ $clinic->id }}"
                             data-manager="{{ $clinic->regionalManager ?
-                                optional($clinic->regionalManager->first(), function ($user)
-                                {
-                                    return $user->name;
-                                }) : '' }}"
+                                optional($clinic->regionalManager->first()->user) : '' }}"
 
                             data-veterinary="{{ $clinic->vetManager ?
-                                optional($clinic->vetManager->first(), function ($user)
-                                {
-                                    return $user->name;
-                                }) : '' }}"
+                                optional($clinic->vetManager->first()->user) : '' }}"
 
                             data-general="{{ $clinic->generalManager ?
-                                optional($clinic->generalManager->first(), function ($user)
-                                {
-                                    return $user->name;
-                                }) : '' }}"
+                                optional($clinic->generalManager->first()->user) : '' }}"
                             @if (old('clinic_id') == $clinic->id)
                                 selected
                             @endif
