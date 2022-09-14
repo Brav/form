@@ -60,7 +60,7 @@ class ReCaptchaRule implements Rule
             return false;
         }
 
-        Log::info($response->getScore()) . ' - threshold';
+        Log::info($response->getScore() . ' - threshold') ;
 
         return true;
     }
