@@ -27,19 +27,19 @@
                             data-manager="{{ $clinic->regionalManager ?
                                 optional($clinic->regionalManager->first(), function ($user)
                                 {
-                                    return $user ? $user->name : '';
+                                    return $user->name;
                                 }) : '' }}"
 
                             data-veterinary="{{ $clinic->vetManager ?
                                 optional($clinic->vetManager->first(), function ($user)
                                 {
-                                    return $user ? $user->name : '';
+                                    return $user->name;
                                 }) : '' }}"
 
                             data-general="{{ $clinic->generalManager ?
                                 optional($clinic->generalManager->first(), function ($user)
                                 {
-                                    return $user ? $user->name : '';
+                                    return $user->name;
                                 }) : '' }}"
                             @if (old('clinic_id') == $clinic->id)
                                 selected
