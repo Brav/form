@@ -44,7 +44,7 @@ class ReCaptchaRule implements Rule
 
         $response = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
             ->setExpectedAction('complaint_form')
-            ->setScoreThreshold(0.5)
+            ->setScoreThreshold(0.1)
             ->verify($value, $_SERVER['REMOTE_ADDR']);
 
         if (!$response->isSuccess()) {
