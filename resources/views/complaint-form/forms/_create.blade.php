@@ -24,11 +24,11 @@
                     <option></option>
                     @foreach ($clinics as $clinic)
                         <option value="{{ $clinic->id }}"
-                            data-manager="{{ $clinic->firstManager('regional_manager') ?? '' }}"
+                            data-manager="{{ $clinic->getFirstManager('regional_manager') ?? '' }}"
 
-                            data-veterinary="{{ $clinic->firstManager('veterinary_manager') ?? ''}}"
+                            data-veterinary="{{ $clinic->getFirstManager('veterinary_manager') ?? ''}}"
 
-                            data-general="{{ $clinic->firstManager('general_manager') ?? '' }}"
+                            data-general="{{ $clinic->getFirstManager('general_manager') ?? '' }}"
                             @if (old('clinic_id') == $clinic->id)
                                 selected
                             @endif
