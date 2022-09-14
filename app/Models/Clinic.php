@@ -152,7 +152,7 @@ class Clinic extends Model
     public function getRegionalManagerAttribute()
     {
 
-        dump($this->managers);``
+        dump($this->managers);
         if($this->managers->count() === 0 || !$this->managers)
             return null;
 
