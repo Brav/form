@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 use ReCaptcha\ReCaptcha;
 
 class ReCaptchaRule implements Rule
@@ -59,6 +60,7 @@ class ReCaptchaRule implements Rule
             return false;
         }
 
+        Log::info($response->getScore()) . ' - threshold';
 
         return true;
     }
