@@ -68,8 +68,8 @@ class ReCaptchaRule implements Rule
      *
      * @return string
      */
-    public function message()
-    {
-        return 'There was a problem with captcha. Please try again.';
-    }
+//    public function message()
+//    {
+////        return 'There was a problem with captcha. Please try again.';
+//    }
 }
