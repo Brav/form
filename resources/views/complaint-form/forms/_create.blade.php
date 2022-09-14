@@ -413,7 +413,7 @@
                 <input type="file"
                 name="files[]"
                 id="documents" multiple
-                class="custom-file-input">
+                >
                 @error('documents')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
