@@ -412,7 +412,7 @@
                 <label for="documents" class="custom-file-label">Files/Documents</label>
                 <input type="file"
                 name="files[]"
-                id="documents"
+                id="documents" multiple
                 class="custom-file-input">
                 @error('documents')
                     <div class="alert alert-danger">{{ $message }}</div>
