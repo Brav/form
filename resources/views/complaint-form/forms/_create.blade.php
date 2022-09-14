@@ -408,8 +408,8 @@
 
     <div class="form-row">
         <div class="col-md-4">
-            <div class="custom-file">
-                <label for="documents" class="custom-file-label">Files/Documents</label>
+            <div class="">
+                <label for="documents" class="">Files/Documents</label>
                 <input type="file"
                 name="files[]"
                 id="documents" multiple
