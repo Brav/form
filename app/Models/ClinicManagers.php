@@ -72,6 +72,7 @@ class ClinicManagers extends Model
             {
                 switch ($type) {
                     case 'lead_vet':
+                    case 'veterinary_manager':
                     case 'other':
                         foreach ($request->post($type) as $user)
                         {

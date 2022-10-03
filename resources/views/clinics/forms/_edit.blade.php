@@ -69,7 +69,10 @@
         <div class="col">
              <div class="form-group">
                 <label for="veterinary_manager">Vet Manager</label>
-                <select class="form-control select2" name=veterinary_manager id="veterinary_manager">
+                <select class="form-control select2" multiple
+                name=veterinary_manager[]
+                id="veterinary_manager"
+                id="veterinary_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
