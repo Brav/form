@@ -33,7 +33,7 @@ class SendEmailToUser extends Mailable
      */
     public function build()
     {
-        return $this->from('complaintsreporting@vet.partners')
+        return $this->from('website@vet.partners')
             ->subject('Complaint Form Filled')
             ->view('emails/complaint-form-user')
             ->with([

@@ -29,7 +29,7 @@ class NewAccount extends Mailable
      */
     public function build()
     {
-        return $this->from('complaintsreporting@vet.partners')
+        return $this->from('website@vet.partners')
         ->subject('Account Created')
         ->view('emails/new-account')
         ->with([
