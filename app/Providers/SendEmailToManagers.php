@@ -49,8 +49,6 @@ class SendEmailToManagers
 
         $mailTo = \array_filter(\filter_var_array($mailTo, FILTER_VALIDATE_EMAIL, FILTER_SANITIZE_EMAIL));
 
-        dd($mailTo);
-
         if($mailTo)
         {
             \Mail::to($mailTo)
