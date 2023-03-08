@@ -117,3 +117,7 @@
 
     </tr>
 @endforeach
+
+@php
+    dd(666)
+@endphp
