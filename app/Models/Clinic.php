@@ -144,7 +144,7 @@ class Clinic extends Model
         if($data->count() === 0)
             return null;
 
-        return $data;
+        return $data->user->first();
     }
 
     /**
@@ -156,8 +156,6 @@ class Clinic extends Model
     {
         if($this->managers->count() === 0 || !$this->managers)
             return null;
-
-            dump($this->managers);
 
         $managers = $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('regional_manager');
