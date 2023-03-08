@@ -7,16 +7,16 @@
         $regionalManager = '/';
         $generalManager = '/';
 
-        if($form->clinic->regionalManager)
-        {
-            dump($form->clinic->regionalManager->first());
-        }
+        // if($form->clinic->regionalManager)
+        // {
+        //     dump($form->clinic->regionalManager->first());
+        // }
 
-        if($form->clinic->generalManager)
-        {
-            dump(555);
-            dump($form->clinic->generalManager->first());
-        }
+        // if($form->clinic->generalManager)
+        // {
+        //     dump(555);
+        //     dump($form->clinic->generalManager->first());
+        // }
 
         $typeName     = $form->type->name ?? '/';
         $channelName  = $form->channel->name ?? '/';
