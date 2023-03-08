@@ -134,8 +134,6 @@ class Clinic extends Model
         if($this->managers->count() === 0)
             return null;
 
-
-
         $data = $this->managers->filter(function($item){
 
             return $item->manager_type_id == ClinicManagers::managerID('general_manager');
@@ -144,7 +142,7 @@ class Clinic extends Model
         if($data->count() === 0)
             return null;
 
-        return $data->user->first() ?? null;
+        return optional($data->user)->first() ?? null;
     }
 
     /**
