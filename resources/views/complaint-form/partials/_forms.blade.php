@@ -4,7 +4,7 @@
         $dateOfClientComplaint = $form->date_of_client_complaint !== null ?
             date('d/m/Y', \strtotime($form->date_of_client_complaint)) : '/';
 
-        dd($form->clinic->regionalManager);
+        dd($form->clinic->regionalManager->first());
 
         $regionalManager = $form->clinic->regionalManager ? optional($form->clinic->regionalManager)->first()->user->name : '/';
         $generalManager  = $form->clinic->generalManager ? optional($form->clinic->generalManager)->first()->user->name : '/';
