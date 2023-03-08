@@ -9,7 +9,7 @@
 
         if($form->clinic->regionalManager)
         {
-            dump($form->clinic->regionalManager->first());
+            dump($form->clinic->regionalManager);
         }
 
         if($form->clinic->generalManager)
