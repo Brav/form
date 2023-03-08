@@ -142,7 +142,7 @@ class Clinic extends Model
         if($data->count() === 0)
             return null;
 
-        return optional($data->user)->first() ?? null;
+        return $data->first()->user ?? null;
     }
 
     /**
