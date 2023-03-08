@@ -14,8 +14,7 @@
 
         if($form->clinic->generalManager)
         {
-            // dump(555);
-            // dump($form->clinic->generalManager->first());
+            $generalManager  = $form->clinic->generalManager->name;
         }
 
         $typeName     = $form->type->name ?? '/';
@@ -118,7 +117,3 @@
 
     </tr>
 @endforeach
-
-@php
-    dd(666)
-@endphp
