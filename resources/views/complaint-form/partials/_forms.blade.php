@@ -6,8 +6,8 @@
 
         dump($form->clinic->regionalManager->first());
 
-        $regionalManager = $form->clinic->regionalManager ? optional($form->clinic->regionalManager->first())->user->name : '/';
-        $generalManager  = $form->clinic->generalManager ? optional($form->clinic->generalManager->first())->user->name : '/';
+        $regionalManager = $form->clinic->regionalManager ? optional($form->clinic->regionalManager->first())->optional(user)->name : '/';
+        $generalManager  = $form->clinic->generalManager ? optional($form->clinic->generalManager->first())->optional(user)->name : '/';
 
         $typeName     = $form->type->name ?? '/';
         $channelName  = $form->channel->name ?? '/';
