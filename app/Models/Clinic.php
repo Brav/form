@@ -135,10 +135,9 @@ class Clinic extends Model
             return null;
 
         $data = $this->managers->filter(function($item){
+            dump($item);
             return $item->manager_type_id == ClinicManagers::managerID('general_manager');
         });
-
-        dump($data);
 
         if($data->count() === 0)
             return null;
