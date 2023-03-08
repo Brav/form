@@ -9,12 +9,12 @@
 
         if($form->clinic->regionalManager)
         {
-            dump($form->clinic->regionalManager->first())
+            dump($form->clinic->regionalManager->first());
         }
 
         if($form->clinic->generalManager)
         {
-            dump($form->clinic->generalManager->first())
+            dump($form->clinic->generalManager->first());
         }
 
         $typeName     = $form->type->name ?? '/';
