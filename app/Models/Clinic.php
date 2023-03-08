@@ -138,6 +138,8 @@ class Clinic extends Model
             return $item->manager_type_id == ClinicManagers::managerID('general_manager');
         });
 
+        dump($data);
+
         if($data->count() === 0)
             return null;
 

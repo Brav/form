@@ -14,6 +14,7 @@
 
         if($form->clinic->generalManager)
         {
+            dump(555);
             dump($form->clinic->generalManager->first());
         }
 
