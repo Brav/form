@@ -4,10 +4,18 @@
         $dateOfClientComplaint = $form->date_of_client_complaint !== null ?
             date('d/m/Y', \strtotime($form->date_of_client_complaint)) : '/';
 
-        dump($form->clinic->regionalManager->first());
+        $regionalManager = '/';
+        $generalManager = '/';
 
-        $regionalManager = $form->clinic->regionalManager ? optional($form->clinic->regionalManager->first())->optional(user)->name : '/';
-        $generalManager  = $form->clinic->generalManager ? optional($form->clinic->generalManager->first())->optional(user)->name : '/';
+        if($form->clinic->regionalManager)
+        {
+            dump($form->clinic->regionalManager->first())
+        }
+
+        if($form->clinic->generalManager)
+        {
+            dump($form->clinic->generalManager->first())
+        }
 
         $typeName     = $form->type->name ?? '/';
         $channelName  = $form->channel->name ?? '/';
@@ -109,7 +117,3 @@
 
     </tr>
 @endforeach
-
-@php
-    dd(666)
-@endphp
