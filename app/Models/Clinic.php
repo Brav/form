@@ -154,9 +154,11 @@ class Clinic extends Model
         if($this->managers->count() === 0 || !$this->managers)
             return null;
 
-        return $this->managers->filter(function($item){
+        $managers = $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('regional_manager');
         });
+
+        return $managers->first()->user ?? null;
     }
 
     /**
@@ -169,9 +171,11 @@ public function getGmVetsServicesAttribute()
         if($this->managers->count() === 0)
             return null;
 
-        return $this->managers->filter(function($item){
+        $managers = $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('gm_vet_services');
         });
+
+        return $managers->first()->user ?? null;
     }
 
     /**
@@ -184,9 +188,11 @@ public function getGmVetsServicesAttribute()
         if($this->managers->count() === 0)
             return null;
 
-        return $this->managers->filter(function($item){
+        $managers = $this->managers->filter(function($item){
             return $item->manager_type_id == ClinicManagers::managerID('other');
         });
+
+        return $managers->first()->user ?? null;
     }
 
     /**
