@@ -4,18 +4,8 @@
         $dateOfClientComplaint = $form->date_of_client_complaint !== null ?
             date('d/m/Y', \strtotime($form->date_of_client_complaint)) : '/';
 
-        $regionalManager = '/';
-        $generalManager = '/';
-
-        if($form->clinic->regionalManager)
-        {
-            $regionalManager = $form->clinic->regionalManager->name;
-        }
-
-        if($form->clinic->generalManager)
-        {
-            $generalManager  = $form->clinic->generalManager->name;
-        }
+        $regionalManager = $form->clinic->getFirstManager('regional_manager')->name ?? '/';
+        $generalManager  = $form->clinic->getFirstManager('general_manager')->name ?? '/';
 
         $typeName     = $form->type->name ?? '/';
         $channelName  = $form->channel->name ?? '/';
