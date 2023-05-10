@@ -30,6 +30,7 @@ class ComplaintForm extends Model
         'date_of_incident',
         'date_of_client_complaint',
         'description',
+        'aggression',
         'location_id',
         'complaint_category_id',
         'complaint_type_id',
@@ -112,6 +113,9 @@ class ComplaintForm extends Model
         {
             $data['outcome'] = '';
         }
+
+        $data['aggression'] = $data['aggression_choice'] === 'yes' ?
+        $data['aggression'] : null;
 
         return $data;
     }
@@ -241,6 +245,16 @@ class ComplaintForm extends Model
         }
 
         return $form->first() ? $form->first()->name : '/';
+    }
+
+    static public function clientAggressionValues()
+    {
+        return [
+            'verbal'   => 'Verbal abuse (yelling, screaming)',
+            'physical' => 'Physical abuse (pushing, shoving, physical injury)',
+            'damage'   => 'Damage to the property',
+            'threats'  => 'Threats (verbal or physical)'
+        ];
     }
 
 }

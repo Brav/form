@@ -6,6 +6,7 @@ use App\Models\Animal;
 use App\Models\Clinic;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
+use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
 use App\Models\Location;
 use App\Models\Severity;
@@ -44,6 +45,8 @@ class ComplaintFormUpdateRequest extends FormRequest
             'date_of_incident'         => ['nullable', 'date_format:d/m/Y'],
             'date_of_client_complaint' => ['nullable', 'date_format:d/m/Y'],
             'description'              => ['required', 'string', 'min:2'],
+            'aggression_choice'        => ['required', Rule::in(['no', 'yes'])],
+            'aggression'               => ['required_if:aggression_choice,yes', Rule::in(array_keys(ComplaintForm::clientAggressionValues()))],
             'location_id'              => ['required',
                 Rule::in(Location::all()->pluck('id')->toArray()),
             ],

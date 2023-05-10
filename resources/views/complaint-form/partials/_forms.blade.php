@@ -49,6 +49,8 @@
         <th>{{ $form->date_of_incident->format('d/m/Y') }}</th>
         <th>{{ $dateOfClientComplaint }}</th>
         <th class="text-break">{{ $form->description }}</th>
+        <th>{{ $form->aggression ?
+                $aggressions[$form->aggression] : "None" }}</th>
         <th>{{ $form->location->name }}</th>
         <th>{{ $form->category->name }}</th>
         <th>{{ $typeName }}</th>

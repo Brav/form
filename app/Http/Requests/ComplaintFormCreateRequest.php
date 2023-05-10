@@ -6,6 +6,7 @@ use App\Models\Animal;
 use App\Models\Clinic;
 use App\Models\ComplaintCategory;
 use App\Models\ComplaintChannel;
+use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
 use App\Models\Location;
 use App\Models\Severity;
@@ -44,6 +45,8 @@ class ComplaintFormCreateRequest extends FormRequest
             'date_of_incident'         => ['required', 'date_format:d/m/Y'],
             'date_of_client_complaint' => ['nullable', 'date_format:d/m/Y'],
             'description'              => ['required', 'string', 'min:2'],
+            'aggression_choice'        => ['required', Rule::in(['no', 'yes'])],
+            'aggression'               => ['required_if:aggression_choice,yes', Rule::in(array_keys(ComplaintForm::clientAggressionValues()))],
             'location_id'              => ['required',
                 Rule::in(Location::all()->pluck('id')->toArray()),
             ],
@@ -84,7 +87,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'location_id.required'           => 'Location is required',
             'complaint_category_id.required' => 'Complaint category is required',
             'complaint_type_id.in'           => "Complaint type doesn't have valid value",
-            'complaint_channel_id.in'        => "Complaint channlel doesn't have valid value",
+            'complaint_channel_id.in'        => "Complaint channel doesn't have valid value",
             'documents.max' => "Please note that maximum file upload size needs to be less than 20MB",
         ];
     }

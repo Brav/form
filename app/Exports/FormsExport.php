@@ -108,6 +108,7 @@ class FormsExport implements FromView
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'export'         => true,
             'canEdit'        => $canEdit,
+            'aggressions'    => ComplaintForm::clientAggressionValues(),
 
         ]);
     }

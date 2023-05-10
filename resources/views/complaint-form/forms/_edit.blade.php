@@ -398,60 +398,104 @@
 
     </div>
 
-        <div class="form-row">
-            <div class="col-md-8">
-                <div class="form-group">
-                <label for="description">Description of incident and/or complaint</label>
-                <textarea class="form-control"
-                    name="description"
-                    id="description"
-                    rows="4"
-                    {{ $readonly }}>{{
-                old('description', $form->description) }}</textarea>
-                @error('description')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                </div>
+    <div class="form-row">
+        <div class="col-md-8">
+            <div class="form-group">
+            <label for="description">Description of incident and/or complaint</label>
+            <textarea class="form-control"
+                name="description"
+                id="description"
+                rows="4"
+                {{ $readonly }}>{{
+            old('description', $form->description) }}</textarea>
+            @error('description')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+
+        <div class="col-md-5">
+            <div class="form-group">
+            <label for="aggression_choice">Has there been any client aggression?</label>
+            <select class="form-control no-keyboard" name="aggression_choice" id="aggression_choice">
+                <option value="no"
+                    @if (old('aggression_choice') === 'no')
+                        selected
+                    @endif
+                >No</option>
+                <option value="yes"
+                    @if (old('aggression_choice') === 'yes' || $form->aggression)
+                        selected
+                    @endif
+                >Yes</option>
+            </select>
             </div>
         </div>
 
-        <div class="form-row">
-            <div class="col-md-4">
-                <div class="form-group">
-                <label for="location_id">Location</label>
-                <select
-                    class="form-control"
+        <div class="col-md-7">
+            <div class="form-group">
+            <label for="aggression">If Yes, select type of aggression?</label>
 
-                    id="location_id"
-                    {{ $readonly }}
-                    @if ($readonly === 'readonly')
-                        disabled="disabled"
-                    @endif
+            <select
+                @if (old('aggression_choice') !== 'yes' && !$form->aggression)
+                    disabled
+                @endif
+                class="form-control no-keyboard" name="aggression" id="aggression">
+                @foreach ($aggressions as $key => $value)
+                    <option
+                    @if (old('aggression', $form->aggression) == $key)
+                            selected
+                        @endif
+                    value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
 
-                    @if ($readonly !== 'readonly')
-                        name="location_id"
-                    @endif
-                    >
-                    <option></option>
-                    @foreach ($locations as $location)
-                        <option value="{{ $location->id }}"
-                            @if (old('location_id', $form->location_id) == $location->id)
-                                selected
-                            @endif
-                            >{{ $location->name }}</option>
-                    @endforeach
-                </select>
+            </div>
+        </div>
 
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-4">
+            <div class="form-group">
+            <label for="location_id">Location</label>
+            <select
+                class="form-control"
+
+                id="location_id"
+                {{ $readonly }}
                 @if ($readonly === 'readonly')
-                    <input type="hidden" name="location_id" value="{{ $form->location_id }}">
+                    disabled="disabled"
                 @endif
 
-                @error('location_id')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                </div>
+                @if ($readonly !== 'readonly')
+                    name="location_id"
+                @endif
+                >
+                <option></option>
+                @foreach ($locations as $location)
+                    <option value="{{ $location->id }}"
+                        @if (old('location_id', $form->location_id) == $location->id)
+                            selected
+                        @endif
+                        >{{ $location->name }}</option>
+                @endforeach
+            </select>
+
+            @if ($readonly === 'readonly')
+                <input type="hidden" name="location_id" value="{{ $form->location_id }}">
+            @endif
+
+            @error('location_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             </div>
         </div>
+    </div>
 
         <div class="form-row align-items-center">
 

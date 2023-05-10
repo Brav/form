@@ -145,6 +145,18 @@
     <th></th>
     <th>
         <select class="form-control filter filter-select select-one"
+        name="aggression"
+        id="aggression"
+        data-column="aggression"
+        data-type="select">
+            <option value="none">None</option>
+        @foreach ($aggressions as $key => $value)
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endforeach
+        </select>
+    </th>
+    <th>
+        <select class="form-control filter filter-select select-one"
         name="location_id"
         id="location_id"
         data-column="location_id"

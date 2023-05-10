@@ -131,3 +131,12 @@ $("body").on("submit", "#complaint_form", function(e) {
 
     $("#submit-form").attr("disabled", true);
 });
+
+$("body").on("change", "#aggression_choice", function(e){
+
+    let aggressionSelect = $("#aggression");
+
+    this.value === "yes"
+        ? aggressionSelect.attr("disabled", false)
+        : aggressionSelect.attr("disabled", true);
+});

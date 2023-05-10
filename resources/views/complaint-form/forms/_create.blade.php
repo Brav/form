@@ -280,6 +280,50 @@
     </div>
 
     <div class="form-row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+            <label for="aggression_choice">Has there been any client aggression?</label>
+            <select class="form-control no-keyboard" name="aggression_choice" id="aggression_choice">
+                <option value="no"
+                    @if (old('aggression_choice') === 'no')
+                        selected
+                    @endif
+                >No</option>
+                <option value="yes"
+                    @if (old('aggression_choice') === 'yes')
+                        selected
+                    @endif
+                >Yes</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="form-group">
+            <label for="aggression">If Yes, select type of aggression?</label>
+
+            <select
+                @if (old('aggression_choice') !== 'yes')
+                    disabled
+                @endif
+                class="form-control no-keyboard" name="aggression" id="aggression">
+                @foreach ($aggressions as $key => $value)
+                    <option
+                    @if (old('aggression') == $key)
+                            selected
+                        @endif
+                    value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="form-row">
         <div class="col-md-4">
             <div class="form-group">
             <label for="location_id">Location</label>

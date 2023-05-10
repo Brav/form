@@ -85,6 +85,7 @@ class ComplaintFormController extends Controller
             'outcomes'       => OutcomeOptions::orderBy('name', 'asc')->get(),
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'export'         => false,
+            'aggressions'    => ComplaintForm::clientAggressionValues(),
         ];
 
         if(!request()->ajax())
@@ -149,12 +150,13 @@ class ComplaintFormController extends Controller
                 'managers.user'])
                 ->orderBy('name', 'asc')
                 ->get(),
-            'categories' => ComplaintCategory::orderBy('name')->get(),
-            'types'      => ComplaintType::orderBy('name')->get(),
-            'channels'   => ComplaintChannel::orderBy('name')->get(),
-            'locations'  => Location::orderBy('name')->get(),
-            'severities' => Severity::get(),
-            'animals'    => Animal::get(),
+            'categories'  => ComplaintCategory::orderBy('name')->get(),
+            'types'       => ComplaintType::orderBy('name')->get(),
+            'channels'    => ComplaintChannel::orderBy('name')->get(),
+            'locations'   => Location::orderBy('name')->get(),
+            'severities'  => Severity::get(),
+            'animals'     => Animal::get(),
+            'aggressions' => ComplaintForm::clientAggressionValues(),
         ]);
     }
 
@@ -277,6 +279,7 @@ class ComplaintFormController extends Controller
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'severities'     => Severity::get(),
             'animals'        => Animal::get(),
+            'aggressions'    => ComplaintForm::clientAggressionValues(),
         ]);
     }
 
@@ -536,7 +539,9 @@ class ComplaintFormController extends Controller
                 break;
 
             case 'select':
-                $query->where($data['column'], '=', $search);
+                $search !== 'none' ?
+                    $query->where($data['column'], '=', $search) :
+                    $query->whereNull($data['column']);
                 break;
 
             case 'options':
