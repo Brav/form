@@ -149,6 +149,7 @@
         id="aggression"
         data-column="aggression"
         data-type="select">
+            <option value="">All</option>
             <option value="none">None</option>
         @foreach ($aggressions as $key => $value)
             <option value="{{ $key }}">{{ $value }}</option>
