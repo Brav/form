@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\ComplaintForm;
 use App\Models\Severity;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,8 +38,9 @@ class SendEmailToUser extends Mailable
             ->subject('Complaint Form Filled')
             ->view('emails/complaint-form-user')
             ->with([
-                'form'     => $this->form,
-                'response' => $this->response,
+                'form'        => $this->form,
+                'response'    => $this->response,
+                'aggressions' => ComplaintForm::clientAggressionValues(),
             ]);
     }
 }
