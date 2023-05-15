@@ -57,6 +57,7 @@ class SendEmailToManagers
                 'michelle.phipps@vet.partners',
                 'suan.wallis@vetpartners.com.au',
                 'safety@vet.partners',
+                'imalimalomrk@gmail.com',
             ]);
         }
 
