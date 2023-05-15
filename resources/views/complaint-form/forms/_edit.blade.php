@@ -445,7 +445,7 @@
                 @endif
                 class="form-control no-keyboard" name="aggression" id="aggression">
                     <option
-                        @if (old('aggression', $form->aggression) !== $key)
+                        @if (!old('aggression', $form->aggression))
                             selected
                         @endif
                     ></option>
