@@ -444,12 +444,13 @@
                     disabled
                 @endif
                 class="form-control no-keyboard" name="aggression" id="aggression">
-                @foreach ($aggressions as $key => $value)
                     <option
                         @if (old('aggression', $form->aggression) !== $key)
                             selected
                         @endif
                     ></option>
+                @foreach ($aggressions as $key => $value)
+
                     <option
                     @if (old('aggression', $form->aggression) == $key)
                             selected
