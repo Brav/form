@@ -244,7 +244,7 @@ a[x-apple-data-detectors='true'] {
         <strong>Date of client complaint (if applicable):</strong> {{ $form->date_of_client_complaint !== null ?
             date('d/m/Y', \strtotime($form->date_of_client_complaint)) : 'n/a'}} <br>
         <strong>Description of the incident and/or complaint:</strong> {{$form->description  }} <br>
-        <strong>Client Aggrtession: </strong>
+        <strong>Client Aggression: </strong>
           {{ $form->aggression ? $aggressions[$form->aggression] : "None"}}
         <br>
         <strong>Location of the incident:</strong> {{$form->location->name  }} <br>

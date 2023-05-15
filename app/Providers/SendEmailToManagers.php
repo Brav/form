@@ -49,6 +49,17 @@ class SendEmailToManagers
 
         $mailTo = \array_filter(\filter_var_array($mailTo, FILTER_VALIDATE_EMAIL, FILTER_SANITIZE_EMAIL));
 
+        // Special case when client aggression is reported
+        if($form->aggression !== null)
+        {
+            \array_push($mailTo, ...[
+                'shane.matthews@vetpartners.com.au',
+                'michelle.phipps@vet.partners',
+                'suan.wallis@vetpartners.com.au',
+                'safety@vet.partners',
+            ]);
+        }
+
         if($mailTo)
         {
             \Mail::to($mailTo)

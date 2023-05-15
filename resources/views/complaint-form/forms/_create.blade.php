@@ -310,6 +310,11 @@
                 class="form-control no-keyboard" name="aggression" id="aggression">
                 @foreach ($aggressions as $key => $value)
                     <option
+                        @if (old('aggression') !== $key)
+                            selected
+                        @endif
+                    ></option>
+                    <option
                     @if (old('aggression') == $key)
                             selected
                         @endif
