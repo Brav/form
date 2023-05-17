@@ -10,8 +10,9 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-8 ">
-                                    <h2 class="text-white display-4"><strong>Complaints Reporting</strong></h2>
-                                    <p class="text-white h3" style="opacity: .85;">Please use the form to lodge any formal complaints. If the complaint is of an urgent nature please flag you have submitted this to your regional manager</p>
+                                    <h2 class="text-white display-4"><strong>Complaints Reporting and Adverse Event Reporting</strong></h2>
+                                    <p class="text-white h3" style="opacity: .85;">Please use the form to lodge formal clinical complaints, client concerns about our services and to report any clinical incidents or adverse patient outcomes, including near misses.
+                                    <br>If the complaint is urgent, please flag you have submitted this to your regional manager.</p>
                                     <a href="{{ route('complaint-form.create') }}" class="btn btn-hero btn-hero-primary btn-hero-lg m-1">Submit a complaint</a>
 
                                     <a href="{{ route('complaint-form.manage') }}" class="btn btn-hero btn-hero-light btn-hero-lg m-1">View Submitted Complaints</a>
@@ -99,12 +100,12 @@
                     <div class="col-lg-6">
                         <div class="col-inner py-4 px-5" style="background: #d8efee">
 
-                            <h2 class="text-primary pt-4">Complaints Management <br /> & Handling</h2>
+                            <h2 class="text-primary pt-4">Clinical Complaints Management  <br /> & Handling</h2>
 
                             <div class="d-block" style="height: 2px; width: 200px; background:#a5cf4c"></div>
                             <br>
 
-                            <p>Please use the website to lodge any formal complaints and to document the process. This system is designed to ensure complaints are properly recorded, assigned, tracked, and resolved. </p>
+                            <p>Please use the website to lodge any formal clinical complaints and to document the process. This system is designed to ensure clinical complaints are properly recorded, assigned, tracked, and resolved. </p>
 
                             <ul>
                                 <li>If a complaint is of an urgent nature please flag you have submitted this to your regional manager. </li>
@@ -112,7 +113,7 @@
                             </ul>
                             <br>
 
-                            <p class="mb-0"><strong>Once you have completed your complaint form a confirmation email will be sent to your email address.</strong></p>
+                            <p class="mb-0"><strong>Once you have completed your clinical complaints form a confirmation email will be sent to your email address.</strong></p>
                         </div>
 
                     </div>
