@@ -58,6 +58,9 @@ class SendEmailToManagers
                 'suan.wallis@vetpartners.com.au',
                 'safety@vet.partners',
                 'imalimalomrk@gmail.com',
+                'Gillian.Porter@vet.partners',
+                'tayla.hayes@vet.partners',
+                'pippa.sicolo@vetpartners.com.au',
             ]);
         }
 
