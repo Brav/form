@@ -3,8 +3,8 @@
     <th>{{ $response->name }}</th>
     <th>{!! str_replace(
         ',',
-        $response->contacts,
-        '<br>'
+        '<br>',
+         $response->contacts,
         ) !!}</th>
     <th>
         <a href="{{ route('automated-email-contacts.edit', $response->id) }}"
