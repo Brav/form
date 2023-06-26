@@ -55,19 +55,19 @@ class SendEmailToManagers
         }
 
         // Special case when client aggression is reported
-        if($form->aggression !== null)
-        {
-            \array_push($mailTo, ...[
-                'shane.matthews@vetpartners.com.au',
-                'michelle.phipps@vet.partners',
-                'suan.wallis@vetpartners.com.au',
-                'safety@vet.partners',
-                'imalimalomrk@gmail.com',
-                'Gillian.Porter@vet.partners',
-                'tayla.hayes@vet.partners',
-                'pippa.sicolo@vetpartners.com.au',
-            ]);
-        }
+        // if($form->aggression !== null)
+        // {
+        //     \array_push($mailTo, ...[
+        //         'shane.matthews@vetpartners.com.au',
+        //         'michelle.phipps@vet.partners',
+        //         'suan.wallis@vetpartners.com.au',
+        //         'safety@vet.partners',
+        //         'imalimalomrk@gmail.com',
+        //         'Gillian.Porter@vet.partners',
+        //         'tayla.hayes@vet.partners',
+        //         'pippa.sicolo@vetpartners.com.au',
+        //     ]);
+        // }
 
         if($mailTo)
         {

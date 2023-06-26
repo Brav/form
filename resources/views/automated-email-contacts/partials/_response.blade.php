@@ -1,7 +1,11 @@
 <tr id="item-{{ $response->id }}">
     <th>{{ $response->id }}</th>
     <th>{{ $response->name }}</th>
-    <th>{{ $response->contacts }}</th>
+    <th>{!! str_replace(
+        ',',
+        $response->contacts,
+        '<br>'
+        ) !!}</th>
     <th>
         <a href="{{ route('automated-email-contacts.edit', $response->id) }}"
             class="btn btn-primary btn-sm active"
