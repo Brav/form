@@ -49,6 +49,11 @@ class SendEmailToManagers
 
         $mailTo = \array_filter(\filter_var_array($mailTo, FILTER_VALIDATE_EMAIL, FILTER_SANITIZE_EMAIL));
 
+        if($event->autoEmailContacts)
+        {
+            \array_push($mailTo, ...\explode(',', $event->autoEmailContacts));
+        }
+
         // Special case when client aggression is reported
         if($form->aggression !== null)
         {

@@ -6,6 +6,7 @@ use App\Exports\FormsExport;
 use App\Http\Requests\ComplaintFormCreateRequest;
 use App\Http\Requests\ComplaintFormUpdateRequest;
 use App\Models\Animal;
+use App\Models\AutomatedEmailContacts;
 use App\Models\AutomatedResponse;
 use App\Models\Clinic;
 use App\Models\ClinicManagers;
@@ -174,6 +175,22 @@ class ComplaintFormController extends Controller
             ->whereJsonContains('scenario->severity', $request->severity_id)
             ->first();
 
+        $autoEmailContacts = AutomatedEmailContacts::whereJsonContains(
+            'scenario->categories', $request->complaint_category_id
+        )
+        ->orWhereJsonContains(
+            'scenario->types', $request->complaint_type_id
+        )
+        ->orWhereJsonContains(
+            'scenario->channels', $request->complaint_channel_id
+        )
+        ->orWhereJsonContains(
+            'scenario->severity', $request->severity_id
+        )
+        ->orWhereJsonContains(
+            'scenario->aggression', $request->aggression
+        )->get();
+
         if(!$autoResponse)
         {
             $autoResponse = AutomatedResponse::where('default', '=', true)->first();
@@ -209,7 +226,17 @@ class ComplaintFormController extends Controller
             }
         }
 
-        ComplaintFilled::dispatch($model, $autoResponse);
+        $autoEmailContactsData = '';
+
+        foreach ($autoEmailContacts->pluck('contacts')->toArray() as $contact) {
+            $autoEmailContactsData .= ',' . $contact;
+        }
+
+        ComplaintFilled::dispatch(
+            $model,
+            $autoResponse,
+            trim($autoEmailContactsData, ',')
+        );
 
         return redirect()->route('complaint-form.sent')
             ->with([

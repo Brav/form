@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\AutomatedEmailContactsController;
 use App\Http\Controllers\AutomatedResponseController;
 use Illuminate\Support\Facades\Route;
 
@@ -209,6 +210,17 @@ Route::prefix('severity')->middleware(['auth', 'admin'])->group(function () {
     Route::post('store', [SeverityController::class, 'store'])->name('severity.store');
     Route::put('update/{item}', [SeverityController::class, 'update'])->name('severity.update');
     Route::delete('destroy/{item}', [SeverityController::class, 'destroy'])->name('severity.destroy');
+});
+
+Route::prefix('automated-email-contacts')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [AutomatedEmailContactsController::class, 'index'])->name('automated-email-contacts.index');
+    Route::get('create', [AutomatedEmailContactsController::class, 'create'])->name('automated-email-contacts.create');
+    Route::get('delete/{response}', [AutomatedEmailContactsController::class, 'delete'])->name('automated-email-contacts.delete');
+    Route::get('edit/{response}', [AutomatedEmailContactsController::class, 'edit'])->name('automated-email-contacts.edit');
+    Route::post('store', [AutomatedEmailContactsController::class, 'store'])->name('automated-email-contacts.store');
+    Route::put('update/{response}', [AutomatedEmailContactsController::class, 'update'])->name('automated-email-contacts.update');
+    Route::delete('destroy/{response}', [AutomatedEmailContactsController::class, 'destroy'])->name('automated-email-contacts.destroy');
 });
 
 Route::view('operational_policy', 'operationalPolicy')->name('operational_policy');

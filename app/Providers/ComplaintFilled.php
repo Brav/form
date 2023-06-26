@@ -13,16 +13,18 @@ class ComplaintFilled
 
     public $form;
     public $autoResponse;
+    public $autoEmailContacts;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(ComplaintForm $form, $autoResponse)
+    public function __construct(ComplaintForm $form, $autoResponse, $autoEmailContacts = null)
     {
         $this->form = $form;
         $this->autoResponse = $autoResponse;
+        $this->autoEmailContacts = $autoEmailContacts;
     }
 
     /**
