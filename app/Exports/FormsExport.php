@@ -87,7 +87,13 @@ class FormsExport implements FromView
             return $query->whereBetween('created_at', [$lastFriday->toDateTimeString(), $today]);
 
         })
-        ->with(['clinic', 'location', 'category', 'type', 'channel', 'severity'])
+        ->whereIn('clinic_id', function($query)
+        {
+            return $query->select('id')
+            ->from('clinics')
+            ->where('name', 'not like', '%test%');
+        })
+        ->with(['clinic', 'clinic.managers', 'clinic.managers.user','location', 'category', 'type', 'channel', 'animal', 'severity'])
         ->get();
 
         $canEdit = true;
