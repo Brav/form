@@ -10,6 +10,7 @@
             <th scope="col" class="small text-nowrap">Regional Manager</th>
             <th scope="col" class="small text-nowrap">General Manager</th>
             <th scope="col" class="small text-nowrap">Team member logging the complaint</th>
+            <th scope="col" class="small text-nowrap">Email of Team Member</th>
             <th scope="col" class="small text-nowrap">Position of the team member</th>
             <th scope="col" class="small text-nowrap">Client/Owner name</th>
             <th scope="col" class="small text-nowrap">Patient name</th>

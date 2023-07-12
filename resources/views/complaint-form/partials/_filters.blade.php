@@ -70,6 +70,16 @@
         <input
             type="text"
             class="form-control filter filter-text"
+            placeholder="Email of Team Member"
+            data-column="team_member_email"
+            data-operator="like"
+            data-type="text">
+    </th>
+
+    <th>
+        <input
+            type="text"
+            class="form-control filter filter-text"
             placeholder="Position of the team member"
             data-column="team_member_position"
             data-operator="like"

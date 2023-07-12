@@ -41,6 +41,7 @@
         <th>{{ $regionalManager }}</th>
         <th>{{ $generalManager }}</th>
         <th>{{ $form->team_member }}</th>
+        <th>{{ $form->team_member_email }}</th>
         <th>{{ $form->team_member_position }}</th>
         <th>{{ $form->client_name }}</th>
         <th>{{ $form->patient_name }}</th>

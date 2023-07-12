@@ -52,6 +52,13 @@ class ComplaintFormController extends Controller
 
         $forms = ComplaintForm::query();
 
+        $forms->whereIn('clinic_id', function($query)
+        {
+            return $query->select('id')
+            ->from('clinics')
+            ->where('name', 'not like', '%test%');
+        });
+
         foreach ($queryData as $data)
         {
             if(isset($data['column'], $data['search'], $data['type']))
@@ -63,7 +70,7 @@ class ComplaintFormController extends Controller
         $forms = $forms->when(!auth()->user()->admin, function($query) use($userClinics){
             return $query->whereIn('clinic_id', $userClinics);
         })
-        ->with(['clinic', 'location', 'category', 'type', 'channel', 'animal', 'severity'])
+        ->with(['clinic', 'clinic.managers', 'clinic.managers.user','location', 'category', 'type', 'channel', 'animal', 'severity'])
         ->orderBy('created_at', 'DESC')
         ->paginate(20);
 
@@ -555,6 +562,7 @@ class ComplaintFormController extends Controller
 
                         case 'team_member';
                         case 'team_member_position';
+                        case 'team_member_email';
                         case 'client_name';
                         case 'patient_name';
                         case 'pms_code';
