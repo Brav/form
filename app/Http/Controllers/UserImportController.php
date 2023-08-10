@@ -266,7 +266,10 @@ class UserImportController extends Controller
 
                 $user = User::create($data);
 
-                \Mail::to($email)->send(new \App\Mail\NewAccount($user, $password));
+                if(app()->isProduction())
+                {
+                    \Mail::to($email)->send(new \App\Mail\NewAccount($user, $password));
+                }
 
                 $users[] = $user;
             }
