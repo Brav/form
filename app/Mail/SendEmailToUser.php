@@ -26,7 +26,6 @@ class SendEmailToUser extends Mailable
     {
         $this->form     = $form;
         $this->response = $response;
-        $this->autoCountryEmails = $autoCountryEmails;
     }
 
     /**
@@ -42,7 +41,6 @@ class SendEmailToUser extends Mailable
             ->with([
                 'form'              => $this->form,
                 'response'          => $this->response,
-                'autoCountryEmails' => $this->autoCountryEmails,
                 'aggressions'       => ComplaintForm::clientAggressionValues(),
             ]);
     }
