@@ -22,7 +22,7 @@ class SendEmailToUser extends Mailable
      *
      * @return void
      */
-    public function __construct($form, $response, $autoCountryEmails)
+    public function __construct($form, $response)
     {
         $this->form     = $form;
         $this->response = $response;
