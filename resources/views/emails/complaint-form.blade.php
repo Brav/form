@@ -274,7 +274,7 @@ a[x-apple-data-detectors='true'] {
 </table>
 
 <p>
-  {{ $autoCountryEmails->body['clinic'] ?? '' }}
+  {!! $autoCountryEmails->body['clinic'] ?? '' !!}
 </p>
 
 </body>
