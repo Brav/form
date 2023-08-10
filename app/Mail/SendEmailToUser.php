@@ -15,16 +15,18 @@ class SendEmailToUser extends Mailable
 
     public $form;
     public $response;
+    public $autoCountryEmails;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($form, $response)
+    public function __construct($form, $response, $autoCountryEmails)
     {
         $this->form     = $form;
         $this->response = $response;
+        $this->autoCountryEmails = $autoCountryEmails;
     }
 
     /**
@@ -38,9 +40,10 @@ class SendEmailToUser extends Mailable
             ->subject('Complaint Form Filled')
             ->view('emails/complaint-form-user')
             ->with([
-                'form'        => $this->form,
-                'response'    => $this->response,
-                'aggressions' => ComplaintForm::clientAggressionValues(),
+                'form'              => $this->form,
+                'response'          => $this->response,
+                'autoCountryEmails' => $this->autoCountryEmails,
+                'aggressions'       => ComplaintForm::clientAggressionValues(),
             ]);
     }
 }

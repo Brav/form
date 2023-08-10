@@ -228,50 +228,54 @@ a[x-apple-data-detectors='true'] {
     <tr>
       <td style="overflow-wrap:break-word;word-break:break-word;padding:40px 20px 10px;font-family:arial,helvetica,sans-serif;" align="left">
 
-  <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 20px; line-height: 30px;">
-      <span>Details of the report you have submitted is below:</span><br><br>
-      <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
-        <strong>Regional Manager:</strong> {{ $form->clinic->regionalManager ?
-            optional($form->clinic->regionalManager->first()->user)->name : '/'  }} <br>
-        <strong>Team member logging the complaint:</strong> {{ $form->team_member ?? '/' }} <br>
-        <strong>Email of the team member:</strong> {{ $form->team_member_email ?? '/' }} <br>
-        <strong>Position of the team member:</strong> {{ $form->team_member_position  }} <br>
-        <strong>Client/Owner name:</strong> {{ $form->client_name  }} <br>
-        <strong>Patient name:</strong> {{ $form->patient_name }} <br>
-        <strong>Species:</strong> {{ $form->animal->name ?? 'Other'  }} <br>
-        <strong>Patient number:</strong> {{ $form->pms_code  }} <br>
-        <strong>Date of the incident:</strong> {{$form->date_of_incident->format('d/m/Y')  }} <br>
-        <strong>Date of client complaint (if applicable):</strong> {{ $form->date_of_client_complaint !== null ?
-            date('d/m/Y', \strtotime($form->date_of_client_complaint)) : 'n/a'}} <br>
-        <strong>Description of the incident and/or complaint:</strong> {{$form->description  }} <br>
-        <strong>Client Aggression: </strong>
-          {{ $form->aggression ? $aggressions[$form->aggression] : "None"}}
-        <br>
-        <strong>Location of the incident:</strong> {{$form->location->name  }} <br>
-        <strong>Category:</strong> {{$form->category->name  }} <br>
-        <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>
-        <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }} <br>
-        <strong>Complaint Level:</strong> {{ $form->level ?? 'n/a'  }} <br>
-        <strong>Severity:</strong> {{$form->severity->name  }} <br>
-    </span></p>
-    <p style="font-size: 13px; line-height: 150%;">
-      <a href="{{ route('complaint-form.edit', $form->id) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">View and update the report here.</a>
-    </p>
-    <p>
-      <strong>Useful resources for dealing with complaints</strong><br>
-       <span><a href="https://rise.articulate.com/share/ebvbTT1KJhQKagctvBlQGhcH1F5ACXN8#/">Difficult Conversation Planning </a></span><br>
-        <span><a href="https://rise.articulate.com/share/9WMRd5wNr9CVkiIlFSWRnI3TQlW6NMX7#/">How to Have a Difficult Conversation</a></span><br>
-        <span><a href="https://rise.articulate.com/share/IrnA9Lkdv_7s6S7QMrlV9BetXvHjidXl#/">Managing Client Complaints and Angry Customers</a></span><br>
-        <span><a href="{{ route('operational_policy') }}">Clients Complaints and Concerns - Operational Policy</a></span><br>
-        <span><a href="<?php echo asset('media/documents/responding_to_reviews.pdf') ?>" class="d-block" target=_blank rel=noopener rel=nofollow>Responding To Reviews</a>
-    </p>
-  </div>
+        <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
+          <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 20px; line-height: 30px;">
+            <span>Details of the report you have submitted is below:</span><br><br>
+            <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
+              <strong>Regional Manager:</strong> {{ $form->clinic->regionalManager ?
+                  optional($form->clinic->regionalManager->first()->user)->name : '/'  }} <br>
+              <strong>Team member logging the complaint:</strong> {{ $form->team_member ?? '/' }} <br>
+              <strong>Email of the team member:</strong> {{ $form->team_member_email ?? '/' }} <br>
+              <strong>Position of the team member:</strong> {{ $form->team_member_position  }} <br>
+              <strong>Client/Owner name:</strong> {{ $form->client_name  }} <br>
+              <strong>Patient name:</strong> {{ $form->patient_name }} <br>
+              <strong>Species:</strong> {{ $form->animal->name ?? 'Other'  }} <br>
+              <strong>Patient number:</strong> {{ $form->pms_code  }} <br>
+              <strong>Date of the incident:</strong> {{$form->date_of_incident->format('d/m/Y')  }} <br>
+              <strong>Date of client complaint (if applicable):</strong> {{ $form->date_of_client_complaint !== null ?
+                  date('d/m/Y', \strtotime($form->date_of_client_complaint)) : 'n/a'}} <br>
+              <strong>Description of the incident and/or complaint:</strong> {{$form->description  }} <br>
+              <strong>Client Aggression: </strong>
+                {{ $form->aggression ? $aggressions[$form->aggression] : "None"}}
+              <br>
+              <strong>Location of the incident:</strong> {{$form->location->name  }} <br>
+              <strong>Category:</strong> {{$form->category->name  }} <br>
+              <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>
+              <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }} <br>
+              <strong>Complaint Level:</strong> {{ $form->level ?? 'n/a'  }} <br>
+              <strong>Severity:</strong> {{$form->severity->name  }} <br>
+          </span></p>
+          <p style="font-size: 13px; line-height: 150%;">
+            <a href="{{ route('complaint-form.edit', $form->id) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">View and update the report here.</a>
+          </p>
+          <p>
+            <strong>Useful resources for dealing with complaints</strong><br>
+            <span><a href="https://rise.articulate.com/share/ebvbTT1KJhQKagctvBlQGhcH1F5ACXN8#/">Difficult Conversation Planning </a></span><br>
+              <span><a href="https://rise.articulate.com/share/9WMRd5wNr9CVkiIlFSWRnI3TQlW6NMX7#/">How to Have a Difficult Conversation</a></span><br>
+              <span><a href="https://rise.articulate.com/share/IrnA9Lkdv_7s6S7QMrlV9BetXvHjidXl#/">Managing Client Complaints and Angry Customers</a></span><br>
+              <span><a href="{{ route('operational_policy') }}">Clients Complaints and Concerns - Operational Policy</a></span><br>
+              <span><a href="<?php echo asset('media/documents/responding_to_reviews.pdf') ?>" class="d-block" target=_blank rel=noopener rel=nofollow>Responding To Reviews</a>
+          </p>
+        </div>
 
       </td>
     </tr>
   </tbody>
 </table>
+
+<p>
+  {{ $autoCountryEmails->body['clinic'] ?? '' }}
+</p>
 
 </body>
 

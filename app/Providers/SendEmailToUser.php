@@ -32,6 +32,6 @@ class SendEmailToUser
         $autoResponse = $event->autoResponse;
 
         \Mail::to($form->team_member_email)
-        ->send(new \App\Mail\SendEmailToUser($form, $autoResponse));
+        ->send(new \App\Mail\SendEmailToUser($form, $autoResponse, $event->autoCountryEmails));
     }
 }

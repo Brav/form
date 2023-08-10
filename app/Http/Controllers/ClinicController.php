@@ -49,7 +49,7 @@ class ClinicController extends Controller
         {
             if(isset($data['column'], $data['search'], $data['type']))
             {
-                $this->createQuery($query, $data);
+            $this->createQuery($query, $data);
             }
         }
 
@@ -100,9 +100,10 @@ class ClinicController extends Controller
         })->get();
 
         return view('form', [
-            'task'  => 'create',
-            'view'  => 'clinics',
-            'users' => $users,
+            'task'      => 'create',
+            'view'      => 'clinics',
+            'users'     => $users,
+            'countries' => Clinic::$countries,
         ]);
     }
 
@@ -166,6 +167,7 @@ class ClinicController extends Controller
             'view'   => 'clinics',
             'users'  => $users,
             'clinic' => $clinic,
+            'countries' => Clinic::$countries,
         ]);
     }
 
@@ -234,7 +236,7 @@ class ClinicController extends Controller
      * @param mixed $data
      * @return void
      */
-    private function createQuery($query, $data) :void
+private function createQuery($query, $data) :void
     {
         switch ($data['type'])
         {

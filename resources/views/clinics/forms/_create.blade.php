@@ -197,8 +197,26 @@
             </div>
         </div>
 
-        <div class="col"></div>
+    </div>
 
+    <div class="form-row align-items-center">
+
+        <div class="col-4">
+             <div class="form-group">
+                <label for="other">Country</label>
+                <select class="form-control text-capitalize"
+                    name=country
+                    id="country">
+                    @foreach ($countries as $key => $value)
+                        <option
+                        @if (old('country') === $key)
+                            selected
+                        @endif
+                        value="{{ $key }}">{{ $key }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
     </div>
 
     <button type="submit" class="btn btn-primary">Create</button>

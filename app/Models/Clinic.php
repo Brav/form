@@ -23,6 +23,13 @@ class Clinic extends Model
     protected $fillable = [
         'name',
         'code',
+        'owner_id',
+        'country',
+    ];
+
+    public static $countries = [
+        'australia' => 'au',
+        'new zealand' => 'nz',
     ];
 
     /**

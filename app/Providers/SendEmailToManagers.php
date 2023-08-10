@@ -54,6 +54,11 @@ class SendEmailToManagers
             \array_push($mailTo, ...\explode(',', $event->autoEmailContacts));
         }
 
+        if($event->autoCountryEmails)
+        {
+            \array_push($mailTo, ...\explode(',', $event->autoCountryEmails['emails']));
+        }
+
         // Special case when client aggression is reported
         // if($form->aggression !== null)
         // {
@@ -72,7 +77,7 @@ class SendEmailToManagers
         if($mailTo)
         {
             \Mail::to($mailTo)
-            ->send(new \App\Mail\SendEmailToManagers($form));
+            ->send(new \App\Mail\SendEmailToManagers($form, $event->autoCountryEmails));
         }
 
     }

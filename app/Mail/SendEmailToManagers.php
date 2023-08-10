@@ -14,15 +14,17 @@ class SendEmailToManagers extends Mailable
     use Queueable, SerializesModels;
 
     public $form;
+    public $autoCountryEmails;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($form)
+    public function __construct($form, $autoCountryEmails)
     {
         $this->form = $form;
+        $this->autoCountryEmails = $autoCountryEmails;
     }
 
     /**
@@ -36,8 +38,9 @@ class SendEmailToManagers extends Mailable
             ->subject('Complaint Form Filled')
             ->view('emails/complaint-form')
             ->with([
-                'form'        => $this->form,
-                'aggressions' => ComplaintForm::clientAggressionValues(),
+                'form'              => $this->form,
+                'autoCountryEmails' => $this->autoCountryEmails,
+                'aggressions'       => ComplaintForm::clientAggressionValues(),
             ]);
     }
 }

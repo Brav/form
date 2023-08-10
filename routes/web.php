@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\AutomatedCountryEmailController;
 use App\Http\Controllers\AutomatedEmailContactsController;
 use App\Http\Controllers\AutomatedResponseController;
 use Illuminate\Support\Facades\Route;
@@ -221,6 +222,17 @@ Route::prefix('automated-email-contacts')->middleware(['auth', 'admin'])->group(
     Route::post('store', [AutomatedEmailContactsController::class, 'store'])->name('automated-email-contacts.store');
     Route::put('update/{response}', [AutomatedEmailContactsController::class, 'update'])->name('automated-email-contacts.update');
     Route::delete('destroy/{response}', [AutomatedEmailContactsController::class, 'destroy'])->name('automated-email-contacts.destroy');
+});
+
+Route::prefix('automated-country-emails')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [AutomatedCountryEmailController::class, 'index'])->name('automated-country-emails.index');
+    Route::get('create', [AutomatedCountryEmailController::class, 'create'])->name('automated-country-emails.create');
+    Route::get('delete/{response}', [AutomatedCountryEmailController::class, 'delete'])->name('automated-country-emails.delete');
+    Route::get('edit/{response}', [AutomatedCountryEmailController::class, 'edit'])->name('automated-country-emails.edit');
+    Route::post('store', [AutomatedCountryEmailController::class, 'store'])->name('automated-country-emails.store');
+    Route::put('update/{response}', [AutomatedCountryEmailController::class, 'update'])->name('automated-country-emails.update');
+    Route::delete('destroy/{response}', [AutomatedCountryEmailController::class, 'destroy'])->name('automated-country-emails.destroy');
 });
 
 Route::view('operational_policy', 'operationalPolicy')->name('operational_policy');

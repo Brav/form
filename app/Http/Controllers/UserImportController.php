@@ -124,6 +124,7 @@ class UserImportController extends Controller
 
         $clinicName = trim($data['clinic_name']);
         $clinicCode = trim($data['clinic_code'] ?? '');
+        $clinicCountry = \trim(\strtolower($data['clinic_country']));
 
         $clinic = Clinic::where('name', strtolower($clinicName))->withTrashed()->first();
 
@@ -131,6 +132,7 @@ class UserImportController extends Controller
         {
             $clinic->name       = $clinicName;
             $clinic->code       = !empty($clinicCode) ? $clinicCode : null;
+            $clinic->country    = $clinicCountry;
             $clinic->deleted_at = null;
 
             $clinic->update();
@@ -139,8 +141,9 @@ class UserImportController extends Controller
         else
         {
             $clinic = Clinic::create([
-                'name' => $data['clinic_name'],
-                'code' => !empty($clinicCode) ? $clinicCode : null,
+                'name'    => $data['clinic_name'],
+                'code'    => !empty($clinicCode) ? $clinicCode : null,
+                'country' => $clinicCountry,
             ]);
         }
 

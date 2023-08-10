@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Clinic;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ClinicCreateRequest extends FormRequest
 {
@@ -37,6 +39,7 @@ class ClinicCreateRequest extends FormRequest
             'gm_vet_services'          => ['required', 'numeric'],
             'other'                    => ['nullable'],
             'other.*'                  => ['numeric'],
+            'country'                  => ['nullable', Rule::in(\array_keys(Clinic::$countries))],
         ];
     }
 }

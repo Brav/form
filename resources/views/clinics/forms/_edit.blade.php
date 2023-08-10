@@ -152,7 +152,7 @@
 
     <div class="form-row align-items-center">
 
-        <div class="col">
+        <div class="col-4">
              <div class="form-group">
                 <label for="gm_vet_services">GM Vet Services</label>
                 <select class="form-control select2"
@@ -171,7 +171,7 @@
             </div>
         </div>
 
-        <div class="col">
+        <div class="col-8">
              <div class="form-group">
                 <label for="other">Other</label>
                 <select class="form-control select2"
@@ -191,8 +191,26 @@
             </div>
         </div>
 
-        <div class="col"></div>
+    </div>
 
+    <div class="form-row align-items-center">
+
+        <div class="col-4">
+             <div class="form-group">
+                <label for="other">Country</label>
+                <select class="form-control text-capitalize"
+                    name=country
+                    id="country">
+                    @foreach ($countries as $key => $value)
+                        <option
+                        @if (old('country', $clinic->country) === $key)
+                            selected
+                        @endif
+                        value="{{ $key }}">{{ $key }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
     </div>
 
     <button type="submit" class="btn btn-primary">Update</button>

@@ -2,31 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AutomatedEmailContactsRequest;
-use App\Models\AutomatedEmailContacts;
-use App\Models\ComplaintCategory;
-use App\Models\ComplaintChannel;
-use App\Models\ComplaintForm;
-use App\Models\ComplaintType;
-use App\Models\Severity;
+use App\Http\Requests\AutomatedCountryEmailRequest;
+use App\Models\AutomatedCountryEmail;
 use Illuminate\Http\Request;
 
-class AutomatedEmailContactsController extends Controller
+class AutomatedCountryEmailController extends Controller
 {
-
     function index()
     {
-        $responses = AutomatedEmailContacts::paginate(20);
+        $responses = AutomatedCountryEmail::paginate(20);
 
         if(!request()->ajax())
         {
-            return view('automated-email-contacts/index', [
+            return view('automated-country-emails/index', [
                 'responses' => $responses,
             ]);
         }
 
         return [
-            'html' => view('automated-email-contacts/partials/_responses', [
+            'html' => view('automated-country-emails/partials/_responses', [
                 'responses' => $responses,
             ])->render(),
             'pagination' => view('pagination', [
@@ -48,12 +42,7 @@ class AutomatedEmailContactsController extends Controller
         return response()->json(
             view('form-ajax', [
                 'task'        => 'create',
-                'view'        => 'automated-email-contacts',
-                'categories'  => ComplaintCategory::all(),
-                'types'       => ComplaintType::all(),
-                'channels'    => ComplaintChannel::all(),
-                'severities'  => Severity::get(),
-                'aggressions' => ComplaintForm::clientAggressionValues(),
+                'view'        => 'automated-country-emails',
             ])->render(),
             200);
     }
@@ -61,20 +50,19 @@ class AutomatedEmailContactsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  AutomatedEmailContactsRequest  $request
+     * @param  AutomatedCountryEmailRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AutomatedEmailContactsRequest $request)
+    public function store(AutomatedCountryEmailRequest $request)
     {
         $data = $request->all();
 
-        $data['scenario'] = AutomatedEmailContacts::scenario($request);
-        $data['contacts'] = AutomatedEmailContacts::contacts($request->contacts);
+        $data['country'] = \strtolower($data['country']);
 
-        $response = AutomatedEmailContacts::create($data);
+        $response = AutomatedCountryEmail::create($data);
 
         return response()->json(
-            view('automated-email-contacts/partials/_response', [
+            view('automated-country-emails/partials/_response', [
                 'response' => $response,
             ])->render()
             , 200);
@@ -83,21 +71,16 @@ class AutomatedEmailContactsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  AutomatedEmailContacts $response
+     * @param  AutomatedCountryEmail $response
      * @return \Illuminate\Http\Response
      */
-    public function edit(AutomatedEmailContacts $response)
+    public function edit(AutomatedCountryEmail $response)
     {
         return response()->json(
             view('form-ajax', [
                 'task'       => 'edit',
-                'view'       => 'automated-email-contacts',
+                'view'       => 'automated-country-emails',
                 'response'   => $response,
-                'categories' => ComplaintCategory::all(),
-                'types'      => ComplaintType::all(),
-                'channels'   => ComplaintChannel::all(),
-                'severities' => Severity::get(),
-                'aggressions' => ComplaintForm::clientAggressionValues(),
             ])->render()
         , 200);
     }
@@ -105,20 +88,19 @@ class AutomatedEmailContactsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  AutomatedEmailContactsRequest  $request
+     * @param  AutomatedCountryEmailRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(AutomatedEmailContactsRequest $request, AutomatedEmailContacts $response)
+    public function update(AutomatedCountryEmailRequest $request, AutomatedCountryEmail $response)
     {
         $data = $request->all();
 
-        $data['scenario'] = AutomatedEmailContacts::scenario($request);
-        $data['contacts'] = AutomatedEmailContacts::contacts($request->contacts);
-
         $response->update($data);
 
+        $data['country'] = \strtolower($data['country']);
+
         return response()->json(
-            view('automated-email-contacts/partials/_response', [
+            view('automated-country-emails/partials/_response', [
                 'response' => $response->fresh(),
             ])->render()
             , 200);
@@ -130,12 +112,12 @@ class AutomatedEmailContactsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function delete(AutomatedEmailContacts $response)
+    public function delete(AutomatedCountryEmail $response)
     {
         return view('modals/partials/_delete', [
             'id'        => $response->id,
-            'routeName' => route('automated-email-contacts.destroy', $response->id),
-            'itemName'  => $response->name,
+            'routeName' => route('automated-country-emails.destroy', $response->id),
+            'itemName'  => $response->country,
             'table'     => 'response',
         ]);
     }
@@ -146,7 +128,7 @@ class AutomatedEmailContactsController extends Controller
      * @param  AutomatedResponse $response
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AutomatedEmailContacts $response)
+    public function destroy(AutomatedCountryEmail $response)
     {
         if($response->delete())
             return response()->json([

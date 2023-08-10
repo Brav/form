@@ -6,6 +6,7 @@ use App\Exports\FormsExport;
 use App\Http\Requests\ComplaintFormCreateRequest;
 use App\Http\Requests\ComplaintFormUpdateRequest;
 use App\Models\Animal;
+use App\Models\AutomatedCountryEmail;
 use App\Models\AutomatedEmailContacts;
 use App\Models\AutomatedResponse;
 use App\Models\Clinic;
@@ -233,16 +234,19 @@ class ComplaintFormController extends Controller
             }
         }
 
-        $autoEmailContactsData = '';
+        $autoEmailContactsData = \implode(',', $autoEmailContacts->pluck('contacts')->toArray());
 
-        foreach ($autoEmailContacts->pluck('contacts')->toArray() as $contact) {
-            $autoEmailContactsData .= ',' . $contact;
-        }
+
+        $clinic = Clinic::find($data['clinic_id']);
+
+        $autoCountryEmails = AutomatedCountryEmail::where('country', $clinic->country)->first();
+
 
         ComplaintFilled::dispatch(
             $model,
             $autoResponse,
-            trim($autoEmailContactsData, ',')
+            $autoEmailContactsData,
+            $autoCountryEmails,
         );
 
         return redirect()->route('complaint-form.sent')
