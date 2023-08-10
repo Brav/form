@@ -255,6 +255,9 @@ a[x-apple-data-detectors='true'] {
               <strong>Complaint Level:</strong> {{ $form->level ?? 'n/a'  }} <br>
               <strong>Severity:</strong> {{$form->severity->name  }} <br>
           </span></p>
+          <p>
+              {!! $autoCountryEmails->body['clinic'] ?? '' !!}
+          </p>
           <p style="font-size: 13px; line-height: 150%;">
             <a href="{{ route('complaint-form.edit', $form->id) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">View and update the report here.</a>
           </p>
@@ -272,10 +275,6 @@ a[x-apple-data-detectors='true'] {
     </tr>
   </tbody>
 </table>
-
-<p>
-  {!! $autoCountryEmails->body['clinic'] ?? '' !!}
-</p>
 
 </body>
 
