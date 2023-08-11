@@ -232,6 +232,19 @@
         </select>
     </th>
 
+    <th>
+        <select class="form-control filter filter-select select-one text-capitalize"
+        name="clinic_country"
+        id="clinic_country"
+        data-column="clinic_country"
+        data-type="text">
+            <option value="all">All</option>
+        @foreach ($countries as $key => $value)
+            <option value="{{ $key }}">{{ $key }}</option>
+        @endforeach
+        </select>
+    </th>
+
     <th></th>
 
     @if ($canEdit)

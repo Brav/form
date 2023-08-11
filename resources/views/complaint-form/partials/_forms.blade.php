@@ -58,6 +58,7 @@
         <th>{{ $channelName }}</th>
         <th>{{ $form->level }}</th>
         <th class="text-capitalize">{{ $severityName }}</th>
+        <th class="text-capitalize">{{ $form->clinic->country ?? 'N/A' }}</th>
         <th>
             @if ($form->files)
                 @foreach ($form->files as $file)

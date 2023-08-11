@@ -95,6 +95,7 @@ class ComplaintFormController extends Controller
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'export'         => false,
             'aggressions'    => ComplaintForm::clientAggressionValues(),
+            'countries'      => Clinic::$countries,
         ];
 
         if(!request()->ajax())
@@ -532,6 +533,20 @@ class ComplaintFormController extends Controller
                                 ->from('clinics')
                                 ->where('code', 'like', '%' . $search . '%');
                             });
+                            break;
+
+                        case 'clinic_country';
+
+                            if($search !== 'all')
+                            {
+                                $query->whereIn('clinic_id', function($query) use ($search)
+                                {
+                                    return $query->select('id')
+                                    ->from('clinics')
+                                    ->where('country', '=', $search);
+                                });
+                            }
+
                             break;
 
                         case 'regional_manager';

@@ -28,6 +28,7 @@
             <th scope="col" class="small text-nowrap">Channel</th>
             <th scope="col" class="small text-nowrap">Complaint Level</th>
             <th scope="col" class="small text-nowrap">Severity</th>
+            <th scope="col" class="small text-nowrap">Country</th>
             <th scope="col" class="small text-nowrap">Files/Documents</th>
             @if ($canEdit)
                 @foreach ($outcomeOptions as $option)
