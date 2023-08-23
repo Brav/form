@@ -22,7 +22,7 @@
                 style="min-width: 550px"
             >Description of the incident and/or complaint</th>
             <th>Client Aggression</th>
-            <th scope="col" class="small text-nowrap">Location of the incident</th>
+            <th scope="col" class="small " style="max-width: 150px">Formal complaint lodged?</th>
             <th scope="col" class="small text-nowrap">Category</th>
             <th scope="col" class="small text-nowrap">Type of complaint</th>
             <th scope="col" class="small text-nowrap">Channel</th>

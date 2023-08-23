@@ -52,7 +52,7 @@
         <th class="text-break">{{ $form->description }}</th>
         <th>{{ $form->aggression ?
                 $aggressions[$form->aggression] : "None" }}</th>
-        <th>{{ $form->location->name }}</th>
+        <th>{{ $form->formal_complaint_lodged ? 'Yes' : 'No' }}</th>
         <th>{{ $form->category->name }}</th>
         <th>{{ $typeName }}</th>
         <th>{{ $channelName }}</th>

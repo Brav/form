@@ -168,14 +168,15 @@
     </th>
     <th>
         <select class="form-control filter filter-select select-one"
-        name="location_id"
-        id="location_id"
-        data-column="location_id"
+        name="formal_complaint_lodged"
+        id="formal_complaint_lodged"
+        data-column="formal_complaint_lodged"
         data-type="select">
             <option value="all">All</option>
-        @foreach ($locations as $location)
-            <option value="{{ $location->id }}">{{ $location->name }}</option>
-        @endforeach
+
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+
         </select>
     </th>
 

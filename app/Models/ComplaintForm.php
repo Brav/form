@@ -37,6 +37,7 @@ class ComplaintForm extends Model
         'complaint_channel_id',
         'severity_id',
         'animal_id',
+        'formal_complaint_lodged',
         'level',
         'outcome',
         'outcome_options',
@@ -109,6 +110,7 @@ class ComplaintForm extends Model
             $data['animal_id'] = null;
         }
 
+
         if(!isset($data['outcome']))
         {
             $data['outcome'] = '';
@@ -116,6 +118,9 @@ class ComplaintForm extends Model
 
         $data['aggression'] = $data['aggression_choice'] === 'yes' ?
         $data['aggression'] : null;
+
+        $data['formal_complaint_lodged'] =
+            $data['formal_complaint_lodged'] === 'yes' ? true : false;
 
         return $data;
     }

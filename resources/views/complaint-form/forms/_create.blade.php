@@ -1,4 +1,4 @@
-<h1>Complaints Reporting Form</h1>
+<h1>Complaints Reporting and Adverse Event Reporting Form</h1>
 
 <form
     id=complaint_form
@@ -281,7 +281,7 @@
 
     <div class="form-row">
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
             <label for="aggression_choice">Has there been any client aggression?</label>
             <select class="form-control no-keyboard" name="aggression_choice" id="aggression_choice">
@@ -299,7 +299,7 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="form-group">
             <label for="aggression">If Yes, select type of aggression?</label>
 
@@ -330,21 +330,23 @@
     </div>
 
     <div class="form-row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
-            <label for="location_id">Location</label>
-            <select class="form-control no-keyboard" name="location_id" id="location_id">
-                <option></option>
-                @foreach ($locations as $location)
-                    <option value="{{ $location->id }}"
-                        @if (old('location_id') == $location->id)
-                            selected
-                        @endif
-                        >{{ $location->name }}</option>
-                @endforeach
+            <label for="formal_complaint_lodged">Has a formal complaint been lodged</label>
+            <select class="form-control no-keyboard" name="formal_complaint_lodged" id="formal_complaint_lodged">
+                <option value="no"
+                    @if (old('formal_complaint_lodged') === 'no')
+                        selected
+                    @endif>No</option>
+
+                <option value="yes"
+                @if (old('formal_complaint_lodged') === 'yes')
+                    selected
+                @endif>Yes</option>
+
             </select>
 
-            @error('location_id')
+            @error('formal_complaint_lodged')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             </div>
@@ -358,7 +360,6 @@
             <div class="form-group">
                 <label for="complaint_category_id">Category</label>
                 <select class="form-control no-keyboard" name="complaint_category_id" id="complaint_category_id">
-                    <option></option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
 
@@ -485,7 +486,7 @@
     <div class="form-row">
 
         <button type="submit" id="submit-form"
-            class="btn btn-hero-primary mt-3">Submit a complaint</button>
+            class="btn btn-hero-primary mt-3">Submit</button>
         <div class="mx-2 d-none" id="compaint-submitted" style="margin-top: 20px">
             <i class="fas fa-spinner fa-2x fa-spin"></i>
         </div>

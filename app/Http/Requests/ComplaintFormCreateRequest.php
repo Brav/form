@@ -47,7 +47,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'description'              => ['required', 'string', 'min:2'],
             'aggression_choice'        => ['required', Rule::in(['no', 'yes'])],
             'aggression'               => ['required_if:aggression_choice,yes', Rule::in(array_keys(ComplaintForm::clientAggressionValues()))],
-            'location_id'              => ['required',
+            'location_id'              => ['nullable',
                 Rule::in(Location::all()->pluck('id')->toArray()),
             ],
             'complaint_category_id' => ['required',
@@ -61,6 +61,9 @@ class ComplaintFormCreateRequest extends FormRequest
             ],
             'animal_id' => ['required',
                 Rule::in(\array_merge(Animal::all()->pluck('id')->toArray(), ['other']) ),
+            ],
+            'formal_complaint_lodged' => [
+                'required', Rule::in(['yes', 'no']),
             ],
             // 'recaptcha_token' => ['required', new \App\Rules\ReCaptchaRule($this->recaptcha_token)],
             'severity_id'    => ['required',

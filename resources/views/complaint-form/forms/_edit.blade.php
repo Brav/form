@@ -417,7 +417,7 @@
 
     <div class="form-row">
 
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="form-group">
             <label for="aggression_choice">Has there been any client aggression?</label>
             <select class="form-control no-keyboard" name="aggression_choice" id="aggression_choice">
@@ -435,7 +435,7 @@
             </div>
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div class="form-group">
             <label for="aggression">If Yes, select type of aggression?</label>
 
@@ -468,42 +468,29 @@
     <div class="form-row">
         <div class="col-md-4">
             <div class="form-group">
-            <label for="location_id">Location</label>
-            <select
-                class="form-control"
 
-                id="location_id"
-                {{ $readonly }}
-                @if ($readonly === 'readonly')
-                    disabled="disabled"
-                @endif
+            <label for="formal_complaint_lodged">Has a formal complaint been lodged</label>
+            <select class="form-control no-keyboard" name="formal_complaint_lodged" id="formal_complaint_lodged">
+                <option value="no"
+                    @if (old('formal_complaint_lodged', $form->formal_complaint_lodged ? 'yes' : 'no') === 'no')
+                        selected
+                    @endif>No</option>
 
-                @if ($readonly !== 'readonly')
-                    name="location_id"
-                @endif
-                >
-                <option></option>
-                @foreach ($locations as $location)
-                    <option value="{{ $location->id }}"
-                        @if (old('location_id', $form->location_id) == $location->id)
-                            selected
-                        @endif
-                        >{{ $location->name }}</option>
-                @endforeach
+                <option value="yes"
+                @if (old('formal_complaint_lodged', $form->formal_complaint_lodged ? 'yes' : 'no') === 'yes')
+                    selected
+                @endif>Yes</option>
+
             </select>
 
-            @if ($readonly === 'readonly')
-                <input type="hidden" name="location_id" value="{{ $form->location_id }}">
-            @endif
-
-            @error('location_id')
+            @error('formal_complaint_lodged')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             </div>
         </div>
     </div>
 
-        <div class="form-row align-items-center">
+    <div class="form-row align-items-center">
 
         <div class="col-md-3">
 
@@ -520,7 +507,6 @@
                         name="complaint_category_id"
                     @endif
                     {{ $readonly }}>
-                    <option></option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
 

@@ -22,10 +22,11 @@ class SendEmailToUser extends Mailable
      *
      * @return void
      */
-    public function __construct($form, $response)
+    public function __construct($form, $response, $autoCountryEmails = null)
     {
         $this->form     = $form;
         $this->response = $response;
+        $this->autoCountryEmails = $autoCountryEmails;
     }
 
     /**
@@ -41,6 +42,7 @@ class SendEmailToUser extends Mailable
             ->with([
                 'form'              => $this->form,
                 'response'          => $this->response,
+                'autoCountryEmails' => $this->autoCountryEmails,
                 'aggressions'       => ComplaintForm::clientAggressionValues(),
             ]);
     }

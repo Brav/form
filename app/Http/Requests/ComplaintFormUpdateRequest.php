@@ -47,7 +47,7 @@ class ComplaintFormUpdateRequest extends FormRequest
             'description'              => ['required', 'string', 'min:2'],
             'aggression_choice'        => ['required', Rule::in(['no', 'yes'])],
             'aggression'               => ['required_if:aggression_choice,yes', Rule::in(array_keys(ComplaintForm::clientAggressionValues()))],
-            'location_id'              => ['required',
+            'location_id'              => ['nullable',
                 Rule::in(Location::all()->pluck('id')->toArray()),
             ],
             'complaint_category_id' => ['required',
@@ -63,6 +63,9 @@ class ComplaintFormUpdateRequest extends FormRequest
                 Rule::in(Severity::get()->pluck('id')->toArray())],
             'animal_id' => ['required',
                 Rule::in(\array_merge(Animal::all()->pluck('id')->toArray(), ['other']) ),
+            ],
+            'formal_complaint_lodged' => [
+                'required', Rule::in(['yes', 'no']),
             ],
             'documents'       => 'nullable',
             'documents.*'     => 'max:20000',
@@ -91,7 +94,9 @@ class ComplaintFormUpdateRequest extends FormRequest
             'complaint_category_id.required' => 'Complaint category is required',
             'complaint_type_id.in'           => "Complaint type doesn't have valid value",
             'complaint_channel_id.in'        => "Complaint type doesn't have valid value",
-            'documents.max' => "Please note that maximum file upload size needs to be less than 20MB"
+            'documents.max' => "Please note that maximum file upload size needs to be less than 20MB",
+            'formal_complaint_lodged.in' => "Please select yes or no",
+            'formal_complaint_lodged.required' => "Please select yes or no",
         ];
     }
 }

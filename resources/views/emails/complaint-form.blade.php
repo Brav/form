@@ -248,7 +248,8 @@ a[x-apple-data-detectors='true'] {
               <strong>Client Aggression: </strong>
                 {{ $form->aggression ? $aggressions[$form->aggression] : "None"}}
               <br>
-              <strong>Location of the incident:</strong> {{$form->location->name  }} <br>
+              <strong>Has a formal complaint been lodged: {{ $form->formal_complaint_lodged ? 'Yes' : 'No' }}</strong> <br>
+              {{-- <strong>Location of the incident:</strong> {{$form->location->name  }} <br> --}}
               <strong>Category:</strong> {{$form->category->name  }} <br>
               <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>
               <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }} <br>

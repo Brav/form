@@ -232,12 +232,16 @@ a[x-apple-data-detectors='true'] {
 
 
       <span>Dear {{ $form->team_member }},</span><br><br>
-      <span>Thank you for submitting this complaint,</span><br>
+      <span>Thank you for lodging your complaint/incident.</span><br>
       <span>This complaint has a level of {{ $form->level ?? 'n/a'}}
           and severity of {{ $form->severity->name }}</span><br>
       <span>{!! $response->response ?? 'n/a' !!}</span><br><br>
 
-      <span>Details of the report you have submitted is below:</span><br><br>
+      <p>
+        {!! $autoCountryEmails->body['user'] ?? '' !!}
+      </p>
+
+      <span>Details of the report submitted:</span><br><br>
       <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
         <strong>Regional Manager:</strong> {{
             $form->clinic->getFirstManager('regional_manager')->name ?? '/'  }} <br>
@@ -255,7 +259,8 @@ a[x-apple-data-detectors='true'] {
         <strong>Client Aggression: </strong>
           {{ $form->aggression ? $aggressions[$form->aggression] : "None"}}
         <br>
-        <strong>Location of the incident:</strong> {{$form->location->name  }} <br>
+        <strong>Has a formal complaint been lodged: {{ $form->formal_complaint_lodged ? 'Yes' : 'No' }}</strong> <br>
+        {{-- <strong>Location of the incident:</strong> {{$form->location->name  }} <br> --}}
         <strong>Category:</strong> {{$form->category->name  }} <br>
         <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>
         <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }} <br>
