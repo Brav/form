@@ -27,6 +27,8 @@ class SendEmailToUser extends Mailable
         $this->form     = $form;
         $this->response = $response;
         $this->autoCountryEmails = $autoCountryEmails;
+
+        dd($autoCountryEmails);
     }
 
     /**
