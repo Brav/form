@@ -28,6 +28,7 @@ class ComplaintFilled
         $this->autoEmailContacts = $autoEmailContacts;
         $this->autoCountryEmails = $autoCountryEmails;
 
+        dd($autoCountryEmails);
         die;
     }
 
