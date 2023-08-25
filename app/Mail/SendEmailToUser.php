@@ -36,7 +36,7 @@ class SendEmailToUser extends Mailable
      */
     public function build()
     {
-        dd($autoCountryEmails->body['client']);
+        dd($this->autoCountryEmails->body['client']);
 
         return $this->from('complaintsreporting@vet.partners')
             ->subject('Complaint Form Filled')
