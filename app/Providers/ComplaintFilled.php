@@ -27,6 +27,8 @@ class ComplaintFilled
         $this->autoResponse = $autoResponse;
         $this->autoEmailContacts = $autoEmailContacts;
         $this->autoCountryEmails = $autoCountryEmails;
+
+        dd($autoCountryEmails);
     }
 
     /**
