@@ -238,7 +238,7 @@ a[x-apple-data-detectors='true'] {
       <span>{!! $response->response ?? 'n/a' !!}</span><br><br>
 
       <p>
-        {!! $autoCountryEmails->body['user'] ?? '' !!}
+        {!! $autoCountryEmails->body['client'] ?? '' !!}
       </p>
 
       <span>Details of the report submitted:</span><br><br>
