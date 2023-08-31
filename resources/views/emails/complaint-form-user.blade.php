@@ -237,8 +237,10 @@ a[x-apple-data-detectors='true'] {
       <p>Please remember to update your clinical records with the client’s concerns and follow up with your PM and/or CL.</p>
 
 
-      <p style="font-weight=bold">
+      <p>
+        <strong>
         {!! $autoCountryEmails->body['client'] ?? '' !!}
+        </strong>
       </p>
 
       <span>Details of the report submitted:</span><br><br>
