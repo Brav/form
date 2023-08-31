@@ -228,16 +228,16 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:40px 20px 10px;font-family:arial,helvetica,sans-serif;" align="left">
 
   <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 20px; line-height: 30px;">
+
+      <h2>Dear {{ $form->team_member }},</h2>
+
+      <p>Thank you for lodging your complaint/incident. </p>
+      <p>The complaint has been sent to your Practice Manager(PM)and Clinical Leader(CL).</p>
+      <p>If the client is still with you in the hospital, please explain to them that the complaint has been escalated to your hospital’s veterinary leadership team and they will be in touch within 24 hours.</p>
+      <p>Please remember to update your clinical records with the client’s concerns and follow up with your PM and/or CL.</p>
 
 
-      <span>Dear {{ $form->team_member }},</span><br><br>
-      <span>Thank you for lodging your complaint/incident.</span><br>
-      <span>This complaint has a level of {{ $form->level ?? 'n/a'}}
-          and severity of {{ $form->severity->name }}</span><br>
-      <span>{!! $response->response ?? 'n/a' !!}</span><br><br>
-
-      <p>
+      <p style="font-weight=bold">
         {!! $autoCountryEmails->body['client'] ?? '' !!}
       </p>
 
