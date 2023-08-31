@@ -10,7 +10,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-8 ">
-                                    <h2 class="text-white display-4"><strong>Complaints Reporting and Adverse Event Reporting</strong></h2>
+                                    <h2 class="text-white display-4"><strong>Complaints and Adverse Event Reporting</strong></h2>
                                     <p class="text-white h3" style="opacity: .85;">Please use the form to lodge formal clinical complaints, client concerns about our services and to report any clinical incidents or adverse patient outcomes, including near misses.
                                     <br>If the complaint is urgent, please flag you have submitted this to your regional manager.</p>
                                     <a href="{{ route('complaint-form.create') }}" class="btn btn-hero btn-hero-primary btn-hero-lg m-1">Submit a complaint</a>

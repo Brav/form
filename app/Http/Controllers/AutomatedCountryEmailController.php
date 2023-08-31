@@ -57,7 +57,8 @@ class AutomatedCountryEmailController extends Controller
     {
         $data = $request->all();
 
-        $data['country'] = \strtolower($data['country']);
+        $data['body']['client'] = \strip_tags($data['body']['client'], '<p><a><bold><strong><em><i>');
+        $data['body']['clinic'] = \strip_tags($data['body']['clinic'], '<p><a><bold><strong><em><i>');
 
         $response = AutomatedCountryEmail::create($data);
 
@@ -95,9 +96,12 @@ class AutomatedCountryEmailController extends Controller
     {
         $data = $request->all();
 
-        $response->update($data);
+        $data['body']['client'] = \strip_tags($data['body']['client'], '<p><a><bold><strong><em><i>');
+        $data['body']['clinic'] = \strip_tags($data['body']['clinic'], '<p><a><bold><strong><em><i>');
 
         $data['country'] = \strtolower($data['country']);
+
+        $response->update($data);
 
         return response()->json(
             view('automated-country-emails/partials/_response', [

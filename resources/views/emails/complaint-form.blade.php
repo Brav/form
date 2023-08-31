@@ -230,7 +230,7 @@ a[x-apple-data-detectors='true'] {
 
         <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
           <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 20px; line-height: 30px;">
-            <span>Details of the report you have submitted is below:</span><br><br>
+            <span>Details of the report submitted:</span><br><br>
             <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
               <strong>Regional Manager:</strong> {{ $form->clinic->regionalManager ?
                   optional($form->clinic->regionalManager->first()->user)->name : '/'  }} <br>
@@ -259,7 +259,7 @@ a[x-apple-data-detectors='true'] {
           <p>
               {!! $autoCountryEmails->body['clinic'] ?? '' !!}
           </p>
-          <p style="font-size: 13px; line-height: 150%;">
+          <p style="font-size: 16px; line-height: 150%; width: 100%; text-align: center">
             <a href="{{ route('complaint-form.edit', $form->id) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">View and update the report here.</a>
           </p>
           <p>
