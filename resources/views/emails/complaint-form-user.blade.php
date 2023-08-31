@@ -231,13 +231,13 @@ a[x-apple-data-detectors='true'] {
 
       <h2>Dear {{ $form->team_member }},</h2>
 
-      <p>Thank you for lodging your complaint/incident. </p>
-      <p>The complaint has been sent to your Practice Manager(PM)and Clinical Leader(CL).</p>
-      <p>If the client is still with you in the hospital, please explain to them that the complaint has been escalated to your hospital’s veterinary leadership team and they will be in touch within 24 hours.</p>
-      <p>Please remember to update your clinical records with the client’s concerns and follow up with your PM and/or CL.</p>
+      <p style="margin-bottom: 15px">Thank you for lodging your complaint/incident. </p>
+      <p style="margin-bottom: 15px">The complaint has been sent to your Practice Manager(PM)and Clinical Leader(CL).</p>
+      <p style="margin-bottom: 15px">If the client is still with you in the hospital, please explain to them that the complaint has been escalated to your hospital’s veterinary leadership team and they will be in touch within 24 hours.</p>
+      <p style="margin-bottom: 15px">Please remember to update your clinical records with the client’s concerns and follow up with your PM and/or CL.</p>
 
 
-      <p>
+      <p style="margin-bottom: 15px">
         <strong>
         {!! $autoCountryEmails->body['client'] ?? '' !!}
         </strong>
