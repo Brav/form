@@ -217,7 +217,7 @@
 
     <div class="form-row">
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="date_of_incident">Date of the incident</label>
                 <div class="input-group date date_of_incident" data-target-input="nearest">
@@ -240,7 +240,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="date_of_client_complaint">Date of client complaint: (if applicable)</label>
                 <div class="input-group date date_of_client_complaint" id="start_dt_2" data-target-input="nearest" >
