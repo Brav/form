@@ -256,9 +256,7 @@ a[x-apple-data-detectors='true'] {
               <strong>Complaint Level:</strong> {{ $form->level ?? 'n/a'  }} <br>
               <strong>Severity:</strong> {{$form->severity->name  }} <br>
           </span></p>
-          <p>
-              {!! $autoCountryEmails->body['clinic'] ?? '' !!}
-          </p>
+
           <p style="font-size: 16px; line-height: 150%; width: 100%; text-align: center">
             <a href="{{ route('complaint-form.edit', $form->id) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">View and update the report here.</a>
           </p>
