@@ -260,6 +260,13 @@ a[x-apple-data-detectors='true'] {
           <p style="font-size: 16px; line-height: 150%; width: 100%; text-align: center">
             <a href="{{ route('complaint-form.edit', $form->id) }}" style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">View and update the report here.</a>
           </p>
+
+          <p style="margin-bottom: 15px">
+            <strong>
+            {!! $autoCountryEmails->body['clinic'] ?? '' !!}
+            </strong>
+          </p>
+
           <p>
             <strong>Useful resources for dealing with complaints</strong><br>
             <span><a href="https://rise.articulate.com/share/ebvbTT1KJhQKagctvBlQGhcH1F5ACXN8#/">Difficult Conversation Planning </a></span><br>
