@@ -60,9 +60,9 @@ class AutomatedCountryEmailController extends Controller
         $data['body']['client'] = \strip_tags($data['body']['client'], '<p><a><bold><strong><em><i>');
         $data['body']['clinic'] = \strip_tags($data['body']['clinic'], '<p><a><bold><strong><em><i>');
 
-        $data['emails'] ??= [];
+        $data['country'] = \strtolower($data['country']);
 
-        dd($data);
+        $data['emails'] ??= [];
 
         $response = AutomatedCountryEmail::create($data);
 
@@ -104,6 +104,8 @@ class AutomatedCountryEmailController extends Controller
         $data['body']['clinic'] = \strip_tags($data['body']['clinic'], '<p><a><bold><strong><em><i>');
 
         $data['country'] = \strtolower($data['country']);
+
+        $data['emails'] ??= [];
 
         $response->update($data);
 
