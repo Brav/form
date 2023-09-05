@@ -60,7 +60,7 @@ class AutomatedCountryEmailController extends Controller
         $data['body']['client'] = \strip_tags($data['body']['client'], '<p><a><bold><strong><em><i>');
         $data['body']['clinic'] = \strip_tags($data['body']['clinic'], '<p><a><bold><strong><em><i>');
 
-        $data['emails'] ??= '';
+        $data['emails'] ??= [];
 
         $response = AutomatedCountryEmail::create($data);
 

@@ -26,7 +26,7 @@ class AutomatedCountryEmailRequest extends FormRequest
     {
         return [
             'country' => ['required', 'string', 'min:3', Rule::unique('automated_country_emails')->ignore($this->response?->id)],
-            'emails' => ['nullable', 'string',],
+            'emails' => ['required', 'string',],
             'body.*'  => ['nullable', 'string'],
         ];
     }
