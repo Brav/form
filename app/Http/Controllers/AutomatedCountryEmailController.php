@@ -62,6 +62,8 @@ class AutomatedCountryEmailController extends Controller
 
         $data['emails'] ??= [];
 
+        dd($data);
+
         $response = AutomatedCountryEmail::create($data);
 
         return response()->json(
