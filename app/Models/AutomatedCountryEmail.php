@@ -38,7 +38,7 @@ class AutomatedCountryEmail extends Model
     ];
 
     protected $attributes = [
-        'emails' => [],
+        'emails' => '',
     ];
 
     /**

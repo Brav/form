@@ -62,7 +62,7 @@ class AutomatedCountryEmailController extends Controller
 
         $data['country'] = \strtolower($data['country']);
 
-        $data['emails'] ??= [];
+        $data['emails'] ??= '';
 
         $response = AutomatedCountryEmail::create($data);
 
@@ -105,7 +105,7 @@ class AutomatedCountryEmailController extends Controller
 
         $data['country'] = \strtolower($data['country']);
 
-        $data['emails'] ??= [];
+        $data['emails'] ??= '';
 
         $response->update($data);
 
