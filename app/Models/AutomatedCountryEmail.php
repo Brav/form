@@ -37,6 +37,10 @@ class AutomatedCountryEmail extends Model
         'body'   => 'array',
     ];
 
+    protected $attributes = [
+        'emails' => [],
+    ];
+
     /**
      * Set the additional emails
      *
