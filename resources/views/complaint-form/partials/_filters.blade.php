@@ -224,7 +224,7 @@
         <select class="form-control filter filter-select select-one"
         name="severity"
         id="severity"
-        data-column="severity"
+        data-column="severity_id"
         data-type="select">
             <option value="all">All</option>
         @foreach ($severities as $severity)
