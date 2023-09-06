@@ -74,6 +74,8 @@ class SendEmailToManagers
         //     ]);
         // }
 
+        $mailTo = array_filter($mailTo);
+
         if($mailTo)
         {
             \Mail::to($mailTo)
