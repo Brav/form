@@ -261,12 +261,12 @@ a[x-apple-data-detectors='true'] {
         <strong>Client Aggression: </strong>
           {{ $form->aggression ? $aggressions[$form->aggression] : "None"}}
         <br>
-        <strong>Has a formal complaint been lodged: {{ $form->formal_complaint_lodged ? 'Yes' : 'No' }}</strong> <br>
+        <strong>Has a formal complaint been lodged:</strong> {{ $form->formal_complaint_lodged ? 'Yes' : 'No' }}<br>
         {{-- <strong>Location of the incident:</strong> {{$form->location->name  }} <br> --}}
         <strong>Category:</strong> {{$form->category->name  }} <br>
         <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>
         <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }} <br>
-        <strong>Complaint Level:</strong> {{ $form->level  }} <br>
+        <strong>Complaint Level:</strong> {{ $form->level ?? 'n/a' }} <br>
         <strong>Severity:</strong> {{$form->severity->name  }} <br>
 
         @if ($form->files)
@@ -291,9 +291,9 @@ a[x-apple-data-detectors='true'] {
             <span><a href="https://rise.articulate.com/share/9WMRd5wNr9CVkiIlFSWRnI3TQlW6NMX7#/">How to Have a Difficult Conversation</a></span><br>
             <span><a href="https://rise.articulate.com/share/IrnA9Lkdv_7s6S7QMrlV9BetXvHjidXl#/">Managing Client Complaints and Angry Customers</a></span><br>
             <span><a href="{{ route('operational_policy') }}">Clients Complaints and Concerns - Operational Policy</a></span><br>
-            <span><a href="<?php echo asset('media/documents/responding_to_reviews.pdf') ?>" class="d-block" target=_blank rel=noopener rel=nofollow>Responding To Reviews</a>
+            <span><a href="<?php echo asset('media/documents/responding_to_reviews.pdf') ?>" class="d-block" target=_blank rel=noopener rel=nofollow>Responding To Reviews</a></span>
         </p>
-    </span></p>
+
   </div>
 
       </td>

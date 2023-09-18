@@ -225,6 +225,7 @@ a[x-apple-data-detectors='true'] {
 
 <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
   <tbody>
+
     <tr>
       <td style="overflow-wrap:break-word;word-break:break-word;padding:40px 20px 10px;font-family:arial,helvetica,sans-serif;" align="left">
 
@@ -248,7 +249,7 @@ a[x-apple-data-detectors='true'] {
               <strong>Client Aggression: </strong>
                 {{ $form->aggression ? $aggressions[$form->aggression] : "None"}}
               <br>
-              <strong>Has a formal complaint been lodged: {{ $form->formal_complaint_lodged ? 'Yes' : 'No' }}</strong> <br>
+              <strong>Has a formal complaint been lodged:</strong> {{ $form->formal_complaint_lodged ? 'Yes' : 'No' }}<br>
               {{-- <strong>Location of the incident:</strong> {{$form->location->name  }} <br> --}}
               <strong>Category:</strong> {{$form->category->name  }} <br>
               <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>

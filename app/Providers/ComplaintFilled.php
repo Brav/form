@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\ComplaintForm;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -13,7 +14,7 @@ class ComplaintFilled
 
     public $form;
     public $autoResponse;
-    public $autoEmailContacts;
+    public $autoEmailContacts = null;
     public $autoCountryEmails;
 
     /**
@@ -21,7 +22,7 @@ class ComplaintFilled
      *
      * @return void
      */
-    public function __construct(ComplaintForm $form, $autoResponse, $autoEmailContacts = null, $autoCountryEmails)
+    public function __construct(ComplaintForm $form, $autoResponse, $autoEmailContacts, $autoCountryEmails)
     {
         $this->form = $form;
         $this->autoResponse = $autoResponse;
@@ -32,7 +33,7 @@ class ComplaintFilled
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return Channel|array
      */
     public function broadcastOn()
     {
