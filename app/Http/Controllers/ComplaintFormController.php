@@ -21,18 +21,14 @@ use App\Models\OutcomeOptionsCategories;
 use App\Models\Severity;
 use App\Providers\ComplaintFilled;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ComplaintFormController extends Controller
 {
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $userClinics = [];
@@ -82,14 +78,10 @@ class ComplaintFormController extends Controller
         // $canEdit = auth()->user()->admin == 1 ||
         //         auth()->user()->role->hasPermission('w') ? true : false;
 
-        $canEdit = true;
-
-        $canDelete = auth()->user()->admin == 1 ? true : false;
-
         $data = [
             'forms'          => $forms,
-            'canEdit'        => $canEdit,
-            'canDelete'      => $canDelete,
+            'canEdit'        => true,
+            'canDelete'      => auth()->user()->admin == 1,
             'severities'     => Severity::get(),
             'outcomes'       => OutcomeOptions::orderBy('name', 'asc')->get(),
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
@@ -124,7 +116,7 @@ class ComplaintFormController extends Controller
     /**
      * Show the message after the form is sent.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function sent()
     {
@@ -137,11 +129,6 @@ class ComplaintFormController extends Controller
         return view('complaint-form/form-sent');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('form', [
@@ -173,10 +160,10 @@ class ComplaintFormController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\ComplaintFormCreateRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param ComplaintFormCreateRequest $request
+     * @return RedirectResponse
      */
-    public function store(ComplaintFormCreateRequest $request)
+    public function store(ComplaintFormCreateRequest $request): RedirectResponse
     {
         $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories', $request->complaint_category_id)
             ->whereJsonContains('scenario->types', $request->complaint_type_id)
@@ -242,40 +229,28 @@ class ComplaintFormController extends Controller
 
         $autoCountryEmails = AutomatedCountryEmail::where('country', $clinic->country)->first();
 
-
-        ComplaintFilled::dispatch(
-            $model,
-            $autoResponse,
-            $autoEmailContactsData,
-            $autoCountryEmails,
-        );
+//        ComplaintFilled::dispatch(
+//            $model,
+//            $autoResponse,
+//            $autoEmailContactsData,
+//            $autoCountryEmails,
+//        );
 
         return redirect()->route('complaint-form.sent')
             ->with([
                 'status' => [
                     'message'  => "You have file the complaint successfully",
                 ],
-                'response' => $autoResponse->response ?? null,
+                'response' => $autoResponse,
                 'user'     => $model->team_member,
             ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ComplaintForm  $complaintForm
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ComplaintForm $complaintForm)
-    {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\ComplaintForm  $form
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(ComplaintForm $form)
     {
@@ -327,7 +302,7 @@ class ComplaintFormController extends Controller
      *
      * @param  \App\Http\Requests\ComplaintFormUpdateRequest  $request
      * @param  \App\Models\ComplaintForm  $complaintForm
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(ComplaintFormUpdateRequest $request, ComplaintForm $form)
     {
@@ -397,7 +372,7 @@ class ComplaintFormController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function delete(ComplaintForm $form)
     {
@@ -413,7 +388,7 @@ class ComplaintFormController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\ComplaintForm  $form
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(ComplaintForm $form)
     {

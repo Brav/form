@@ -79,7 +79,7 @@ class SendEmailToManagers
         if($mailTo)
         {
             \Mail::to($mailTo)
-            ->send(new \App\Mail\SendEmailToManagers($form, $event->autoCountryEmails));
+            ->send(new \App\Mail\SendEmailToManagers($form, $event->autoCountryEmails, $autoResponse));
         }
 
     }

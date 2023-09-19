@@ -39,6 +39,7 @@
                 <th scope="col" class="small text-nowrap">Date completed</th>
             @endif
             @if (!$export)
+                <th scope="col" class="small text-nowrap">Automated Response</th>
                 <th scope="col" class="small text-nowrap">Actions</th>
             @endif
         </tr>

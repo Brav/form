@@ -284,6 +284,7 @@
             name="date_completed_filter"
             id="date_completed_filter"/>
         </th>
+        <th></th>
     @endif
 
     <th>

@@ -4,10 +4,10 @@ namespace App\Models;
 
 use App\Http\Requests\AutomatedResponseRequest;
 use Illuminate\Database\Eloquent\Model;
+use JsonException;
 
 class AutomatedResponse extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -42,14 +42,54 @@ class AutomatedResponse extends Model
         'default'             => 'boolean',
     ];
 
-    public function getScenarioCaseAttribute()
+    /**
+     * @throws JsonException
+     */
+    public function getScenarioCaseAttribute(): array
     {
-        if($this->default)
+
+        $returnInfo = [];
+
+        $scenario = json_decode($this->attributes['scenario'], false, 512, JSON_THROW_ON_ERROR);
+
+        if(isset($scenario->categories))
         {
-            return "Default";
+            $data = $this->formatScenarioText('categories', $scenario->categories);
+
+            if($data){
+                $returnInfo[] = "Categories used for this response: " . implode(', ', $data);
+            }
         }
 
-        return 'test';
+        if(isset($scenario->types))
+        {
+
+            $data = $this->formatScenarioText('types', $scenario->types);
+
+            if($data){
+                $returnInfo[] = "Types used for this response: " . implode(', ', $data);
+            }
+        }
+
+        if(isset($scenario->channels))
+        {
+            $data = $this->formatScenarioText('channels', $scenario->channels);
+
+            if($data){
+                $returnInfo[] = "Channels used for this response: " . implode(', ', $data);
+            }
+        }
+
+        if(isset($scenario->severity))
+        {
+            $data = $this->formatScenarioText('severity', $scenario->severity);
+
+            if($data){
+                $returnInfo[] = "Severities used for this response: " . implode(', ', $data);
+            }
+        }
+
+        return  $returnInfo;
     }
 
     /**
@@ -116,5 +156,34 @@ class AutomatedResponse extends Model
         }
 
         return $return;
+    }
+
+    protected function formatScenarioText($scenario, $scenarioIDs): array
+    {
+        static $scenarioData;
+
+        if(!$scenarioData)
+        {
+            $scenarioData = [
+                'categories' => ComplaintCategory::all(),
+                'types' => ComplaintType::all(),
+                'channels' => ComplaintChannel::all(),
+                'severity' => Severity::all(),
+            ];
+        }
+
+        $returnData = [];
+
+        $data = $scenarioData[$scenario]
+            ->filter(function ($value) use ($scenarioIDs) {
+                return in_array($value->id, $scenarioIDs, false);
+            });
+
+        foreach ($data as $datum)
+        {
+            $returnData[] = $datum->name;
+        }
+
+        return $returnData;
     }
 }

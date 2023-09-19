@@ -97,6 +97,7 @@
             <th>{{ $dateCompleted }}</th>
         @endif
         @if (!$export)
+            <th>{{ $form->automated_response  }}</th>
             <th>
                 @if (isset($canDelete) && $canDelete)
                     <a data-toggle="modal"

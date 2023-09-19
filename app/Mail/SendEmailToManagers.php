@@ -16,15 +16,18 @@ class SendEmailToManagers extends Mailable
     public $form;
     public $autoCountryEmails;
 
+    public $autoResponse;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($form, $autoCountryEmails)
+    public function __construct($form, $autoCountryEmails, $autoResponse)
     {
         $this->form = $form;
         $this->autoCountryEmails = $autoCountryEmails;
+        $this->autoResponse = $autoResponse;
     }
 
     /**
@@ -40,6 +43,7 @@ class SendEmailToManagers extends Mailable
             ->with([
                 'form'              => $this->form,
                 'autoCountryEmails' => $this->autoCountryEmails,
+                'autoResponse' => $this->autoResponse,
                 'aggressions'       => ComplaintForm::clientAggressionValues(),
             ]);
     }

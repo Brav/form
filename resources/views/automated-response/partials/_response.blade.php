@@ -1,9 +1,16 @@
 <tr id="item-{{ $response->id }}">
-    <th>{{ $response->id }}</th>
+    <th>
+        {{ $response->id }}
+        @if($response->default)
+            <p><strong class="text-danger">This is default response</strong></p>
+        @endif
+    </th>
     <th>{{ $response->name }}</th>
     <th>{!! $response->response !!}</th>
     <th>
-        {{ $response->scenarioCase }}
+       @foreach($response->scenarioCase as $scenario)
+           <p>{{ $scenario  }}</p>
+       @endforeach
     </th>
     <th>
         <a href="{{ route('automated-response.edit', $response->id) }}"

@@ -4,14 +4,24 @@
 
     <div class="content">
         <div class="block-content">
+
+            @auth()
+                <div class="alert alert-danger" role="alert">
+                   <strong>Automated response used:</strong><br>
+                    {{ session('response')->name ??
+                    'N/A (response not found/set for combination used in this complaint)'
+                    }}
+                </div>
+            @endauth
+
             <div class="container">
                 <div class="alert alert-success text-center" role="alert">
                     <hr>
                     <h4 class="h1 alert-heading my-3">Complaint Sent!</h4>
                     <hr>
-                    @if (session('response'))
-                        {!! session('response') !!}
-                    @endif
+
+                    {!! session('response')->response ?? '' !!}
+
                 </div>
 
                 <p>

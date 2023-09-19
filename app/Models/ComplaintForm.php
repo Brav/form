@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use DateTime;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ComplaintForm extends Model
@@ -195,10 +197,26 @@ class ComplaintForm extends Model
         return $this->belongsTo(Animal::class);
     }
 
+    protected function automatedResponse(): Attribute
+    {
+        return Attribute::make(
+            get: static function (?string $value, array $attributes) {
+
+                $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories',  (string)$attributes['complaint_category_id'])
+                    ->whereJsonContains('scenario->types', (string)$attributes['complaint_type_id'])
+                    ->whereJsonContains('scenario->channels', (string)$attributes['complaint_channel_id'])
+                    ->whereJsonContains('scenario->severity', (string)$attributes['severity_id'])
+                    ->first();
+
+                return $autoResponse->name ?? 'N/A';
+            },
+        );
+    }
+
     /**
      * Return complaint level
      *
-     * @return string
+     * @return string|null
      */
     public function complaintLevel() :?string
     {

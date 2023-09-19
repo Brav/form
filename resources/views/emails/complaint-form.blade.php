@@ -232,6 +232,12 @@ a[x-apple-data-detectors='true'] {
         <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
           <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 20px; line-height: 30px;">
             <span>Details of the report submitted:</span><br><br>
+
+           <strong>Automated response used:</strong><br>
+            {{ $autoResponse->name ??
+            'N/A (response not found/set for combination used in this complaint)'
+            }}<br>
+
             <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
               <strong>Regional Manager:</strong> {{ $form->clinic->regionalManager ?
                   optional($form->clinic->regionalManager->first()->user)->name : '/'  }} <br>
