@@ -229,12 +229,12 @@ class ComplaintFormController extends Controller
 
         $autoCountryEmails = AutomatedCountryEmail::where('country', $clinic->country)->first();
 
-//        ComplaintFilled::dispatch(
-//            $model,
-//            $autoResponse,
-//            $autoEmailContactsData,
-//            $autoCountryEmails,
-//        );
+        ComplaintFilled::dispatch(
+            $model,
+            $autoResponse,
+            $autoEmailContactsData,
+            $autoCountryEmails,
+        );
 
         return redirect()->route('complaint-form.sent')
             ->with([
