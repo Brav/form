@@ -67,14 +67,22 @@ class FormsExport implements FromView
 
         if(auth()->check() && !auth()->user()->admin)
         {
-            $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
+            $userClinics[] = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
                 ->pluck('clinic_id')
                 ->toArray();
+
+            if(auth()->user()->role->name === 'New Zealand Maintenance')
+            {
+                $userClinics[] = Clinic::where('country', '=', 'new zealand')
+                    ->get()
+                    ->pluck('id')
+                    ->toArray();
+            }
         }
 
         $forms = ComplaintForm::when(!$this->commandExport && !auth()->user()->admin, function($query) use($userClinics){
-            return $query->whereIn('clinic_id', $userClinics);
+            return $query->whereIn('clinic_id', array_merge(...$userClinics));
         })
         ->when($this->commandExport, function($query){
 
