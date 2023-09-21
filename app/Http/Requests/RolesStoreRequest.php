@@ -27,7 +27,7 @@ class RolesStoreRequest extends FormRequest
     {
         return [
             'name'  =>['required'],
-            'level' =>['required', 'array',
+            'level' =>['nullable', 'array',
                 // Rule::in(Roles::$levels),
             ],
             'read'  =>['nullable', Rule::in('r')],

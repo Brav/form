@@ -35,10 +35,18 @@ class ComplaintFormController extends Controller
 
         if(!auth()->user()->admin)
         {
-            $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
+            $userClinics[] = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
                 ->pluck('clinic_id')
                 ->toArray();
+
+            if(auth()->user()->role->name === 'New Zealand Maintenance')
+            {
+                $userClinics[] = Clinic::where('country', '=', 'new zealand')
+                    ->get()
+                    ->pluck('id')
+                    ->toArray();
+            }
         }
 
         $queryData = \filter_var_array(

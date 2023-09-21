@@ -6,6 +6,10 @@
     enctype="multipart/form-data">
     @csrf
     @method('PUT')
+
+    @if(auth()->user()->role->name === 'New Zealand Maintance')
+        <fieldset disabled="disabled">
+    @endif
     <input
         type="file"
         name="documents[]"
@@ -730,5 +734,8 @@
     @endif
 
     <button type="submit" class="btn btn-primary">Update the complaint</button>
+    @if(auth()->user()->role->name === 'New Zealand Maintance')
+        </fieldset>
+    @endif
 </form>
 

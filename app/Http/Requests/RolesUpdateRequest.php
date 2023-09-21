@@ -29,7 +29,7 @@ class RolesUpdateRequest extends FormRequest
             'name'  =>['required',
                 Rule::unique('roles')->ignore($this->roles->id)
             ],
-            'level' =>['required', 'array',
+            'level' =>['nullable', 'array',
                 function ($attribute, $value, $fail) {
                     if(max($value) > max(Roles::$levels) ||
                         min($value) < min(Roles::$levels)
