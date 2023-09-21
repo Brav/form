@@ -73,7 +73,7 @@ class ComplaintFormController extends Controller
         }
 
         $forms = $forms->when(!auth()->user()->admin, function($query) use($userClinics){
-            return $query->whereIn('clinic_id', $userClinics);
+            return $query->whereIn('clinic_id', array_merge(...$userClinics));
         })
         ->with(['clinic', 'clinic.managers', 'clinic.managers.user','location', 'category', 'type', 'channel', 'animal', 'severity'])
         ->orderBy('created_at', 'DESC')
