@@ -108,20 +108,11 @@ function setManager()
     let veterinary = clinic.find("option:selected").data("veterinary");
     let general = clinic.find("option:selected").data("general");
 
-    if(manager)
-    {
-        $("#regional_manager").val(manager);
-    }
 
-    if (veterinary)
-    {
-        $("#veterinary_manager").val(veterinary);
-    }
+    $("#regional_manager").val(manager);
+    $("#veterinary_manager").val(veterinary);
+    $("#general_manager").val(general);
 
-    if (general)
-    {
-        $("#general_manager").val(general);
-    }
 }
 
 $("body").on("submit", "#complaint_form", function(e) {

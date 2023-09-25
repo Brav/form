@@ -162,7 +162,7 @@ class Clinic extends Model
      *
      * @return Illuminate\Database\Eloquent\Collection[]
      */
-public function getGmVetsServicesAttribute()
+    public function getGmVetsServicesAttribute()
     {
         if($this->managers->count() === 0)
             return null;

@@ -1,4 +1,5 @@
 <h1>Complaints Reporting Form Update</h1>
+
 <form
     class="max-1024"
     action="{{ route('complaint-form.update', $form->id) }}"
@@ -145,9 +146,33 @@
                         {{ $readonly }}>
                         <option></option>
                         @foreach ($clinics as $clinic)
+
+
+                            @php
+                                $vetManagers = [];
+                                $generalManagers = [];
+                            @endphp
+
+                            @foreach($clinic->vetManager as $manager)
+                                @php
+                                    $vetManagers[] = $manager?->user?->name ?? ''
+                                @endphp
+                            @endforeach
+
+                            @foreach($clinic->generalManager as $manager)
+                                @php
+                                    $generalManagers[] = $manager?->user?->name ?? ''
+                                @endphp
+                            @endforeach
+
                             <option value="{{ $clinic->id }}"
                                 data-manager="{{
                                     $clinic->regionalManager ? $clinic->regionalManager->first()->user->name ?? '' : '' }}"
+
+                                    data-veterinary="{{ trim(implode(', ', $vetManagers), ',') }}"
+
+                                    data-general="{{ trim(implode(',', $generalManagers), ',') }}"
+
                                 @if (old('clinic_id', $form->clinic_id) == $clinic->id)
                                     selected
                                 @endif
@@ -171,7 +196,8 @@
                 <div class="form-group">
                     <label for="regional_manager">Regional Manager</label>
                     <input type="text"
-                    class="form-control" name="regional_manager"
+                    class="form-control"
+                    name="regional_manager"
                     id="regional_manager"
                     readonly>
                 </div>
