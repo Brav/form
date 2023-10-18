@@ -153,13 +153,13 @@
                                 $generalManagers = [];
                             @endphp
 
-                            @foreach($clinic->vetManager as $manager)
+                            @foreach($clinic->vetManager ?? [] as $manager)
                                 @php
                                     $vetManagers[] = $manager?->user?->name ?? ''
                                 @endphp
                             @endforeach
 
-                            @foreach($clinic->generalManager as $manager)
+                            @foreach($clinic->generalManager ?? [] as $manager)
                                 @php
                                     $generalManagers[] = $manager?->user?->name ?? ''
                                 @endphp
