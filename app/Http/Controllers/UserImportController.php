@@ -124,7 +124,7 @@ class UserImportController extends Controller
 
         $clinicName = trim($data['clinic_name']);
         $clinicCode = trim($data['clinic_code'] ?? '');
-        $clinicCountry = \trim(\strtolower($data['clinic_country']));
+        $clinicCountry = \trim(\strtolower($data['clinic_country'] ?? 'australia'));
 
         $clinic = Clinic::where('name', strtolower($clinicName))->withTrashed()->first();
 
