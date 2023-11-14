@@ -287,6 +287,7 @@ a[x-apple-data-detectors='true'] {
 
         <p>
           <strong>Useful resources for dealing with complaints</strong><br>
+          <span><a href="<?php echo asset('media/documents/THE-DO_S-AND-DON_T-OF-COMPLAINT-MANAGEMENT-v2.pdf') ?>">Do’s & Don’ts of Complaint Management</a></span><br>
           <span><a href="https://rise.articulate.com/share/ebvbTT1KJhQKagctvBlQGhcH1F5ACXN8#/">Difficult Conversation Planning </a></span><br>
             <span><a href="https://rise.articulate.com/share/9WMRd5wNr9CVkiIlFSWRnI3TQlW6NMX7#/">How to Have a Difficult Conversation</a></span><br>
             <span><a href="https://rise.articulate.com/share/IrnA9Lkdv_7s6S7QMrlV9BetXvHjidXl#/">Managing Client Complaints and Angry Customers</a></span><br>
