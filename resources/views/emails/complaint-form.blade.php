@@ -233,10 +233,10 @@ a[x-apple-data-detectors='true'] {
           <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 20px; line-height: 30px;">
             <span>Details of the report submitted:</span><br><br>
 
-           <strong>Automated response used:</strong><br>
+           {{-- <strong>Automated response used:</strong><br>
             {{ $autoResponse->name ??
             'N/A (response not found/set for combination used in this complaint)'
-            }}<br>
+            }}<br> --}}
 
             <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
               <strong>Regional Manager:</strong> {{ $form->clinic->regionalManager ?
@@ -276,6 +276,7 @@ a[x-apple-data-detectors='true'] {
 
           <p>
             <strong>Useful resources for dealing with complaints</strong><br>
+            <span><a href="<?php echo asset('media/documents/THE-DO_S-AND-DON_T-OF-COMPLAINT-MANAGEMENT-v2.pdf') ?>">Do’s & Don’ts of Complaint Management</a></span><br>
             <span><a href="https://rise.articulate.com/share/ebvbTT1KJhQKagctvBlQGhcH1F5ACXN8#/">Difficult Conversation Planning </a></span><br>
               <span><a href="https://rise.articulate.com/share/9WMRd5wNr9CVkiIlFSWRnI3TQlW6NMX7#/">How to Have a Difficult Conversation</a></span><br>
               <span><a href="https://rise.articulate.com/share/IrnA9Lkdv_7s6S7QMrlV9BetXvHjidXl#/">Managing Client Complaints and Angry Customers</a></span><br>
