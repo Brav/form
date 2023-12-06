@@ -1,1 +1,1 @@
-{"version":3,"sources":["webpack:///./app.scss"],"names":[],"mappings":"AAAA,cACE,mBACF,C","file":"css/app.css","sourcesContent":[".avoid-clicks {\n  pointer-events: none;\n}\n"],"sourceRoot":""}
+{"version":3,"file":"css/app.css","mappings":"AAAA,cACE,mBACF,C","sources":["webpack:///./app.scss"],"sourcesContent":[".avoid-clicks {\n  pointer-events: none;\n}\n"],"names":[],"sourceRoot":""}

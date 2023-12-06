@@ -180,8 +180,8 @@ class ClinicController extends Controller
      */
     public function update(Request $request, Clinic $clinic)
     {
-
         $data = $request->all();
+
         $data['owner_id'] = auth()->id();
 
         $clinic->update($data);

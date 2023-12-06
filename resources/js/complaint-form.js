@@ -109,9 +109,9 @@ function setManager()
     let general = clinic.find("option:selected").data("general");
 
 
-    $("#regional_manager").val(manager);
-    $("#veterinary_manager").val(veterinary);
-    $("#general_manager").val(general);
+    $("#regional_manager").not('.edit').val(manager);
+    $("#veterinary_manager").not('.edit').val(veterinary);
+    $("#general_manager").not('.edit').val(general);
 
 }
 

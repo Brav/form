@@ -69,9 +69,9 @@
         <div class="col">
              <div class="form-group">
                 <label for="veterinary_manager">Vet Manager</label>
-                <select class="form-control select2" multiple
-                name=veterinary_manager[]
-                id="veterinary_manager"
+                <select class="form-control select2 edit"
+                multiple
+                name="veterinary_manager[]"
                 id="veterinary_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
@@ -111,7 +111,7 @@
         <div class="col">
              <div class="form-group">
                 <label for="general_manager">General Manager</label>
-                <select class="form-control select2"
+                <select class="form-control select2 edit"
                     name=general_manager
                     id="general_manager">
                     @foreach ($users as $user)
@@ -130,7 +130,9 @@
         <div class="col">
              <div class="form-group">
                 <label for="regional_manager">Regional Manager</label>
-                <select class="form-control select2" name=regional_manager id="regional_manager">
+                <select class="form-control select2 edit"
+                        name=regional_manager
+                        id="regional_manager">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             @if (in_array($user->id,
