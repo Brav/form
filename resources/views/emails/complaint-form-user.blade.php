@@ -291,7 +291,7 @@ a[x-apple-data-detectors='true'] {
           <span><a href="https://rise.articulate.com/share/ebvbTT1KJhQKagctvBlQGhcH1F5ACXN8#/">Difficult Conversation Planning </a></span><br>
             <span><a href="https://rise.articulate.com/share/9WMRd5wNr9CVkiIlFSWRnI3TQlW6NMX7#/">How to Have a Difficult Conversation</a></span><br>
             <span><a href="https://rise.articulate.com/share/IrnA9Lkdv_7s6S7QMrlV9BetXvHjidXl#/">Managing Client Complaints and Angry Customers</a></span><br>
-            <span><a href="{{ route('operational_policy') }}">Clients Complaints and Concerns - Operational Policy</a></span><br>
+            <span><a href="<?php echo asset('media/documents/Client-Complaints-and-Concerns---Operational-Policy-Updated-Sept-2023.pdf') ?>">Clients Complaints and Concerns - Operational Policy</a></span><br>
             <span><a href="<?php echo asset('media/documents/responding_to_reviews.pdf') ?>" class="d-block" target=_blank rel=noopener rel=nofollow>Responding To Reviews</a></span>
         </p>
 
