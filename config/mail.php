@@ -70,6 +70,9 @@ return [
         'array' => [
             'transport' => 'array',
         ],
+        'office365mail' => [
+            'transport' => 'office365mail',
+        ],
     ],
 
     /*
