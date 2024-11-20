@@ -173,6 +173,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/_laravel_idea" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/microsoft/microsoft-graph" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/motze92/office365-mail" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/samluvanda/o365-sendmail" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

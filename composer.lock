@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26f9c612c848ec91faa082a819e440ee",
+    "content-hash": "27ea9d48da76434746aa145dcd6c0f33",
     "packages": [
         {
             "name": "brick/math",
@@ -4191,6 +4191,54 @@
                 }
             ],
             "time": "2023-04-15T23:01:58+00:00"
+        },
+        {
+            "name": "samluvanda/o365-sendmail",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/samluvanda/o365-sendmail.git",
+                "reference": "339fbfbde32ef0290f6d89216998c00e444d0587"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/samluvanda/o365-sendmail/zipball/339fbfbde32ef0290f6d89216998c00e444d0587",
+                "reference": "339fbfbde32ef0290f6d89216998c00e444d0587",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^10.0|^11.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "O365Sendmail\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "O365Sendmail\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samson Luvanda",
+                    "email": "s_luvanda@hotmail.com"
+                }
+            ],
+            "description": "The Laravel Office 365 Mail Transport",
+            "support": {
+                "issues": "https://github.com/samluvanda/o365-sendmail/issues",
+                "source": "https://github.com/samluvanda/o365-sendmail/tree/v1.0.0"
+            },
+            "time": "2024-04-30T14:22:36+00:00"
         },
         {
             "name": "spatie/laravel-robots-middleware",
