@@ -68,11 +68,12 @@
             <!-- end slide -->
         </div>
 
-        <div class="ds-seperator">
+        {{-- <div class="ds-seperator">
 
             <a class="page-scroll fusion-one-page-text-link" href="#">
                 <div class="lineholderfirst"></div>
             </a>
+
 
             <div class="lineholder">
                 <svg version="1.1" class="firstdivider" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0.5px" y="0.5px" width="2560px" height="100px" viewBox="0 0 2560 100" style="enable-background:new 0 0 2560 100;" xml:space="preserve">
@@ -83,7 +84,7 @@
 
             </div>
 
-        </div>
+        </div> --}}
 
     </div>
 @endsection
