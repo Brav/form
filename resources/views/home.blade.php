@@ -99,7 +99,7 @@
                         <div class="d-block h-100 bg-image" style="background: url({{ asset('media/images/Clayfield5.jpg')}});"></div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="col-inner py-4 px-5 class="text-white" style="background: #00292e">
+                        <div class="col-inner py-4 px-5 text-white" style="background: #00292e">
 
                             <h2 class="text-white pt-4">Clinical Complaints Management  <br /> & Handling</h2>
 
