@@ -99,11 +99,11 @@
                         <div class="d-block h-100 bg-image" style="background: url({{ asset('media/images/Clayfield5.jpg')}});"></div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="col-inner py-4 px-5" style="background: #d8efee">
+                        <div class="col-inner py-4 px-5 class="text-white" style="background: #00292e">
 
-                            <h2 class="text-primary pt-4">Clinical Complaints Management  <br /> & Handling</h2>
+                            <h2 class="text-white pt-4">Clinical Complaints Management  <br /> & Handling</h2>
 
-                            <div class="d-block" style="height: 2px; width: 200px; background:#a5cf4c"></div>
+                            <div class="d-block" style="height: 2px; width: 200px; background:#00b2c2"></div>
                             <br>
 
                             <p>Please use the website to lodge any formal clinical complaints and to document the process. This system is designed to ensure clinical complaints are properly recorded, assigned, tracked, and resolved. </p>
