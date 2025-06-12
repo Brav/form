@@ -80,7 +80,7 @@ class ComplaintFormController extends Controller
         ->paginate(20);
 
         /**
-         * Original project had functionallity where you could set individial permissions
+         * The Original project had functionality where you could set individual permissions
          * for each user - this has been removed, but for simplicity $canEdit is set to be true always
          */
         // $canEdit = auth()->user()->admin == 1 ||
@@ -257,7 +257,7 @@ class ComplaintFormController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ComplaintForm  $form
+     * @param ComplaintForm $form
      * @return Response
      */
     public function edit(ComplaintForm $form)
@@ -309,7 +309,7 @@ class ComplaintFormController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\ComplaintFormUpdateRequest  $request
-     * @param  \App\Models\ComplaintForm  $complaintForm
+     * @param ComplaintForm $complaintForm
      * @return Response
      */
     public function update(ComplaintFormUpdateRequest $request, ComplaintForm $form)
@@ -395,7 +395,7 @@ class ComplaintFormController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ComplaintForm  $form
+     * @param ComplaintForm $form
      * @return Response
      */
     public function destroy(ComplaintForm $form)

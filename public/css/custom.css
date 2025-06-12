@@ -1120,8 +1120,9 @@ fill: #bbb !important;
 
 }
 
-footer-new {
-
+#footer-new {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .footer-new-top {
@@ -1129,7 +1130,11 @@ footer-new {
     background: #00292e;
     min-height: 300px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
+    align-content: flex-start;
+    width: 100%;
+    gap: 30px 0;
 }
 .footer-new-top p {
     color: white;
@@ -1188,10 +1193,10 @@ footer-new {
     height: 70px;
     min-height: 70px;
     padding: 24px 30px 52px;
-    background: #00292e;
-    background-image: url("../media/logos/pets_pattern_1_RGB.svg");
+    background: #00292e url("../media/logos/pets_pattern_1_RGB.svg");
     display: flex;
     justify-content: space-around;
+    width: 100%;
 }
 .footer-new-bottom p,
 .footer-new-bottom a{
@@ -1202,6 +1207,9 @@ footer-new {
 .footer-new-bottom a:hover {
     color: #00b2c2;
 }
+
+
+
 /*END FOOTER*/
 
 

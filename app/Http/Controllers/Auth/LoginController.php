@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo;
+    protected string $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -41,13 +41,13 @@ class LoginController extends Controller
         $this->redirectTo = route('complaint-form.manage');
     }
 
-     /**
-      * Added to overwrite the login credentials
-      *
-      * @param \Illuminate\Http\Request $request
-      *
-      * @return void
-      */
+    /**
+     * Added to overwrite the login credentials
+     *
+     * @param Request $request
+     *
+     * @return array
+     */
      protected function credentials(Request $request) :array
      {
          return [

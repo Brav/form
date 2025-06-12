@@ -9,7 +9,7 @@ Sidebar -->
                     <img src="{{ asset('media/favicons/favicon.png')}}" alt="" class="img-fluid" style="max-height: 32px">
                 </span>
                 <span class="smini-hidden">
-                    <img src="{{ asset('media/logos/vetpartners-logo-sec.png')}}" alt="" class="img-fluid" style="max-height: 32px">
+                    <img src="{{ asset('media/logos/VetPartners_Logo_VERT_WHT_RGB.svg')}}" alt="" class="img-fluid" style="max-height: 64px; width: 100%">
                 </span>
             </a>
             <!-- END Logo -->

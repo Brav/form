@@ -156,7 +156,8 @@ a[x-apple-data-detectors='true'] {
   <tr>
     <td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-      <img align="center" border="0" src="https://complaintsreporting.vet.partners/media/logos/logo.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 300px;" width="300"/>
+      <img align="center" border="0" src="https://complaintsreporting.vet.partners/media/logos/VetPartners_Logo_VERT_POS_RGB.svg" alt="Image" title="Image"
+           style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 300px;" width="300"/>
 
     </td>
   </tr>

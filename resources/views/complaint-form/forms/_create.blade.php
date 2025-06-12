@@ -19,7 +19,7 @@
 
         <div class="col-md-4">
             <div class="form-group">
-                    <label for="clinic_id">Clinic Name</label>
+                    <label for="clinic_id">Clinic Name *</label>
                     <select class="form-control select2" name="clinic_id" id="clinic_id">
                     <option></option>
                     @foreach ($clinics as $clinic)
@@ -91,7 +91,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="team_member">Team Member logging the complaint:</label>
+                <label for="team_member">Team Member logging the complaint: *</label>
                 <input type="text"
                 class="form-control"
                 name="team_member"
@@ -108,7 +108,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="team_member_email">Email of Team Member</label>
+                <label for="team_member_email">Email of Team Member *</label>
                 <input type="email"
                     class="form-control"
                     name="team_member_email"
@@ -125,7 +125,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="team_member_position">Position of Team Member</label>
+                <label for="team_member_position">Position of Team Member *</label>
                 <input type="text"
                     class="form-control"
                     name="team_member_position"
@@ -146,7 +146,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="client_name">Client / Owner Name:</label>
+                <label for="client_name">Client / Owner Name: *</label>
                 <input type="text"
                 class="form-control"
                 name="client_name"
@@ -162,7 +162,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="patient_name">Patient Name</label>
+                <label for="patient_name">Patient Name *</label>
                 <input type="text"
                     class="form-control"
                     name="patient_name"
@@ -178,7 +178,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="animal_id">Species</label>
+                <label for="animal_id">Species *</label>
                 <select class="form-control" name="animal_id" id="animal_id">
                 @foreach ($animals as $animal)
                     <option value="{{ $animal->id }}"
@@ -200,7 +200,7 @@
         <div class="col-8">
 
             <div class="form-group">
-                <label for="pms_code">Patient Number</label>
+                <label for="pms_code">Patient Number *</label>
                 <input type="text"
                     class="form-control"
                     name="pms_code"
@@ -219,7 +219,7 @@
 
         <div class="col-md-6">
             <div class="form-group">
-                <label for="date_of_incident">Date of the incident</label>
+                <label for="date_of_incident">Date of the incident *</label>
                 <div class="input-group date date_of_incident" data-target-input="nearest">
 
                     <input type="text"
@@ -269,8 +269,13 @@
     <div class="form-row">
         <div class="col-md-8">
             <div class="form-group">
-            <label for="description">Summary of incident and/or complain</label>
-            <textarea class="form-control" name="description" id="description" rows="4" minlength="2" maxlength="250">{{
+            <label for="description">Summary of incident and/or complain *</label>
+            <textarea class="form-control"
+                name="description"
+                id="description"
+                rows="4"
+                minlength="2"
+                maxlength="250">{{
             old('description') }}</textarea>
             @error('description')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -283,7 +288,7 @@
 
         <div class="col-md-6">
             <div class="form-group">
-            <label for="aggression_choice">Has there been any client aggression?</label>
+            <label for="aggression_choice">Has there been any client aggression? *</label>
             <select class="form-control no-keyboard" name="aggression_choice" id="aggression_choice">
                 <option value="no"
                     @if (old('aggression_choice') === 'no')
@@ -327,7 +332,7 @@
     <div class="form-row">
         <div class="col-md-6">
             <div class="form-group">
-            <label for="formal_complaint_lodged">Has a complaint been lodged</label>
+            <label for="formal_complaint_lodged">Has a complaint been lodged *</label>
             <select class="form-control no-keyboard" name="formal_complaint_lodged" id="formal_complaint_lodged">
                 <option value="no"
                     @if (old('formal_complaint_lodged') === 'no')
@@ -353,7 +358,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="complaint_category_id">Category</label>
+                <label for="complaint_category_id">Category *</label>
                 <select class="form-control no-keyboard" name="complaint_category_id" id="complaint_category_id">
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
@@ -386,7 +391,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="complaint_type_id">Type of complaint</label>
+                <label for="complaint_type_id">Type of complaint *</label>
                 <select class="form-control no-keyboard" name="complaint_type_id" id="complaint_type_id">
                     <option></option>
                     @foreach ($types as $type)
@@ -410,7 +415,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="severity_id">Severity</label>
+                <label for="severity_id">Severity *</label>
                 <select class="form-control no-keyboard" name="severity_id" id="severity_id">
                     @foreach ($severities as $severity)
                         <option
@@ -431,7 +436,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="complaint_channel_id">Channel</label>
+                <label for="complaint_channel_id">Channel *</label>
                 <select class="form-control no-keyboard" name="complaint_channel_id" id="complaint_channel_id">
                     <option></option>
                     @foreach ($channels as $channel)

@@ -8,7 +8,7 @@
     @csrf
     @method('PUT')
 
-    @if(auth()->user()->role->name === 'New Zealand Maintance')
+    @if(auth()->user()->role->name === 'New Zealand Maintenance')
         <fieldset disabled="disabled">
     @endif
     <input
@@ -34,103 +34,112 @@
 
     </div>
 
-    <div class="form-row align-items-center">
+    <fieldset class="p-4 mb-4 mt-4 border border-primary bg-light" style="background: #e0e0e0 !important;">
 
-        @foreach ($outcomeOptions as $option)
+        <legend style="width: fit-content; padding: 0 10px" >Outcome Updates</legend>
 
-            @php
-                $categoryKey = array_search($option->id, array_column($form->outcome_options ?? [], 'category_id'));
-                $outcome = $form->outcome_options ? $form->outcome_options[$categoryKey]['option_id'] : null;
-            @endphp
+        <div class="form-row align-items-center">
 
-            <div class="col-md-4">
-                <div class="form-group">
-                  <label for="outcomeOptions-{{ $option->selectName }}">{{ $option->name }}</label>
 
-                  <select class="form-control"
-                    name="outcomeOptions[{{ $option->selectName }}]"
-                    id="outcomeOptions-{{ $option->selectName }}">
-                    <option></option>
-                    @foreach ($option->options as $item)
-                        <option value="{{ $item->id }}"
-                            @if (old('outcomeOptions-' . $option->selectName, $outcome)
-                            == $item->id)
-                                selected
-                            @endif
-                            >{{ $item->name }}</option>
-                    @endforeach
-                  </select>
+            @foreach ($outcomeOptions as $option)
 
-                </div>
-            </div>
-        @endforeach
+                @php
+                    $categoryKey = array_search($option->id, array_column($form->outcome_options ?? [], 'category_id'));
+                    $outcome = $form->outcome_options ? $form->outcome_options[$categoryKey]['option_id'] : null;
+                @endphp
 
-    </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="outcomeOptions-{{ $option->selectName }}">{{ $option->name }}</label>
 
-    <div class="form-row align-items-center">
+                      <select class="form-control"
+                        name="outcomeOptions[{{ $option->selectName }}]"
+                        id="outcomeOptions-{{ $option->selectName }}">
+                        <option></option>
+                        @foreach ($option->options as $item)
+                            <option value="{{ $item->id }}"
+                                @if (old('outcomeOptions-' . $option->selectName, $outcome)
+                                == $item->id)
+                                    selected
+                                @endif
+                                >{{ $item->name }}</option>
+                        @endforeach
+                      </select>
 
-        <div class="col-md-8">
-            <div class="form-group">
-                <label for="outcome"><strong>Update or outcome of incident/complaint</strong>
-                    <span class="font-weight-normal"> - please date each additional entry </span></label>
-              <textarea class="form-control"
-                name="outcome"
-                id="outcome"
-                rows="5"
-                >{{ old('outcome', $form->outcome) }}</textarea>
-                @error('outcome')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-
-    </div>
-
-    <div class="form-row alight-items-center">
-        <div class="col-md-4">
-            <div class="form-group">
-              <label for="completed_by">Completed by</label>
-              <input type="text"
-                class="form-control"
-                name="completed_by"
-                id="completed_by"
-                value="{{ old('completed_by', $form->completed_by) }}">
-                @error('completed_by')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-
-                <label for="date_completed">Date completed</label>
-                <div class="input-group date date_completed" id="date-completed" data-target-input="nearest" >
-                    <input type="text"
-                        class="form-control datetimepicker-input datetimepicker"
-                        data-target="#date-completed"
-                        name="date_completed"
-                        id="date_completed"
-                        value="{{ old('date_completed', optional($form->date_completed)->format('d/m/Y')) }}"/>
-                    <div class="input-group-append"
-                        data-target="#date-completed"
-                        data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                    @error('date_completed')
+                </div>
+            @endforeach
+
+
+
+        </div>
+
+        <div class="form-row align-items-center">
+
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="outcome"><strong>Update or outcome of incident/complaint</strong>
+                        <span class="font-weight-normal"> - please date each additional entry </span></label>
+                  <textarea class="form-control"
+                    name="outcome"
+                    id="outcome"
+                    rows="5"
+                    >{{ old('outcome', $form->outcome) }}</textarea>
+                    @error('outcome')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
+            </div>
 
+        </div>
+
+        <div class="form-row alight-items-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="completed_by">Completed by</label>
+                  <input type="text"
+                    class="form-control"
+                    name="completed_by"
+                    id="completed_by"
+                    value="{{ old('completed_by', $form->completed_by) }}">
+                    @error('completed_by')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    <label for="date_completed">Date completed</label>
+                    <div class="input-group date date_completed" id="date-completed" data-target-input="nearest" >
+                        <input type="text"
+                            class="form-control datetimepicker-input datetimepicker"
+                            data-target="#date-completed"
+                            name="date_completed"
+                            id="date_completed"
+                            value="{{ old('date_completed', optional($form->date_completed)->format('d/m/Y')) }}"/>
+                        <div class="input-group-append"
+                            data-target="#date-completed"
+                            data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                        @error('date_completed')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
+
+    </fieldset>
 
     <div class="form-row align-items-center">
 
         <div class="col-md-4">
             <div class="form-group">
 
-                    <label for="clinic_id">Clinic Name</label>
+                    <label for="clinic_id">Clinic Name *</label>
                     <select class="form-control @if ($readonly !== 'readonly')
                         select2
                     @endif"
@@ -242,7 +251,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="team_member">Team Member logging the complaint:</label>
+                <label for="team_member">Team Member logging the complaint: *</label>
                 <input type="text"
                 class="form-control"
                 name="team_member"
@@ -260,7 +269,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="team_member_email">Email of Team Member</label>
+                <label for="team_member_email">Email of Team Member *</label>
                 <input type="email"
                     class="form-control"
                     name="team_member_email"
@@ -278,7 +287,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="team_member_position">Position of Team Member</label>
+                <label for="team_member_position">Position of Team Member *</label>
                 <input type="text"
                     class="form-control"
                     name="team_member_position"
@@ -301,7 +310,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="client_name">Client / Owner Name:</label>
+                <label for="client_name">Client / Owner Name: *</label>
                 <input type="text"
                 class="form-control"
                 name="client_name"
@@ -318,7 +327,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="patient_name">Patient Name</label>
+                <label for="patient_name">Patient Name *</label>
                 <input type="text"
                     class="form-control"
                     name="patient_name"
@@ -335,7 +344,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="animal_id">Species</label>
+                <label for="animal_id">Species *</label>
                 <select class="form-control" name="animal_id" id="animal_id">
                 @foreach ($animals as $animal)
                     <option value="{{ $animal->id }}"
@@ -357,7 +366,7 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="pms_code">Patient Number</label>
+                <label for="pms_code">Patient Number *</label>
                 <input type="text"
                     class="form-control"
                     name="pms_code"
@@ -377,7 +386,7 @@
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="date_of_incident">Date of the incident</label>
+                <label for="date_of_incident">Date of the incident *</label>
                 <div class="input-group date date_of_incident" data-target-input="nearest">
 
                     <input type="text"
@@ -432,7 +441,7 @@
     <div class="form-row">
         <div class="col-md-8">
             <div class="form-group">
-            <label for="description">Summary of incident and/or complain</label>
+            <label for="description">Summary of incident and/or complain *</label>
             <textarea class="form-control"
                 name="description"
                 id="description"
@@ -452,7 +461,7 @@
 
         <div class="col-md-6">
             <div class="form-group">
-            <label for="aggression_choice">Has there been any client aggression?</label>
+            <label for="aggression_choice">Has there been any client aggression? *</label>
             <select class="form-control no-keyboard" name="aggression_choice" id="aggression_choice">
                 <option value="no"
                     @if (old('aggression_choice') === 'no')
@@ -497,7 +506,7 @@
         <div class="col-md-4">
             <div class="form-group">
 
-            <label for="formal_complaint_lodged">Has a complaint been lodged</label>
+            <label for="formal_complaint_lodged">Has a complaint been lodged *</label>
             <select class="form-control no-keyboard" name="formal_complaint_lodged" id="formal_complaint_lodged">
                 <option value="no"
                     @if (old('formal_complaint_lodged', $form->formal_complaint_lodged ? 'yes' : 'no') === 'no')
@@ -523,7 +532,7 @@
         <div class="col-md-3">
 
             <div class="form-group">
-                <label for="complaint_category_id">Category</label>
+                <label for="complaint_category_id">Category *</label>
                 <select
                     class="form-control"
                     id="complaint_category_id"
@@ -571,7 +580,7 @@
         <div class="col-md-3">
 
             <div class="form-group">
-                <label for="complaint_type_id">Type of complaint</label>
+                <label for="complaint_type_id">Type of complaint *</label>
                 <select class="form-control"
                     id="complaint_type_id"
 
@@ -609,7 +618,7 @@
         <div class="col-md-3">
 
             <div class="form-group">
-                <label for="severity_id">Severity</label>
+                <label for="severity_id">Severity *</label>
                 <select class="form-control"
 
                     id="severity_id"
@@ -647,7 +656,7 @@
         <div class="col-md-3">
 
             <div class="form-group">
-                <label for="complaint_channel_id">Channel</label>
+                <label for="complaint_channel_id">Channel *</label>
                 <select class="form-control"
                     id="complaint_channel_id"
 
@@ -763,7 +772,7 @@
     @endif
 
     <button type="submit" class="btn btn-primary">Update the complaint</button>
-    @if(auth()->user()->role->name === 'New Zealand Maintance')
+    @if(auth()->user()->role->name === 'New Zealand Maintenance')
         </fieldset>
     @endif
 </form>
