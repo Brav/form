@@ -202,7 +202,7 @@
                      <div class="form-row">
                          <div class="col-md-8">
                              <div class="form-group">
-                                <label for="description">Description of incident and/or complaint</label>
+                                <label for="description">Summary of incident and/or complain</label>
                                 <textarea class="form-control" name="description" id="description" rows="4">{{
                                 old('description') }}</textarea>
                                 @error('description')

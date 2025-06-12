@@ -44,7 +44,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'pms_code'                 => ['required', 'string', 'min:2'],
             'date_of_incident'         => ['required', 'date_format:d/m/Y'],
             'date_of_client_complaint' => ['nullable', 'date_format:d/m/Y'],
-            'description'              => ['required', 'string', 'min:2'],
+            'description'              => ['required', 'string', 'min:2', 'max:250'],
             'aggression_choice'        => ['required', Rule::in(['no', 'yes'])],
             'aggression'               => ['required_if:aggression_choice,yes', Rule::in(array_keys(ComplaintForm::clientAggressionValues()))],
             'location_id'              => ['nullable',

@@ -1,7 +1,7 @@
 <tr id="item-{{ $type->id }}">
         <th>{{ $type->id }}</th>
         <th>{{ $type->name }}</th>
-        <th class="complaint-type-category-{{ $type->category->id }}">{{ $type->category->name }}</th>
+        <th class="complaint-type-category-{{ $type->category?->id }}">{{ $type->category?->name }}</th>
         <th>
             <a href="{{ route('complaint-type.edit', $type->id) }}"
                 class="btn btn-primary btn-sm active"

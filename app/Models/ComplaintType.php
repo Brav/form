@@ -20,6 +20,7 @@ class ComplaintType extends Model
      */
     protected $fillable = [
         'name',
+        'complaint_category_id',
     ];
 
     /**

@@ -10,13 +10,14 @@ use App\Models\ComplaintType;
 use App\Models\Roles;
 use App\Models\Severity;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ComplaintTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -40,7 +41,7 @@ class ComplaintTypeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function delete(ComplaintType $type)
     {
@@ -55,7 +56,7 @@ class ComplaintTypeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -73,8 +74,8 @@ class ComplaintTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\ComplaintTypeCreateRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param ComplaintTypeCreateRequest $request
+     * @return Response
      */
     public function store(ComplaintTypeCreateRequest $request)
     {
@@ -94,7 +95,7 @@ class ComplaintTypeController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\ComplaintType  $complaintType
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(ComplaintType $complaintType)
     {
@@ -105,7 +106,7 @@ class ComplaintTypeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\ComplaintType  $complaintType
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(ComplaintType $type)
     {
@@ -127,7 +128,7 @@ class ComplaintTypeController extends Controller
      *
      * @param  \App\Http\Requests\ComplaintTypeUpdateRequest  $request
      * @param  \App\Models\ComplaintType  $type
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(ComplaintTypeUpdateRequest $request, ComplaintType $type)
     {
@@ -147,7 +148,7 @@ class ComplaintTypeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\ComplaintType  $type
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(ComplaintType $type)
     {

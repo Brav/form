@@ -269,8 +269,8 @@
     <div class="form-row">
         <div class="col-md-8">
             <div class="form-group">
-            <label for="description">Description of incident and/or complaint</label>
-            <textarea class="form-control" name="description" id="description" rows="4">{{
+            <label for="description">Summary of incident and/or complain</label>
+            <textarea class="form-control" name="description" id="description" rows="4" minlength="2" maxlength="250">{{
             old('description') }}</textarea>
             @error('description')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -327,7 +327,7 @@
     <div class="form-row">
         <div class="col-md-6">
             <div class="form-group">
-            <label for="formal_complaint_lodged">Has a formal complaint been lodged</label>
+            <label for="formal_complaint_lodged">Has a complaint been lodged</label>
             <select class="form-control no-keyboard" name="formal_complaint_lodged" id="formal_complaint_lodged">
                 <option value="no"
                     @if (old('formal_complaint_lodged') === 'no')

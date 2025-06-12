@@ -71,7 +71,8 @@
 
         <div class="col-md-8">
             <div class="form-group">
-              <label for="outcome">Outcome of incident and/or complaint</label>
+                <label for="outcome"><strong>Update or outcome of incident/complaint</strong>
+                    <span class="font-weight-normal"> - please date each additional entry </span></label>
               <textarea class="form-control"
                 name="outcome"
                 id="outcome"
@@ -431,11 +432,13 @@
     <div class="form-row">
         <div class="col-md-8">
             <div class="form-group">
-            <label for="description">Description of incident and/or complaint</label>
+            <label for="description">Summary of incident and/or complain</label>
             <textarea class="form-control"
                 name="description"
                 id="description"
                 rows="4"
+                minlength="2"
+                maxlength="250"
                 {{ $readonly }}>{{
             old('description', $form->description) }}</textarea>
             @error('description')
@@ -494,7 +497,7 @@
         <div class="col-md-4">
             <div class="form-group">
 
-            <label for="formal_complaint_lodged">Has a formal complaint been lodged</label>
+            <label for="formal_complaint_lodged">Has a complaint been lodged</label>
             <select class="form-control no-keyboard" name="formal_complaint_lodged" id="formal_complaint_lodged">
                 <option value="no"
                     @if (old('formal_complaint_lodged', $form->formal_complaint_lodged ? 'yes' : 'no') === 'no')
