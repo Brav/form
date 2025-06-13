@@ -319,6 +319,7 @@ class ComplaintFormController extends Controller
         if (!auth()->user()->admin) {
             $request->request->remove('date_of_incident');
             $request->request->remove('date_of_client_complaint');
+            $request->request->remove('date_to_respond_to_the_client');
         }
 
         $data = $form->format($request->all(), true);
