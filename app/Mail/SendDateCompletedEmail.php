@@ -10,15 +10,17 @@ use Illuminate\Mail\Mailable;
 class SendDateCompletedEmail extends Mailable
 {
     private $complaintForm;
+    private $clinic;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($complaintForm)
+    public function __construct($complaintForm, $clinic)
     {
         $this->complaintForm = $complaintForm;
+        $this->clinic = $clinic;
     }
 
     /**
@@ -26,41 +28,14 @@ class SendDateCompletedEmail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
-        $clinic = Clinic::with([
-           'managers' => function ($query) {
-               return $query->whereIn('manager_type_id',
-                                      [
-                                          ClinicManagers::managerID('veterinary_manager'),
-
-                                      ]);
-           },
-           'managers.user' => function ($query) {
-               $query->select('id', 'email');
-           }
-       ])->find($this->complaintForm->clinic_id);
-
-
-        $emails = $clinic->managers
-            ->pluck('user.email')
-            ->filter()
-            ->unique()
-            ->values()
-            ->toArray();
-
-        $automatedEmails = AutomatedDateCompletedEmail::first();
-
-        $sendTo = array_merge($emails, $automatedEmails->emails);
-
-        $form = $this->from('complaintsreporting@vet.partners')
+        return $this->from('complaintsreporting@vet.partners')
             ->subject('Complaint Report Completion')
             ->view('emails/date-completed-notification')
             ->with([
-                'clinic' => $clinic,
+                'clinic' => $this->clinic,
                 'complaintForm' => $this->complaintForm,
             ]);
-
-        \Mail::to($sendTo)->send($form);
     }
 }

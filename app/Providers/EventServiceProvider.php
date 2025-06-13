@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\ComplaintReminderEvent;
 use App\Listeners\SendReminder;
+use App\Mail\SendDateCompletedEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -28,6 +29,10 @@ class EventServiceProvider extends ServiceProvider
 
         ComplaintReminderEvent::class => [
             SendReminder::class
+        ],
+
+        DateCompletedService::class => [
+            SendDateCompletedEmailService::class
         ]
     ];
 

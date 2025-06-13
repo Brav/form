@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\FormsExport;
 use App\Http\Requests\ComplaintFormCreateRequest;
 use App\Http\Requests\ComplaintFormUpdateRequest;
+use App\Mail\SendDateCompletedEmail;
 use App\Models\Animal;
 use App\Models\AutomatedCountryEmail;
 use App\Models\AutomatedEmailContacts;
@@ -20,6 +21,8 @@ use App\Models\OutcomeOptions;
 use App\Models\OutcomeOptionsCategories;
 use App\Models\Severity;
 use App\Providers\ComplaintFilled;
+use App\Providers\DateCompletedService;
+use App\Providers\SendDateCompletedEmailService;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -326,6 +329,8 @@ class ComplaintFormController extends Controller
 
         $result = $form->update($data);
 
+        $form->refresh();
+
         $directory = 'documents/complaint_form_' . $form->id;
 
         if (request()->hasFile('documents')) {
@@ -353,8 +358,8 @@ class ComplaintFormController extends Controller
                 ->delete();
         }
 
-        if ($request['date_to_respond_to_the_client']) {
-            new \App\Mail\SendDateCompletedEmail($result);
+        if ($form->date_completed) {
+            DateCompletedService::dispatch($form);
         }
 
         return redirect()->route('complaint-form.manage')

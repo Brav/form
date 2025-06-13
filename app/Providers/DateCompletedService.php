@@ -1,36 +1,41 @@
 <?php
 
-namespace App\Events;
+namespace App\Providers;
 
+
+use App\Console\Commands\ComplaintReminder;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ComplaintReminderEvent
+class DateCompletedService
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $form;
-    public $week;
 
     /**
-     * Create a new event instance.
+     * Create the event listener.
      *
      * @return void
      */
-    public function __construct($form, $week)
+    public function __construct($form)
     {
         $this->form = $form;
-        $this->week = $week;
     }
 
     /**
-     * Get the channels the event should broadcast on.
+     * Handle the event.
      *
+     * @param   $event
      * @return void
      */
-    public function broadcastOn()
+    public function handle($event): void
     {
-        // return new PrivateChannel('channel-name');
+
+
+
+
     }
+
 }

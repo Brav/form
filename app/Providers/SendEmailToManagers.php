@@ -26,7 +26,7 @@ class SendEmailToManagers
      * @param  ComplaintFilled  $event
      * @return void
      */
-    public function handle(ComplaintFilled $event)
+    public function handle(ComplaintFilled $event): void
     {
 
         $form         = $event->form;
