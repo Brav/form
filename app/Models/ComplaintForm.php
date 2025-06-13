@@ -31,6 +31,7 @@ class ComplaintForm extends Model
         'pms_code',
         'date_of_incident',
         'date_of_client_complaint',
+        'date_to_respond_to_the_client',
         'description',
         'aggression',
         'location_id',
@@ -53,10 +54,11 @@ class ComplaintForm extends Model
      * @var array
      */
     protected $casts = [
-        'date_of_incident'         => 'datetime',
-        'date_of_client_complaint' => 'datetime',
-        'date_completed'           => 'datetime',
-        'outcome_options'          => 'json',
+        'date_of_incident'              => 'datetime',
+        'date_of_client_complaint'      => 'datetime',
+        'date_to_respond_to_the_client' => 'datetime',
+        'date_completed'                => 'datetime',
+        'outcome_options'               => 'json',
     ];
 
     /**
@@ -67,62 +69,58 @@ class ComplaintForm extends Model
      *
      * @return array
      */
-    public function format(array $data, bool $update = false) :array
+    public function format(array $data, bool $update = false): array
     {
-        if(isset($data['date_of_incident']))
-        {
+        if (isset($data['date_of_incident'])) {
             $date = DateTime::createFromFormat('d/m/Y', $data['date_of_incident']);
 
             $data['date_of_incident'] = $date->format('Y-m-d H:i:s');
         }
 
-        if(isset($data['date_of_client_complaint']) && $data['date_of_client_complaint'] !== null)
-        {
-            $dateOfClientComplaint            = DateTime::createFromFormat('d/m/Y', $data['date_of_client_complaint']);
+        if (isset($data['date_of_client_complaint']) && $data['date_of_client_complaint'] !== null) {
+            $dateOfClientComplaint = DateTime::createFromFormat('d/m/Y', $data['date_of_client_complaint']);
             $data['date_of_client_complaint'] = $dateOfClientComplaint->format('Y-m-d');
         }
 
-        if($update === true)
-        {
-            if($data['date_completed'] !== null)
-            {
-                $dateCompleted          = DateTime::createFromFormat('d/m/Y', $data['date_completed']);
+        if (isset($data['date_to_respond_to_the_client']) && $data['date_to_respond_to_the_client'] !== null) {
+            $dateOfClientComplaint = DateTime::createFromFormat('d/m/Y', $data['date_to_respond_to_the_client']);
+            $data['date_to_respond_to_the_client'] = $dateOfClientComplaint->format('Y-m-d');
+        }
+
+        if ($update === true) {
+            if ($data['date_completed'] !== null) {
+                $dateCompleted = DateTime::createFromFormat('d/m/Y', $data['date_completed']);
                 $data['date_completed'] = $dateCompleted->format('Y-m-d');
             }
 
             $outcomeOptions = [];
 
-            foreach ($data['outcomeOptions'] as $key => $value )
-            {
+            foreach ($data['outcomeOptions'] as $key => $value) {
                 $name = \str_replace('_', ' ', $key);
 
                 $option = OutcomeOptionsCategories::where('name', '=', $name)->first();
 
                 $outcomeOptions[] = [
                     'category_id' => $option->id,
-                    'option_id'   => (int) $value,
+                    'option_id'   => (int)$value,
                 ];
             }
 
             $data['outcome_options'] = $outcomeOptions;
         }
 
-        if(!isset($data['animal_id']) || $data['animal_id'] === 'other')
-        {
+        if (!isset($data['animal_id']) || $data['animal_id'] === 'other') {
             $data['animal_id'] = null;
         }
 
 
-        if(!isset($data['outcome']))
-        {
+        if (!isset($data['outcome'])) {
             $data['outcome'] = '';
         }
 
-        $data['aggression'] = $data['aggression_choice'] === 'yes' ?
-        $data['aggression'] : null;
+        $data['aggression'] = $data['aggression_choice'] === 'yes' ? $data['aggression'] : null;
 
-        $data['formal_complaint_lodged'] =
-            $data['formal_complaint_lodged'] === 'yes' ? true : false;
+        $data['formal_complaint_lodged'] = $data['formal_complaint_lodged'] === 'yes';
 
         return $data;
     }
@@ -130,7 +128,7 @@ class ComplaintForm extends Model
     /**
      * Get the clinic associated with the ComplaintForm
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function clinic(): BelongsTo
     {
@@ -140,7 +138,7 @@ class ComplaintForm extends Model
     /**
      * Get the location associated with the ComplaintForm
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function location(): BelongsTo
     {
@@ -150,7 +148,7 @@ class ComplaintForm extends Model
     /**
      * Get the category associated with the ComplaintForm
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function category(): BelongsTo
     {
@@ -160,7 +158,7 @@ class ComplaintForm extends Model
     /**
      * Get the type associated with the ComplaintForm
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function type(): BelongsTo
     {
@@ -170,7 +168,7 @@ class ComplaintForm extends Model
     /**
      * Get the channel associated with the ComplaintForm
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function channel(): BelongsTo
     {
@@ -180,7 +178,7 @@ class ComplaintForm extends Model
     /**
      * Get the severity associated with the ComplaintForm
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function severity(): BelongsTo
     {
@@ -190,7 +188,7 @@ class ComplaintForm extends Model
     /**
      * Get the animal associated with the ComplaintForm
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function animal(): BelongsTo
     {
@@ -202,7 +200,7 @@ class ComplaintForm extends Model
         return Attribute::make(
             get: static function (?string $value, array $attributes) {
 
-                $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories',  (string)$attributes['complaint_category_id'])
+                $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories', (string)$attributes['complaint_category_id'])
                     ->whereJsonContains('scenario->types', (string)$attributes['complaint_type_id'])
                     ->whereJsonContains('scenario->channels', (string)$attributes['complaint_channel_id'])
                     ->whereJsonContains('scenario->severity', (string)$attributes['severity_id'])
@@ -218,7 +216,7 @@ class ComplaintForm extends Model
      *
      * @return string|null
      */
-    public function complaintLevel() :?string
+    public function complaintLevel(): ?string
     {
         return '/';
     }
@@ -230,12 +228,11 @@ class ComplaintForm extends Model
      */
     public function getFilesAttribute()
     {
-        $files     = [];
-        $formFiles =  Storage::files('documents/complaint_form_' . $this->id);
+        $files = [];
+        $formFiles = Storage::files('documents/complaint_form_' . $this->id);
 
-        foreach($formFiles as $file)
-        {
-            $path    = \explode('/', $file);
+        foreach ($formFiles as $file) {
+            $path = \explode('/', $file);
             $files[] = end($path);
         }
 
@@ -248,21 +245,18 @@ class ComplaintForm extends Model
      * @param array $item
      * @return string
      */
-    public function option($options) :string
+    public function option($options): string
     {
-        if(!$this->outcome_options)
-        {
+        if (!$this->outcome_options) {
             return '/';
         }
 
         $form = null;
 
-        foreach($this->outcome_options as $item)
-        {
+        foreach ($this->outcome_options as $item) {
             $form = $options->where('id', $item['option_id']);
 
-            if($form->count())
-            {
+            if ($form->count()) {
                 break;
             }
         }

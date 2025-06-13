@@ -113,7 +113,7 @@
 
                 $(function () {
 
-                    dateOfIncident = {
+                    let dateOfIncident = {
                         dateFormat: "d/m/Y",
                     };
 
@@ -123,7 +123,11 @@
 
                     $("#date_of_incident").flatpickr(dateOfIncident);
 
-                    dateConfiguration = {
+                    $("#date_to_respond_to_the_client").flatpickr({
+                        dateFormat: "d/m/Y",
+                    })
+
+                    let dateConfiguration = {
                         dateFormat: "d/m/Y",
                     };
 

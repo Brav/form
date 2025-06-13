@@ -214,10 +214,12 @@
         </div>
 
     </div>
+    <div class="form-row">
+    </div>
 
     <div class="form-row">
 
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="date_of_incident">Date of the incident *</label>
                 <div class="input-group date date_of_incident" data-target-input="nearest">
@@ -240,7 +242,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="date_of_client_complaint">Date of client complaint: (if applicable)</label>
                 <div class="input-group date date_of_client_complaint" id="start_dt_2" data-target-input="nearest" >
@@ -259,6 +261,30 @@
             </div>
 
                 @error('date_of_client_complaint')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="date_to_respond_to_the_client">Date you responded to the client: (if applicable)</label>
+                <div class="input-group date date_to_respond_to_the_client" id="date2" data-target-input="nearest" >
+                    <input type="text"
+                           class="form-control datetimepicker-input datetimepicker"
+                           data-target="#date2"
+                           name="date_to_respond_to_the_client"
+                           id="date_to_respond_to_the_client"
+                           value="{{ old('date_to_respond_to_the_client') }}"/>
+                    <div class="input-group-append"
+                         data-target="#date2"
+                         data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+
+                </div>
+
+                @error('date_to_respond_to_the_client')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

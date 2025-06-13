@@ -33,15 +33,13 @@ class ComplaintFormController extends Controller
     {
         $userClinics = [];
 
-        if(!auth()->user()->admin)
-        {
+        if (!auth()->user()->admin) {
             $userClinics[] = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
                 ->pluck('clinic_id')
                 ->toArray();
 
-            if(auth()->user()->role->name === 'New Zealand Maintenance')
-            {
+            if (auth()->user()->role->name === 'New Zealand Maintenance') {
                 $userClinics[] = Clinic::where('country', '=', 'new zealand')
                     ->get()
                     ->pluck('id')
@@ -50,34 +48,31 @@ class ComplaintFormController extends Controller
         }
 
         $queryData = \filter_var_array(
-            \array_filter(request()->all(), function($element){
-            return is_array($element);
+            \array_filter(request()->all(), function ($element) {
+                return is_array($element);
             }), FILTER_SANITIZE_FULL_SPECIAL_CHARS
         );
 
         $forms = ComplaintForm::query();
 
-        $forms->whereIn('clinic_id', function($query)
-        {
+        $forms->whereIn('clinic_id', function ($query) {
             return $query->select('id')
-            ->from('clinics')
-            ->where('name', 'not like', '%test%');
+                ->from('clinics')
+                ->where('name', 'not like', '%test%');
         });
 
-        foreach ($queryData as $data)
-        {
-            if(isset($data['column'], $data['search'], $data['type']))
-            {
+        foreach ($queryData as $data) {
+            if (isset($data['column'], $data['search'], $data['type'])) {
                 $this->createQuery($forms, $data);
             }
         }
 
-        $forms = $forms->when(!auth()->user()->admin, function($query) use($userClinics){
+        $forms = $forms->when(!auth()->user()->admin, function ($query) use ($userClinics) {
             return $query->whereIn('clinic_id', array_merge(...$userClinics));
         })
-        ->with(['clinic', 'clinic.managers', 'clinic.managers.user','location', 'category', 'type', 'channel', 'animal', 'severity'])
-        ->orderBy('created_at', 'DESC')
-        ->paginate(20);
+            ->with(['clinic', 'clinic.managers', 'clinic.managers.user', 'location', 'category', 'type', 'channel', 'animal', 'severity'])
+            ->orderBy('created_at', 'DESC')
+            ->paginate(20);
 
         /**
          * The Original project had functionality where you could set individual permissions
@@ -98,19 +93,18 @@ class ComplaintFormController extends Controller
             'countries'      => Clinic::$countries,
         ];
 
-        if(!request()->ajax())
-        {
-            $data['locations']  = Location::orderBy('name', 'asc')->get();
+        if (!request()->ajax()) {
+            $data['locations'] = Location::orderBy('name', 'asc')->get();
             $data['categories'] = ComplaintCategory::orderBy('name', 'asc')->get();
-            $data['types']      = ComplaintType::orderBy('name', 'asc')->get();
-            $data['channels']   = ComplaintChannel::orderBy('name', 'asc')->get();
-            $data['animals']    = Animal::orderBy('name', 'asc')->get();
+            $data['types'] = ComplaintType::orderBy('name', 'asc')->get();
+            $data['channels'] = ComplaintChannel::orderBy('name', 'asc')->get();
+            $data['animals'] = Animal::orderBy('name', 'asc')->get();
 
             return view('complaint-form/index', $data);
         }
 
         return [
-            'html' => view('complaint-form/partials/_forms', $data)->render(),
+            'html'       => view('complaint-form/partials/_forms', $data)->render(),
             'pagination' => view('pagination', [
                 'paginator' => $forms,
                 'layout'    => 'vendor.pagination.bootstrap-4',
@@ -129,8 +123,7 @@ class ComplaintFormController extends Controller
     public function sent()
     {
 
-        if(rtrim(request()->server('HTTP_REFERER'), "/") != route('complaint-form.create'))
-        {
+        if (rtrim(request()->server('HTTP_REFERER'), "/") != route('complaint-form.create')) {
             return redirect()->route('complaint-form.create');
         }
 
@@ -140,19 +133,20 @@ class ComplaintFormController extends Controller
     public function create()
     {
         return view('form', [
-            'task'       => 'create',
-            'view'       => 'complaint-form',
-            'clinics'    => Clinic::with([
-                'managers' => function($query){
-                    return $query->whereIn('manager_type_id',
-                        [
-                            ClinicManagers::managerID('regional_manager'),
-                            ClinicManagers::managerID('veterinary_manager'),
-                            ClinicManagers::managerID('general_manager'),
+            'task'        => 'create',
+            'view'        => 'complaint-form',
+            'clinics'     => Clinic::with([
+                                              'managers' => function ($query) {
+                                                  return $query->whereIn('manager_type_id',
+                                                                         [
+                                                                             ClinicManagers::managerID('regional_manager'),
+                                                                             ClinicManagers::managerID('veterinary_manager'),
+                                                                             ClinicManagers::managerID('general_manager'),
 
-                        ]);
-                },
-                'managers.user'])
+                                                                         ]);
+                                              },
+                                              'managers.user'
+                                          ])
                 ->orderBy('name', 'asc')
                 ->get(),
             'categories'  => ComplaintCategory::orderBy('name')->get(),
@@ -182,26 +176,25 @@ class ComplaintFormController extends Controller
         $autoEmailContacts = AutomatedEmailContacts::whereJsonContains(
             'scenario->categories', $request->complaint_category_id
         )
-        ->orWhereJsonContains(
-            'scenario->types', $request->complaint_type_id
-        )
-        ->orWhereJsonContains(
-            'scenario->channels', $request->complaint_channel_id
-        )
-        ->orWhereJsonContains(
-            'scenario->severity', $request->severity_id
-        )
-        ->orWhereJsonContains(
-            'scenario->aggression', $request->aggression
-        )->get();
+            ->orWhereJsonContains(
+                'scenario->types', $request->complaint_type_id
+            )
+            ->orWhereJsonContains(
+                'scenario->channels', $request->complaint_channel_id
+            )
+            ->orWhereJsonContains(
+                'scenario->severity', $request->severity_id
+            )
+            ->orWhereJsonContains(
+                'scenario->aggression', $request->aggression
+            )->get();
 
-        if(!$autoResponse)
-        {
+        if (!$autoResponse) {
             $autoResponse = AutomatedResponse::where('default', '=', true)->first();
         }
 
         $model = new ComplaintForm();
-        $data  = $model->format($request->all());
+        $data = $model->format($request->all());
 
         $data['level'] = $autoResponse->level ?? null;
 
@@ -209,23 +202,21 @@ class ComplaintFormController extends Controller
 
         $directory = 'documents/complaint_form_' . $model->id;
 
-        if(request()->hasFile('documents'))
-        {
-            foreach(request()->file('documents') as $file)
-            {
+        if (request()->hasFile('documents')) {
+            foreach (request()->file('documents') as $file) {
                 $fileName =
-                \strtolower(
-                    \str_replace(' ', '',
-                        \filter_var($file->getClientOriginalName(),
-                        FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-                        FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+                    \strtolower(
+                        \str_replace(' ', '',
+                                     \filter_var($file->getClientOriginalName(),
+                                                 FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+                                                 FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+                                     )
                         )
-                    )
-                );
+                    );
 
                 Storage::putFileAs($directory,
-                    $file,
-                    $fileName);
+                                   $file,
+                                   $fileName);
 
             }
         }
@@ -246,12 +237,12 @@ class ComplaintFormController extends Controller
 
         return redirect()->route('complaint-form.sent')
             ->with([
-                'status' => [
-                    'message'  => "You have file the complaint successfully",
-                ],
-                'response' => $autoResponse,
-                'user'     => $model->team_member,
-            ]);
+                       'status'   => [
+                           'message' => "You have file the complaint successfully",
+                       ],
+                       'response' => $autoResponse,
+                       'user'     => $model->team_member,
+                   ]);
     }
 
     /**
@@ -262,15 +253,13 @@ class ComplaintFormController extends Controller
      */
     public function edit(ComplaintForm $form)
     {
-        if(!auth()->user()->admin)
-        {
+        if (!auth()->user()->admin) {
             $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
                 ->pluck('clinic_id')
                 ->toArray();
 
-            if(!\in_array($form->clinic_id, $userClinics))
-            {
+            if (!\in_array($form->clinic_id, $userClinics)) {
                 return redirect()->route('complaint-form.create');
             }
 
@@ -280,17 +269,18 @@ class ComplaintFormController extends Controller
             'task'           => 'edit',
             'view'           => 'complaint-form',
             'readonly'       => auth()->user()->admin ? '' : 'readonly',
-            'clinics'    => Clinic::with([
-                'managers' => function($query){
-                    return $query->whereIn('manager_type_id',
-                        [
-                            ClinicManagers::managerID('regional_manager'),
-                            ClinicManagers::managerID('veterinary_manager'),
-                            ClinicManagers::managerID('general_manager'),
+            'clinics'        => Clinic::with([
+                                                 'managers' => function ($query) {
+                                                     return $query->whereIn('manager_type_id',
+                                                                            [
+                                                                                ClinicManagers::managerID('regional_manager'),
+                                                                                ClinicManagers::managerID('veterinary_manager'),
+                                                                                ClinicManagers::managerID('general_manager'),
 
-                        ]);
-                },
-                'managers.user'])
+                                                                            ]);
+                                                 },
+                                                 'managers.user'
+                                             ])
                 ->orderBy('name', 'asc')
                 ->get(),
             'categories'     => ComplaintCategory::orderBy('name')->get(),
@@ -308,28 +298,25 @@ class ComplaintFormController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\ComplaintFormUpdateRequest  $request
+     * @param \App\Http\Requests\ComplaintFormUpdateRequest $request
      * @param ComplaintForm $complaintForm
      * @return Response
      */
     public function update(ComplaintFormUpdateRequest $request, ComplaintForm $form)
     {
-        if(!auth()->user()->admin)
-        {
+        if (!auth()->user()->admin) {
             $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
                 ->get()
                 ->pluck('clinic_id')
                 ->toArray();
 
-            if(!\in_array($form->clinic_id, $userClinics))
-            {
+            if (!\in_array($form->clinic_id, $userClinics)) {
                 return redirect()->route('complaint-form.create');
             }
 
         }
 
-        if(!auth()->user()->admin)
-        {
+        if (!auth()->user()->admin) {
             $request->request->remove('date_of_incident');
             $request->request->remove('date_of_client_complaint');
         }
@@ -340,29 +327,26 @@ class ComplaintFormController extends Controller
 
         $directory = 'documents/complaint_form_' . $form->id;
 
-        if(request()->hasFile('documents'))
-        {
-            foreach(request()->file('documents') as $file)
-            {
+        if (request()->hasFile('documents')) {
+            foreach (request()->file('documents') as $file) {
                 $fileName =
-                \strtolower(
-                    \str_replace(' ', '',
-                        \filter_var($file->getClientOriginalName(),
-                        FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-                        FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+                    \strtolower(
+                        \str_replace(' ', '',
+                                     \filter_var($file->getClientOriginalName(),
+                                                 FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+                                                 FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+                                     )
                         )
-                    )
-                );
+                    );
 
                 Storage::putFileAs($directory,
-                    $file,
-                    $fileName);
+                                   $file,
+                                   $fileName);
 
             }
         }
 
-        if($result)
-        {
+        if ($result) {
             \DB::table('complaint_forms_reminder_sent')
                 ->where('complaint_form_id', '=', $form->id)
                 ->delete();
@@ -370,11 +354,11 @@ class ComplaintFormController extends Controller
 
         return redirect()->route('complaint-form.manage')
             ->with([
-                'status' => [
-                    'message' => "Form Updated",
-                    'type'    => 'success',
-                ]
-            ]);
+                       'status' => [
+                           'message' => "Form Updated",
+                           'type'    => 'success',
+                       ]
+                   ]);
     }
 
     /**
@@ -400,29 +384,27 @@ class ComplaintFormController extends Controller
      */
     public function destroy(ComplaintForm $form)
     {
-        if(!auth()->user()->admin &&
-            !auth()->user()->role->hasPermission('d'))
-        {
+        if (!auth()->user()->admin &&
+            !auth()->user()->role->hasPermission('d')) {
             die;
         }
 
-        if($form->delete())
-        {
+        if ($form->delete()) {
             \DB::table('complaint_forms_reminder_sent')
                 ->where('complaint_form_id', '=', $form->id)
                 ->delete();
 
             return response()->json([
-                'Deleted'
-            ], 200);
+                                        'Deleted'
+                                    ], 200);
         }
 
         return response()->json([
-            'Something went wrong!'
-        ], 500);
+                                    'Something went wrong!'
+                                ], 500);
     }
 
-    /** @return BinaryFileResponse  */
+    /** @return BinaryFileResponse */
     public function export()
     {
         return Excel::download(new FormsExport, 'forms.xlsx');
@@ -439,14 +421,12 @@ class ComplaintFormController extends Controller
     public function download(ComplaintForm $form)
     {
 
-        if(!auth()->user()->admin)
-        {
+        if (!auth()->user()->admin) {
             $result = ClinicManagers::where('user_id', '=', auth()->id())
                 ->where('clinic_id', '=', $form->clinic_id)
                 ->get();
 
-            if($result->isEmpty())
-            {
+            if ($result->isEmpty()) {
 
                 return redirect()->route('complaint-form.manage');
             }
@@ -464,36 +444,32 @@ class ComplaintFormController extends Controller
      * @param mixed $data
      * @return void
      */
-    private function createQuery($query, $data) :void
+    private function createQuery($query, $data): void
     {
         $search = \trim($data['search']);
 
-        switch ($data['type'])
-        {
+        switch ($data['type']) {
             case 'text':
 
-                if(\strlen($search) > 2)
-                {
-                    switch ($data['column'])
-                    {
+                if (\strlen($search) > 2) {
+                    switch ($data['column']) {
                         case 'created_at':
                         case 'date_of_incident':
                         case 'date_of_client_complaint':
+                        case 'date_to_respond_to_the_client':
                         case 'date_completed':
 
                             $dates = \explode('to', $data['search']);
 
-                            if(count($dates) === 1)
-                            {
+                            if (count($dates) === 1) {
                                 $date = Carbon::createFromFormat('d/m/Y', trim($dates[0]));
 
                                 $query->whereDate($data['column'], '=', $date);
                             }
 
-                            if(count($dates) === 2)
-                            {
+                            if (count($dates) === 2) {
                                 $dateFrom = Carbon::createFromFormat('d/m/Y', trim($dates[0]));
-                                $dateTo   = Carbon::createFromFormat('d/m/Y', trim($dates[1]));
+                                $dateTo = Carbon::createFromFormat('d/m/Y', trim($dates[1]));
 
                                 $query->whereBetween($data['column'], [$dateFrom, $dateTo]);
                             }
@@ -501,32 +477,28 @@ class ComplaintFormController extends Controller
                             break;
 
                         case 'clinic_name';
-                            $query->whereIn('clinic_id', function($query) use ($search)
-                            {
+                            $query->whereIn('clinic_id', function ($query) use ($search) {
                                 return $query->select('id')
-                                ->from('clinics')
-                                ->where('name', 'like', '%' . $search . '%');
+                                    ->from('clinics')
+                                    ->where('name', 'like', '%' . $search . '%');
                             });
                             break;
 
                         case 'clinic_code';
-                            $query->whereIn('clinic_id', function($query) use ($search)
-                            {
+                            $query->whereIn('clinic_id', function ($query) use ($search) {
                                 return $query->select('id')
-                                ->from('clinics')
-                                ->where('code', 'like', '%' . $search . '%');
+                                    ->from('clinics')
+                                    ->where('code', 'like', '%' . $search . '%');
                             });
                             break;
 
                         case 'clinic_country';
 
-                            if($search !== 'all')
-                            {
-                                $query->whereIn('clinic_id', function($query) use ($search)
-                                {
+                            if ($search !== 'all') {
+                                $query->whereIn('clinic_id', function ($query) use ($search) {
                                     return $query->select('id')
-                                    ->from('clinics')
-                                    ->where('country', '=', $search);
+                                        ->from('clinics')
+                                        ->where('country', '=', $search);
                                 });
                             }
 
@@ -534,31 +506,29 @@ class ComplaintFormController extends Controller
 
                         case 'regional_manager';
                             $userID = array_search($data['column'], ClinicManagers::$managerTypes);
-                            $query->whereIn('clinic_id', function($query) use($userID, $search)
-                            {
+                            $query->whereIn('clinic_id', function ($query) use ($userID, $search) {
                                 return $query->select('clinic_id')
-                                ->from('clinic_managers')
-                                ->where('manager_type_id', '=', $userID)
-                                ->whereIn('user_id', function($query) use($search){
-                                    $query->select('id')
-                                    ->from('users')
-                                    ->where('name', 'like', '%' . $search . '%');
-                                });
+                                    ->from('clinic_managers')
+                                    ->where('manager_type_id', '=', $userID)
+                                    ->whereIn('user_id', function ($query) use ($search) {
+                                        $query->select('id')
+                                            ->from('users')
+                                            ->where('name', 'like', '%' . $search . '%');
+                                    });
                             });
                             break;
 
                         case 'general_manager';
                             $userID = array_search($data['column'], ClinicManagers::$managerTypes);
-                            $query->whereIn('clinic_id', function($query) use($userID, $search)
-                            {
+                            $query->whereIn('clinic_id', function ($query) use ($userID, $search) {
                                 return $query->select('clinic_id')
-                                ->from('clinic_managers')
-                                ->where('manager_type_id', '=', $userID)
-                                ->whereIn('user_id', function($query) use($search){
-                                    $query->select('id')
-                                    ->from('users')
-                                    ->where('name', 'like', '%' . $search . '%');
-                                });
+                                    ->from('clinic_managers')
+                                    ->where('manager_type_id', '=', $userID)
+                                    ->whereIn('user_id', function ($query) use ($search) {
+                                        $query->select('id')
+                                            ->from('users')
+                                            ->where('name', 'like', '%' . $search . '%');
+                                    });
                             });
                             break;
 
@@ -568,7 +538,7 @@ class ComplaintFormController extends Controller
                         case 'client_name';
                         case 'patient_name';
                         case 'pms_code';
-                                $query->where($data['column'], 'like', '%' . $search . '%');
+                            $query->where($data['column'], 'like', '%' . $search . '%');
                             break;
                     }
                 }
@@ -582,14 +552,14 @@ class ComplaintFormController extends Controller
                 break;
 
             case 'options':
-                $query->whereJsonContains('outcome_options', ['option_id' => (int) $data['option']]);
+                $query->whereJsonContains('outcome_options', ['option_id' => (int)$data['option']]);
                 break;
 
             case 'other';
                 $search === 'other' ?
-                $query->whereNull($data['column'])
-                :
-                $query->where($data['column'], $search);
+                    $query->whereNull($data['column'])
+                    :
+                    $query->where($data['column'], $search);
                 break;
         }
 

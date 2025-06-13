@@ -7,8 +7,6 @@ $("body").on("click", ".page-link", function (e) {
     let role = $this.closest("ul").attr("role");
     let data = [];
 
-    console.log(pagination.data("filter"));
-
     if (pagination.data("filter"))
     {
         data = filterFilters($(`#${pagination.data("filter")}`));

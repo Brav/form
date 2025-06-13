@@ -14,6 +14,9 @@
         $dateCompleted = $form->date_completed !== null ?
                 date('d/m/Y', \strtotime($form->date_completed)) : '/';
 
+        $dateToRespondToTheClient = $form->date_to_respond_to_the_client !== null ?
+                date('d/m/Y', \strtotime($form->date_to_respond_to_the_client)) : '/';
+
         if ($export)
         {
             $dateOfClientComplaint = rtrim($dateOfClientComplaint, '/');
@@ -29,8 +32,8 @@
         @if (!$export && $canEdit)
             <th>
                 <a href="{{ route('complaint-form.edit', $form->id) }}"
-                    class="btn btn-primary btn-sm active"
-                    role="button" aria-pressed="true">Edit</a>
+                   class="btn btn-primary btn-sm active"
+                   role="button" aria-pressed="true">Edit</a>
             </th>
         @endif
         <th>{{ $form->created_at
@@ -49,6 +52,7 @@
         <th>{{ $form->pms_code }}</th>
         <th>{{ $form->date_of_incident->format('d/m/Y') }}</th>
         <th>{{ $dateOfClientComplaint }}</th>
+        <th>{{ $dateToRespondToTheClient }}</th>
         <th class="text-break">{{ $form->description }}</th>
         <th>{{ $form->aggression ?
                 $aggressions[$form->aggression] : "None" }}</th>
@@ -70,8 +74,8 @@
                         ]);
                     @endphp
                     @if (!$export)
-                        <a  class="d-block mb-1"
-                            href="{{ $route }}">{{ $file }} <i class="fas fa-download"></i></a>
+                        <a class="d-block mb-1"
+                           href="{{ $route }}">{{ $file }} <i class="fas fa-download"></i></a>
                     @else
                         <p>{{ $route }}</p>
                     @endif
@@ -101,10 +105,10 @@
             <th>
                 @if (isset($canDelete) && $canDelete)
                     <a data-toggle="modal"
-                        class="btn btn-danger btn-sm"
-                        role="smallModal"
-                        data-target="#smallModal"
-                        data-attr="{{ route('complaint-form.delete', $form->id) }}" title="Delete Form">Delete</a>
+                       class="btn btn-danger btn-sm"
+                       role="smallModal"
+                       data-target="#smallModal"
+                       data-attr="{{ route('complaint-form.delete', $form->id) }}" title="Delete Form">Delete</a>
                 @endif
 
             </th>
