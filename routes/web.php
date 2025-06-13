@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\AutomatedCountryEmailController;
+use App\Http\Controllers\AutomatedDateCompletedEmailController;
 use App\Http\Controllers\AutomatedEmailContactsController;
 use App\Http\Controllers\AutomatedResponseController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\SeverityController;
 use Illuminate\Support\Facades\Auth;
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Auth::routes();
 
@@ -131,8 +132,8 @@ Route::post('complaint-form/store', [ComplaintFormController::class, 'store'])->
 
 Route::prefix('complaint-form')->middleware(['auth'])->group(function () {
 
-    Route::get('export/',  [ComplaintFormController::class, 'export'])->name('complaint-form.export');
-    Route::match(['GET', 'POST'], 'download/{form}',  [ComplaintFormController::class, 'download'])->name('complaint-form.download');
+    Route::get('export/', [ComplaintFormController::class, 'export'])->name('complaint-form.export');
+    Route::match(['GET', 'POST'], 'download/{form}', [ComplaintFormController::class, 'download'])->name('complaint-form.download');
     Route::get('edit/{form}', [ComplaintFormController::class, 'edit'])->name('complaint-form.edit');
     Route::put('update/{form}', [ComplaintFormController::class, 'update'])->name('complaint-form.update');
 
@@ -233,6 +234,13 @@ Route::prefix('automated-country-emails')->middleware(['auth', 'admin'])->group(
     Route::post('store', [AutomatedCountryEmailController::class, 'store'])->name('automated-country-emails.store');
     Route::put('update/{response}', [AutomatedCountryEmailController::class, 'update'])->name('automated-country-emails.update');
     Route::delete('destroy/{response}', [AutomatedCountryEmailController::class, 'destroy'])->name('automated-country-emails.destroy');
+});
+
+Route::prefix('automated-date-completed-email')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [AutomatedDateCompletedEmailController::class, 'index'])->name('automated-date-completed-email.index');
+    Route::get('edit/{response}', [AutomatedDateCompletedEmailController::class, 'edit'])->name('automated-date-completed-email.edit');
+    Route::put('update/{response}', [AutomatedDateCompletedEmailController::class, 'update'])->name('automated-date-completed-email.update');
 });
 
 Route::view('operational_policy', 'operationalPolicy')->name('operational_policy');

@@ -25,6 +25,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Mail;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ComplaintFormController extends Controller
@@ -319,7 +320,6 @@ class ComplaintFormController extends Controller
         if (!auth()->user()->admin) {
             $request->request->remove('date_of_incident');
             $request->request->remove('date_of_client_complaint');
-            $request->request->remove('date_to_respond_to_the_client');
         }
 
         $data = $form->format($request->all(), true);
@@ -351,6 +351,10 @@ class ComplaintFormController extends Controller
             \DB::table('complaint_forms_reminder_sent')
                 ->where('complaint_form_id', '=', $form->id)
                 ->delete();
+        }
+
+        if ($request['date_to_respond_to_the_client']) {
+            new \App\Mail\SendDateCompletedEmail($result);
         }
 
         return redirect()->route('complaint-form.manage')

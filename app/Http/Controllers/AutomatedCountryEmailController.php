@@ -8,19 +8,18 @@ use Illuminate\Http\Request;
 
 class AutomatedCountryEmailController extends Controller
 {
-    function index()
+    public function index()
     {
         $responses = AutomatedCountryEmail::paginate(20);
 
-        if(!request()->ajax())
-        {
+        if (!request()->ajax()) {
             return view('automated-country-emails/index', [
                 'responses' => $responses,
             ]);
         }
 
         return [
-            'html' => view('automated-country-emails/partials/_responses', [
+            'html'       => view('automated-country-emails/partials/_responses', [
                 'responses' => $responses,
             ])->render(),
             'pagination' => view('pagination', [
@@ -41,8 +40,8 @@ class AutomatedCountryEmailController extends Controller
     {
         return response()->json(
             view('form-ajax', [
-                'task'        => 'create',
-                'view'        => 'automated-country-emails',
+                'task' => 'create',
+                'view' => 'automated-country-emails',
             ])->render(),
             200);
     }
@@ -50,7 +49,7 @@ class AutomatedCountryEmailController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  AutomatedCountryEmailRequest  $request
+     * @param AutomatedCountryEmailRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(AutomatedCountryEmailRequest $request)
@@ -67,33 +66,33 @@ class AutomatedCountryEmailController extends Controller
         $response = AutomatedCountryEmail::create($data);
 
         return response()->json(
-            view('automated-country-emails/partials/_response', [
-                'response' => $response,
-            ])->render()
+              view('automated-country-emails/partials/_response', [
+                  'response' => $response,
+              ])->render()
             , 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  AutomatedCountryEmail $response
+     * @param AutomatedCountryEmail $response
      * @return \Illuminate\Http\Response
      */
     public function edit(AutomatedCountryEmail $response)
     {
         return response()->json(
-            view('form-ajax', [
-                'task'       => 'edit',
-                'view'       => 'automated-country-emails',
-                'response'   => $response,
-            ])->render()
-        , 200);
+              view('form-ajax', [
+                  'task'     => 'edit',
+                  'view'     => 'automated-country-emails',
+                  'response' => $response,
+              ])->render()
+            , 200);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  AutomatedCountryEmailRequest  $request
+     * @param AutomatedCountryEmailRequest $request
      * @return \Illuminate\Http\Response
      */
     public function update(AutomatedCountryEmailRequest $request, AutomatedCountryEmail $response)
@@ -110,9 +109,9 @@ class AutomatedCountryEmailController extends Controller
         $response->update($data);
 
         return response()->json(
-            view('automated-country-emails/partials/_response', [
-                'response' => $response->fresh(),
-            ])->render()
+              view('automated-country-emails/partials/_response', [
+                  'response' => $response->fresh(),
+              ])->render()
             , 200);
     }
 
@@ -135,18 +134,18 @@ class AutomatedCountryEmailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  AutomatedResponse $response
+     * @param AutomatedResponse $response
      * @return \Illuminate\Http\Response
      */
     public function destroy(AutomatedCountryEmail $response)
     {
-        if($response->delete())
+        if ($response->delete())
             return response()->json([
-                'Deleted'
-            ], 200);
+                                        'Deleted'
+                                    ], 200);
 
         return response()->json([
-            'Something went wrong!'
-        ], 500);
+                                    'Something went wrong!'
+                                ], 500);
     }
 }

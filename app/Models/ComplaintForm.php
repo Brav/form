@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ComplaintForm extends Model
 {
-    use HasFactory;
     use SoftDeletes;
 
     /**
