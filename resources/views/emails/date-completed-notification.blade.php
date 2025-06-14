@@ -8,8 +8,6 @@
 </head>
 <body>
 <p>
-
-    @dd($clinic)
     Complaint Report Completion: <br>
     <strong>{{ $clinic->name }}</strong><br>
 
