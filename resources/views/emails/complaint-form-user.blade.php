@@ -316,8 +316,7 @@
 
                                                     <span>Details of the report submitted:</span><br><br>
                                                     <strong>Clinic:</strong> {{ $form->clinic->name }} <br>
-                                                    <strong>Regional Manager:</strong> {{
-            $form->clinic->getFirstManager('regional_manager')->name ?? '/'  }} <br>
+                                                    <strong>Regional Manager:</strong> {{ $form->clinic->getFirstManager('regional_manager')->name ?? '/'  }} <br>
                                                     <strong>Team member logging the
                                                         complaint:</strong> {{ $form->team_member ?? '/' }} <br>
                                                     <strong>Email of the team
@@ -347,7 +346,7 @@
                                                     <br>
                                                     {{-- <strong>Location of the incident:</strong> {{$form->location->name  }} <br> --}}
                                                     <strong>Category:</strong> {{$form->category->name  }} <br>
-                                                    <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} <br>
+                                                    <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} @if($form?->type->name === 'Other'): {{ $form->other_type_of_complaint }} @endif<br>
                                                     <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }}
                                                     <br>
                                                     <strong>Complaint Level:</strong> {{ $form->level ?? 'n/a' }} <br>
@@ -362,10 +361,10 @@
                                                             @endphp
 
                                                             <a class="d-block mb-1"
-                                                               href="{{ route('complaint-form.download', [
-                      'form' => $form->id,
-                      'file' => $file,
-                  ]) }}"
+                                                                href="{{ route('complaint-form.download', [
+                                                                    'form' => $form->id,
+                                                                    'file' => $file,
+                                                                ]) }}"
                                                                style="color: #00434f; display: block; font-size: 14px; text-align: center; margin: 5px auto;">{{ $file }}</a>
 
                                                         @endforeach
