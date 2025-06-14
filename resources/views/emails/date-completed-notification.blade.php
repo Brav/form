@@ -8,7 +8,7 @@
 </head>
 <body>
 <p>
-    Complaint Report Completion:
+    Complaint Report Completion: <br>
     <strong>{{ $clinic->name }}</strong><br>
 
     Please note the complaint report has been marked as complete. The matter will now be consider closed.
@@ -16,9 +16,9 @@
 
     You can view the complaint report by following this link: <br>
     <a href="{{ route('complaint-form.edit', $complaintForm->id) }}">Check the complaint</a>
-
-    Regards,
-
+</p>
+<p>
+    Regards, <br>
     Clinical Governance Team
 </p>
 </body>
