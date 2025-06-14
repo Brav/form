@@ -77,12 +77,12 @@ class ComplaintForm extends Model
             $data['date_of_incident'] = $date->format('Y-m-d H:i:s');
         }
 
-        if (isset($data['date_of_client_complaint']) && $data['date_of_client_complaint'] !== null) {
+        if ($data['date_of_client_complaint'] ?? null) {
             $dateOfClientComplaint = DateTime::createFromFormat('d/m/Y', $data['date_of_client_complaint']);
             $data['date_of_client_complaint'] = $dateOfClientComplaint->format('Y-m-d');
         }
 
-        if (isset($data['date_to_respond_to_the_client']) && $data['date_to_respond_to_the_client'] !== null) {
+        if ($data['date_to_respond_to_the_client'] ?? null) {
             $dateOfClientComplaint = DateTime::createFromFormat('d/m/Y', $data['date_to_respond_to_the_client']);
             $data['date_to_respond_to_the_client'] = $dateOfClientComplaint->format('Y-m-d');
         }
@@ -93,9 +93,8 @@ class ComplaintForm extends Model
                 $data['date_completed'] = $dateCompleted->format('Y-m-d');
             }
 
-            $outcomeOptions = [];
-
             if($updateOutcome === true){
+                $outcomeOptions = [];
                 foreach ($data['outcomeOptions'] as $key => $value) {
                     $name = \str_replace('_', ' ', $key);
 
@@ -106,9 +105,9 @@ class ComplaintForm extends Model
                         'option_id'   => (int)$value,
                     ];
                 }
+                $data['outcome_options'] = $outcomeOptions;
             }
 
-            $data['outcome_options'] = $outcomeOptions;
         }
 
         if (!isset($data['animal_id']) || $data['animal_id'] === 'other') {
@@ -117,11 +116,11 @@ class ComplaintForm extends Model
 
 
         if (!isset($data['outcome']) || $updateOutcome === false) {
-            $data['outcome'] = '';
+            $data['outcome'] = $data['outcome'] ?? null;
         }
 
         if ($updateOutcome === false) {
-            $data['completed_by'] = '';
+            $data['completed_by'] = $data['completed_by']?? null;
         }
 
         $data['aggression'] = $data['aggression_choice'] === 'yes' ? $data['aggression'] : null;
