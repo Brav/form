@@ -36,6 +36,7 @@ class ComplaintForm extends Model
         'location_id',
         'complaint_category_id',
         'complaint_type_id',
+        'other_type_of_complaint',
         'complaint_channel_id',
         'severity_id',
         'animal_id',
@@ -88,7 +89,8 @@ class ComplaintForm extends Model
         }
 
         if ($update === true) {
-            if (($data['date_completed'] ?? null) || $updateOutcome === true) {
+            if (($data['date_completed'] ?? null) && $updateOutcome === true) {
+                dd($data['date_completed']);
                 $dateCompleted = DateTime::createFromFormat('d/m/Y', $data['date_completed']);
                 $data['date_completed'] = $dateCompleted->format('Y-m-d');
             }
@@ -116,7 +118,7 @@ class ComplaintForm extends Model
 
 
         if (!isset($data['outcome']) || $updateOutcome === false) {
-            $data['outcome'] = $data['outcome'] ?? null;
+            $data['outcome'] = $data['outcome'] ?? '';
         }
 
         if ($updateOutcome === false) {
@@ -126,6 +128,13 @@ class ComplaintForm extends Model
         $data['aggression'] = $data['aggression_choice'] === 'yes' ? $data['aggression'] : null;
 
         $data['formal_complaint_lodged'] = $data['formal_complaint_lodged'] === 'yes';
+
+        $complaintTypes = ComplaintType::getAll();
+        $selectedComplaintType = $complaintTypes->where('id', '=', $data['complaint_type_id'])->first();
+
+        if($selectedComplaintType->name !== 'Other'){
+            $data['other_type_of_complaint'] = null;
+        }
 
         return $data;
     }

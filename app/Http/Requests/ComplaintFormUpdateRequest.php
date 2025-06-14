@@ -32,6 +32,9 @@ class ComplaintFormUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $complaintTypes = ComplaintType::getAll();
+        $complaintTypeOther = $complaintTypes->where('name', '=', 'Other')->first();
+
         return [
             'clinic_id'                     => [
                 'required',
@@ -59,7 +62,7 @@ class ComplaintFormUpdateRequest extends FormRequest
             ],
             'complaint_type_id'             => [
                 'required',
-                Rule::in(ComplaintType::all()->pluck('id')->toArray()),
+                Rule::in($complaintTypes->pluck('id')->toArray()),
             ],
             'complaint_channel_id'          => [
                 'required',
@@ -76,6 +79,7 @@ class ComplaintFormUpdateRequest extends FormRequest
             'formal_complaint_lodged'       => [
                 'required', Rule::in(['yes', 'no']),
             ],
+            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id, 'min:2', 'max:250' ],
             'documents'                     => 'nullable',
             'documents.*'                   => 'max:20000',
             'outcome'                       => ['nullable', 'string', 'min:2'],

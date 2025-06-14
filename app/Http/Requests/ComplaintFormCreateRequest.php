@@ -15,6 +15,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ComplaintFormCreateRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,6 +33,10 @@ class ComplaintFormCreateRequest extends FormRequest
      */
     public function rules(): array
     {
+
+        $complaintTypes = ComplaintType::getAll();
+        $complaintTypeOther = $complaintTypes->where('name', '=', 'Other')->first();
+
         return [
             'clinic_id'                     => [
                 'required',
@@ -59,7 +64,7 @@ class ComplaintFormCreateRequest extends FormRequest
             ],
             'complaint_type_id'             => [
                 'required',
-                Rule::in(ComplaintType::all()->pluck('id')->toArray()),
+                Rule::in($complaintTypes->pluck('id')->toArray()),
             ],
             'complaint_channel_id'          => [
                 'required',
@@ -77,6 +82,7 @@ class ComplaintFormCreateRequest extends FormRequest
                 'required',
                 Rule::in(Severity::get()->pluck('id')->toArray())
             ],
+            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id, 'min:2', 'max:250' ],
             'documents'                     => 'nullable',
             'documents.*'                   => 'max:20000',
 
@@ -100,6 +106,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'complaint_category_id.required' => 'Complaint category is required',
             'complaint_type_id.in'           => "Complaint type doesn't have valid value",
             'complaint_channel_id.in'        => "Complaint channel doesn't have valid value",
+            'other_type_of_complaint.required_if' => 'If other is selected for complaint type, please describe it here',
             'documents.max'                  => "Please note that maximum file upload size needs to be less than 20MB",
         ];
     }

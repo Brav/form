@@ -436,6 +436,25 @@
 
         </div>
     </div>
+
+    <div class="form-row d-none" id="other-type-of-complaint-container">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="other_type_of_complaint">Please describe type of complaint</label>
+                <textarea class="form-control"
+                          name="other_type_of_complaint"
+                          id="other_type_of_complaint"
+                          rows="4"
+                          minlength="2"
+                          maxlength="250">{{
+        old('other_type_of_complaint') }}</textarea>
+                @error('other_type_of_complaint')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+    </div>
+
      <div class="form-row align-items-center">
 
         <div class="col-md-4">
@@ -525,6 +544,25 @@
 @section('js_after')
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.api_site_key') }}"></script>
     <script>
+
+        $(function() {
+            if($('#complaint_type_id').find('option:selected').text().toLowerCase() === 'other'){
+                $('#other-type-of-complaint-container').removeClass('d-none')
+            }
+        });
+
+        $('body').on('change', '#complaint_type_id', function (e) {
+
+            let optionSelected = $(this).find('option:selected').text().toLowerCase()
+            $('#other-type-of-complaint-container').addClass('d-none')
+
+            if(optionSelected === 'other'){
+                $('#other-type-of-complaint-container').removeClass('d-none')
+            }
+
+
+        })
+
         grecaptcha.ready(function() {
             grecaptcha.execute('{{ config('recaptcha.api_site_key') }}', {action: "complaint_form"})
                 .then(function(token) {

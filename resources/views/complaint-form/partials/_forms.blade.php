@@ -10,6 +10,11 @@
         $typeName     = $form->type->name ?? '/';
         $channelName  = $form->channel->name ?? '/';
         $severityName = $form->severity->name ?? '/';
+        $typeOther = null;
+
+        if($typeName === 'Other'){
+            $typeOther = $form->other_type_of_complaint;
+        }
 
         $dateCompleted = $form->date_completed !== null ?
                 date('d/m/Y', \strtotime($form->date_completed)) : '/';
@@ -58,7 +63,7 @@
                 $aggressions[$form->aggression] : "None" }}</th>
         <th>{{ $form->formal_complaint_lodged ? 'Yes' : 'No' }}</th>
         <th>{{ $form->category->name }}</th>
-        <th>{{ $typeName }}</th>
+        <th>{{ $typeName }}@if($typeOther): <br> {{ $typeOther }} @endif</th>
         <th>{{ $channelName }}</th>
         <th>{{ $form->level }}</th>
         <th class="text-capitalize">{{ $severityName }}</th>

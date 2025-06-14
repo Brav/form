@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,8 +11,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ComplaintType extends Model
 {
-    use HasFactory;
     use SoftDeletes;
+
+
+    protected static $types;
 
     /**
      * The attributes that are mass assignable.
@@ -24,9 +27,9 @@ class ComplaintType extends Model
     ];
 
     /**
-     * Get all of the channels for the ComplaintType
+     * Get all the channels for the ComplaintType
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function channels(): HasMany
     {
@@ -36,10 +39,15 @@ class ComplaintType extends Model
     /**
      * Get the category that owns the ComplaintType
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function category(): BelongsTo
     {
         return $this->belongsTo(ComplaintCategory::class, 'complaint_category_id');
+    }
+
+    public static function getAll(): Collection
+    {
+        return self::$types ??= self::all();
     }
 }
