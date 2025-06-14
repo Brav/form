@@ -26,7 +26,7 @@ class Clinic extends Model
         'country',
     ];
 
-    public static $countries = [
+    public static array $countries = [
         'australia'   => 'au',
         'new zealand' => 'nz',
     ];
@@ -36,7 +36,7 @@ class Clinic extends Model
      *
      * @var array
      */
-    public static $userFields = [
+    public static array $userFields = [
         'lead_vet',
         'practice_manager',
         'veterinary_manager',
@@ -48,7 +48,7 @@ class Clinic extends Model
     /**
      * Get all the managers for the Clinic
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function managers(): HasMany
     {
@@ -58,7 +58,7 @@ class Clinic extends Model
     /**
      * Get the owner associated with the Clinic
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function owner(): BelongsTo
     {
@@ -102,8 +102,9 @@ class Clinic extends Model
      */
     public function getVetManagerAttribute()
     {
-        if ($this->managers->count() === 0)
+        if ($this->managers->count() === 0) {
             return null;
+        }
 
         return $this->managers->filter(function ($item) {
             return $item->manager_type_id == ClinicManagers::managerID('veterinary_manager');
@@ -117,8 +118,9 @@ class Clinic extends Model
      */
     public function getGmVeterinaryOperationAttribute()
     {
-        if ($this->managers->count() === 0)
+        if ($this->managers->count() === 0) {
             return null;
+        }
 
         return $this->managers->filter(function ($item) {
             return $item->manager_type_id == ClinicManagers::managerID('gm_veterinary_operations');

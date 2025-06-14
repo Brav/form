@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\ClinicCreateRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +10,6 @@ use App\Models\Clinic;
 
 class ClinicManagers extends Model
 {
-    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -27,7 +27,7 @@ class ClinicManagers extends Model
      *
      * @var array
      */
-    static $managerTypes = [
+    public static array $managerTypes = [
         1 => 'lead_vet',
         2 => 'practice_manager',
         3 => 'veterinary_manager',
@@ -43,7 +43,7 @@ class ClinicManagers extends Model
      *
      * @var string[]
      */
-    static $managersLabel = [
+    public static array $managersLabel = [
         1 => 'Lead Vet',
         2 => 'Practise Manager',
         3 => 'Veterinary Manager',
@@ -57,10 +57,10 @@ class ClinicManagers extends Model
     /**
      *
      * @param \App\Models\Clinic $clinic
-     * @param  \App\Http\Requests\ClinicCreateRequest  $request
+     * @param  ClinicCreateRequest  $request
      * @return void
      */
-    static public function saveManagers($clinic, $request)
+    public static function saveManagers($clinic, $request): void
     {
         $managers = [];
 
@@ -102,7 +102,7 @@ class ClinicManagers extends Model
     /**
      * Get the clinic that owns the ClinicManagers
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function clinic(): BelongsTo
     {
@@ -112,7 +112,7 @@ class ClinicManagers extends Model
     /**
      * Get the user that owns the ClinicManagers
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -125,8 +125,8 @@ class ClinicManagers extends Model
      * @param mixed $name
      * @return int|string|false
      */
-    static public function managerID($name)
+    static public function managerID($name): bool|int|string
     {
-        return \array_search($name, self::$managerTypes);
+        return \array_search($name, self::$managerTypes, true);
     }
 }

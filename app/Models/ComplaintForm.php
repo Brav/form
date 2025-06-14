@@ -65,10 +65,11 @@ class ComplaintForm extends Model
      *
      * @param array $data
      * @param boolean $update
+     * @param boolean $updateOutcome
      *
      * @return array
      */
-    public function format(array $data, bool $update = false): array
+    public function format(array $data, bool $update = false, bool $updateOutcome = false): array
     {
         if (isset($data['date_of_incident'])) {
             $date = DateTime::createFromFormat('d/m/Y', $data['date_of_incident']);
@@ -87,22 +88,24 @@ class ComplaintForm extends Model
         }
 
         if ($update === true) {
-            if ($data['date_completed'] !== null) {
+            if (($data['date_completed'] ?? null) || $updateOutcome === true) {
                 $dateCompleted = DateTime::createFromFormat('d/m/Y', $data['date_completed']);
                 $data['date_completed'] = $dateCompleted->format('Y-m-d');
             }
 
             $outcomeOptions = [];
 
-            foreach ($data['outcomeOptions'] as $key => $value) {
-                $name = \str_replace('_', ' ', $key);
+            if($updateOutcome === true){
+                foreach ($data['outcomeOptions'] as $key => $value) {
+                    $name = \str_replace('_', ' ', $key);
 
-                $option = OutcomeOptionsCategories::where('name', '=', $name)->first();
+                    $option = OutcomeOptionsCategories::where('name', '=', $name)->first();
 
-                $outcomeOptions[] = [
-                    'category_id' => $option->id,
-                    'option_id'   => (int)$value,
-                ];
+                    $outcomeOptions[] = [
+                        'category_id' => $option->id,
+                        'option_id'   => (int)$value,
+                    ];
+                }
             }
 
             $data['outcome_options'] = $outcomeOptions;
@@ -113,8 +116,12 @@ class ComplaintForm extends Model
         }
 
 
-        if (!isset($data['outcome'])) {
+        if (!isset($data['outcome']) || $updateOutcome === false) {
             $data['outcome'] = '';
+        }
+
+        if ($updateOutcome === false) {
+            $data['completed_by'] = '';
         }
 
         $data['aggression'] = $data['aggression_choice'] === 'yes' ? $data['aggression'] : null;

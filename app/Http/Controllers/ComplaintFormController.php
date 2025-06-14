@@ -24,6 +24,9 @@ use App\Providers\ComplaintFilled;
 use App\Providers\DateCompletedService;
 use App\Providers\SendDateCompletedEmailService;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -253,7 +256,7 @@ class ComplaintFormController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param ComplaintForm $form
-     * @return Response
+     * @return RedirectResponse
      */
     public function edit(ComplaintForm $form)
     {
@@ -263,30 +266,42 @@ class ComplaintFormController extends Controller
                 ->pluck('clinic_id')
                 ->toArray();
 
-            if (!\in_array($form->clinic_id, $userClinics)) {
+            if (!\in_array($form->clinic_id, $userClinics, true)) {
                 return redirect()->route('complaint-form.create');
             }
+        }
 
+        $readOnlyOutcomes = true;
+
+        if(!auth()->user()->admin) {
+
+            $clinic = $form->clinic;
+            $managers = $clinic->managers->pluck('manager_type_id', 'user_id')->toArray();
+
+            if(!array_key_exists(auth()->id(), $managers) || !in_array(ClinicManagers::managerID('veterinary_manager'), $managers, true)) {
+                $readOnlyOutcomes = false;
+            }
         }
 
         return view('form', [
             'task'           => 'edit',
             'view'           => 'complaint-form',
             'readonly'       => auth()->user()->admin ? '' : 'readonly',
+            'readOnlyOutcomes' => $readOnlyOutcomes ? '' : 'readonly',
             'clinics'        => Clinic::with([
-                                                 'managers' => function ($query) {
-                                                     return $query->whereIn('manager_type_id',
-                                                                            [
-                                                                                ClinicManagers::managerID('regional_manager'),
-                                                                                ClinicManagers::managerID('veterinary_manager'),
-                                                                                ClinicManagers::managerID('general_manager'),
+                             'managers' => function ($query) {
+                                return $query->whereIn('manager_type_id',
+                                    [
+                                        ClinicManagers::managerID('regional_manager'),
+                                        ClinicManagers::managerID('veterinary_manager'),
+                                        ClinicManagers::managerID('general_manager'),
 
-                                                                            ]);
-                                                 },
-                                                 'managers.user'
-                                             ])
-                ->orderBy('name', 'asc')
-                ->get(),
+                                    ]);
+                                },
+                                'managers.user'
+                             ])
+                                ->orderBy('name', 'asc')
+                                ->get(),
             'categories'     => ComplaintCategory::orderBy('name')->get(),
             'types'          => ComplaintType::orderBy('name')->get(),
             'channels'       => ComplaintChannel::orderBy('name')->get(),
@@ -302,11 +317,11 @@ class ComplaintFormController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\ComplaintFormUpdateRequest $request
-     * @param ComplaintForm $complaintForm
-     * @return Response
+     * @param ComplaintFormUpdateRequest $request
+     * @param ComplaintForm $form
+     * @return RedirectResponse
      */
-    public function update(ComplaintFormUpdateRequest $request, ComplaintForm $form)
+    public function update(ComplaintFormUpdateRequest $request, ComplaintForm $form): RedirectResponse
     {
         if (!auth()->user()->admin) {
             $userClinics = ClinicManagers::where('user_id', '=', auth()->id())
@@ -320,12 +335,24 @@ class ComplaintFormController extends Controller
 
         }
 
+        $updateOutcome = true;
+
+        if(!auth()->user()->admin) {
+
+            $clinic = $form->clinic;
+            $managers = $clinic->managers->pluck('manager_type_id', 'user_id')->toArray();
+
+            if(!array_key_exists(auth()->id(), $managers) || !in_array(ClinicManagers::managerID('veterinary_manager'), $managers, true)) {
+                $updateOutcome = false;
+            }
+        }
+
         if (!auth()->user()->admin) {
             $request->request->remove('date_of_incident');
             $request->request->remove('date_of_client_complaint');
         }
 
-        $data = $form->format($request->all(), true);
+        $data = $form->format($request->all(), true, $updateOutcome);
 
         $result = $form->update($data);
 

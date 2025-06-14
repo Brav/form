@@ -54,7 +54,13 @@
 
                       <select class="form-control"
                         name="outcomeOptions[{{ $option->selectName }}]"
-                        id="outcomeOptions-{{ $option->selectName }}">
+                        id="outcomeOptions-{{ $option->selectName }}"
+                              @if ($readOnlyOutcomes === 'readonly')
+                                  disabled="disabled"
+                              @endif
+
+                          {{ $readOnlyOutcomes }}>
+                      >
                         <option></option>
                         @foreach ($option->options as $item)
                             <option value="{{ $item->id }}"
@@ -70,8 +76,6 @@
                 </div>
             @endforeach
 
-
-
         </div>
 
         <div class="form-row align-items-center">
@@ -84,6 +88,11 @@
                     name="outcome"
                     id="outcome"
                     rows="5"
+                    @if ($readOnlyOutcomes === 'readonly')
+                        disabled="disabled"
+                     @endif
+
+                    {{ $readOnlyOutcomes }}
                     >{{ old('outcome', $form->outcome) }}</textarea>
                     @error('outcome')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -101,6 +110,11 @@
                     class="form-control"
                     name="completed_by"
                     id="completed_by"
+                    @if ($readOnlyOutcomes === 'readonly')
+                        disabled="disabled"
+                     @endif
+
+                    {{ $readOnlyOutcomes }}
                     value="{{ old('completed_by', $form->completed_by) }}">
                     @error('completed_by')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -111,22 +125,31 @@
                 <div class="form-group">
 
                     <label for="date_completed">Date completed</label>
-                    <div class="input-group date date_completed" id="date-completed" data-target-input="nearest" >
-                        <input type="text"
-                            class="form-control datetimepicker-input datetimepicker"
-                            data-target="#date-completed"
-                            name="date_completed"
-                            id="date_completed"
-                            value="{{ old('date_completed', optional($form->date_completed)->format('d/m/Y')) }}"/>
-                        <div class="input-group-append"
-                            data-target="#date-completed"
-                            data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    @if($readOnlyOutcomes)
+                        <input class="form-control"
+                               type="text"
+                               disabled
+                               readonly
+                               value="{{ old('date_completed', optional($form->date_completed)->format('d/m/Y')) }}"
+                        >
+                    @else
+                        <div class="input-group date date_completed" id="date-completed" data-target-input="nearest" >
+                            <input type="text"
+                                   class="form-control datetimepicker-input datetimepicker"
+                                   data-target="#date-completed"
+                                   name="date_completed"
+                                   id="date_completed"
+                                   value="{{ old('date_completed', optional($form->date_completed)->format('d/m/Y')) }}"/>
+                            <div class="input-group-append"
+                                 data-target="#date-completed"
+                                 data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                            @error('date_completed')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('date_completed')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    @endif
 
                 </div>
             </div>
