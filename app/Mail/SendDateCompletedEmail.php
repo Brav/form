@@ -2,9 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\AutomatedDateCompletedEmail;
-use App\Models\Clinic;
-use App\Models\ClinicManagers;
 use Illuminate\Mail\Mailable;
 
 class SendDateCompletedEmail extends Mailable

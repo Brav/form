@@ -62,7 +62,7 @@ class SendDateCompletedEmailService
         $mailTo = array_merge($emails, $automatedEmails->emails);
 
         \Mail::to(array_filter($mailTo))
-            ->send(new \App\Mail\SendDateCompletedEmail($clinic, $form ));
+            ->send(new \App\Mail\SendDateCompletedEmail($form, $clinic));
 
     }
 
