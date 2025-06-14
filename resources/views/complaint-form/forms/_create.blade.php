@@ -440,7 +440,7 @@
     <div class="form-row d-none" id="other-type-of-complaint-container">
         <div class="col-md-8">
             <div class="form-group">
-                <label for="other_type_of_complaint">Please describe type of complaint</label>
+                <label for="other_type_of_complaint">Please describe type of complaint *</label>
                 <textarea class="form-control"
                           name="other_type_of_complaint"
                           id="other_type_of_complaint"
