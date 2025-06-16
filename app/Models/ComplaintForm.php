@@ -37,8 +37,10 @@ class ComplaintForm extends Model
         'complaint_category_id',
         'complaint_type_id',
         'other_type_of_complaint',
+        'near_miss_description',
         'complaint_channel_id',
         'severity_id',
+        'patient_injury_type_id',
         'animal_id',
         'formal_complaint_lodged',
         'level',
@@ -90,7 +92,6 @@ class ComplaintForm extends Model
 
         if ($update === true) {
             if (($data['date_completed'] ?? null) && $updateOutcome === true) {
-                dd($data['date_completed']);
                 $dateCompleted = DateTime::createFromFormat('d/m/Y', $data['date_completed']);
                 $data['date_completed'] = $dateCompleted->format('Y-m-d');
             }
@@ -134,6 +135,13 @@ class ComplaintForm extends Model
 
         if($selectedComplaintType->name !== 'Other'){
             $data['other_type_of_complaint'] = null;
+        }
+
+        $complaintCategories = ComplaintCategory::getAll();
+        $selectedComplaintCategory = $complaintCategories->where('id', '=', $data['complaint_category_id'])->first();
+
+        if($selectedComplaintCategory->name !== 'Near Miss'){
+            $data['near_miss_description'] = null;
         }
 
         return $data;
@@ -207,6 +215,11 @@ class ComplaintForm extends Model
     public function animal(): BelongsTo
     {
         return $this->belongsTo(Animal::class);
+    }
+
+    public function patientInjuryType(): BelongsTo
+    {
+        return $this->belongsTo(PatientInjuryType::class);
     }
 
     protected function automatedResponse(): Attribute

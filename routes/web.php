@@ -5,6 +5,7 @@ use App\Http\Controllers\AutomatedCountryEmailController;
 use App\Http\Controllers\AutomatedDateCompletedEmailController;
 use App\Http\Controllers\AutomatedEmailContactsController;
 use App\Http\Controllers\AutomatedResponseController;
+use App\Http\Controllers\PatientInjuryTypeController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ComplaintCategoryController;
@@ -235,6 +236,18 @@ Route::prefix('automated-country-emails')->middleware(['auth', 'admin'])->group(
     Route::put('update/{response}', [AutomatedCountryEmailController::class, 'update'])->name('automated-country-emails.update');
     Route::delete('destroy/{response}', [AutomatedCountryEmailController::class, 'destroy'])->name('automated-country-emails.destroy');
 });
+
+Route::prefix('patient-injury-types')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('', [PatientInjuryTypeController::class, 'index'])->name('patient-injury-type.index');
+    Route::get('create', [PatientInjuryTypeController::class, 'create'])->name('patient-injury-type.create');
+    Route::get('delete/{item}', [PatientInjuryTypeController::class, 'delete'])->name('patient-injury-type.delete');
+    Route::get('edit/{item}', [PatientInjuryTypeController::class, 'edit'])->name('patient-injury-type.edit');
+    Route::post('store', [PatientInjuryTypeController::class, 'store'])->name('patient-injury-type.store');
+    Route::put('update/{item}', [PatientInjuryTypeController::class, 'update'])->name('patient-injury-type.update');
+    Route::delete('destroy/{item}', [PatientInjuryTypeController::class, 'destroy'])->name('patient-injury-type.destroy');
+});
+
 
 Route::prefix('automated-date-completed-email')->middleware(['auth', 'admin'])->group(function () {
 

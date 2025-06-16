@@ -10,6 +10,8 @@
         $typeName     = $form->type->name ?? '/';
         $channelName  = $form->channel->name ?? '/';
         $severityName = $form->severity->name ?? '/';
+        $patientInjuryTypeName = $form->patientInjuryType->name ?? '/';
+
         $typeOther = null;
 
         if($typeName === 'Other'){
@@ -62,11 +64,12 @@
         <th>{{ $form->aggression ?
                 $aggressions[$form->aggression] : "None" }}</th>
         <th>{{ $form->formal_complaint_lodged ? 'Yes' : 'No' }}</th>
-        <th>{{ $form->category->name }}</th>
+        <th>{{ $form->category->name }} @if($form->category->name === 'Near miss'):<br> {{$form->near_miss_description}} @endif</th>
         <th>{{ $typeName }}@if($typeOther): <br> {{ $typeOther }} @endif</th>
         <th>{{ $channelName }}</th>
         <th>{{ $form->level }}</th>
         <th class="text-capitalize">{{ $severityName }}</th>
+        <th class="text-capitalize">{{ $patientInjuryTypeName }}</th>
         <th class="text-capitalize">{{ $form->clinic->country ?? 'N/A' }}</th>
         <th>
             @if ($form->files)

@@ -2,20 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ComplaintCategory extends Model
 {
-    use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
         'name',
         'values_used',
     ];
+
+    protected static $types;
 
     /**
      * The attributes that should be cast.
@@ -60,10 +61,15 @@ class ComplaintCategory extends Model
     /**
      * Get all of the types for the ComplaintCategory
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function types(): HasMany
     {
-        return $this->hasMany(CategoryType::class);
+        return $this->hasMany(ComplaintType::class);
+    }
+
+    public static function getAll(): Collection
+    {
+        return self::$types ??= self::all();
     }
 }

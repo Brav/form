@@ -92,12 +92,15 @@ Sidebar -->
                                 <span class="nav-main-link-name">Complaint Categories</span>
                             </a>
                         </li>
+
+
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{ route('location.index') }}">
+                            <a class="nav-main-link" href="{{ route('patient-injury-type.index') }}">
                                 <i class="nav-main-link-icon fa fa-folder-open"></i>
-                                <span class="nav-main-link-name">Locations</span>
+                                <span class="nav-main-link-name">Patient Injury Types</span>
                             </a>
                         </li>
+
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="{{ route('outcome-options.index') }}">
                                 <i class="nav-main-link-icon fa fa-folder-open"></i>
@@ -124,8 +127,6 @@ Sidebar -->
                                 <span class="nav-main-link-name">Automated Date Completed Email Sending</span>
                             </a>
                         </li>
-
-
 
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="{{ route('automated-country-emails.index') }}">

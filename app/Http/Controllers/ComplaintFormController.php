@@ -19,6 +19,7 @@ use App\Models\ComplaintType;
 use App\Models\Location;
 use App\Models\OutcomeOptions;
 use App\Models\OutcomeOptionsCategories;
+use App\Models\PatientInjuryType;
 use App\Models\Severity;
 use App\Providers\ComplaintFilled;
 use App\Providers\DateCompletedService;
@@ -143,16 +144,16 @@ class ComplaintFormController extends Controller
             'task'        => 'create',
             'view'        => 'complaint-form',
             'clinics'     => Clinic::with([
-                                              'managers' => function ($query) {
-                                                  return $query->whereIn('manager_type_id',
-                                                                         [
-                                                                             ClinicManagers::managerID('regional_manager'),
-                                                                             ClinicManagers::managerID('veterinary_manager'),
-                                                                             ClinicManagers::managerID('general_manager'),
+                          'managers' => function ($query) {
+                              return $query->whereIn('manager_type_id',
+                             [
+                                 ClinicManagers::managerID('regional_manager'),
+                                 ClinicManagers::managerID('veterinary_manager'),
+                                 ClinicManagers::managerID('general_manager'),
 
-                                                                         ]);
-                                              },
-                                              'managers.user'
+                             ]);
+                          },
+                          'managers.user'
                                           ])
                 ->orderBy('name', 'asc')
                 ->get(),
@@ -161,6 +162,7 @@ class ComplaintFormController extends Controller
             'channels'    => ComplaintChannel::orderBy('name')->get(),
             // 'locations'   => Location::orderBy('name')->get(),
             'severities'  => Severity::get(),
+            'patientInjuryTypes' => PatientInjuryType::get(),
             'animals'     => Animal::get(),
             'aggressions' => ComplaintForm::clientAggressionValues(),
         ]);
@@ -309,6 +311,7 @@ class ComplaintFormController extends Controller
             'form'           => $form->load(['clinic', 'location', 'category', 'type', 'channel', 'severity']),
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'severities'     => Severity::get(),
+            'patientInjuryTypes' => PatientInjuryType::get(),
             'animals'        => Animal::get(),
             'aggressions'    => ComplaintForm::clientAggressionValues(),
         ]);

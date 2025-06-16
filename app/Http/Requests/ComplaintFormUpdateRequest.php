@@ -9,6 +9,7 @@ use App\Models\ComplaintChannel;
 use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
 use App\Models\Location;
+use App\Models\PatientInjuryType;
 use App\Models\Severity;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,6 +35,9 @@ class ComplaintFormUpdateRequest extends FormRequest
     {
         $complaintTypes = ComplaintType::getAll();
         $complaintTypeOther = $complaintTypes->where('name', '=', 'Other')->first();
+
+        $complaintCategories = ComplaintCategory::getAll();
+        $complaintNearMiss = $complaintCategories->where('name', '=', 'Near Miss')->first();
 
         return [
             'clinic_id'                     => [
@@ -72,6 +76,10 @@ class ComplaintFormUpdateRequest extends FormRequest
                 'required',
                 Rule::in(Severity::get()->pluck('id')->toArray())
             ],
+            'patient_injury_type_id'                   => [
+                'nullable',
+                Rule::in(PatientInjuryType::get()->pluck('id')->toArray())
+            ],
             'animal_id'                     => [
                 'required',
                 Rule::in(\array_merge(Animal::all()->pluck('id')->toArray(), ['other'])),
@@ -80,6 +88,7 @@ class ComplaintFormUpdateRequest extends FormRequest
                 'required', Rule::in(['yes', 'no']),
             ],
             'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id, 'min:2', 'max:250' ],
+            'near_miss_description' => ['required_if:complaint_category_id,' . $complaintNearMiss->id, 'min:2', 'max:250' ],
             'documents'                     => 'nullable',
             'documents.*'                   => 'max:20000',
             'outcome'                       => ['nullable', 'string', 'min:2'],
@@ -110,6 +119,8 @@ class ComplaintFormUpdateRequest extends FormRequest
             'documents.max'                    => "Please note that maximum file upload size needs to be less than 20MB",
             'formal_complaint_lodged.in'       => "Please select yes or no",
             'formal_complaint_lodged.required' => "Please select yes or no",
+            'other_type_of_complaint.required_if' => 'If other is selected for complaint type, please describe it here',
+            'near_miss_description.required_if' => 'If near miss is selected, please describe it here',
         ];
     }
 }

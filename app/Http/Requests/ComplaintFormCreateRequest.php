@@ -9,6 +9,7 @@ use App\Models\ComplaintChannel;
 use App\Models\ComplaintForm;
 use App\Models\ComplaintType;
 use App\Models\Location;
+use App\Models\PatientInjuryType;
 use App\Models\Severity;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -36,6 +37,9 @@ class ComplaintFormCreateRequest extends FormRequest
 
         $complaintTypes = ComplaintType::getAll();
         $complaintTypeOther = $complaintTypes->where('name', '=', 'Other')->first();
+
+        $complaintCategories = ComplaintCategory::getAll();
+        $complaintNearMiss = $complaintCategories->where('name', '=', 'Near miss')->first();
 
         return [
             'clinic_id'                     => [
@@ -82,7 +86,12 @@ class ComplaintFormCreateRequest extends FormRequest
                 'required',
                 Rule::in(Severity::get()->pluck('id')->toArray())
             ],
-            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id, 'min:2', 'max:250' ],
+            'patient_injury_type_id'                   => [
+                'nullable',
+                Rule::in(PatientInjuryType::get()->pluck('id')->toArray())
+            ],
+            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id, 'nullable', 'min:2', 'max:250' ],
+            'near_miss_description' => ['required_if:complaint_category_id,' . $complaintNearMiss->id, 'nullable', 'min:2', 'max:250' ],
             'documents'                     => 'nullable',
             'documents.*'                   => 'max:20000',
 
@@ -107,6 +116,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'complaint_type_id.in'           => "Complaint type doesn't have valid value",
             'complaint_channel_id.in'        => "Complaint channel doesn't have valid value",
             'other_type_of_complaint.required_if' => 'If other is selected for complaint type, please describe it here',
+            'near_miss_description.required_if' => 'If near miss is selected, please describe it here',
             'documents.max'                  => "Please note that maximum file upload size needs to be less than 20MB",
         ];
     }

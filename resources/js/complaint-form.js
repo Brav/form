@@ -131,3 +131,34 @@ $("body").on("change", "#aggression_choice", function(e){
         ? aggressionSelect.attr("disabled", false)
         : aggressionSelect.attr("disabled", true);
 });
+
+$(function() {
+    if($('#complaint_type_id').find('option:selected').text().toLowerCase() === 'other'){
+        $('#other-type-of-complaint-container').removeClass('d-none')
+    }
+});
+
+$(function() {
+    if($('#complaint_category_id').find('option:selected').text().toLowerCase() === 'near miss'){
+        $('#near-miss-description-container').removeClass('d-none')
+    }
+});
+
+$('body').on('change', '#complaint_category_id', function (e) {
+    let optionSelected = $(this).find('option:selected').text().toLowerCase()
+    $('#near-miss-description-container').addClass('d-none')
+
+    if(optionSelected === 'near miss'){
+        $('#near-miss-description-container').removeClass('d-none')
+        $('#other-type-of-complaint-container').addClass('d-none')
+    }
+})
+
+$('body').on('change', '#complaint_type_id', function (e) {
+    let optionSelected = $(this).find('option:selected').text().toLowerCase()
+    $('#other-type-of-complaint-container').addClass('d-none')
+
+    if(optionSelected === 'other'){
+        $('#other-type-of-complaint-container').removeClass('d-none')
+    }
+})

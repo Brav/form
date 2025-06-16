@@ -1,5 +1,7 @@
 <h1>Complaints Reporting and Adverse Event Reporting Form</h1>
 
+@dump($errors)
+
 <form
     id=complaint_form
     class="max-1024"
@@ -441,15 +443,31 @@
         <div class="col-md-8">
             <div class="form-group">
                 <label for="other_type_of_complaint">Please describe type of complaint *</label>
-                <textarea class="form-control"
-                          name="other_type_of_complaint"
-                          id="other_type_of_complaint"
-                          rows="4"
-                          minlength="2"
-                          maxlength="250">{{
-        old('other_type_of_complaint') }}</textarea>
+                <input class="form-control"
+                    name="other_type_of_complaint"
+                    id="other_type_of_complaint"
+                    minlength="2"
+                    maxlength="250"
+                    value="{{old('other_type_of_complaint') }}" />
                 @error('other_type_of_complaint')
-                <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row d-none" id="near-miss-description-container">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="near_miss_description">Near miss description *</label>
+                <input class="form-control"
+                       name="near_miss_description"
+                       id="near_miss_description"
+                       minlength="2"
+                       maxlength="250"
+                       value="{{old('near_miss_description') }}" />
+                @error('near-miss-description')
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
         </div>
@@ -477,6 +495,28 @@
             </div>
 
         </div>
+
+         <div class="col-md-4">
+
+             <div class="form-group">
+                 <label for="patient_injury_type_id">Patient Injury Type (if applicable)</label>
+                 <select class="form-control no-keyboard" name="patient_injury_type_id" id="patient_injury_type_id">
+                     <option></option>
+                     @foreach ($patientInjuryTypes as $type)
+                         <option
+                             value="{{ $type->id }}"
+                             @if (old('patient_injury_type_id') == $type->id)
+                                 selected
+                             @endif
+                         >{{ \ucwords($type->name) }}</option>
+                     @endforeach
+                 </select>
+                 @error('patient_injury_type_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                 @enderror
+             </div>
+
+         </div>
 
         <div class="col-md-4">
 
@@ -544,25 +584,6 @@
 @section('js_after')
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.api_site_key') }}"></script>
     <script>
-
-        $(function() {
-            if($('#complaint_type_id').find('option:selected').text().toLowerCase() === 'other'){
-                $('#other-type-of-complaint-container').removeClass('d-none')
-            }
-        });
-
-        $('body').on('change', '#complaint_type_id', function (e) {
-
-            let optionSelected = $(this).find('option:selected').text().toLowerCase()
-            $('#other-type-of-complaint-container').addClass('d-none')
-
-            if(optionSelected === 'other'){
-                $('#other-type-of-complaint-container').removeClass('d-none')
-            }
-
-
-        })
-
         grecaptcha.ready(function() {
             grecaptcha.execute('{{ config('recaptcha.api_site_key') }}', {action: "complaint_form"})
                 .then(function(token) {
