@@ -78,7 +78,7 @@ class ComplaintFormController extends Controller
         $forms = $forms->when(!auth()->user()->admin, function ($query) use ($userClinics) {
             return $query->whereIn('clinic_id', array_merge(...$userClinics));
         })
-            ->with(['clinic', 'clinic.managers', 'clinic.managers.user', 'location', 'category', 'type', 'channel', 'animal', 'severity'])
+            ->with(['clinic', 'clinic.managers', 'clinic.managers.user', 'location', 'category', 'type', 'channel', 'animal', 'severity', 'patientInjuryType'])
             ->orderBy('created_at', 'DESC')
             ->paginate(20);
 
@@ -94,6 +94,7 @@ class ComplaintFormController extends Controller
             'canEdit'        => true,
             'canDelete'      => auth()->user()->admin == 1,
             'severities'     => Severity::get(),
+            'patientInjuryTypes' => PatientInjuryType::get(),
             'outcomes'       => OutcomeOptions::orderBy('name', 'asc')->get(),
             'outcomeOptions' => OutcomeOptionsCategories::with(['options'])->get(),
             'export'         => false,

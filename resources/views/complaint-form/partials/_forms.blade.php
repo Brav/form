@@ -32,6 +32,7 @@
             $channelName           = rtrim($channelName, '/');
             $severityName          = rtrim($severityName, '/');
             $dateCompleted         = rtrim($dateCompleted, '/');
+            $patientInjuryTypeName         = rtrim($patientInjuryTypeName, '/');
         }
     @endphp
 

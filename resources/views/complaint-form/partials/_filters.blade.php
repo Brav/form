@@ -245,6 +245,19 @@
     </th>
 
     <th>
+        <select class="form-control filter filter-select select-one"
+                name="patientInjuryType"
+                id="patientInjuryType"
+                data-column="patient_injury_type_id"
+                data-type="select">
+            <option value="all">All</option>
+            @foreach ($patientInjuryTypes as $type)
+                <option value="{{ $type->id }}">{{ $type->name }}</option>
+            @endforeach
+        </select>
+    </th>
+
+    <th>
         <select class="form-control filter filter-select select-one text-capitalize"
                 name="clinic_country"
                 id="clinic_country"
