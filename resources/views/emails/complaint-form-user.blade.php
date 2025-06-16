@@ -351,6 +351,7 @@
                                                     <br>
                                                     <strong>Complaint Level:</strong> {{ $form->level ?? 'n/a' }} <br>
                                                     <strong>Severity:</strong> {{$form->severity->name  }} <br>
+                                                    <strong>Patient Injury Type:</strong> {{$form->patientInjuryType?->name ?? 'n/a'  }} <br>
 
                                                     @if ($form->files)
                                                         <strong>The following file(s) have been attached for your

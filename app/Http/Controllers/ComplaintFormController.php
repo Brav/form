@@ -209,6 +209,7 @@ class ComplaintFormController extends Controller
         $data['level'] = $autoResponse->level ?? null;
 
         $model = $model->create($data);
+        $model->refresh();
 
         $directory = 'documents/complaint_form_' . $model->id;
 
@@ -217,12 +218,10 @@ class ComplaintFormController extends Controller
                 $fileName =
                     \strtolower(
                         \str_replace(' ', '',
-                                     \filter_var($file->getClientOriginalName(),
-                                                 FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-                                                 FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
-                                     )
-                        )
-                    );
+                             \filter_var($file->getClientOriginalName(),
+                                         FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+                                         FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+                             )));
 
                 Storage::putFileAs($directory,
                                    $file,
