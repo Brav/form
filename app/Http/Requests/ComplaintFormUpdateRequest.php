@@ -37,7 +37,7 @@ class ComplaintFormUpdateRequest extends FormRequest
         $complaintTypeOther = $complaintTypes->where('name', '=', 'Other')->first();
 
         $complaintCategories = ComplaintCategory::getAll();
-        $complaintNearMiss = $complaintCategories->where('name', '=', 'Near Miss')->first();
+        $complaintNearMiss = $complaintCategories->where('name', '=', 'Near miss')->first();
 
         return [
             'clinic_id'                     => [

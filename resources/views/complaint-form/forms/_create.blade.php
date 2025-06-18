@@ -1,7 +1,5 @@
 <h1>Complaints Reporting and Adverse Event Reporting Form</h1>
 
-@dump($errors)
-
 <form
     id=complaint_form
     class="max-1024"

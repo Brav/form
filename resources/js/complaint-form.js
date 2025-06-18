@@ -133,7 +133,10 @@ $("body").on("change", "#aggression_choice", function(e){
 });
 
 $(function() {
-    if($('#complaint_type_id').find('option:selected').text().toLowerCase() === 'other'){
+
+    let complaintTypeText = ('#complaint_type_id').find('option:selected').text().toLowerCase();
+
+    if(complaintTypeText === 'other' || complaintTypeText === 'others'){
         $('#other-type-of-complaint-container').removeClass('d-none')
     }
 });
@@ -158,7 +161,7 @@ $('body').on('change', '#complaint_type_id', function (e) {
     let optionSelected = $(this).find('option:selected').text().toLowerCase()
     $('#other-type-of-complaint-container').addClass('d-none')
 
-    if(optionSelected === 'other'){
+    if(optionSelected === 'other' || optionSelected === 'others'){
         $('#other-type-of-complaint-container').removeClass('d-none')
     }
 })

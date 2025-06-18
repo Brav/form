@@ -155,6 +155,8 @@
             </div>
         </div>
 
+        <button type="submit" class="btn btn-primary mt-3 mb-3">Update the complaint</button>
+
     </fieldset>
 
     <div class="form-row align-items-center">
@@ -368,7 +370,7 @@
 
             <div class="form-group">
                 <label for="animal_id">Species *</label>
-                <select class="form-control" name="animal_id" id="animal_id">
+                <select class="form-control" name="animal_id" id="animal_id" {{ $readonly }}>
                 @foreach ($animals as $animal)
                     <option value="{{ $animal->id }}"
                         @if (old('animal_id') == $animal->id)
@@ -485,7 +487,7 @@
         <div class="col-md-6">
             <div class="form-group">
             <label for="aggression_choice">Has there been any client aggression? *</label>
-            <select class="form-control no-keyboard" name="aggression_choice" id="aggression_choice">
+            <select class="form-control no-keyboard" name="aggression_choice" id="aggression_choice" {{ $readonly }}>
                 <option value="no"
                     @if (old('aggression_choice') === 'no')
                         selected
@@ -530,7 +532,7 @@
             <div class="form-group">
 
             <label for="formal_complaint_lodged">Has a complaint been lodged *</label>
-            <select class="form-control no-keyboard" name="formal_complaint_lodged" id="formal_complaint_lodged">
+            <select class="form-control no-keyboard" name="formal_complaint_lodged" id="formal_complaint_lodged" {{$readonly}}>
                 <option value="no"
                     @if (old('formal_complaint_lodged', $form->formal_complaint_lodged ? 'yes' : 'no') === 'no')
                         selected
@@ -816,14 +818,15 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Download</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Download</th>
 
-                    @if (auth()->user()->admin)
-                        <th scope="col">Delete</th>
-                    @endif
+                        @if (auth()->user()->admin)
+                            <th scope="col">Delete</th>
+                        @endif
 
-                </tr>                </thead>
+                    </tr>
+                </thead>
                 <tbody>
 
                     @php
@@ -869,7 +872,7 @@
         </div>
     @endif
 
-    <button type="submit" class="btn btn-primary">Update the complaint</button>
+    <button type="submit" class="btn btn-primary mt-3 mb-3">Update the complaint</button>
     @if(auth()->user()->role->name === 'New Zealand Maintenance')
         </fieldset>
     @endif
