@@ -260,7 +260,7 @@ function appendFileNames(files)
         );
     }
 
-    $("#files-for-upload")
+    $(".files-for-upload")
         .removeClass("d-none")
         .find(".files")
         .html(allFiles.join(""));

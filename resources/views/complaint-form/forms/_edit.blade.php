@@ -168,7 +168,7 @@
                     @enderror
                 </div>
 
-                <div id="files-for-upload" class='d-none mt-2'>
+                <div id="" class='d-none mt-2 files-for-upload'>
                     <p class="font-weight-bold">Files for upload:</p>
                     <div class="files"></div>
                 </div>
@@ -825,7 +825,7 @@
                 @enderror
             </div>
 
-            <div id="files-for-upload" class='d-none mt-2'>
+            <div id="files-for-upload" class='d-none mt-2 files-for-upload'>
                 <p class="font-weight-bold">Files for upload:</p>
                 <div class="files"></div>
             </div>
