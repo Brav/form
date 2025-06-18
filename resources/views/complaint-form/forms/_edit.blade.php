@@ -155,6 +155,26 @@
             </div>
         </div>
 
+        <div class="form-row">
+            <div class="col-md-4">
+                <div class="custom-file">
+                    <label for="documents" class="custom-file-label">Files/Documents</label>
+                    <input type="file"
+                           name="files[]"
+                           id="documents" multiple
+                           class="custom-file-input">
+                    @error('documents')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div id="files-for-upload" class='d-none mt-2'>
+                    <p class="font-weight-bold">Files for upload:</p>
+                    <div class="files"></div>
+                </div>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary mt-3 mb-3">Update the complaint</button>
 
     </fieldset>
@@ -813,9 +833,9 @@
     </div>
 
     @if ($form->files)
-        <div class="mb-2 col-md-4">
+        <div class="mt-4 mb-4 bg-white p-4">
             <h4>Files</h4>
-            <table class="table table-striped">
+            <table class="table table-striped table-dark table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>

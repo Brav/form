@@ -87,8 +87,8 @@ class ComplaintFormUpdateRequest extends FormRequest
             'formal_complaint_lodged'       => [
                 'required', Rule::in(['yes', 'no']),
             ],
-            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id, 'min:2', 'max:250' ],
-            'near_miss_description' => ['required_if:complaint_category_id,' . $complaintNearMiss->id, 'min:2', 'max:250' ],
+            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id, 'nullable', 'min:2', 'max:250' ],
+            'near_miss_description' => ['required_if:complaint_category_id,' . $complaintNearMiss->id, 'nullable', 'min:2', 'max:250' ],
             'documents'                     => 'nullable',
             'documents.*'                   => 'max:20000',
             'outcome'                       => ['nullable', 'string', 'min:2'],
