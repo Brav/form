@@ -37,6 +37,7 @@ class ComplaintFormCreateRequest extends FormRequest
 
         $complaintTypes = ComplaintType::getAll();
         $complaintTypeOther = $complaintTypes->where('name', '=', 'Other')->first();
+        $complaintTypeOthers = $complaintTypes->where('name', '=', 'Others')->first();
 
         $complaintCategories = ComplaintCategory::getAll();
         $complaintNearMiss = $complaintCategories->where('name', '=', 'Near miss')->first();
@@ -90,7 +91,7 @@ class ComplaintFormCreateRequest extends FormRequest
                 'nullable',
                 Rule::in(PatientInjuryType::get()->pluck('id')->toArray())
             ],
-            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id, 'nullable', 'min:2', 'max:250' ],
+            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id . ',' . $complaintTypeOthers?->id, 'nullable', 'min:2', 'max:250' ],
             'near_miss_description' => ['required_if:complaint_category_id,' . $complaintNearMiss->id, 'nullable', 'min:2', 'max:250' ],
             'documents'                     => 'nullable',
             'documents.*'                   => 'max:20000',

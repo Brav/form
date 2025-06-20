@@ -14,7 +14,7 @@
 
         $typeOther = null;
 
-        if($typeName === 'Other'){
+        if($typeName === 'Other' || $typeName === 'Others'){
             $typeOther = $form->other_type_of_complaint;
         }
 

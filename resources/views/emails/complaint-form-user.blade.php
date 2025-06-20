@@ -346,7 +346,7 @@
                                                     <br>
                                                     {{-- <strong>Location of the incident:</strong> {{$form->location->name  }} <br> --}}
                                                     <strong>Category:</strong> {{$form->category->name  }} <br>
-                                                    <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} @if($form?->type->name === 'Other'): {{ $form->other_type_of_complaint }} @endif<br>
+                                                    <strong>Type:</strong> {{ optional($form->type)->name ?? '' }} @if($form?->type->name === 'Other' || $form?->type->name === 'Others'): {{ $form->other_type_of_complaint }} @endif<br>
                                                     <strong>Channel:</strong> {{ optional($form->channel)->name ?? ''  }}
                                                     <br>
                                                     <strong>Complaint Level:</strong> {{ $form->level ?? 'n/a' }} <br>
