@@ -5,6 +5,15 @@
     action="{{ route('complaint-form.update', $form->id) }}"
     method="POST"
     enctype="multipart/form-data">
+
+    <div class="card-body">
+        @if (session('status'))
+            <div class="alert alert-{{ session('status.type') }}" role="alert">
+                {{ session('status.message') }}
+            </div>
+        @endif
+    </div>
+
     @csrf
     @method('PUT')
 

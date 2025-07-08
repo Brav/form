@@ -359,6 +359,16 @@ class ComplaintFormController extends Controller
 
         $result = $form->update($data);
 
+        if(!$result) {
+            return redirect()->route('complaint-form.edit', $form->id)
+                ->with([
+                    'status' => [
+                        'message' => "Error updating the complaint information",
+                        'type'    => 'danger',
+                    ]
+                ]);
+        }
+
         $form->refresh();
 
         $directory = 'documents/complaint_form_' . $form->id;
@@ -382,23 +392,21 @@ class ComplaintFormController extends Controller
             }
         }
 
-        if ($result) {
-            \DB::table('complaint_forms_reminder_sent')
-                ->where('complaint_form_id', '=', $form->id)
-                ->delete();
-        }
+        \DB::table('complaint_forms_reminder_sent')
+            ->where('complaint_form_id', '=', $form->id)
+            ->delete();
 
         if ($form->date_completed) {
             DateCompletedService::dispatch($form);
         }
 
-        return redirect()->route('complaint-form.manage')
+        return redirect()->route('complaint-form.edit', $form->id)
             ->with([
-                       'status' => [
-                           'message' => "Form Updated",
-                           'type'    => 'success',
-                       ]
-                   ]);
+               'status' => [
+                   'message' => "Form Updated",
+                   'type'    => 'success',
+               ]
+            ]);
     }
 
     /**
