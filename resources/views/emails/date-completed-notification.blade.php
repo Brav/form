@@ -11,7 +11,7 @@
     Complaint Report Completion: <br>
     <strong>{{ $clinic->name }}</strong><br>
 
-    Please note the complaint report has been marked as complete. The matter will now be consider closed.
+    Please note the complaint report has been marked as complete. The matter will now be considered closed.
     No further message will be sent. <br>
 
     You can view the complaint report by following this link: <br>

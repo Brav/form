@@ -183,7 +183,7 @@
                                                             align="center">
 
                                                             <img align="center" border="0"
-                                                                 src="https://complaintsreporting.vet.partners/media/logos/VetPartners_Logo_VERT_POS_RGB.svg"
+                                                                 src="https://complaintsreporting.vetpartners.net.au/media/logos/VetPartners_Logo_VERT_POS_RGB.svg"
                                                                  alt="Image" title="Image"
                                                                  style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 300px;"
                                                                  width="300"/>

@@ -72,7 +72,7 @@ class FormsExport implements FromView
                 ->pluck('clinic_id')
                 ->toArray();
 
-            if(auth()->user()->role->name === 'New Zealand Maintenance')
+            if(auth()->user()?->role?->name === 'New Zealand Maintenance')
             {
                 $userClinics[] = Clinic::where('country', '=', 'new zealand')
                     ->get()

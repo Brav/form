@@ -47,7 +47,7 @@ class ComplaintFormController extends Controller
                 ->pluck('clinic_id')
                 ->toArray();
 
-            if (auth()->user()->role->name === 'New Zealand Maintenance') {
+            if (auth()->user()?->role?->name === 'New Zealand Maintenance') {
                 $userClinics[] = Clinic::where('country', '=', 'new zealand')
                     ->get()
                     ->pluck('id')
@@ -280,7 +280,7 @@ class ComplaintFormController extends Controller
             $clinic = $form->clinic;
             $managers = $clinic->managers->pluck('manager_type_id', 'user_id')->toArray();
 
-            if(!array_key_exists(auth()->id(), $managers) || !in_array(ClinicManagers::managerID('veterinary_manager'), $managers, true)) {
+            if(!in_array(ClinicManagers::managerID('veterinary_manager'), $managers, true)) {
                 $readOnlyOutcomes = false;
             }
         }

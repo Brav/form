@@ -125,7 +125,7 @@ class ClinicManagers extends Model
      * @param mixed $name
      * @return int|string|false
      */
-    static public function managerID($name): bool|int|string
+    public static function managerID(mixed $name): bool|int|string
     {
         return \array_search($name, self::$managerTypes, true);
     }

@@ -8,7 +8,7 @@
     @csrf
     @method('PUT')
 
-    @if(auth()->user()->role->name === 'New Zealand Maintenance')
+    @if(auth()->user()?->role?->name === 'New Zealand Maintenance')
         <fieldset disabled="disabled">
     @endif
     <input
@@ -893,7 +893,7 @@
     @endif
 
     <button type="submit" class="btn btn-primary mt-3 mb-3">Update the complaint</button>
-    @if(auth()->user()->role->name === 'New Zealand Maintenance')
+    @if(auth()->user()?->role?->name === 'New Zealand Maintenance')
         </fieldset>
     @endif
 </form>
