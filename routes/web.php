@@ -201,7 +201,7 @@ Route::prefix('files')->middleware(['auth', 'admin'])->group(function () {
     Route::get('edit/{file}', [FileController::class, 'edit'])->name('file.edit');
     Route::post('store', [FileController::class, 'store'])->name('file.store');
     Route::put('update/{file}', [FileController::class, 'update'])->name('file.update');
-    Route::delete('destroy/{file}', [FileController::class, 'destroy'])->name('file.destroy');
+    Route::delete('destroy/{form}', [FileController::class, 'destroy'])->name('file.destroy');
 });
 
 Route::prefix('severity')->middleware(['auth', 'admin'])->group(function () {

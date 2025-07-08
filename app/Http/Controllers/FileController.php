@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FileRequest;
 use App\Http\Requests\FileUpdateRequest;
+use App\Models\ComplaintForm;
 use App\Models\File;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -14,7 +17,7 @@ class FileController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -26,7 +29,7 @@ class FileController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function delete(File $file)
     {
@@ -41,7 +44,7 @@ class FileController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  App\Http\Requests\FileRequest $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(FileRequest $request)
     {
@@ -73,8 +76,8 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return Response
      */
     public function show(File $file)
     {
@@ -84,8 +87,8 @@ class FileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return Response
      */
     public function edit(File $file)
     {
@@ -102,8 +105,8 @@ class FileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  App\Http\Requests\FileUpdateRequest  $request
-     * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return Response
      */
     public function update(FileUpdateRequest $request, File $file)
     {
@@ -121,22 +124,28 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
+     * @param ComplaintForm $form
+     * @return JsonResponse
      */
-    public function destroy(File $file)
+    public function destroy(ComplaintForm $form): JsonResponse
     {
-        if(!Storage::delete('public/files/' . $file->name))
-        {
-            return response()->json('error', 500);
-        }
 
-        if($file->delete())
-        {
-            return response()->json('deleted', 200);
-        }
+        $directory = 'documents/complaint_form_' . $form->id;
 
-        return response()->json('error', 500);
+        $fileName =
+            \strtolower(
+                \str_replace(' ', '',
+                    \filter_var(request()->input('file'),
+                        FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+                        FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
+                    )
+                )
+            );
+
+        return Storage::delete($directory . '/' . $fileName) ?
+        response()->json('success', 200) : response()->json('error', 500);
+
+
     }
 
     /**

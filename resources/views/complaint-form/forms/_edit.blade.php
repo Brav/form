@@ -873,9 +873,9 @@
                                 <th>
                                     <a  class="d-block mb-1 file-delete"
                                         href="#"
-                                        data-route="{{ route('file.delete', $form->id) }}"
+                                        data-route="{{ route('file.destroy', $form->id) }}"
                                         data-file="{{ $file }}"
-                                        data-id="file-{{ $form->id . '-' . $i  }}""><i class="fas fa-trash"></i></a>
+                                        data-id="file-{{ $form->id . '-' . $i  }}"><i class="fas fa-trash"></i></a>
                                 </th>
                             @endif
 
