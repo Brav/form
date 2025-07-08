@@ -134,7 +134,7 @@ $("body").on("change", "#aggression_choice", function(e){
 
 $(function() {
 
-    let complaintTypeText = ('#complaint_type_id').find('option:selected').text().toLowerCase();
+    let complaintTypeText = $('#complaint_type_id').find('option:selected').text().toLowerCase();
 
     if(complaintTypeText === 'other' || complaintTypeText === 'others'){
         $('#other-type-of-complaint-container').removeClass('d-none')
