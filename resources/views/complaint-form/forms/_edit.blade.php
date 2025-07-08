@@ -185,6 +185,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary mt-3 mb-3">Update the complaint</button>
+        <button type="submit" name="redirect" value="dashboard" class="btn btn-secondary mt-3 mb-3">Update and go back to dashboard</button>
 
     </fieldset>
 
@@ -902,6 +903,7 @@
     @endif
 
     <button type="submit" class="btn btn-primary mt-3 mb-3">Update the complaint</button>
+    <button type="submit" name="redirect" value="dashboard" class="btn btn-secondary mt-3 mb-3">Update and go back to dashboard</button>
     @if(auth()->user()?->role?->name === 'New Zealand Maintenance')
         </fieldset>
     @endif

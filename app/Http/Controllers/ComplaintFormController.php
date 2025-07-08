@@ -400,13 +400,16 @@ class ComplaintFormController extends Controller
             DateCompletedService::dispatch($form);
         }
 
-        return redirect()->route('complaint-form.edit', $form->id)
-            ->with([
-               'status' => [
-                   'message' => "Form Updated",
-                   'type'    => 'success',
-               ]
-            ]);
+        $route = $request->input('redirect') === 'dashboard'
+            ? ['complaint-form.manage']
+            : ['complaint-form.edit', $form->id];
+
+        return redirect()->route(...$route)->with([
+            'status' => [
+                'message' => 'Form Updated',
+                'type'    => 'success',
+            ],
+        ]);
     }
 
     /**
@@ -486,7 +489,7 @@ class ComplaintFormController extends Controller
     }
 
     /**
-     * Create query for filters
+     * Create a query for filters
      *
      * @param mixed $query
      * @param mixed $data
