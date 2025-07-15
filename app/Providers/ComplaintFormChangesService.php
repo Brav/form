@@ -2,25 +2,28 @@
 
 namespace App\Providers;
 
-
-use App\Console\Commands\ComplaintReminder;
+use App\Models\ComplaintForm;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\ServiceProvider;
 
-class DateCompletedService
+class ComplaintFormChangesService
 {
+
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $form;
+    public array $changedFields;
+    public ComplaintForm $form;
 
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct($form)
+    public function __construct($changedFields, $form)
     {
+        $this->changedFields = $changedFields;
         $this->form = $form;
     }
 
@@ -32,5 +35,4 @@ class DateCompletedService
      */
     public function handle($event): void
     {}
-
 }

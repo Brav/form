@@ -33,6 +33,10 @@ class EventServiceProvider extends ServiceProvider
 
         DateCompletedService::class => [
             SendDateCompletedEmailService::class
+        ],
+
+        ComplaintFormChangesService::class => [
+            SendComplaintFormChangesService::class
         ]
     ];
 

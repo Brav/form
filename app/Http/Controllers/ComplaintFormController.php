@@ -22,6 +22,7 @@ use App\Models\OutcomeOptionsCategories;
 use App\Models\PatientInjuryType;
 use App\Models\Severity;
 use App\Providers\ComplaintFilled;
+use App\Providers\ComplaintFormChangesService;
 use App\Providers\DateCompletedService;
 use App\Providers\SendDateCompletedEmailService;
 use Carbon\Carbon;
@@ -323,6 +324,7 @@ class ComplaintFormController extends Controller
      * @param ComplaintFormUpdateRequest $request
      * @param ComplaintForm $form
      * @return RedirectResponse
+     * @throws \JsonException
      */
     public function update(ComplaintFormUpdateRequest $request, ComplaintForm $form): RedirectResponse
     {
@@ -356,8 +358,16 @@ class ComplaintFormController extends Controller
         }
 
         $data = $form->format($request->all(), true, $updateOutcome);
+        $form->fill($data);
 
-        $result = $form->update($data);
+        $isDirty = $form->isDirty();
+
+        if ($isDirty) {
+            $changes = $form->getDirty(); // before saving
+            $original = $form->getOriginal(); // original values
+        }
+
+        $result = $form->save($data);
 
         if(!$result) {
             return redirect()->route('complaint-form.edit', $form->id)
@@ -374,6 +384,9 @@ class ComplaintFormController extends Controller
         $directory = 'documents/complaint_form_' . $form->id;
 
         if (request()->hasFile('documents')) {
+
+            $filesUploaded = [];
+
             foreach (request()->file('documents') as $file) {
                 $fileName =
                     \strtolower(
@@ -389,6 +402,16 @@ class ComplaintFormController extends Controller
                                    $file,
                                    $fileName);
 
+                $filesUploaded[] = $fileName;
+
+            }
+        }
+
+        if($isDirty){
+            $changedFields = ComplaintForm::checkForChanges($form->refresh(), $original, $form->getChanges(), $filesUploaded ?? []);
+
+            if($changedFields) {
+                ComplaintFormChangesService::dispatch($changedFields, $form);
             }
         }
 
@@ -433,7 +456,7 @@ class ComplaintFormController extends Controller
      * @param ComplaintForm $form
      * @return Response
      */
-    public function destroy(ComplaintForm $form)
+    public function destroy(ComplaintForm $form): Response
     {
         if (!auth()->user()->admin &&
             !auth()->user()->role->hasPermission('d')) {
@@ -455,8 +478,10 @@ class ComplaintFormController extends Controller
                                 ], 500);
     }
 
-    /** @return BinaryFileResponse */
-    public function export()
+    /**
+     * @return BinaryFileResponse
+     */
+    public function export(): BinaryFileResponse
     {
         return Excel::download(new FormsExport, 'forms.xlsx');
     }
@@ -465,8 +490,6 @@ class ComplaintFormController extends Controller
      * Downloads the selected file
      *
      * @param ComplaintForm $form
-     * @param string $file
-     * @param extension $file
      * @return mixed
      */
     public function download(ComplaintForm $form)
@@ -603,7 +626,7 @@ class ComplaintFormController extends Controller
                 break;
 
             case 'options':
-                $query->whereJsonContains('outcome_options', ['option_id' => (int)$data['option']]);
+                $query->whereJsonContains('outcome_options', ['option_id' => (int) $data['option']]);
                 break;
 
             case 'other';

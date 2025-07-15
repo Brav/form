@@ -126,6 +126,9 @@
 
                 if($('#date_completed').length)
                 {
+                    let dateConfiguration = {
+                        dateFormat: "d/m/Y",
+                    };
 
                     if (dateCompletedDate !== '') {
                         dateConfiguration.defaultDate = dateCompletedDate;

@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OutcomeOptionsCategories extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'name'
     ];

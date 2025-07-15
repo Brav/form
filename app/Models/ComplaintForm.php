@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use JsonException;
 
 class ComplaintForm extends Model
 {
@@ -269,7 +270,7 @@ class ComplaintForm extends Model
     /**
      * Get option name for the category
      *
-     * @param array $item
+     * @param $options
      * @return string
      */
     public function option($options): string
@@ -288,10 +289,124 @@ class ComplaintForm extends Model
             }
         }
 
-        return $form->first() ? $form->first()->name : '/';
+        return $form?->first()?->name ?? '/';
     }
 
-    static public function clientAggressionValues()
+    /**
+     * @throws JsonException
+     */
+    public static function checkForChanges(ComplaintForm $form, array $originalData, array $changedData, array $filesUploaded): array
+    {
+
+        $changedFields = [];
+        $ignoredFields = [
+            'updated_at'
+        ];
+
+        $textFields = [
+            'outcome',
+            'team_member',
+            'team_member_email',
+            'team_member_position',
+            'client_name',
+            'patient_name',
+            'description',
+            'completed_by',
+            'aggression',
+        ];
+
+        $filteredData = array_diff_key($changedData, array_flip($ignoredFields));
+
+        $changedFields = array_intersect_key($changedData, array_flip($textFields));
+
+        if($filteredData['outcome_options'] ?? false){
+
+            $newOptions = json_decode($filteredData['outcome_options'], true, 512, JSON_THROW_ON_ERROR);
+
+            $originalNormalized = array_map('json_encode', $newOptions);
+            $updatedNormalized  = array_map('json_encode', $originalData['outcome_options']);
+
+            $diff = array_diff($originalNormalized, $updatedNormalized);
+
+            $diffDecoded = array_map('json_decode', $diff);
+
+            if($diffDecoded){
+
+                $outcomeOptions = OutcomeOptionsCategories::with(['options'])->get();
+
+                foreach ($diffDecoded as $key => $value) {
+
+                    $category = $outcomeOptions->where('id', $value->category_id)->first();
+
+                    if($value->option_id === 0){
+                        $changedFields[$category->name] = 'N\A';
+                    } else {
+                        $changedFields[$category->name] = $category->options->find($value->option_id)->name;
+                    }
+                }
+            }
+
+        }
+
+        $dateOfIncident = date('Y-m-d', strtotime($filteredData['date_of_incident']));
+
+        if ($dateOfIncident !== date('Y-m-d', strtotime($originalData['date_of_incident']))) {
+            $changedFields['date_of_incident'] = $dateOfIncident;
+        }
+
+        if(array_key_exists('animal_id', $filteredData)){
+            $changedFields['animal'] = $filteredData['animal_id'] !== null ? $form->animal->name : 'Other' ;
+        }
+
+        if(array_key_exists('date_completed', $filteredData)){
+
+            $dateCompleted = date('Y-m-d', strtotime($filteredData['date_completed']));
+
+            if($dateCompleted !== date('Y-m-d', strtotime($originalData['date_completed']))){
+                $changedFields['date_completed'] = $dateCompleted;
+            }
+        }
+
+        if($filteredData['clinic_id'] ?? false){
+            $changedFields['clinic'] = $form->clinic->name ?? 'Other';
+        }
+
+        if((bool) $filteredData['formal_complaint_lodged'] !== (bool) $originalData['formal_complaint_lodged']){
+            $changedFields['formal_complaint_lodged'] = $filteredData['formal_complaint_lodged'] ? 'Yes' : 'No';
+        }
+
+        if($filteredData['complaint_category_id'] ?? false){
+            $changedFields['complaint_category'] = $form?->complaintCategory?->name ?? 'N\A';
+        }
+
+        if($filteredData['complaint_type_id'] ?? false){
+            $changedFields['complaint_type'] = $form?->type?->name ?? 'N\A';
+        }
+
+        if($filteredData['complaint_channel_id'] ?? false){
+            $changedFields['complaint_channel'] = $form?->channel?->name ?? 'N\A';
+        }
+
+        if($filteredData['severity_id'] ?? false){
+            $changedFields['severity'] = $form?->severity?->name ?? 'N\A';
+        }
+
+        if($filteredData['patient_injury_type_id'] ?? false){
+            $changedFields['patient_injury_type'] = $form->patientInjuryType->name ?? 'N\A';
+        }
+
+        if(array_key_exists('aggression', $changedFields)){
+            $changedFields['aggression'] = $filteredData['aggression'] !== null ? self::clientAggressionValues()[$changedFields['aggression']] : 'No';
+        }
+
+        if($filesUploaded){
+            $changedFields['files'] = implode(', ' . PHP_EOL, $filesUploaded);
+        }
+
+        return $changedFields;
+    }
+
+    public static function clientAggressionValues(): array
     {
         return [
             'verbal'   => 'Verbal abuse (yelling, screaming)',

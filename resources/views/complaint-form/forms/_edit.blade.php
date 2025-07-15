@@ -758,7 +758,7 @@
 
                          @if ($readonly !== 'readonly')
                              name="patient_injury_type_id"
-                     @endif
+                        @endif
 
                      {{ $readonly }}>
                  >
@@ -766,7 +766,7 @@
                      @foreach ($patientInjuryTypes as $type)
                          <option
                              value="{{ $type->id }}"
-                             @if (old('patient_injury_type_id') == $type->id)
+                             @if (old('patient_injury_type_id', $form->patient_injury_type_id) === $type->id)
                                  selected
                              @endif
                          >{{ \ucwords($type->name) }}</option>
