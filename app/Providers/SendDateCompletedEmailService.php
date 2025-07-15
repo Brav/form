@@ -60,10 +60,10 @@ class SendDateCompletedEmailService
 
         $mailTo = array_filter(array_merge($emails, $automatedEmails->emails));
 
-//        if($mailTo) {
-//            \Mail::to($mailTo)
-//                ->send(new SendDateCompletedEmail($form, $clinic));
-//        }
+        if($mailTo) {
+            \Mail::to($mailTo)
+                ->send(new SendDateCompletedEmail($form, $clinic));
+        }
     }
 
 }
