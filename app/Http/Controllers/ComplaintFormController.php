@@ -274,14 +274,14 @@ class ComplaintFormController extends Controller
             }
         }
 
-        $readOnlyOutcomes = true;
+        $readOnlyOutcomes = !auth()->user()->admin;
 
         if(!auth()->user()->admin) {
 
             $clinic = $form->clinic;
             $managers = $clinic->managers->pluck('manager_type_id', 'user_id')->toArray();
 
-            if(!in_array(ClinicManagers::managerID('veterinary_manager'), $managers, true)) {
+            if(in_array(ClinicManagers::managerID('veterinary_manager'), $managers, true)) {
                 $readOnlyOutcomes = false;
             }
         }
@@ -290,7 +290,7 @@ class ComplaintFormController extends Controller
             'task'           => 'edit',
             'view'           => 'complaint-form',
             'readonly'       => auth()->user()->admin ? '' : 'readonly',
-            'readOnlyOutcomes' => $readOnlyOutcomes ? '' : 'readonly',
+            'readOnlyOutcomes' => $readOnlyOutcomes ? 'readonly' : '',
             'clinics'        => Clinic::with([
                              'managers' => function ($query) {
                                 return $query->whereIn('manager_type_id',
