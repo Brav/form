@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use JsonException;
@@ -228,14 +229,25 @@ class ComplaintForm extends Model
         return Attribute::make(
             get: static function (?string $value, array $attributes) {
 
-                $autoResponse = AutomatedResponse::whereJsonContains('scenario->categories', (string)$attributes['complaint_category_id'])
-                    ->whereJsonContains('scenario->types', (string)$attributes['complaint_type_id'])
-                    ->whereJsonContains('scenario->channels', (string)$attributes['complaint_channel_id'])
-                    ->whereJsonContains('scenario->severity', (string)$attributes['severity_id'])
-                    ->first();
+                // Create a cache key based on attribute combo
+                $key = implode('-', [
+                    $attributes['complaint_category_id'],
+                    $attributes['complaint_type_id'],
+                    $attributes['complaint_channel_id'],
+                    $attributes['severity_id'],
+                ]);
 
-                return $autoResponse->name ?? 'N/A';
-            },
+                // Return cached or newly queried name
+                return Cache::remember("auto_response.$key", now()->addMinutes(3600), static function () use ($attributes) {
+                    $autoResponse = \App\Models\AutomatedResponse::whereJsonContains('scenario->categories', (string)$attributes['complaint_category_id'])
+                        ->whereJsonContains('scenario->types', (string)$attributes['complaint_type_id'])
+                        ->whereJsonContains('scenario->channels', (string)$attributes['complaint_channel_id'])
+                        ->whereJsonContains('scenario->severity', (string)$attributes['severity_id'])
+                        ->first();
+
+                    return $autoResponse->name ?? 'N/A';
+                });
+            }
         );
     }
 

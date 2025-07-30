@@ -8,14 +8,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
+     * @throws Throwable
      */
     public function index()
     {
@@ -44,11 +47,12 @@ class UserController extends Controller
 
         $users = $users->with(['role'])->paginate(20);
 
-        if(!request()->ajax())
+        if(!request()->ajax()){
             return view('users/index', [
                 'users' => $users,
                 'roles' => $roles,
             ]);
+        }
 
         return [
             'html' => view('users/partials/_users', [
@@ -68,7 +72,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function delete(User $user)
     {
@@ -82,7 +86,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -106,7 +110,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\UserCreateRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(UserCreateRequest $request)
     {
@@ -144,7 +148,7 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(User $user)
     {
@@ -155,7 +159,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(User $user)
     {
@@ -189,7 +193,7 @@ class UserController extends Controller
      *
      * @param  \App\Http\Requests\UserUpdateRequest  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(UserUpdateRequest $request, User $user)
     {
@@ -236,7 +240,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(User $user)
     {

@@ -253,7 +253,7 @@ function appendFileNames(files)
 
     for (let i = 0, l = files.length; i < l; i++) {
         allFiles.push(
-            `<span class="font-weight-bold d-block">${files[i].name}
+            `<span class="font-weight-bold d-block mb-3">${files[i].name}
                 <i class="fas fa-trash-alt file-remove"
                 data-order="${i}"></i>
             </span>`

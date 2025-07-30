@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 /** @package Roles */
 class Roles extends Model
 {
-    use HasFactory;
 
-    static $levels = [
+    public static array $levels = [
         1,
         2,
         3,
@@ -22,6 +21,7 @@ class Roles extends Model
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
         'level' => 'array',
     ];
 
@@ -41,17 +41,17 @@ class Roles extends Model
     {
         $permissions = [];
 
-        if( \is_integer(\strpos($this->permissions, 'r')) )
+        if( \is_int(\strpos($this->permissions, 'r')) )
         {
             $permissions[] = 'read';
         }
 
-        if( \is_integer(\strpos($this->permissions, 'w')) )
+        if( \is_int(\strpos($this->permissions, 'w')) )
         {
             $permissions[] = 'write';
         }
 
-        if( \is_integer(\strpos($this->permissions, 'd')) )
+        if( \is_int(\strpos($this->permissions, 'd')) )
         {
             $permissions[] = 'delete';
         }
@@ -70,6 +70,6 @@ class Roles extends Model
      */
     public function hasPermission(string $permission) :?string
     {
-        return \is_integer(\strpos($this->permissions, $permission)) ? $permission : null;
+        return \is_int(\strpos($this->permissions, $permission)) ? $permission : null;
     }
 }

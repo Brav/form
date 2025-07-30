@@ -34,7 +34,7 @@
                 <label for="password">Password</label>
                 <input type="text" class="form-control" name=password id="password" value="{{ old('password') }}">
 
-                <small id="passwordHelp" class="form-text text-muted">If you leavel this field empty, user password will remain the same.</small>
+                <small id="passwordHelp" class="form-text text-muted">If you leave this field empty, user password will remain the same.</small>
 
                 @error('password')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -62,7 +62,6 @@
                         >{{ $role->name }}</option>
                   @endforeach
               </select>
-              <!-- <small id="ownerHelp" class="form-text text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, nulla corporis?</small> -->
             </div>
         </div>
 
@@ -80,7 +79,7 @@
                             >{{ $userList->name }}</option>
                     @endforeach
                   </select>
-                  <!-- <small id="ownerHelp" class="form-text text-muted">This user will be able to edit user and assign him to the clinics</small> -->
+
                 </div>
             </div>
         @endif

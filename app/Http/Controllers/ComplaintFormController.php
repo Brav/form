@@ -57,7 +57,7 @@ class ComplaintFormController extends Controller
         }
 
         $queryData = \filter_var_array(
-            \array_filter(request()->all(), function ($element) {
+            \array_filter(request()->all(), static function ($element) {
                 return is_array($element);
             }), FILTER_SANITIZE_FULL_SPECIAL_CHARS
         );
@@ -407,13 +407,13 @@ class ComplaintFormController extends Controller
             }
         }
 
-        if($isDirty){
-            $changedFields = ComplaintForm::checkForChanges($form->refresh(), $original, $form->getChanges(), $filesUploaded ?? []);
-
-            if($changedFields) {
-                ComplaintFormChangesService::dispatch($changedFields, $form);
-            }
-        }
+//        if($isDirty){
+//            $changedFields = ComplaintForm::checkForChanges($form->refresh(), $original, $form->getChanges(), $filesUploaded ?? []);
+//
+//            if($changedFields) {
+//                ComplaintFormChangesService::dispatch($changedFields, $form);
+//            }
+//        }
 
         \DB::table('complaint_forms_reminder_sent')
             ->where('complaint_form_id', '=', $form->id)
