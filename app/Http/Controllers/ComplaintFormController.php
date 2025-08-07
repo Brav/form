@@ -259,7 +259,7 @@ class ComplaintFormController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param ComplaintForm $form
-     * @return RedirectResponse
+     * @return View|RedirectResponse
      */
     public function edit(ComplaintForm $form)
     {
