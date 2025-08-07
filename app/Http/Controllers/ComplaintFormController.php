@@ -277,7 +277,6 @@ class ComplaintFormController extends Controller
         $readOnlyOutcomes = !auth()->user()->admin;
 
         if(!auth()->user()->admin) {
-
             $clinic = $form->clinic;
             $managers = $clinic->managers->pluck('manager_type_id', 'user_id')->toArray();
 
