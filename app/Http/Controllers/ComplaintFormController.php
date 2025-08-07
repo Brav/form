@@ -286,6 +286,8 @@ class ComplaintFormController extends Controller
             }
         }
 
+        dd($readOnlyOutcomes);
+
         return view('form', [
             'task'           => 'edit',
             'view'           => 'complaint-form',
