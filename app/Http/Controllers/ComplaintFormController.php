@@ -281,7 +281,7 @@ class ComplaintFormController extends Controller
             $clinic = $form->clinic;
             $managers = $clinic->managers->pluck('manager_type_id', 'user_id')->toArray();
 
-            if(in_array(ClinicManagers::managerID('veterinary_manager'), $managers, )) {
+            if(in_array(ClinicManagers::managerID('veterinary_manager'), $managers)) {
                 $readOnlyOutcomes = false;
             }
         }
