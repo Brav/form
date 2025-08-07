@@ -56,7 +56,7 @@ class ComplaintFormCreateRequest extends FormRequest
             'date_of_incident'              => ['required', 'date_format:d/m/Y'],
             'date_of_client_complaint'      => ['nullable', 'date_format:d/m/Y'],
             'date_to_respond_to_the_client' => ['nullable', 'date_format:d/m/Y'],
-            'description'                   => ['required', 'string', 'min:2', 'max:250'],
+            'description'                   => ['required', 'string', 'min:2', 'max:500'],
             'aggression_choice'             => ['required', Rule::in(['no', 'yes'])],
             'aggression'                    => ['required_if:aggression_choice,yes', Rule::in(array_keys(ComplaintForm::clientAggressionValues()))],
             'location_id'                   => [

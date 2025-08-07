@@ -496,13 +496,13 @@
     <div class="form-row">
         <div class="col-md-8">
             <div class="form-group">
-            <label for="description">Summary of incident and/or complain *</label>
+            <label for="description">Summary of incident and/or complain * (500 char limit)</label>
             <textarea class="form-control"
                 name="description"
                 id="description"
                 rows="4"
                 minlength="2"
-                maxlength="250"
+                maxlength="500"
                 {{ $readonly }}>{{
             old('description', $form->description) }}</textarea>
             @error('description')

@@ -54,7 +54,7 @@ class ComplaintFormUpdateRequest extends FormRequest
             'date_of_incident'              => ['nullable', 'date_format:d/m/Y'],
             'date_of_client_complaint'      => ['nullable', 'date_format:d/m/Y'],
             'date_to_respond_to_the_client' => ['nullable', 'date_format:d/m/Y'],
-            'description'                   => ['required', 'string', 'min:2',],
+            'description'                   => ['required', 'string', 'min:2', 'max:500'],
             'aggression_choice'             => ['required', Rule::in(['no', 'yes'])],
             'aggression'                    => ['required_if:aggression_choice,yes', Rule::in(array_keys(ComplaintForm::clientAggressionValues()))],
             'location_id'                   => [
@@ -88,8 +88,8 @@ class ComplaintFormUpdateRequest extends FormRequest
             'formal_complaint_lodged'       => [
                 'required', Rule::in(['yes', 'no']),
             ],
-            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id . ',' . $complaintTypeOthers?->id, 'nullable', 'min:2', 'max:250' ],
-            'near_miss_description' => ['required_if:complaint_category_id,' . $complaintNearMiss->id, 'nullable', 'min:2', 'max:250' ],
+            'other_type_of_complaint' => ['required_if:complaint_type_id,' . $complaintTypeOther->id . ',' . $complaintTypeOthers?->id, 'nullable', 'min:2', 'max:500' ],
+            'near_miss_description' => ['required_if:complaint_category_id,' . $complaintNearMiss->id, 'nullable', 'min:2', 'max:500' ],
             'documents'                     => 'nullable',
             'documents.*'                   => 'max:20000',
             'outcome'                       => ['nullable', 'string', 'min:2'],
