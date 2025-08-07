@@ -276,8 +276,6 @@ class ComplaintFormController extends Controller
 
         $readOnlyOutcomes = !auth()->user()->admin;
 
-        dump($readOnlyOutcomes);
-
         if(!auth()->user()->admin) {
 
             $clinic = $form->clinic;
@@ -287,8 +285,6 @@ class ComplaintFormController extends Controller
                 $readOnlyOutcomes = false;
             }
         }
-
-        dd($readOnlyOutcomes);
 
         return view('form', [
             'task'           => 'edit',
