@@ -276,12 +276,14 @@ class ComplaintFormController extends Controller
 
         $readOnlyOutcomes = !auth()->user()->admin;
 
+        dump($readOnlyOutcomes);
+
         if(!auth()->user()->admin) {
 
             $clinic = $form->clinic;
             $managers = $clinic->managers->pluck('manager_type_id', 'user_id')->toArray();
 
-            if(in_array(ClinicManagers::managerID('veterinary_manager'), $managers, true)) {
+            if(in_array(ClinicManagers::managerID('veterinary_manager'), $managers, )) {
                 $readOnlyOutcomes = false;
             }
         }
