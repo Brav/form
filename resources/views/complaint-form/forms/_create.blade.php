@@ -301,7 +301,7 @@
                 id="description"
                 rows="4"
                 minlength="2"
-                maxlength="250">{{
+                maxlength="500">{{
             old('description') }}</textarea>
             @error('description')
                 <div class="alert alert-danger">{{ $message }}</div>
