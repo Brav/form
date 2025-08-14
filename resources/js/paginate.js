@@ -172,5 +172,5 @@ function filterFilters(parent) {
         }
     });
 
-    return data;
+    return {data};
 }

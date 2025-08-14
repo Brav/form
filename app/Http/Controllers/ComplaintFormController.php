@@ -70,7 +70,7 @@ class ComplaintFormController extends Controller
                 ->where('name', 'not like', '%test%');
         });
 
-        foreach ($queryData as $data) {
+        foreach ($queryData['data'] ?? [] as $data) {
             if (isset($data['column'], $data['search'], $data['type'])) {
                 $this->createQuery($forms, $data);
             }
@@ -517,7 +517,7 @@ class ComplaintFormController extends Controller
      * @param mixed $data
      * @return void
      */
-    private function createQuery($query, $data): void
+    private function createQuery(mixed $query, mixed $data): void
     {
         $search = \trim($data['search']);
 
