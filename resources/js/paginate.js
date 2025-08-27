@@ -126,7 +126,6 @@ function doSearch(url, searchData, container) {
             let paginationID = data.id
                 ? `#pagination-${data.id}`
                 : "#pagination";
-
             $(`#${container}`).html(data.html);
             $(paginationID).html(data.pagination);
         },

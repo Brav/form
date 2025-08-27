@@ -37,7 +37,7 @@ class UserController extends Controller
             return $query->where('created_by', '=', auth()->id());
         });
 
-        foreach ($queryData as $data)
+        foreach ($queryData['data'] ?? [] as $data)
         {
             if(isset($data['column'], $data['search'], $data['type']))
             {

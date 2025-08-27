@@ -45,7 +45,7 @@ class ClinicController extends Controller
                 });
         });
 
-        foreach ($queryData as $data)
+        foreach ($queryData['data'] ?? [] as $data)
         {
             if(isset($data['column'], $data['search'], $data['type']))
             {
