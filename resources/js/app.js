@@ -260,6 +260,8 @@ function appendFileNames(files)
         );
     }
 
+    console.log(allFiles)
+
     $(".files-for-upload")
         .removeClass("d-none")
         .find(".files")

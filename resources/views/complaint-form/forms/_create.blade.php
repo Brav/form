@@ -553,7 +553,7 @@
                 @enderror
             </div>
 
-            <div id="files-for-upload" class='d-none mt-2'>
+            <div id="files-for-upload" class='d-none mt-2 files-for-upload'>
                 <p class="font-weight-bold">Files for upload:</p>
                 <div class="files"></div>
             </div>
@@ -579,14 +579,14 @@
     <div class="d-block pb-5"></div>
 </form>
 
-@section('js_after')
-    <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.api_site_key') }}"></script>
-    <script>
-        grecaptcha.ready(function() {
-            grecaptcha.execute('{{ config('recaptcha.api_site_key') }}', {action: "complaint_form"})
-                .then(function(token) {
-                    document.getElementById("recaptcha_token").value = token;
-                });
-        });
-    </script>
-@endsection
+{{--@section('js_after')--}}
+{{--    <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.api_site_key') }}"></script>--}}
+{{--    <script>--}}
+{{--        grecaptcha.ready(function() {--}}
+{{--            grecaptcha.execute('{{ config('recaptcha.api_site_key') }}', {action: "complaint_form"})--}}
+{{--                .then(function(token) {--}}
+{{--                    document.getElementById("recaptcha_token").value = token;--}}
+{{--                });--}}
+{{--        });--}}
+{{--    </script>--}}
+{{--@endsection--}}
