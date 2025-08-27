@@ -71,7 +71,6 @@ class ComplaintFormController extends Controller
         });
 
         foreach ($queryData['data'] ?? [] as $data) {
-            dd($data);
             if (isset($data['column'], $data['search'], $data['type'])) {
                 $this->createQuery($forms, $data);
             }
